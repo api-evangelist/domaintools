@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Domain Suggestions API",
+        "description": "Generates available domain suggestions that are related to a query string",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/domain-suggestions\/": {
+            "get": {
+                "summary": "Domain Suggestions",
+                "description": "Generates available domain suggestions that are related to a query string",
+                "operationId": "DomainSuggestions",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Query string ??? must be at least two characters long. Use spaces to separate multiple terms, but be sure to URL encode the values before passing them to the API."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
