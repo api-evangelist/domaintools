@@ -1,0 +1,36 @@
+{
+    "id": "e9d6a11df06e2b09c796f6185295a577",
+    "name": "Parsed Whois API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "4e966479242f5fc3ec2f6eab55def87a",
+            "name": "Parsed Whois",
+            "url": "httpapi.domaintools.com\/v1\/{domain}\/whois\/parsed",
+            "description": "The Parsed Whois API provides parsed information extracted from the raw Whois recor",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e9d6a11df06e2b09c796f6185295a577",
+            "rawModeData": ""
+        }
+    ]
+}
