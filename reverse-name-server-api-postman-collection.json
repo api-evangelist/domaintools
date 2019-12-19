@@ -1,0 +1,44 @@
+{
+    "id": "fabc6d8af39043f90b4b98258dd5fb15",
+    "name": "Reverse Name Server API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "0279458eb620e39ee4ba04b91645dd5a",
+            "name": "Reverse Name Server",
+            "url": "httpapi.domaintools.com\/v1\/{domain]\/name-server-domains\/",
+            "description": "List of domains that share the same primary name server",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "limit",
+                    "description": "Limits the size of the domain list than can appear in a response.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "fabc6d8af39043f90b4b98258dd5fb15",
+            "rawModeData": ""
+        }
+    ]
+}
