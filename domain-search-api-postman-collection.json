@@ -1,0 +1,114 @@
+{
+    "id": "8870efcb5da836ec74cf90d4540865ef",
+    "name": "Domain Search API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "645ca780b0cc5216472dcd57ef85a7ea",
+            "name": "Domain Search",
+            "url": "httpapi.domaintools.com\/v2\/domain-search\/",
+            "description": "Searches active and deleted domain names that match a query string",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "query",
+                    "description": "Query string ??? each term in the query string must be at least three characters long. Use spaces to separate multiple terms, but be sure to URL encode the values before passing them to the API.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "exclude_query",
+                    "description": "Terms to exclude from matching ??? each term in the query string must be at least three characters long. Use spaces to separate multiple terms, but be sure to URL encode the values before passing them to the API. Default: none",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "max_length",
+                    "description": "Limit the maximum domain character coun",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "min_length",
+                    "description": "Limit the minumum domain character count.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "has_hyphen",
+                    "description": "Return results with hyphens in the domain name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "has_number",
+                    "description": "Return results with numbers in the domain name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "active_only",
+                    "description": "Return only domains currently registered.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "deleted_only",
+                    "description": "Return only domains previously registered but not currently registered.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "anchor_left",
+                    "description": "Return only domains that start with the query term.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "anchor_right",
+                    "description": "\tReturn only domains that end with the query term.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "\tSets the page of results to retrieve from the server. Each page is limited to 100 results.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "8870efcb5da836ec74cf90d4540865ef",
+            "rawModeData": ""
+        }
+    ]
+}
