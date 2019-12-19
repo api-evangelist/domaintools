@@ -1,0 +1,44 @@
+{
+    "id": "fdfd4fba79287385a0a4879f5aca27a4",
+    "name": "Domain Suggestions API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "509706da4c3a3bc2b300cb2727c82634",
+            "name": "Domain Suggestions",
+            "url": "httpapi.domaintools.com\/v1\/domain-suggestions\/",
+            "description": "Generates available domain suggestions that are related to a query string",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "query",
+                    "description": "Query string ??? must be at least two characters long. Use spaces to separate multiple terms, but be sure to URL encode the values before passing them to the API.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "fdfd4fba79287385a0a4879f5aca27a4",
+            "rawModeData": ""
+        }
+    ]
+}
