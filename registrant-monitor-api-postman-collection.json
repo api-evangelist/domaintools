@@ -1,0 +1,79 @@
+{
+    "id": "505d61d94c8c21c2c71c8bd1e57d3eef",
+    "name": "Registrant Monitor API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "6294eebdaedaa7b850e5cdbd42174739",
+            "name": "IP Registrant Monitor",
+            "url": "httpapi.domaintools.com\/v1\/ip-registrant-monitor\/",
+            "description": "Receive notification when specific people or organizations are allocated new IP ranges or have existing ranges de-allocated",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "query",
+                    "description": "A space separated list of free text query terms. Returns the list of IP ranges that satisfy the quer",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "country",
+                    "description": "Limits results to IP addresses allocated to an entity with a particular country. Valid options are ISO 3166-1 two character country codes.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "server",
+                    "description": "Limits results to ranges from a particular Whois server. Valid options are ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "include_total_count",
+                    "description": "Returns the total number of results for a query. This should typically be used only for the first page of a large result set. Valid options are \"true\" and \"false\".",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "Providing the page number allows access to additional pages of data. Results are returned 1000 ranges at a time. The maximum allowed value is 5.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "search_type",
+                    "description": "Type of changes to return. Valid options are \"all\", \"additions\", \"removals\", \"modifications\".",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "505d61d94c8c21c2c71c8bd1e57d3eef",
+            "rawModeData": ""
+        }
+    ]
+}
