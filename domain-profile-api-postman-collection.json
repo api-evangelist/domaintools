@@ -1,0 +1,44 @@
+{
+    "id": "4157ddb334f1f6e75ebefefccfc62787",
+    "name": "Domain Profile API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "cc8f5f95695d11ec7011c6f2a9631600",
+            "name": "Domain Profile",
+            "url": "httpapi.domaintools.comv1\/{domain}",
+            "description": "Basic registrant, server, and registration data for a domain name, plus preview data for other products",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "The domain to profile.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "4157ddb334f1f6e75ebefefccfc62787",
+            "rawModeData": ""
+        }
+    ]
+}
