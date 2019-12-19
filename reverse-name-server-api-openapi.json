@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Reverse Name Server API",
+        "description": "List of domains that share the same primary name server",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/{domain]\/name-server-domains\/": {
+            "get": {
+                "summary": "Reverse Name Server",
+                "description": "List of domains that share the same primary name server",
+                "operationId": "ReverseNameServer",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limits the size of the domain list than can appear in a response."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
