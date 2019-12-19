@@ -1,0 +1,65 @@
+{
+    "id": "43b94904de63171726d304fabd082881",
+    "name": "Brand Monitor API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "e720f578eb5cbbf6f7f2104e6243d747",
+            "name": "Brand Monitor",
+            "url": "httpapi.domaintools.com\/v1\/mark-alert\/",
+            "description": "Monitor new domains registrations for specific keywords",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "query",
+                    "description": "One or more terms separated by the pipe character ( | ).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "exclude",
+                    "description": "Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character ( | ).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "domain_status",
+                    "description": "Sets the scope of domain names to search. By default, the API will search both new domain names and domains which are now on-hold (pending delete). To narrow your search to only one of these status codes, set this parameter to either new or on-hold.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "days_back",
+                    "description": "Use this parameter in exceptional circumstances where you need to search domains registered up to six days prior to the current date. Set the value to an integer in the range of 1-6.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "43b94904de63171726d304fabd082881",
+            "rawModeData": ""
+        }
+    ]
+}
