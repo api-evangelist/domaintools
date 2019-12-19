@@ -1,0 +1,47 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Reverse Whois API",
+        "description": "Provides a list of domain names with Whois records that match a specific query",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/reverse-whois\/": {
+            "get": {
+                "summary": "Reverse Whois",
+                "description": "Provides a list of domain names with Whois records that match a specific query",
+                "operationId": "ReverseWhois",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "terms",
+                        "in": "query",
+                        "description": "List of one or more terms to search for in the Whois record, separated with the pipe character ( | )."
+                    },
+                    {
+                        "name": "exclude",
+                        "in": "query",
+                        "description": "Domain names with Whois records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character ( | )."
+                    },
+                    {
+                        "name": "scope",
+                        "in": "query",
+                        "description": "\tSets the scope of the report to include only current Whois records, or to include both current and historic records. Value must be current (the default) or historic."
+                    },
+                    {
+                        "name": "mode",
+                        "in": "query",
+                        "description": "quote : only lists the size and retail price of the query if you have per-domain pricing access purchase : includes the complete list of domain names that match the query"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
