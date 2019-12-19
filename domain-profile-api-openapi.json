@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Domain Profile API",
+        "description": "Basic registrant, server, and registration data for a domain name, plus preview data for other products",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.comv1"
+    ],
+    "paths": {
+        "\/{domain}": {
+            "get": {
+                "summary": "Domain Profile",
+                "description": "Basic registrant, server, and registration data for a domain name, plus preview data for other products",
+                "operationId": "DomainProfile",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "description": "The domain to profile."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
