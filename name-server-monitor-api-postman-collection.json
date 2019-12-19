@@ -1,0 +1,58 @@
+{
+    "id": "360917fd538d0ad6022a3247cf79c53d",
+    "name": "Name Server Monitor API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "f5a9af7c5c8c27aa7d73921c9fd1ed22",
+            "name": "Name Server Monitor",
+            "url": "httpapi.domaintools.com\/v1\/name-server-monitor\/",
+            "description": "Receive notification when there are new and\/or deleted domains on a given Domain Name Server",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "query",
+                    "description": "The hostname of the Name Server you wish to query",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "days_back",
+                    "description": "Use this parameter in exceptional circumstances where you need to search domain changes up to six days prior to the current date. Set the value to an integer in the range of 1-6. (default 0)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "\tIf the result set is larger than 1000 records for a given day, request additional pages with this parameter. Set the value to an integer up to a maximum of the returned page_count value. (default 1)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "360917fd538d0ad6022a3247cf79c53d",
+            "rawModeData": ""
+        }
+    ]
+}
