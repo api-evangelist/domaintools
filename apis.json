@@ -1,0 +1,287 @@
+{
+    "name": "DomainTools",
+    "description": "DomainTools helps security analysts turn threat data into threat intelligence. We take indicators from your network, including domains and IPs, and connect them with nearly every active domain on the Internet. Those connections inform risk assessments,...",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+    "tags": [
+        "api provider",
+        "api service provider",
+        "dns internet",
+        "general data",
+        "have api",
+        "relative data",
+        "service api"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Whois History API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/whois-history-api.json"
+                }
+            ]
+        },
+        {
+            "name": "IP Monitor API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/ip-monitor-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Name Server Monitor API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/name-server-monitor-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Parsed Whois API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/parsed-whois-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Domain Profile API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-profile-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Domain Search API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-search-api.json"
+                }
+            ]
+        },
+        {
+            "name": "IP Registrant Monitor API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/ip-registrant-monitor-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Reverse Name Server API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-name-server-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Hosting History API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/hosting-history-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Registrant Monitor API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/registrant-monitor-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Reverse IP Whois API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-ip-whois-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Domain Suggestions API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-suggestions-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Brand Monitor API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/brand-monitor-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Reverse Whois API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-whois-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Reverse IP API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-ip-api.json"
+                }
+            ]
+        },
+        {
+            "name": "Whois Lookup API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/393-domaintools.jpg",
+            "humanURL": "http:\/\/www.domaintools.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/whois-lookup-api.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/api.domaintools.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/blog.domaintools.com\/feed\/"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/domain-tools"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/domain-tools"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/www.domaintools.com\/api\/docs\/"
+        },
+        {
+            "type": "Email",
+            "url": "sales@domaintools.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/DomainTools"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/www.domaintools.com\/products\/domain-research\/pricing\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/DomainTools"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.domaintools.com"
+        }
+    ]
+}
