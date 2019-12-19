@@ -1,0 +1,44 @@
+{
+    "id": "75bd93e10e9a66e9bd22a7307136748d",
+    "name": "Whois Lookup API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "baa7fc8aa87ba7943ac99d4447f4ff74",
+            "name": "Whois Lookup",
+            "url": "httpapi.domaintools.com\/v1\/domaintools.com\/\/{domain}\/whois",
+            "description": "The Whois Lookup API provides the ownership record for a domain name or IP address with basic registration details.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "The domain to lookup.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "75bd93e10e9a66e9bd22a7307136748d",
+            "rawModeData": ""
+        }
+    ]
+}
