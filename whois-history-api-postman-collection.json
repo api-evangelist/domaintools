@@ -1,0 +1,44 @@
+{
+    "id": "be24d05653479af46d91e15f71f57bf9",
+    "name": "Whois History API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "9dd515d44a1ce9b2e2f5386c355f9e9e",
+            "name": "Whois History",
+            "url": "httpapi.domaintools.com\/v1\/{domain}\/whois\/history\/",
+            "description": "Historical Whois records",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "The domain being requested.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "be24d05653479af46d91e15f71f57bf9",
+            "rawModeData": ""
+        }
+    ]
+}
