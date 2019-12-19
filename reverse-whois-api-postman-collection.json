@@ -1,0 +1,65 @@
+{
+    "id": "85560c50ccddcff164bed621a4cd8324",
+    "name": "Reverse Whois API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "107e06f3a869fb126ca6cb52c8c30aca",
+            "name": "Reverse Whois",
+            "url": "httpapi.domaintools.com\/v1\/reverse-whois\/",
+            "description": "Provides a list of domain names with Whois records that match a specific query",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "terms",
+                    "description": "List of one or more terms to search for in the Whois record, separated with the pipe character ( | ).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "exclude",
+                    "description": "Domain names with Whois records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character ( | ).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "scope",
+                    "description": "\tSets the scope of the report to include only current Whois records, or to include both current and historic records. Value must be current (the default) or historic.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "mode",
+                    "description": "quote : only lists the size and retail price of the query if you have per-domain pricing access purchase : includes the complete list of domain names that match the query",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "85560c50ccddcff164bed621a4cd8324",
+            "rawModeData": ""
+        }
+    ]
+}
