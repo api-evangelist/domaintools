@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Whois History API",
+        "description": "Historical Whois records",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/{domain}\/whois\/history\/": {
+            "get": {
+                "summary": "Whois History",
+                "description": "Historical Whois records",
+                "operationId": "WhoisHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "description": "The domain being requested."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
