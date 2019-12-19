@@ -1,0 +1,44 @@
+{
+    "id": "62b1ce255e8a7cabbab2516f414d0613",
+    "name": "Hosting History API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "13b3d6daef00042dd5de99338d8d0567",
+            "name": "Domain History",
+            "url": "httpapi.domaintools.com\/v1\/{domain}\/hosting-history\/",
+            "description": "Provides the registrar, IP and name server history for a domain name",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "The domain.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "62b1ce255e8a7cabbab2516f414d0613",
+            "rawModeData": ""
+        }
+    ]
+}
