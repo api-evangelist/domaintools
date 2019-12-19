@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Whois Lookup API",
+        "description": "",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1\/domaintools.com\/"
+    ],
+    "paths": {
+        "\/{domain}\/whois": {
+            "get": {
+                "summary": "Whois Lookup",
+                "description": "The Whois Lookup API provides the ownership record for a domain name or IP address with basic registration details.",
+                "operationId": "WhoisLookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "description": "The domain to lookup."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
