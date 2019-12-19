@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Hosting History API",
+        "description": "Provides the registrar, IP and name server history for a domain name",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/{domain}\/hosting-history\/": {
+            "get": {
+                "summary": "Domain History",
+                "description": "Provides the registrar, IP and name server history for a domain name",
+                "operationId": "DomainHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "description": "The domain."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
