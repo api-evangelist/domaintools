@@ -1,0 +1,79 @@
+{
+    "id": "dc0863692fa20da421314e311a4d480c",
+    "name": "Reverse IP API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "ed9129ab30a9592bf8c3537b4678200e",
+            "name": "Reverse IP Whois",
+            "url": "httpapi.domaintools.com\/v1\/reverse-ip-whois\/",
+            "description": "Provides a list of IP network ranges with Whois records that match a specific query",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "ip",
+                    "description": "Returns the most recent cached IP Whois record for the allocated range the IP is in.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "query",
+                    "description": "A space separated list of free text query terms. Returns the list of IP ranges that satisfy the query. The",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "country",
+                    "description": "Limits results to IP addresses allocated to an entity with a particular country. Valid options are ISO 3166-1 two character country codes.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "server",
+                    "description": "Limits results to ranges from a particular Whois server. Valid options are ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "include_total_count",
+                    "description": "Returns the total number of results for a query. This should typically be used only for the first page of a large result set. Valid options are \"true\" and \"false\"",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "Providing the page number allows access to additional pages of data. Results are returned 1000 ranges at a time. The maximum allowed value is 5.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "dc0863692fa20da421314e311a4d480c",
+            "rawModeData": ""
+        }
+    ]
+}
