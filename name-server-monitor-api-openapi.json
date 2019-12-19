@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Name Server Monitor API",
+        "description": "Receive notification when there are new and\/or deleted domains on a given Domain Name Server",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpapi.domaintools.com\/v1"
+    ],
+    "paths": {
+        "\/name-server-monitor\/": {
+            "get": {
+                "summary": "Name Server Monitor",
+                "description": "Receive notification when there are new and\/or deleted domains on a given Domain Name Server",
+                "operationId": "NameServerMonitor",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "The hostname of the Name Server you wish to query"
+                    },
+                    {
+                        "name": "days_back",
+                        "in": "query",
+                        "description": "Use this parameter in exceptional circumstances where you need to search domain changes up to six days prior to the current date. Set the value to an integer in the range of 1-6. (default 0)"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "\tIf the result set is larger than 1000 records for a given day, request additional pages with this parameter. Set the value to an integer up to a maximum of the returned page_count value. (default 1)"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
