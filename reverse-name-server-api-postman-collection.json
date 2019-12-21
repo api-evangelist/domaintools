@@ -1,5 +1,5 @@
 {
-    "id": "fabc6d8af39043f90b4b98258dd5fb15",
+    "id": "3db5aa13dfc93985d5289066265f3a5d",
     "name": "Reverse Name Server API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "0279458eb620e39ee4ba04b91645dd5a",
+            "id": "b8a2faba5914c77c152167acbeb53bc8",
             "name": "Reverse Name Server",
             "url": "httpapi.domaintools.com\/v1\/{domain]\/name-server-domains\/",
             "description": "List of domains that share the same primary name server",
@@ -37,7 +37,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "fabc6d8af39043f90b4b98258dd5fb15",
+            "collectionId": "3db5aa13dfc93985d5289066265f3a5d",
             "rawModeData": ""
         }
     ]
