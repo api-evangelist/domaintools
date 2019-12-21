@@ -1,5 +1,5 @@
 {
-    "id": "be24d05653479af46d91e15f71f57bf9",
+    "id": "f7405c8779ac1565405873fbf1353253",
     "name": "Whois History API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "9dd515d44a1ce9b2e2f5386c355f9e9e",
+            "id": "4fb47de89397b5fbd10b0f6090b399b5",
             "name": "Whois History",
             "url": "httpapi.domaintools.com\/v1\/{domain}\/whois\/history\/",
             "description": "Historical Whois records",
@@ -37,7 +37,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "be24d05653479af46d91e15f71f57bf9",
+            "collectionId": "f7405c8779ac1565405873fbf1353253",
             "rawModeData": ""
         }
     ]
