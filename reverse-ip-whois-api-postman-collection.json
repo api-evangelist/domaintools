@@ -1,5 +1,5 @@
 {
-    "id": "6f4c9987ac895b9c0d3de437e612f552",
+    "id": "cec455265504a0fbf50152fa7e755c0b",
     "name": "Reverse IP Whois API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "3454bd930e89eb7b877f73f5969580cc",
+            "id": "98274e0eae73c0d428b69d7ed90d8354",
             "name": "Reverse IP Whois",
             "url": "httpapi.domaintools.com\/v1\/reverse-ip-whois\/",
             "description": "Provides a list of IP network ranges with Whois records that match a specific query",
@@ -72,7 +72,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6f4c9987ac895b9c0d3de437e612f552",
+            "collectionId": "cec455265504a0fbf50152fa7e755c0b",
             "rawModeData": ""
         }
     ]
