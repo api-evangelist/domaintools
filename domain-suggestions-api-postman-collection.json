@@ -1,5 +1,5 @@
 {
-    "id": "fdfd4fba79287385a0a4879f5aca27a4",
+    "id": "7c1d3e43185e803e770626b15c063bcb",
     "name": "Domain Suggestions API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "509706da4c3a3bc2b300cb2727c82634",
+            "id": "0b3dd198919730a11d8e6842f63abecf",
             "name": "Domain Suggestions",
             "url": "httpapi.domaintools.com\/v1\/domain-suggestions\/",
             "description": "Generates available domain suggestions that are related to a query string",
@@ -37,7 +37,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "fdfd4fba79287385a0a4879f5aca27a4",
+            "collectionId": "7c1d3e43185e803e770626b15c063bcb",
             "rawModeData": ""
         }
     ]
