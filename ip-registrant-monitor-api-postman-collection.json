@@ -1,5 +1,5 @@
 {
-    "id": "3c58f979b401bc74b200709cccee89ed",
+    "id": "5e345e2817e9de881eecefa1ded2064f",
     "name": "IP Registrant Monitor API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "ed1e81992ce9c81089e609244d442f56",
+            "id": "849c5919a651755885f327c5aed8984e",
             "name": "IP Registrant Monitor",
             "url": "httpapi.domaintools.com\/v1\/ip-registrant-monitor\/",
             "description": "Receive notification when specific people or organizations are allocated new IP ranges or have existing ranges de-allocated",
@@ -72,7 +72,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "3c58f979b401bc74b200709cccee89ed",
+            "collectionId": "5e345e2817e9de881eecefa1ded2064f",
             "rawModeData": ""
         }
     ]
