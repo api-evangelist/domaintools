@@ -1,5 +1,5 @@
 {
-    "id": "85560c50ccddcff164bed621a4cd8324",
+    "id": "4f3aaba9eac3eaa9d43ceaf105cd2e6f",
     "name": "Reverse Whois API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "107e06f3a869fb126ca6cb52c8c30aca",
+            "id": "15711b3a0cb29ec9e26872edfdf3f701",
             "name": "Reverse Whois",
             "url": "httpapi.domaintools.com\/v1\/reverse-whois\/",
             "description": "Provides a list of domain names with Whois records that match a specific query",
@@ -58,7 +58,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "85560c50ccddcff164bed621a4cd8324",
+            "collectionId": "4f3aaba9eac3eaa9d43ceaf105cd2e6f",
             "rawModeData": ""
         }
     ]
