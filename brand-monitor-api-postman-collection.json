@@ -1,5 +1,5 @@
 {
-    "id": "43b94904de63171726d304fabd082881",
+    "id": "86bf7d3e1a3a10b340be6eed0e405c05",
     "name": "Brand Monitor API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "e720f578eb5cbbf6f7f2104e6243d747",
+            "id": "de63c506d5e3c7a78389c28c13141221",
             "name": "Brand Monitor",
             "url": "httpapi.domaintools.com\/v1\/mark-alert\/",
             "description": "Monitor new domains registrations for specific keywords",
@@ -58,7 +58,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "43b94904de63171726d304fabd082881",
+            "collectionId": "86bf7d3e1a3a10b340be6eed0e405c05",
             "rawModeData": ""
         }
     ]
