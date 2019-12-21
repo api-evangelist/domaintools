@@ -1,5 +1,5 @@
 {
-    "id": "8870efcb5da836ec74cf90d4540865ef",
+    "id": "5c108fc8049b8fe5981879d0f230c849",
     "name": "Domain Search API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "645ca780b0cc5216472dcd57ef85a7ea",
+            "id": "dcfe52f92b1f05f59d203cd5d6af0c59",
             "name": "Domain Search",
             "url": "httpapi.domaintools.com\/v2\/domain-search\/",
             "description": "Searches active and deleted domain names that match a query string",
@@ -107,7 +107,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "8870efcb5da836ec74cf90d4540865ef",
+            "collectionId": "5c108fc8049b8fe5981879d0f230c849",
             "rawModeData": ""
         }
     ]
