@@ -1,5 +1,5 @@
 {
-    "id": "4157ddb334f1f6e75ebefefccfc62787",
+    "id": "6365894a351865f173d1d9d5c241bb5c",
     "name": "Domain Profile API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "cc8f5f95695d11ec7011c6f2a9631600",
+            "id": "2a7ab1fdda93992cbe675168a515b6f8",
             "name": "Domain Profile",
             "url": "httpapi.domaintools.comv1\/{domain}",
             "description": "Basic registrant, server, and registration data for a domain name, plus preview data for other products",
@@ -37,7 +37,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4157ddb334f1f6e75ebefefccfc62787",
+            "collectionId": "6365894a351865f173d1d9d5c241bb5c",
             "rawModeData": ""
         }
     ]
