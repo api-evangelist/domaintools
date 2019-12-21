@@ -11,8 +11,8 @@
         "relative data",
         "service api"
     ],
-    "created": "2019-12-19",
-    "modified": "2019-12-19",
+    "created": "2019-12-21",
+    "modified": "2019-12-21",
     "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/apis.json",
     "specificationVersion": "0.14",
     "apis": [
@@ -27,6 +27,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/whois-history-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/whois-history-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/whois-history-api-postman-collection.json"
                 }
             ]
         },
@@ -41,6 +49,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/ip-monitor-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/ip-monitor-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/ip-monitor-api-postman-collection.json"
                 }
             ]
         },
@@ -55,6 +71,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/name-server-monitor-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/name-server-monitor-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/name-server-monitor-api-postman-collection.json"
                 }
             ]
         },
@@ -69,6 +93,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/parsed-whois-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/parsed-whois-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/parsed-whois-api-postman-collection.json"
                 }
             ]
         },
@@ -83,6 +115,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-profile-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-profile-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-profile-api-postman-collection.json"
                 }
             ]
         },
@@ -97,6 +137,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-search-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-search-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-search-api-postman-collection.json"
                 }
             ]
         },
@@ -111,6 +159,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/ip-registrant-monitor-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/ip-registrant-monitor-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/ip-registrant-monitor-api-postman-collection.json"
                 }
             ]
         },
@@ -125,6 +181,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-name-server-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-name-server-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-name-server-api-postman-collection.json"
                 }
             ]
         },
@@ -139,6 +203,14 @@
                 {
                     "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/hosting-history-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/hosting-history-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/hosting-history-api-postman-collection.json"
                 }
             ]
         },
@@ -152,7 +224,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/registrant-monitor-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/registrant-monitor-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/registrant-monitor-api-postman-collection.json"
                 }
             ]
         },
@@ -166,7 +246,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-ip-whois-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-ip-whois-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-ip-whois-api-postman-collection.json"
                 }
             ]
         },
@@ -180,7 +268,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-suggestions-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/domain-suggestions-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/domain-suggestions-api-postman-collection.json"
                 }
             ]
         },
@@ -194,7 +290,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/brand-monitor-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/brand-monitor-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/brand-monitor-api-postman-collection.json"
                 }
             ]
         },
@@ -208,7 +312,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-whois-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-whois-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-whois-api-postman-collection.json"
                 }
             ]
         },
@@ -222,7 +334,15 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-ip-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/reverse-ip-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/reverse-ip-api-postman-collection.json"
                 }
             ]
         },
@@ -236,13 +356,25 @@
             "properties": [
                 {
                     "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/whois-lookup-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
                     "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/whois-lookup-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/domaintools\/master\/whois-lookup-api-postman-collection.json"
                 }
             ]
         }
     ],
     "include": [],
     "x-common": [
+        {
+            "type": "APIs.json",
+            "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/apis.json"
+        },
         {
             "type": "Base",
             "url": "http:\/\/api.domaintools.com\/"
