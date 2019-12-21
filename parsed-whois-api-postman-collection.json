@@ -1,5 +1,5 @@
 {
-    "id": "e9d6a11df06e2b09c796f6185295a577",
+    "id": "40025866db9acfd8e45c63e617b97991",
     "name": "Parsed Whois API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "4e966479242f5fc3ec2f6eab55def87a",
+            "id": "c4d26e02b9d0aa47ac6482348c337963",
             "name": "Parsed Whois",
             "url": "httpapi.domaintools.com\/v1\/{domain}\/whois\/parsed",
             "description": "The Parsed Whois API provides parsed information extracted from the raw Whois recor",
@@ -29,7 +29,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e9d6a11df06e2b09c796f6185295a577",
+            "collectionId": "40025866db9acfd8e45c63e617b97991",
             "rawModeData": ""
         }
     ]
