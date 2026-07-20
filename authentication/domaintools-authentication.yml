@@ -1,0 +1,56 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/domaintools-dnsdb-openapi.yml, openapi/domaintools-iris-openapi.yml, openapi/domaintools-lookups-monitors-openapi.yml
+docs: https://docs.domaintools.com/authentication/
+notes: >-
+  Docs confirm three credential styles: X-Api-Key header (recommended default),
+  HMAC request signing (recommended for production — the api key never travels
+  over the wire), and http basic (api_username + api_key, discouraged). Query-
+  string api key is supported for Iris/Lookups/Threat Feeds but discouraged.
+  Farsight SIE Batch uniquely takes the api key as an `apikey` field in the JSON
+  POST body. No OAuth token flow is documented for the core product APIs.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: apikey
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  sources:
+  - openapi/domaintools-dnsdb-openapi.yml
+- name: header_auth
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: A secure authentication method where the API key is provided in the `X-Api-Key`
+    HTTP request header.
+  sources:
+  - openapi/domaintools-iris-openapi.yml
+  - openapi/domaintools-lookups-monitors-openapi.yml
+- name: open_key_auth
+  type: http
+  scheme: basic
+  description: A simple authentication scheme using your `api_username` as the username and
+    your `api_key` as the password. We strongly recommend using HMAC or Header authentication
+    instead to avoid exposing your credentials.
+  sources:
+  - openapi/domaintools-iris-openapi.yml
+  - openapi/domaintools-lookups-monitors-openapi.yml
+- name: hmac_auth
+  type: apiKey
+  in: query
+  parameter: signature
+  description: |-
+    A secure scheme using a Hashed Message Authentication Code (HMAC).
+    This method requires three query parameters to be sent with the request:
+    1. `api_username`: Your API username.
+    2. `timestamp`: The current timestamp in ISO 8601 format (e.g., `2020-02-01T22:37:59Z`).
+    3. `signature`: The HMAC signature of the request. This is a hash (SHA-256 recommended) of your username, the timestamp, and the requ
+  sources:
+  - openapi/domaintools-iris-openapi.yml
+  - openapi/domaintools-lookups-monitors-openapi.yml
