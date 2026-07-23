@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Rate Limit API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Rate Limit
+paths:
+  /rate_limit:
+    get:
+      operationId: getRateLimit
+      summary: Query quota and rate limit info
+      description: For block quotas, there are a number of queries that are bought, with all, or a subset, of that number “split” off for a particular API key; e.g. a split is an allocation from the amount of queries purchased. Block quotas have a specific number of queries split with an expiration time (the expiration time is usually much longer than a day). For each API key, the DNSDB API server tracks the number of queries split, number used, and the expiration time. The number of queries bought is not visible to the DNSDB API server.
+      security:
+      - apikey: []
+      responses:
+        '200':
+          description: rate limit
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/rate_limit'
+              examples:
+                time based quota:
+                  value:
+                    rate:
+                      reset: 1433980800
+                      limit: 1000
+                      remaining: 999
+                block quota:
+                  value:
+                    rate:
+                      reset: n/a
+                      burst_size: 10
+                      expires: 1555370914
+                      burst_window: 300
+                      offset max: 3000000
+                      results_max: 256
+                      limit: 600
+                      remaining: 8
+                unlimited:
+                  value:
+                    rate:
+                      reset: n/a
+                      limit: unlimited
+                      remaining: n/a
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+      tags:
+      - Rate Limit
+components:
+  responses:
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+  schemas:
+    rate_limit:
+      type: object
+      properties:
+        limit:
+          oneOf:
+          - type: number
+          - type: string
+            enum:
+            - unlimited
+        remaining:
+          oneOf:
+          - type: number
+          - type: string
+            enum:
+            - n/a
+        reset:
+          oneOf:
+          - type: number
+          - type: string
+            enum:
+            - n/a
+        expires:
+          type: number
+        results_max:
+          type: number
+        offset_max:
+          type: number
+        burst_size:
+          type: number
+        burst_window:
+          type: number
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

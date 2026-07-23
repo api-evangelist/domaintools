@@ -1,0 +1,383 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Siebatchd API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Siebatchd
+paths:
+  /siebatchd/v1/validate:
+    post:
+      operationId: validate
+      security: []
+      summary: Validate API Key
+      description: 'Validates a provided API Key and returns profile and provisioning information associated with it.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyOnly'
+      responses:
+        200:
+          $ref: '#/components/responses/200_validate'
+        403:
+          $ref: '#/components/responses/4xx'
+        500:
+          $ref: '#/components/responses/5xx'
+      tags:
+      - Siebatchd
+  /siebatchd/v1/siebatch/chdetails:
+    post:
+      operationId: chdetails
+      security: []
+      summary: Get Channel Details
+      description: 'Request details of one or more channels such as available datetime ranges, download filetype, and the size of data available. Channel data is always in motion so the details represent a moving window of data available for download.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - apikey
+              - channels
+              properties:
+                apikey:
+                  $ref: '#/components/schemas/ApiKeyField'
+                channels:
+                  type: array
+                  description: 'List of one or more channel numbers (integers). Valid channels are 1-255.
+
+                    '
+                  items:
+                    type: integer
+                    minimum: 1
+                    maximum: 255
+                  example:
+                  - 212
+                  - 213
+      responses:
+        200:
+          $ref: '#/components/responses/200_chdetails'
+        403:
+          $ref: '#/components/responses/4xx'
+        500:
+          $ref: '#/components/responses/5xx'
+      tags:
+      - Siebatchd
+  /siebatchd/v1/siebatch/chfetch:
+    post:
+      operationId: chfetch
+      security: []
+      summary: Fetch Channel Data
+      description: 'Download data associated with a given channel. The seconds portion of start/end times are ignored, but for API consistency, seconds must be given. If no data is available then an HTTP 404 is returned.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelTimeRange'
+      responses:
+        200:
+          description: 'Channel data stream. Content-Type varies by channel (typically application/x-ndjson or application/octet-stream for NMSG).
+
+            '
+          content:
+            application/x-ndjson:
+              schema:
+                type: string
+                description: Newline-delimited JSON records
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+                description: NMSG binary data
+        403:
+          $ref: '#/components/responses/4xx'
+        404:
+          description: No data available for the requested time range.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          $ref: '#/components/responses/5xx'
+      tags:
+      - Siebatchd
+  /siebatchd/v1/siebatch/makeurl:
+    post:
+      operationId: makeurl
+      security: []
+      summary: Make Download URL
+      description: "Generate a presigned URL to download data associated with a channel\nlater or independently of the SIE Batch webserver. Generated URLs\nare shareable and do not reveal credentials. The seconds portion of\nstart/end times are ignored.\n\nThe requested `start_time`/`end_time` must fall within the\nchannel's data retention window. Use `chdetails` to check the\n`earliest` and `latest` timestamps before generating a URL.\nThe `makeurl` call itself succeeds even if the requested range\nextends beyond available data — the error occurs when\ndownloading from the returned URL:\n\n- **404 (NoSuchKey)**: The requested data range is outside the\n  channel's retention window.\n- **403 (Unable to authenticate)**: The generated URL has\n  expired. Generate a new URL with `makeurl`.\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelTimeRange'
+      responses:
+        200:
+          $ref: '#/components/responses/200_makeurl'
+        403:
+          $ref: '#/components/responses/4xx'
+        500:
+          $ref: '#/components/responses/5xx'
+      tags:
+      - Siebatchd
+components:
+  schemas:
+    ChannelTimeRange:
+      type: object
+      required:
+      - apikey
+      - channel
+      - start_time
+      - end_time
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+        channel:
+          type: integer
+          description: Channel number (1-255)
+          minimum: 1
+          maximum: 255
+          example: 213
+        start_time:
+          type: string
+          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:00:00'
+        end_time:
+          type: string
+          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:01:00'
+    ErrorResponse:
+      type: object
+      properties:
+        _status:
+          type: string
+          enum:
+          - NOK
+        _message:
+          type: string
+          description: Short description of what went wrong
+        contact_url:
+          type: string
+          format: uri
+          description: Support contact URL
+        invalid_parameters:
+          type: object
+          description: Details about which parameters were invalid (RFC 7807)
+          properties:
+            name:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+          description: HTTP status code
+        type:
+          type: string
+          description: Hyphenated error mnemonic
+        detail:
+          type: string
+          description: Additional error details (optional)
+        logid:
+          type: string
+          format: uuid
+          description: Server-side log correlation ID
+    ChannelDetail:
+      type: object
+      properties:
+        earliest:
+          type: string
+          description: Earliest available data timestamp
+          example: '2020-01-28 00:40:00'
+        latest:
+          type: string
+          description: Latest available data timestamp
+          example: '2020-01-28 20:06:00'
+        size:
+          type: integer
+          description: Size of available data in bytes
+          example: 83837922
+        mimetype:
+          type: string
+          description: MIME type of the data
+          example: application/x-ndjson
+    ChannelDescription:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Newly Observed Domains
+    ApiKeyField:
+      type: string
+      format: password
+      description: Your Farsight SIE Batch API Key (UUID format)
+      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ApiKeyOnly:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+  responses:
+    5xx:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    200_makeurl:
+      description: Presigned download URL generated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+              url:
+                type: string
+                format: uri
+                description: Presigned shareable URL to the specified SIE data
+          example:
+            _status: OK
+            _message: ''
+            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
+    4xx:
+      description: Client error (authentication or validation failure)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            missing_api_key:
+              summary: Missing API Key
+              value:
+                _status: NOK
+                _message: API key not present
+                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
+                status: 403
+                type: missing-api-key
+            invalid_parameters:
+              summary: Invalid Parameters
+              value:
+                _status: NOK
+                _message: Invalid parameter value
+                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
+                status: 403
+                type: invalid-parameters
+                invalid_parameters:
+                  name: foobar
+                  reason: should be an integer but received a string
+    200_chdetails:
+      description: Channel details returned successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              channels:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/ChannelDetail'
+                description: 'Dictionary of channel objects keyed by channel name (e.g. "ch212").
+
+                  '
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+          example:
+            channels:
+              ch212:
+                earliest: '2020-01-28 00:40:00'
+                latest: '2020-01-28 20:06:00'
+                size: 83837922
+                mimetype: application/x-ndjson
+              ch213:
+                earliest: '2020-01-28 00:40:00'
+                latest: '2020-01-28 20:06:01'
+                size: 10397567992
+                mimetype: application/x-ndjson
+            _status: OK
+            _message: ''
+    200_validate:
+      description: API key is valid. Returns profile and provisioning info.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              profile:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  apikey:
+                    type: string
+                  over_quota_action:
+                    type: string
+                  channels:
+                    type: object
+                  not_really:
+                    type: boolean
+                  siebatch:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/ChannelDescription'
+                    description: 'SIE batch channels the key has access to, keyed by channel ID (e.g. "ch212").
+
+                      '
+                  anomalies:
+                    type: object
+                  state_quota:
+                    type: string
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+          example:
+            profile:
+              username: siebatch-customer
+              siebatch:
+                ch212:
+                  description: Newly Observed Domains
+                ch213:
+                  description: Newly Observed Fully Qualified Domain Names
+            _status: OK
+            _message: ''
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

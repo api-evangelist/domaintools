@@ -1,0 +1,1122 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Iris Detect API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Iris Detect
+  description: 'Iris Detect is an Internet infrastructure detection, monitoring, and enforcement tool.
+
+    It rapidly discovers malicious domains that are engaged in brand impersonation, risk-scores them within minutes, and supports your automation of detection, escalation, and enforcement actions.
+
+    '
+paths:
+  /v1/iris-detect/domains/:
+    patch:
+      operationId: patchDetectDomains
+      summary: Add and remove domains from Watchlist or Ignored lists.
+      tags:
+      - Iris Detect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WatchlistState'
+      responses:
+        '200':
+          $ref: '#/components/responses/DetectWatchlistOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/DetectUnprocessableEntity'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#add-and-remove-from-watchlist
+  /v1/iris-detect/domains/ignored/:
+    get:
+      operationId: getDetectIgnored
+      summary: Provide ignored domains for active monitors in an account.
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/changedSince'
+      - $ref: '#/components/parameters/discoveredBefore'
+      - $ref: '#/components/parameters/discoveredSince'
+      - $ref: '#/components/parameters/domainState'
+      - $ref: '#/components/parameters/escalatedSince'
+      - $ref: '#/components/parameters/includeDomainData'
+      - $ref: '#/components/parameters/irisContainsSearch'
+      - $ref: '#/components/parameters/irisResultsLimit'
+      - $ref: '#/components/parameters/monitorId'
+      - $ref: '#/components/parameters/mxExists'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/order'
+      - $ref: '#/components/parameters/preview'
+      - $ref: '#/components/parameters/riskScoreRanges'
+      - $ref: '#/components/parameters/sortDetect'
+      - $ref: '#/components/parameters/tlds'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectDomainList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#domains
+  /v1/iris-detect/domains/new/:
+    get:
+      operationId: getDetectNewDomains
+      summary: Provide newly discovered domains for active monitors in an account.
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/discoveredBefore'
+      - $ref: '#/components/parameters/discoveredSince'
+      - $ref: '#/components/parameters/includeDomainData'
+      - $ref: '#/components/parameters/irisContainsSearch'
+      - $ref: '#/components/parameters/irisResultsLimit'
+      - $ref: '#/components/parameters/monitorId'
+      - $ref: '#/components/parameters/mxExists'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/order'
+      - $ref: '#/components/parameters/preview'
+      - $ref: '#/components/parameters/riskScoreRanges'
+      - $ref: '#/components/parameters/sortDetect'
+      - $ref: '#/components/parameters/tlds'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectDomainList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#domains
+  /v1/iris-detect/domains/watched/:
+    get:
+      operationId: getDomainsWatched
+      summary: Provide recently changed or escalated domains for active monitors in an account.
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/changedSince'
+      - $ref: '#/components/parameters/discoveredBefore'
+      - $ref: '#/components/parameters/discoveredSince'
+      - $ref: '#/components/parameters/escalatedSince'
+      - $ref: '#/components/parameters/escalationTypes'
+      - $ref: '#/components/parameters/includeDomainData'
+      - $ref: '#/components/parameters/irisContainsSearch'
+      - $ref: '#/components/parameters/irisResultsLimit'
+      - $ref: '#/components/parameters/monitorId'
+      - $ref: '#/components/parameters/mxExists'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/order'
+      - $ref: '#/components/parameters/preview'
+      - $ref: '#/components/parameters/riskScoreRanges'
+      - $ref: '#/components/parameters/sortDetect'
+      - $ref: '#/components/parameters/tlds'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectDomainList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#domains
+  /v1/iris-detect/escalations/:
+    post:
+      operationId: postDetectEscalations
+      summary: Escalate internally and externally.
+      tags:
+      - Iris Detect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WatchlistEscalation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Escalations'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/DetectUnprocessableEntity'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#escalate
+  /v1/iris-detect/monitors/:
+    get:
+      operationId: getDetectMonitors
+      summary: Retrieves monitors and monitor IDs for an account.
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/datetimeCountsSince'
+      - $ref: '#/components/parameters/includeCounts'
+      - $ref: '#/components/parameters/limitMonitors'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/order'
+      - $ref: '#/components/parameters/sortMonitorList'
+      responses:
+        '200':
+          $ref: '#/components/responses/DetectMonitorSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#monitor-list
+    post:
+      operationId: postDetectMonitor
+      summary: Create a new monitor to track lookalike domains for a specific term.
+      description: 'Creates a monitor that begins discovering matching domains immediately.
+
+        The monitor `status` is `pending` after creation and changes to `completed`
+
+        once initial domain discovery finishes.
+
+
+        Requires the "manage monitors" permission.
+
+        '
+      tags:
+      - Iris Detect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMonitorRequest'
+      responses:
+        '200':
+          description: Monitor created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMonitorResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/DetectUnprocessableEntity'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#create-monitor
+    put:
+      operationId: putDetectMonitor
+      summary: Update the configuration of an existing monitor.
+      description: 'Modifies match settings and exclusions for an existing monitor.
+
+        Include only the fields you want to change; omitted fields retain their current values.
+
+
+        A recently created monitor may not be immediately available for updates.
+
+        Wait until the monitor''s `status` changes from `pending` to `completed`
+
+        before sending update requests.
+
+
+        Requires the "manage monitors" permission.
+
+        '
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/monitorIdRequired'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMonitorRequest'
+      responses:
+        '200':
+          description: Monitor updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMonitorResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/DetectUnprocessableEntity'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#update-monitor
+    delete:
+      operationId: deleteDetectMonitor
+      summary: Permanently delete a monitor and stop tracking its associated domains.
+      description: 'Deletes the specified monitor. This action is permanent and can''t be undone.
+
+
+        Requires the "manage monitors" permission.
+
+        '
+      tags:
+      - Iris Detect
+      parameters:
+      - $ref: '#/components/parameters/monitorIdRequired'
+      responses:
+        '200':
+          description: Monitor deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMonitorResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/detect/guide/#delete-monitor
+components:
+  parameters:
+    includeDomainData:
+      in: query
+      name: include_domain_data
+      description: 'If set to true, includes additional DNS and WHOIS details in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    sortDetect:
+      in: query
+      name: sort
+      description: 'Sorts the domain list response. Valid fields to sort by are ''discovered_date'', ''changed_date'', and ''risk_score''.
+
+        '
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - discovered_date
+          - changed_date
+          - risk_score
+      style: form
+      explode: true
+    monitorId:
+      in: query
+      name: monitor_id
+      description: Monitor ID from the monitors response - only used when requesting domains for specific monitors.
+      schema:
+        type: string
+    changedSince:
+      in: query
+      name: changed_since
+      description: 'Most relevant for the `/watched` endpoint to control the timeframe for changes to DNS or WHOIS fields for watched domains.
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    irisResultsLimit:
+      in: query
+      name: limit
+      description: 'Specify the maximum number of records to retrieve in an API query.
+
+        The maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.
+
+        '
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
+    irisContainsSearch:
+      in: query
+      name: search
+      description: Performs a `contains` search.
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    limitMonitors:
+      in: query
+      name: limit
+      description: 'Specifies the maximum number of monitors to retrieve.
+
+        The default is 500. The maximum is restricted to 100 if `include_counts=true`.
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    escalationTypes:
+      in: query
+      name: escalation_types
+      description: 'Filters domains based on specific escalation types. Multiple types can be provided.
+
+        '
+      style: form
+      explode: true
+      schema:
+        $ref: '#/components/schemas/EscalationTypeEnum'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    resultsOffset:
+      name: offset
+      in: query
+      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
+      schema:
+        type: integer
+        minimum: 0
+    mxExists:
+      in: query
+      name: mx_exists
+      description: Whether domain currently has an MX record in DNS.
+      schema:
+        type: boolean
+    discoveredBefore:
+      in: query
+      name: discovered_before
+      description: 'Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.
+
+        Example: `2022-02-10T00:00:00Z (ISO-8601)`
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    datetimeCountsSince:
+      in: query
+      name: datetime_counts_since
+      description: 'Filters counts to include only those generated since the specified ISO-8601 date-time.
+
+        This parameter is conditionally required if `include_counts` is set to `true`.
+
+        Example: `2022-02-10T00:00:00Z`
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    includeCounts:
+      in: query
+      name: include_counts
+      description: 'If set to `true`, the response will include counts for new, watched, changed, and escalated domains for each monitor.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    discoveredSince:
+      in: query
+      name: discovered_since
+      description: 'Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.
+
+        Example: `2022-02-10T00:00:00Z (ISO-8601)`
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    escalatedSince:
+      in: query
+      name: escalated_since
+      description: 'Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    riskScoreRanges:
+      in: query
+      name: risk_score_ranges
+      description: 'Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.
+
+        '
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - 0-0
+          - 1-39
+          - 40-69
+          - 70-99
+          - 100-100
+      style: form
+      explode: true
+    tlds:
+      in: query
+      name: tlds
+      description: Filters on specific TLDs
+      schema:
+        type: array
+        items:
+          type: string
+      allowReserved: true
+      style: form
+      explode: true
+    domainState:
+      in: query
+      name: domain_state
+      description: 'Filters domains based on their state.
+
+        '
+      schema:
+        type: string
+        enum:
+        - active
+        - inactive
+    preview:
+      in: query
+      name: preview
+      description: 'Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.
+
+        '
+      required: false
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    monitorIdRequired:
+      in: query
+      name: monitor_id
+      required: true
+      description: 'The ID of the monitor to operate on.
+
+        Retrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).
+
+        '
+      schema:
+        type: string
+    order:
+      in: query
+      name: order
+      description: Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    sortMonitorList:
+      in: query
+      name: sort[]
+      description: Provides options for sorting the monitor list.
+      schema:
+        type: string
+        enum:
+        - term
+        - created_date
+        - domain_counts_changed
+        - domain_counts_discovered
+  schemas:
+    MonitorList:
+      type: object
+      description: A list of Iris Detect monitors and associated metadata.
+      properties:
+        total_count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Monitor'
+    DetectRiskComponents:
+      type: object
+      properties:
+        proximity:
+          type: integer
+        threat_profile:
+          oneOf:
+          - $ref: '#/components/schemas/DetectThreatProfile'
+          - type: array
+            items: {}
+            description: Empty array when no threat profile data is available.
+    TimestampFilter:
+      title: Timestamp filter
+      description: "Defines a point in time for filtering results.\n\nAccepts one of:\n\n  - relative time, in negative seconds\n\n  - absolute time, in an ISO 8601 timestamp\n"
+      oneOf:
+      - type: integer
+        minimum: -432000
+        maximum: -1
+        description: 'Relative offset in seconds before the current UTC time.
+
+
+          Must be between -1 (1 second ago) and -432000 (5 days ago).
+
+          '
+      - type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+        format: date-time
+        description: 'ISO 8601 datetime in UTC format with no milliseconds or timezone offset. Format: `YYYY-MM-DDTHH:MM:SSZ`.
+
+
+          The timestamp must represent a point between *1 second ago* and *5 days ago*, relative to the current UTC time.
+
+          '
+    BasicString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    CreateMonitorResponse:
+      type: object
+      description: Response returned after successfully creating a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `created`).
+        monitor:
+          $ref: '#/components/schemas/Monitor'
+    DeleteMonitorResponse:
+      type: object
+      description: Response returned after successfully deleting a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `deleted`).
+        monitor:
+          type: object
+          description: The deleted monitor.
+          properties:
+            id:
+              type: string
+              description: The ID of the deleted monitor.
+    CreateMonitorRequest:
+      type: object
+      description: Request body for creating a new Iris Detect monitor.
+      required:
+      - term
+      properties:
+        term:
+          type: string
+          description: The keyword to monitor for domain variations.
+        match_substring_variations:
+          type: boolean
+          default: false
+          description: 'When `true`, includes domains where variations of the term appear
+
+            as substrings within matched domains.
+
+            '
+        nameserver_exclusions:
+          type: array
+          items:
+            type: string
+          description: 'Nameserver patterns to exclude. Wildcards (`*`) are accepted.
+
+            A domain is excluded only when all of its nameservers match an exclusion pattern.
+
+            '
+        text_exclusions:
+          type: array
+          items:
+            type: string
+          description: 'Text strings to exclude from results.
+
+            Domains containing any of these strings are excluded.
+
+            '
+    DetectDomainList:
+      type: object
+      properties:
+        watchlist_domains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectDomain'
+        total_count:
+          type: integer
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    Monitor:
+      type: object
+      description: Details of a single Iris Detect monitor.
+      properties:
+        term:
+          type: string
+        match_substring_variations:
+          type: boolean
+        nameserver_exclusions:
+          type: array
+          items:
+            type: string
+        text_exclusions:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        updated_date:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - active
+          - inactive
+        status:
+          type: string
+        domain_counts:
+          $ref: '#/components/schemas/MonitorDomainCounts'
+        created_by:
+          type: string
+    WatchlistBase:
+      type: object
+      properties:
+        watchlist_domain_ids:
+          type: array
+          items:
+            type: string
+        app_partner:
+          $ref: '#/components/schemas/IdentifierString'
+        app_name:
+          $ref: '#/components/schemas/IdentifierString'
+        app_version:
+          $ref: '#/components/schemas/IdentifierString'
+    WatchlistState:
+      allOf:
+      - $ref: '#/components/schemas/WatchlistBase'
+      - type: object
+        properties:
+          state:
+            type: string
+            enum:
+            - watched
+            - ignored
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    Watchlist:
+      type: object
+      properties:
+        watchlist_domains:
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                enum:
+                - watched
+                - ignored
+              domain:
+                type: string
+              discovered_date:
+                type: string
+              changed_date:
+                type: string
+              id:
+                type: string
+              assigned_by:
+                type: string
+              assigned_date:
+                type: string
+    MonitorDomainCounts:
+      type: object
+      description: Counts of domains associated with a monitor in various states.
+      properties:
+        new:
+          type: integer
+          description: The number of new domains discovered.
+        watched:
+          type: integer
+          description: The number of domains currently on the watchlist.
+        escalated:
+          type: integer
+          description: The number of domains that have been escalated.
+        changed:
+          type: integer
+          description: The number of watched domains that have changed.
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    DetectValidationError:
+      type: object
+      description: 'Validation error returned by Iris Detect endpoints when the request body
+
+        is syntactically valid JSON but contains values that fail server-side
+
+        validation rules.
+
+        '
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code.
+              example: 422
+            summary:
+              type: string
+              description: A human-readable summary of the error.
+              example: The given data was invalid.
+            messages:
+              type: object
+              description: 'A map of field names to arrays of validation error messages.
+
+                Each key is the name of a request body field that failed validation.
+
+                '
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+              example:
+                term:
+                - The term field is required.
+        resources:
+          type: object
+          properties:
+            support:
+              type: string
+              description: A link to the DomainTools documentation.
+              example: https://docs.domaintools.com
+    EscalationTypeEnum:
+      type: string
+      description: The type of escalation action.
+      enum:
+      - blocked
+      - google_safe
+    Escalations:
+      type: object
+      properties:
+        watchlist_domains:
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+              domain:
+                type: string
+              discovered_date:
+                type: string
+              changed_date:
+                type: string
+              id:
+                type: string
+              assigned_by:
+                type: string
+              assigned_date:
+                type: string
+    DetectDomain:
+      type: object
+      properties:
+        state:
+          type: string
+        domain:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+        discovered_date:
+          type: string
+          format: date-time
+        changed_date:
+          type: string
+          format: date-time
+        risk_score:
+          type: integer
+          nullable: true
+        risk_score_status:
+          description: 'Indicates if the risk score is ''provisional'' (initial calculation) or full.
+
+            '
+          type: string
+          nullable: true
+        risk_score_components:
+          $ref: '#/components/schemas/DetectRiskComponents'
+        mx_exists:
+          type: boolean
+        tld:
+          type: string
+        id:
+          type: string
+        escalations:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectEscalation'
+        monitor_ids:
+          type: array
+          items:
+            type: string
+        name_server:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                type: string
+        registrant_contact_email:
+          type: array
+          items:
+            type: string
+        registrar:
+          type: string
+        create_date:
+          type: integer
+          description: 'Domain creation date in YYYYMMDD format.
+
+            '
+        ip:
+          type: array
+          items:
+            type: object
+            properties:
+              country_code:
+                type: string
+              ip:
+                type: string
+              isp:
+                type: string
+        mx:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    UpdateMonitorResponse:
+      type: object
+      description: Response returned after successfully updating a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `updated`).
+        monitor:
+          $ref: '#/components/schemas/Monitor'
+    UpdateMonitorRequest:
+      type: object
+      description: 'Request body for updating an existing Iris Detect monitor.
+
+        Include only the fields you want to change.
+
+        '
+      properties:
+        match_substring_variations:
+          type: boolean
+          description: Enable or disable substring variation matching.
+        nameserver_exclusions:
+          type: array
+          items:
+            type: string
+          description: Replace the current nameserver exclusion list. Wildcards (`*`) are accepted.
+        text_exclusions:
+          type: array
+          items:
+            type: string
+          description: Replace the current text exclusion list.
+    DetectEscalation:
+      type: object
+      properties:
+        escalation_type:
+          $ref: '#/components/schemas/EscalationTypeEnum'
+        id:
+          type: string
+        created:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+    DetectThreatProfile:
+      type: object
+      properties:
+        phishing:
+          type: integer
+        malware:
+          type: integer
+        spam:
+          type: integer
+    WatchlistEscalation:
+      allOf:
+      - $ref: '#/components/schemas/WatchlistBase'
+      - type: object
+        properties:
+          escalation_type:
+            $ref: '#/components/schemas/EscalationTypeEnum'
+  responses:
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DetectWatchlistOk:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Watchlist'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DetectUnprocessableEntity:
+      description: '422: Unprocessable Entity. The request is syntactically valid JSON but
+
+        contains values that fail validation. The response includes per-field
+
+        error messages.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DetectValidationError'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DetectMonitorSuccess:
+      description: OK. A list of monitors was successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MonitorList'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

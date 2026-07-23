@@ -1,0 +1,365 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Flex search
+paths:
+  /{method}/{key}/{value}:
+    description: Flex search
+    parameters:
+    - in: path
+      name: method
+      description: flex search method
+      required: true
+      schema:
+        type: string
+        enum:
+        - regex
+        - glob
+    - in: path
+      name: key
+      description: search key
+      required: true
+      schema:
+        type: string
+        enum:
+        - rrnames
+        - rdata
+    - $ref: '#/components/parameters/value'
+    - $ref: '#/components/parameters/time_first_before'
+    - $ref: '#/components/parameters/time_first_after'
+    - $ref: '#/components/parameters/time_last_before'
+    - $ref: '#/components/parameters/time_last_after'
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/id'
+    - $ref: '#/components/parameters/swclient'
+    - $ref: '#/components/parameters/version'
+    - in: query
+      name: exclude
+      required: false
+      schema:
+        type: string
+    - $ref: '#/components/parameters/offset'
+    get:
+      operationId: flexSearch
+      summary: Flexible search by regex or glob
+      description: Flexible search adds ways to search DNSDB by regular expressions and globs (aka wildcarding).
+      tags:
+      - Flex search
+      security:
+      - apikey: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    obj:
+                      $ref: '#/components/schemas/flex'
+              examples:
+                rrnames:
+                  value:
+                  - obj:
+                      rname: dnsdb.info.
+                rdata:
+                  value:
+                  - obj:
+                      rdata: dnsdb.info.
+                      rdata_raw: 05646E73646204696E666F00
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Expires:
+              $ref: '#/components/headers/X-RateLimit-Expires'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+  /{method}/{key}/{value}/{rrtype}:
+    description: Flex search
+    parameters:
+    - in: path
+      name: method
+      description: flex search method
+      required: true
+      schema:
+        type: string
+        enum:
+        - regex
+        - glob
+    - in: path
+      name: key
+      description: search key
+      required: true
+      schema:
+        type: string
+        enum:
+        - rrnames
+        - rdata
+    - $ref: '#/components/parameters/value'
+    - $ref: '#/components/parameters/rrtype'
+    - $ref: '#/components/parameters/time_first_before'
+    - $ref: '#/components/parameters/time_first_after'
+    - $ref: '#/components/parameters/time_last_before'
+    - $ref: '#/components/parameters/time_last_after'
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/id'
+    - $ref: '#/components/parameters/swclient'
+    - $ref: '#/components/parameters/version'
+    - in: query
+      name: exclude
+      required: false
+      schema:
+        type: string
+    - $ref: '#/components/parameters/offset'
+    get:
+      operationId: flexSearchByType
+      summary: Flexible search filtered by RR type
+      description: Flexible search adds ways to search DNSDB by regular expressions and globs (aka wildcarding).
+      tags:
+      - Flex search
+      security:
+      - apikey: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    obj:
+                      $ref: '#/components/schemas/flex'
+              examples:
+                rrnames:
+                  value:
+                  - obj:
+                      rname: dnsdb.info.
+                rdata:
+                  value:
+                  - obj:
+                      rdata: dnsdb.info.
+                      rdata_raw: 05646E73646204696E666F00
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Expires:
+              $ref: '#/components/headers/X-RateLimit-Expires'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+components:
+  parameters:
+    value:
+      in: path
+      name: value
+      description: Value
+      required: true
+      schema:
+        type: string
+    swclient:
+      in: query
+      name: swclient
+      description: swclient
+      required: false
+      schema:
+        type: string
+    time_last_after:
+      in: query
+      name: time_last_after
+      description: time last after
+      required: false
+      schema:
+        type: number
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
+      schema:
+        type: string
+    time_first_before:
+      in: query
+      name: time_first_before
+      description: time first before
+      required: false
+      schema:
+        type: number
+    time_first_after:
+      in: query
+      name: time_first_after
+      description: time first after
+      required: false
+      schema:
+        type: number
+    version:
+      in: query
+      name: version
+      description: version
+      required: false
+      schema:
+        type: string
+    limit:
+      in: query
+      name: limit
+      description: Limit
+      required: false
+      schema:
+        type: number
+        minimum: 1
+    time_last_before:
+      in: query
+      name: time_last_before
+      description: time last before
+      required: false
+      schema:
+        type: number
+    id:
+      in: query
+      name: id
+      description: id
+      required: false
+      schema:
+        type: string
+    offset:
+      in: query
+      name: offset
+      description: offset
+      required: false
+      schema:
+        type: number
+        minimum: 0
+  headers:
+    X-RateLimit-Limit:
+      description: limit in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - unlimited
+    X-RateLimit-Expires:
+      description: when period expires
+      schema:
+        type: string
+        pattern: ^\d+$
+      allowEmptyValue: true
+    X-RateLimit-Reset:
+      description: when period resets
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Remaining:
+      description: remaining in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+  responses:
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
+    BadRequest:
+      description: Unable to parse request.
+      content:
+        text/plain:
+          schema:
+            type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    flex:
+      type: object
+      properties:
+        rrname:
+          type: string
+        rdata:
+          type: string
+        rdata_raw:
+          type: string
+        rrtype:
+          type: string
+      required:
+      - rrtype
+      additionalProperties: false
+      oneOf:
+      - required:
+        - rrname
+      - required:
+        - rdata
+        - rdata_raw
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

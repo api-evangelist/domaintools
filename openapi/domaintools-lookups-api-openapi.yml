@@ -1,0 +1,3191 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Lookups API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Lookups
+  description: 'Endpoints for retrieving detailed information about domains and IPs, and for finding connections between domains and infrastructure.
+
+    '
+paths:
+  /v1/{domain}/:
+    get:
+      operationId: getDomainProfile
+      summary: Domain Profile
+      description: 'Basic registrant, server, and registration data for a domain name, plus preview data for other products.
+
+        '
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainPath'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DomainProfileSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /v1/{domain}/hosting-history/:
+    get:
+      operationId: getHostingHistory
+      summary: Hosting History
+      description: 'Provides the registrar, IP and name server history for a domain name.
+
+        '
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainPath'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/HostingHistorySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/hosting-history/
+  /v1/{domain}/rdap/parsed/:
+    get:
+      operationId: getParsedDomainRdap
+      summary: Parsed Domain RDAP
+      description: Returns the most recent Domain-RDAP registration record.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainPath'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      responses:
+        '200':
+          $ref: '#/components/responses/ParsedDomainRdapSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/parsed-rdap/
+  /v1/{query}/whois/:
+    get:
+      operationId: getWhoisLookup
+      summary: WHOIS Lookup
+      description: WHOIS records for domain names and IP addresses.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainOrIpPath'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/WhoisLookupSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/whois-lookup/
+  /v1/{domain}/whois/history/:
+    get:
+      operationId: getWhoisHistory
+      summary: WHOIS History
+      description: Retrieve historical WHOIS records of a given domain name.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainPath'
+      - $ref: '#/components/parameters/whoisHistorySort'
+      - $ref: '#/components/parameters/resultsLimit'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/whoisHistoryMode'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/WhoisHistorySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/whois-history/
+  /v1/{query}/whois/parsed/:
+    get:
+      operationId: getParsedWhois
+      summary: Parsed WHOIS
+      description: Parsed results for WHOIS records for domain names and IP addresses.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainOrIpPath'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ParsedWhoisSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/parsed-whois/
+  /v1/reputation/:
+    get:
+      operationId: getDomainReputation
+      summary: Domain Reputation
+      description: This functionality is superseded by the Domain Risk Score `/risk/` endpoint, which offers a more complete and robust evaluation and should be used for all new development.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainQueryRequired'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DomainReputationSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/domain-reputation/
+  /v1/risk/:
+    get:
+      operationId: getDomainRiskScore
+      summary: Domain Risk Score
+      description: Provides risk scores and threat predictions based on DomainTools Proximity and Threat Profile algorithms.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainQueryRequired'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DomainRiskScoreSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/domain-risk-score/
+  /v1/risk/evidence/:
+    get:
+      operationId: getRiskScoreEvidence
+      summary: Risk Score Evidence
+      description: Provides the reasons for a domain's risk score, categorized by evidence type.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainQueryRequired'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/RiskScoreEvidenceSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/domain-risk-score-evidence/
+  /v1/{ip}/host-domains/:
+    get:
+      operationId: getHostDomains
+      summary: Reverse IP
+      description: List of domains that share the same network host (IP Address).
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/ipAddressPath'
+      - $ref: '#/components/parameters/resultsLimit'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseIpSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/reverse-ip/
+  /v1/{nameServer}/name-server-domains/:
+    get:
+      operationId: getNameServerDomains
+      summary: Reverse Name Server
+      description: List of domains that share the same primary name server.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/nameServerPath'
+      - $ref: '#/components/parameters/resultsLimit'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseNameServerSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/reverse-nameserver/
+  /v1/{domain}/reverse-ip/:
+    get:
+      operationId: getReverseIpForDomain
+      summary: Reverse IP (from Domain)
+      description: List of domains that share the same IP address as the given domain.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainPath'
+      - $ref: '#/components/parameters/resultsLimit'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseIpSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/reverse-ip/
+  /v1/reverse-ip-whois/:
+    get:
+      operationId: getReverseIpWhois
+      summary: Reverse IP WHOIS
+      description: 'Provides a list of IP network ranges with WHOIS records that match a specific query.
+
+        NOTE: Either an `ip` or `query` parameter is required.
+
+        '
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/ipQuery'
+      - $ref: '#/components/parameters/reverseIpWhoisQuery'
+      - $ref: '#/components/parameters/countryCode'
+      - $ref: '#/components/parameters/whoisServer'
+      - $ref: '#/components/parameters/includeTotalCount'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/ipVersion'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseIpWhoisSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/reverse-ip-whois/
+  /v1/reverse-whois/:
+    get:
+      operationId: getReverseWhois
+      summary: Reverse WHOIS
+      description: Provides a list of domain names with WHOIS records that match specific query terms.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/reverseWhoisTerms'
+      - $ref: '#/components/parameters/excludeTerms'
+      - $ref: '#/components/parameters/reverseWhoisScope'
+      - $ref: '#/components/parameters/reverseWhoisMode'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseWhoisSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/reverse-whois/
+  /v2/domain-search/:
+    get:
+      operationId: getDomainSearch
+      summary: Domain Search
+      description: Searches active and deleted domain names that match a query string.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainSearchQuery'
+      - $ref: '#/components/parameters/excludeQuery'
+      - $ref: '#/components/parameters/maxLength'
+      - $ref: '#/components/parameters/minLength'
+      - $ref: '#/components/parameters/hasHyphen'
+      - $ref: '#/components/parameters/hasNumber'
+      - $ref: '#/components/parameters/activeOnly'
+      - $ref: '#/components/parameters/deletedOnly'
+      - $ref: '#/components/parameters/anchorLeft'
+      - $ref: '#/components/parameters/anchorRight'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DomainSearchSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/domain-search/
+  /v1/domain-history/:
+    summary: Domain History
+    description: '### Intent
+
+      Track the complete evolution of a domain''s history across its infrastructure, content, and ownership. Identify significant events such as infrastructure weaponization, service changes, or registration transfers.
+
+
+      ### Capabilities
+
+      -   **Retrieve Complete History**: Fetch the available historical record for a domain.
+
+      -   **Customize Data Views**: Isolate specific events by including or excluding data fields (e.g., `A`, `NS`, `MX`, `SSL`). This focuses on critical signals while reducing noise.
+
+      -   **Contextualize the Current Lifecycle**: Use `Active` events to differentiate changes occurring within a domain''s current registration period from its prior history.
+
+
+      ### Use Cases
+
+      -   **Detect Infrastructure Weaponization**: Pinpoint when a domain''s infrastructure was weaponized by isolating changes in IP addresses, name servers, or mail servers. Use the `Active` date to distinguish modifications made during the current registration from previous ones, helping to identify the exact day it was brought online for a malicious campaign.
+
+      -   **Monitor Service Activation**: Determine when a domain likely launched a functional service by identifying the first issuance of an SSL certificate.
+
+      -   **Identify Ownership Changes**: Reveal a transfer of domain ownership by comparing `registrar` and `registrant` data across distinct registration lifecycles.
+
+      '
+    get:
+      operationId: getDomainHistory
+      summary: Domain History
+      description: Retrieve the complete historical record of changes to a domain's infrastructure, registration, and content. Filter results by specific field types to focus on relevant events.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/domainQueryRequired'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      - $ref: '#/components/parameters/resultsPageSize'
+      - $ref: '#/components/parameters/resultsOffset'
+      - $ref: '#/components/parameters/parsedDomainRdapFlag'
+      - $ref: '#/components/parameters/parsedWhoisFlag'
+      - $ref: '#/components/parameters/includeFields'
+      - $ref: '#/components/parameters/excludeFields'
+      responses:
+        '200':
+          $ref: '#/components/responses/DomainHistorySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/lookups/domain-history/
+components:
+  parameters:
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    includeTotalCount:
+      in: query
+      name: include_total_count
+      description: Returns the total number of results for a query. This should typically be used only for the first page of a large result set.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    hasHyphen:
+      in: query
+      name: has_hyphen
+      description: Return results with hyphens in the domain name.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    excludeTerms:
+      in: query
+      name: exclude
+      description: 'Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    hasNumber:
+      in: query
+      name: has_number
+      description: Return results with numbers in the domain name.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    excludeFields:
+      in: query
+      name: exclude_fields
+      description: 'Comma-separated list of fields to exclude from the response. Change events matching these fields will be omitted from the results.
+
+
+        Filtering occurs at the event level—it determines which change events are excluded, not which properties are removed from the `before` and `after` objects. Defaults to returning all change types.
+
+
+        **Field Name Mapping:**
+
+
+        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
+
+        - Filter: `ssl_hash` → Response field: `ssl_info`
+
+        - Filter: `mailserver_host` → Response field: `mx`
+
+        - Filter: `nameserver_host` → Response field: `name_server`
+
+
+        **Valid values include:**
+
+
+        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
+
+        - **Aggregated categories:** Groups of related fields like `all_ip` (excludes all IP-related changes), `all_ssl` (excludes all SSL-related changes), `all_contact_information`, etc.
+
+
+        **Example:** `exclude_fields=all_ip,all_ssl` removes change events where the `field` property is `ip`, `ssl_info`, or related fields.
+
+
+        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DomainHistoryFieldsList'
+    reverseWhoisScope:
+      in: query
+      name: scope
+      description: 'Sets the scope of the report to include only current WHOIS records, or to include both current and historic records.
+
+        '
+      schema:
+        type: string
+        enum:
+        - current
+        - historic
+        default: current
+    deletedOnly:
+      in: query
+      name: deleted_only
+      description: Return only domains previously registered but not currently registered.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    domainQueryRequired:
+      in: query
+      name: domain
+      description: Required. A valid domain name.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    maxLength:
+      in: query
+      name: max_length
+      description: Limit the maximum domain character count.
+      schema:
+        type: integer
+        maximum: 63
+    reverseIpWhoisQuery:
+      name: query
+      in: query
+      description: 'A space-separated list of free text query terms with support for `+` (must include), `-` (must not include), and `*` (prefix) modifiers.
+
+        '
+      schema:
+        type: string
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    ipAddressPath:
+      in: path
+      name: ip
+      description: The IP Address to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    ipVersion:
+      in: query
+      name: ip_version
+      description: 'Limits the query search results to a particular IP version. If omitted, the default is IPv4.
+
+        '
+      schema:
+        type: integer
+        enum:
+        - 4
+        - 6
+        default: 4
+    nameServerPath:
+      in: path
+      name: nameServer
+      description: The name server hostname to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/Hostname'
+    domainPath:
+      in: path
+      name: domain
+      description: A valid domain name.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    activeOnly:
+      in: query
+      name: active_only
+      description: Return only domains currently registered.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    minLength:
+      in: query
+      name: min_length
+      description: Limit the minimum domain character count.
+      schema:
+        type: integer
+        minimum: 1
+    domainOrIpPath:
+      in: path
+      name: query
+      description: A valid domain name or IP address.
+      required: true
+      schema:
+        type: string
+    ipQuery:
+      in: query
+      name: ip
+      description: IPv4 address the registered domain was last known to point to during an active DNS check.
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    excludeQuery:
+      in: query
+      name: exclude_query
+      description: 'Terms to exclude from matching. Each term must be at least three characters long. Use spaces to separate multiple terms.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    domainSearchQuery:
+      in: query
+      name: query
+      description: 'Terms to search for. Each term must be at least three characters long. Use spaces to separate multiple terms.
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    resultsOffset:
+      name: offset
+      in: query
+      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
+      schema:
+        type: integer
+        minimum: 0
+    includeFields:
+      in: query
+      name: include_fields
+      description: 'Comma-separated list of fields to include in the response. Only change events matching these fields will appear in the results.
+
+
+        Filtering occurs at the event level—it determines which change events are returned, not which properties appear in the `before` and `after` objects. Each returned change event includes the complete `before` and `after` state for that field.
+
+
+        **Field Name Mapping:**
+
+
+        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
+
+        - Filter: `ssl_hash` → Response field: `ssl_info`
+
+        - Filter: `mailserver_host` → Response field: `mx`
+
+        - Filter: `nameserver_host` → Response field: `name_server`
+
+
+        This design allows precise filtering using property-level names while maintaining complete context in change events.
+
+
+        **Valid values include:**
+
+
+        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
+
+        - **Aggregated categories:** Groups of related fields like `all_ip` (includes all IP-related changes), `all_ssl` (includes all SSL-related changes), `all_contact_information`, etc.
+
+
+        **Example:** `include_fields=ip,ssl_hash` returns change events where the `field` property is `ip` or `ssl_info`.
+
+
+        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DomainHistoryFieldsList'
+    parsedDomainRdapFlag:
+      name: parsed_domain_rdap
+      in: query
+      description: 'Flag.
+
+        If set to `true`, includes the full parsed Domain RDAP record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    resultsPageSize:
+      name: page_size
+      in: query
+      description: 'Adjusts the number of results returned per page.
+
+        The default is 500. Use this parameter to request a smaller page size.
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    page:
+      in: query
+      name: page
+      description: Sets the page of results to retrieve from the server (used in services that support pagination).
+      schema:
+        type: integer
+        minimum: 1
+    countryCode:
+      in: query
+      name: country
+      description: 'Limits results to IP addresses allocated to an entity with a particular country.
+
+        Must be a valid ISO 3166-1 two-character country code.
+
+        '
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+    whoisHistorySort:
+      in: query
+      name: sort
+      description: Sort the records returned in either ascending or descending order by date.
+      schema:
+        type: string
+        enum:
+        - date_asc
+        - date_desc
+    reverseWhoisTerms:
+      in: query
+      name: terms
+      description: 'One or more terms, where the pipe character `|` may be used as a logical AND to require that all strings be present in order to match.
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    anchorRight:
+      in: query
+      name: anchor_right
+      description: Return only domains that end with the query term.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    parsedWhoisFlag:
+      name: parsed_whois
+      in: query
+      description: 'Flag.
+
+        If set to ''true'', includes the full parsed WHOIS record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    whoisHistoryMode:
+      in: query
+      name: mode
+      description: '- `list` (default): Returns the historical records.
+
+        - `count`: Returns only the total count of historical records.
+
+        - `check_existence`: Returns a boolean indicating if history exists.
+
+        '
+      schema:
+        type: string
+        enum:
+        - list
+        - count
+        - check_existence
+        default: list
+    resultsLimit:
+      name: limit
+      in: query
+      description: 'Specify the maximum number of records to retrieve in an API query.
+
+        The maximum value is **100**.
+
+        '
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
+    reverseWhoisMode:
+      in: query
+      name: mode
+      description: '- `quote`: Returns the size and estimated price of the query.
+
+        - `purchase`: Returns the complete list of matching domain names.
+
+        '
+      schema:
+        type: string
+        enum:
+        - quote
+        - purchase
+    whoisServer:
+      in: query
+      name: server
+      description: 'Limits results to ranges from a particular RIR WHOIS server.
+
+        '
+      schema:
+        type: string
+        enum:
+        - whois.arin.net
+        - whois.apnic.net
+        - whois.ripe.net
+        - whois.lacnic.net
+        - whois.afrinic.net
+    anchorLeft:
+      in: query
+      name: anchor_left
+      description: Return only domains that start with the query term.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+  responses:
+    ReverseNameServerSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseNameServer'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DomainProfileSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainProfile'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    WhoisLookupSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhoisLookup'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ReverseWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseWhois'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    WhoisHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhoisHistory'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainSearchSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainSearch'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ParsedWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/ParsedWhoisDomain'
+            - $ref: '#/components/schemas/ParsedWhoisIp'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainHistory'
+          examples:
+            default_response:
+              $ref: '#/components/examples/DomainHistoryDefaultResponse'
+            parsed_domain_rdap:
+              $ref: '#/components/examples/DomainHistoryParsedDomainRdap'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainReputationSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainReputation'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ReverseIpSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseIp'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ReverseIpWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/ReverseIpWhoisIp'
+            - $ref: '#/components/schemas/ReverseIpWhoisQuery'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DomainRiskScoreSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainRiskScore'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ParsedDomainRdapSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ParsedDomainRdapResponse'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    RiskScoreEvidenceSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainRiskScoreEvidence'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    HostingHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HostingHistory'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+  schemas:
+    ParsedDomainRdapResponse:
+      type: object
+      description: Response for the Parsed Domain RDAP endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain_rdap
+          - parsed_domain_rdap
+          - record_source
+          properties:
+            domain_rdap:
+              type: array
+              description: Raw RDAP records from registry and/or registrar sources.
+              items:
+                type: object
+                required:
+                - source
+                - timestamp
+                - link
+                - record
+                properties:
+                  source:
+                    type: string
+                    description: The source of the RDAP record.
+                    enum:
+                    - registry
+                    - registrar
+                    example: registry
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: ISO 8601 timestamp when the RDAP record was retrieved.
+                    example: '2025-10-21T11:42:11Z'
+                  link:
+                    type: string
+                    format: uri
+                    description: URL of the RDAP server that provided the record.
+                    example: https://rdap.verisign.com/com/v1/domain/domaintools.com
+                  record:
+                    type: string
+                    description: The raw RDAP record as a JSON string.
+            parsed_domain_rdap:
+              type: object
+              description: Parsed and normalized RDAP data.
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  description: The domain name.
+                  example: domaintools.com
+                handle:
+                  type: string
+                  description: The registry-assigned unique identifier for this domain.
+                  example: 1697312_DOMAIN_COM-VRSN
+                domain_statuses:
+                  type: array
+                  description: Current status codes for the domain.
+                  items:
+                    type: string
+                  example:
+                  - client transfer prohibited
+                creation_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain was registered.
+                  example: '1998-08-02T04:00:00+00:00'
+                last_changed_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of the last modification to the domain record.
+                  example: '2020-01-09T23:06:29+00:00'
+                expiration_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp when the domain registration expires.
+                  example: '2027-08-01T04:00:00+00:00'
+                registrar:
+                  type: object
+                  description: Information about the domain registrar.
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the registrar.
+                      example: eNom, LLC
+                    iana_id:
+                      type: string
+                      description: IANA-assigned registrar ID.
+                      example: '48'
+                    contacts:
+                      type: array
+                      description: Registrar contact information.
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: Contact name.
+                          org:
+                            type: string
+                            description: Organization name.
+                          email:
+                            type: string
+                            description: Contact email address.
+                          phone:
+                            type: string
+                            description: Contact phone number.
+                          roles:
+                            type: array
+                            description: The roles this contact performs.
+                            items:
+                              type: string
+                              enum:
+                              - abuse
+                              - technical
+                              - administrative
+                              - billing
+                            example:
+                            - abuse
+                contacts:
+                  type: array
+                  description: Domain contact information from RDAP.
+                  items:
+                    type: object
+                    properties:
+                      handle:
+                        type: string
+                        description: Unique identifier for this contact.
+                      name:
+                        type: string
+                        description: Contact name. May be redacted for privacy.
+                      org:
+                        type: string
+                        description: Organization name.
+                      email:
+                        type: string
+                        description: Contact email address. May be redacted or a privacy service URL.
+                      phone:
+                        type: string
+                        description: Contact phone number.
+                      fax:
+                        type: string
+                        description: Contact fax number.
+                      street:
+                        type: string
+                        description: Street address.
+                      city:
+                        type: string
+                        description: City.
+                      postal:
+                        type: string
+                        description: Postal code.
+                      region:
+                        type: string
+                        description: State or region.
+                      country:
+                        type: string
+                        description: Two-character ISO 3166-1 country code.
+                      roles:
+                        type: array
+                        description: The roles this contact performs for the domain.
+                        items:
+                          type: string
+                          enum:
+                          - registrant
+                          - administrative
+                          - technical
+                          - billing
+                        example:
+                        - registrant
+                dnssec:
+                  type: object
+                  description: DNSSEC status information.
+                  properties:
+                    signed:
+                      type: boolean
+                      description: Whether DNSSEC is enabled for the domain.
+                      example: false
+                nameservers:
+                  type: array
+                  description: List of nameserver hostnames for the domain.
+                  items:
+                    type: string
+                  example:
+                  - DNS1.P04.NSONE.NET.
+                  - DNS2.P04.NSONE.NET.
+                conformance:
+                  type: array
+                  description: RDAP conformance levels supported.
+                  items:
+                    type: string
+                  example:
+                  - rdap_level_0
+                  - icann_rdap_technical_implementation_guide_1
+                emails:
+                  type: array
+                  description: All email addresses found in the RDAP record.
+                  items:
+                    type: string
+                  example:
+                  - abuse@enom.com
+                  - memberservices@domaintools.com
+                email_domains:
+                  type: array
+                  description: Unique email domains extracted from email addresses.
+                  items:
+                    type: string
+                  example:
+                  - domaintools.com
+                  - enom.com
+                unclassified_emails:
+                  type: array
+                  description: Email addresses that don't fit standard contact categories.
+                  items:
+                    type: string
+                  example: []
+            record_source:
+              type: string
+              description: The domain name that was queried.
+              example: domaintools.com
+    DomainProfile:
+      type: object
+      description: Response for the Domain Profile endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            registrant:
+              type: object
+              properties:
+                name:
+                  type: string
+                domain:
+                  type: integer
+                domains:
+                  type: integer
+                product_url:
+                  type: string
+            server:
+              type: object
+              properties:
+                ip_address:
+                  type: string
+                other_domains:
+                  type: integer
+                product_url:
+                  type: string
+            registration:
+              type: object
+              properties:
+                created:
+                  type: string
+                expires:
+                  type: string
+                updated:
+                  type: string
+                registrar:
+                  type: string
+                statuses:
+                  type: array
+                  items:
+                    type: string
+            name_servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  server:
+                    type: string
+                  product_url:
+                    type: string
+            history:
+              type: object
+              properties:
+                registrar:
+                  type: object
+                  properties:
+                    earliest_event:
+                      type: string
+                    events:
+                      type: integer
+                    product_url:
+                      type: string
+                name_server:
+                  type: object
+                  properties:
+                    events:
+                      type: integer
+                    timespan_in_years:
+                      type: integer
+                    product_url:
+                      type: string
+                ip_address:
+                  type: object
+                  properties:
+                    events:
+                      type: integer
+                    timespan_in_years:
+                      type: integer
+                    product_url:
+                      type: string
+                whois:
+                  type: object
+                  properties:
+                    records:
+                      type: integer
+                    earliest_event:
+                      type: string
+                    product_url:
+                      type: string
+            seo:
+              type: object
+              properties:
+                score:
+                  oneOf:
+                  - type: integer
+                  - type: string
+                product_url:
+                  type: string
+            website_data:
+              type: object
+              properties:
+                response_code:
+                  oneOf:
+                  - type: integer
+                  - type: string
+                title:
+                  type: string
+                server:
+                  type: string
+                meta:
+                  type: array
+                  items:
+                    type: string
+                product_url:
+                  type: string
+    EnrichContact:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/EnrichValue'
+        org:
+          $ref: '#/components/schemas/EnrichValue'
+        street:
+          $ref: '#/components/schemas/EnrichValue'
+        city:
+          $ref: '#/components/schemas/EnrichValue'
+        state:
+          $ref: '#/components/schemas/EnrichValue'
+        postal:
+          $ref: '#/components/schemas/EnrichValue'
+        country:
+          $ref: '#/components/schemas/EnrichValue'
+        phone:
+          $ref: '#/components/schemas/EnrichValue'
+        fax:
+          $ref: '#/components/schemas/EnrichValue'
+        email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+    ReverseNameServer:
+      type: object
+      description: Response for the Reverse Name Server endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            name_server:
+              type: object
+              properties:
+                hostname:
+                  type: string
+                primary:
+                  type: integer
+                secondary:
+                  type: string
+                total:
+                  type: integer
+            primary_domains:
+              type: array
+              items:
+                type: string
+            secondary_domains:
+              type: array
+              items:
+                type: string
+    ZeroListedScore:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - zerolist
+        risk_score:
+          type: integer
+          description: The risk score for a zerolisted domain, which is always 0.
+          enum:
+          - 0
+      description: Indicates the domain is on a known-good 'zero list' and is not considered a threat.
+    ParsedWhoisIp:
+      type: object
+      description: Response for the Parsed WHOIS (IP) endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - whois
+          - source
+          - parsed_whois
+          - record_source
+          properties:
+            registrant:
+              type: string
+              description: Top-level organization name for the IP range.
+              example: NearlyFreeSpeech.NET (NFSNI-1)
+            whois:
+              type: object
+              description: Raw WHOIS record information.
+              required:
+              - date
+              - record
+              properties:
+                date:
+                  type: string
+                  format: date
+                  description: Date the WHOIS record was retrieved.
+                  example: '2025-10-16'
+                record:
+                  type: string
+                  description: The raw WHOIS record text.
+            source:
+              type: string
+              description: The Regional Internet Registry (RIR) source of the WHOIS data.
+              enum:
+              - ARIN
+              - RIPE
+              - APNIC
+              - LACNIC
+              - AFRINIC
+              example: ARIN
+            parsed_whois:
+              type: object
+              description: Parsed and normalized IP WHOIS data.
+              required:
+              - networks
+              - contacts
+              properties:
+                networks:
+                  type: array
+                  description: IP network blocks and their allocation details.
+                  items:
+                    $ref: '#/components/schemas/ParsedWhoisIpNetwork'
+                contacts:
+                  type: array
+                  description: Organizations and persons associated with the networks.
+                  items:
+                    $ref: '#/components/schemas/ParsedWhoisIpContact'
+                routes:
+                  type: array
+                  description: Routing information (typically empty).
+                  items:
+                    type: object
+                referral_servers:
+                  type: array
+                  description: Referral server information (typically empty).
+                  items:
+                    type: string
+                other_properties:
+                  type: array
+                  description: Additional properties from the WHOIS record.
+                  items:
+                    type: object
+            record_source:
+              type: string
+              description: The IP address that was queried.
+              example: 208.94.117.131
+    DomainHistoryFieldsList:
+      type: string
+      description: 'Comma-separated list of field names to include or exclude from Domain History responses.
+
+
+        Field filtering works at the **event level**: it determines which change events appear in the response based on the value of the `field` property. Each change event''s `before` and `after` objects always contain the complete state for that field—filtering doesn''t remove properties from these objects.
+
+
+        **Two types of field names are supported:**
+
+
+        1. **Individual fields**: Top-level properties from the response structure (e.g., `ip`, `mx`, `name_server`, `ssl_info`, `create_date`)
+
+        2. **Aggregated categories**: Groups of related fields that simplify filtering multiple event types at once
+
+
+        **Valid field names:**
+
+
+        - **Individual fields**: ip, asn, ip_country_code, isp_name, mailserver_host, mailserver_ip, nameserver_host, nameserver_ip, ssl_hash, ssl_common_name, ssl_alt_names, ssl_not_before, ssl_not_after, create_date, expiration_date, registrant, registrar, registrar_status, active, redirect, redirect_domain, screenshot_collected_timestamp, server_type, website_response, website_title, adsense, baidu_analytics, google_analytics, ga4, facebook, google_tag_manager, hotjar, matomo, statcounter_project, statcounter_security, yandex_metrica, contact_name, contact_phone, contact_street, contact_city, contact_state, contact_fax, contact_organization, admin_contact_email, billing_contact_email, email_dns_soa, technical_contact_email, registrant_contact_email, additional_whois_email
+
+
+        - **Aggregated categories**: all_contact_information, all_emails, all_ip, all_mailserver, all_nameserver, all_ssl, all_web_content, all_web_trackers, all_other
+
+        '
+      pattern: ^[a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*$
+      example: ip,nameserver_host,mailserver_host,ssl_hash
+    RiskScoreValue:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: A domain risk score value ranging from 0 (lowest risk) to 100 (highest risk).
+    DomainRiskScore:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              $ref: '#/components/schemas/RiskScoreValue'
+            components:
+              type: array
+              items:
+                $ref: '#/components/schemas/DomainRiskComponent'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
+
+        '
+    EnrichValue:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+    ParsedWhoisIpContact:
+      type: object
+      description: Contact information from IP WHOIS record.
+      properties:
+        id:
+          type: string
+          description: Contact identifier/handle.
+          example: NFSNI-1
+        type:
+          type: string
+          description: Contact type.
+          enum:
+          - organization
+          - person
+          example: organization
+        name:
+          type: string
+          description: Contact name.
+          example: NearlyFreeSpeech.NET
+        address:
+          type: array
+          description: Postal address lines.
+          items:
+            type: string
+          example:
+          - 1540 INTERNATIONAL PKWY STE 2000
+          - LAKE MARY
+          - FL
+          - '32746'
+        country:
+          type: string
+          description: Country code (lowercase).
+          example: us
+        phone:
+          type: array
+          description: Phone numbers.
+          items:
+            type: string
+          example:
+          - '18887414678'
+        fax:
+          type: array
+          description: Fax numbers.
+          items:
+            type: string
+        email:
+          type: array
+          description: Email addresses.
+          items:
+            type: string
+          example:
+          - noc@nearlyfreespeech.net
+        descr:
+          type: array
+          description: Description or comments.
+          items:
+            type: string
+        contact_keys:
+          type: object
+          description: References to other contact IDs by role.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        remarks:
+          type: array
+          description: Additional remarks.
+          items:
+            type: string
+        notify_email:
+          type: array
+          description: Notification email addresses.
+          items:
+            type: string
+        abuse_mailbox:
+          type: array
+          description: Abuse reporting email addresses.
+          items:
+            type: string
+        mnt_keys:
+          type: object
+          description: Maintainer keys.
+          additionalProperties: true
+        created_date:
+          type: string
+          format: date-time
+          description: Date the contact was created.
+          example: '2008-02-01T00:00:00'
+        updated_date:
+          type: string
+          format: date-time
+          description: Date the contact was last updated.
+          example: '2018-05-22T00:00:00'
+        changed_by:
+          type: array
+          description: Change history.
+          items:
+            type: string
+        source:
+          type: string
+          description: Data source.
+        ref:
+          type: string
+          format: uri
+          description: Reference URL for this contact.
+          example: https://rdap.arin.net/registry/entity/NFSNI-1
+        other:
+          type: object
+          description: Additional properties.
+          additionalProperties: true
+    Hostname:
+      type: string
+      format: hostname
+      description: A valid, fully-qualified domain name (FQDN).
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    ReverseIpWhoisIp:
+      type: object
+      description: Response for the Reverse IP WHOIS (IP) endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            ip_from:
+              type: string
+            ip_to:
+              type: string
+            ip_from_alloc:
+              type: string
+            ip_to_alloc:
+              type: string
+            record_ip:
+              type: string
+            record_date:
+              type: string
+            server:
+              type: string
+            organization:
+              type: string
+            country:
+              type: string
+            range:
+              type: string
+            whois_record:
+              type: string
+    HostingHistory:
+      type: object
+      description: Response for the Hosting History endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            domain_name:
+              type: string
+              description: The queried domain name.
+              example: domaintools.com
+            ip_history:
+              type: array
+              description: 'Chronological list of IP address changes for the domain.
+
+                '
+              items:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    description: 'Event type code. One of: `N` (New — first observed),
+
+                      `C` (Change — IP changed), `D` (Not Resolvable — domain
+
+                      stopped resolving).
+
+                      '
+                    enum:
+                    - N
+                    - C
+                    - D
+                    example: C
+                  action_in_words:
+                    type: string
+                    description: Human-readable label for the action code.
+                    example: Change
+                  actiondate:
+                    type: string
+                    description: Date the event was recorded (YYYY-MM-DD).
+                    example: '2007-03-10'
+                  domain:
+                    type: string
+                    description: The domain name associated with this event.
+                    example: DOMAINTOOLS.COM
+                  post_ip:
+                    type: string
+                    nullable: true
+                    description: IP address after the change. Null or empty string when the domain became unresolvable.
+                    example: 66.249.17.251
+                  pre_ip:
+                    type: string
+                    nullable: true
+                    description: IP address before the change. Null for New events.
+                    example: 66.249.4.251
+            nameserver_history:
+              type: array
+              description: 'Chronological list of nameserver changes for the domain.
+
+                '
+              items:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    description: 'Event type code. One of: `T` (Transfer — nameserver
+
+                      provider changed), `N` (New), `C` (Change).
+
+                      '
+                    example: T
+                  action_in_words:
+                    type: string
+                    description: Human-readable label for the action code.
+                    example: Transfer
+                  actiondate:
+                    type: string
+                    description: Date the event was recorded (YYYY-MM-DD).
+                    example: '2020-01-11'
+                  domain:
+                    type: string
+                    description: The domain name associated with this event.
+                    example: DOMAINTOOLS.COM
+                  post_mns:
+                    type: string
+                    description: Nameserver provider after the change.
+                    example: Nsone.net
+                  pre_mns:
+                    type: string
+                    description: Nameserver provider before the change.
+                    example: Dynect.net
+            registrar_history:
+              type: array
+              deprecated: true
+              description: 'Deprecated. This field is retained for backward compatibility and always returns an empty array. Do not rely on it for new integrations.
+
+                '
+              items: {}
+    IPv4Address:
+      type: string
+      format: ipv4
+      description: A standard IPv4 address.
+    DomainReputation:
+      type: object
+      description: Response for the Domain Reputation endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain
+          - risk_score
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Domain risk score ranging from 0 (lowest risk) to 100 (highest risk). May include decimal values for more precise risk assessment.
+              example: 12.19
+            reasons:
+              type: array
+              description: Optional list of reasons contributing to the risk score. May not be present in all responses.
+              items:
+                type: string
+    ThreatProfile:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on machine-learning models.
+    BasicString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    ParsedWhoisIpNetwork:
+      type: object
+      description: IP network block information from WHOIS.
+      properties:
+        id:
+          type: string
+          description: Network identifier/handle.
+          example: NET-208-94-116-0-1
+        range:
+          type: object
+          description: IP address range information.
+          properties:
+            from:
+              type: string
+              description: Starting IP address.
+              example: 208.94.116.0
+            to:
+              type: string
+              description: Ending IP address.
+              example: 208.94.119.255
+            cidr:
+              type: array
+              description: CIDR notation for the range.
+              items:
+                type: string
+              example:
+              - 208.94.116.0/22
+            count:
+              type: integer
+              description: Number of IP addresses in the range.
+              example: 1024
+        asn:
+          type: array
+          description: Autonomous System Numbers.
+          items:
+            type: string
+        name:
+          type: string
+          description: Network name.
+          example: GF-PHX-IPV4-1
+        org:
+          type: string
+          description: Organization name and ID.
+          example: GridFury, LLC (CELL-1)
+        parent:
+          type: string
+          description: Parent network name and ID.
+          example: NET208 (NET-208-0-0-0-0)
+        parent_id:
+          type: string
+          description: Parent network ID.
+          example: NET-208-0-0-0-0
+        customer:
+          type: string
+          description: Customer information.
+        country:
+          type: string
+          description: Country code.
+        phone:
+          type: array
+          description: Contact phone numbers.
+          items:
+            type: string
+        descr:
+          type: array
+          description: Description or comments.
+          items:
+            type: string
+          example:
+          - http://www.gridfury.com/
+        contact_keys:
+          type: object
+          description: References to contact IDs by role.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            org:
+            - CELL-1
+            tech:
+            - GNO70-ARIN
+            abuse:
+            - GNAT1-ARIN
+        status:
+          type: string
+          description: Network allocation status.
+          example: Direct Allocation
+        remarks:
+          type: array
+          description: Additional remarks.
+          items:
+            type: string
+        notify_email:
+          type: array
+          description: Notification email addresses.
+          items:
+            type: string
+        mnt_keys:
+          type: object
+          description: Maintainer keys.
+          additionalProperties: true
+        created_date:
+          type: string
+          format: date-time
+          description: Date the network was created.
+          example: '2008-08-28T00:00:00'
+        updated_date:
+          type: string
+          format: date-time
+          description: Date the network was last updated.
+          example: '2019-05-31T00:00:00'
+        changed_by:
+          type: array
+          description: Change history.
+          items:
+            type: string
+        source:
+          type: string
+          description: Data source.
+        ref:
+          type: string
+          format: uri
+          description: Reference URL for this network.
+          example: https://rdap.arin.net/registry/ip/208.94.116.0
+        other:
+          type: object
+          description: Additional properties.
+          additionalProperties: true
+    ThreatProfileSpam:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_spam
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as spam-related.
+    WhoisHistory:
+      type: object
+      description: Response for the WHOIS History endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            record_count:
+              type: number
+            history:
+              type: array
+              items:
+                type: object
+                properties:
+                  date:
+                    type: string
+                  is_private:
+                    type: string
+                  whois:
+                    type: object
+                    properties:
+                      registrant:
+                        type: string
+                      registration:
+                        type: object
+                        properties:
+                          created:
+                            type: string
+                          expires:
+                            type: string
+                          registrar:
+                            type: string
+                          statuses:
+                            type: array
+                            items:
+                              type: string
+                      name_servers:
+                        type: array
+                        items:
+                          type: string
+                      server:
+                        type: string
+                      record:
+                        type: string
+    ReverseWhois:
+      type: object
+      description: Response for the Reverse WHOIS endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            domain_count:
+              type: object
+              properties:
+                current:
+                  type: integer
+                historic:
+                  type: integer
+            domains:
+              type: array
+              items:
+                type: string
+            report_price:
+              type: object
+              properties:
+                current:
+                  type: integer
+                historic:
+                  type: integer
+    EnrichResult:
+      type: object
+      description: A comprehensive domain profile result from Iris Enrich API.
+      properties:
+        domain:
+          type: string
+        whois_url:
+          type: string
+        adsense:
+          $ref: '#/components/schemas/EnrichTracker'
+        alexa:
+          type: integer
+        popularity_rank:
+          type: number
+        active:
+          type: boolean
+        google_analytics:
+          $ref: '#/components/schemas/EnrichTracker'
+        ga4:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        gtm_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        fb_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        hotjar_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        baidu_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        yandex_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        matomo_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        statcounter_project_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        statcounter_security_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        admin_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        billing_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        registrant_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        technical_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        create_date:
+          $ref: '#/components/schemas/EnrichValue'
+        expiration_date:
+          $ref: '#/components/schemas/EnrichValue'
+        email_domain:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        soa_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        ssl_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        additional_whois_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        ip:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                $ref: '#/components/schemas/EnrichValue'
+              asn:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              country_code:
+                $ref: '#/components/schemas/EnrichValue'
+              isp:
+                $ref: '#/components/schemas/EnrichValue'
+        mx:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                $ref: '#/components/schemas/EnrichValue'
+              domain:
+                $ref: '#/components/schemas/EnrichValue'
+              ip:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              priority:
+                type: number
+        name_server:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                $ref: '#/components/schemas/EnrichValue'
+              domain:
+                $ref: '#/components/schemas/EnrichValue'
+              ip:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+        domain_risk:
+          type: object
+          properties:
+            risk_score:
+              type: integer
+              minimum: 0
+              maximum: 99
+            components:
+              type: array
+              description: A list of risk components and their individual scores that contribute to the overall domain risk.
+              items:
+                type: object
+        redirect:
+          $ref: '#/components/schemas/EnrichValue'
+        redirect_domain:
+          $ref: '#/components/schemas/EnrichValue'
+        registrant_name:
+          $ref: '#/components/schemas/EnrichValue'
+        registrant_org:
+          $ref: '#/components/schemas/EnrichValue'
+        registrar:
+          $ref: '#/components/schemas/EnrichValue'
+        registrar_status:
+          type: array
+          items:
+            type: string
+        spf_info:
+          type: string
+        ssl_info:
+          type: array
+          items:
+            type: object
+            properties:
+              hash:
+                $ref: '#/components/schemas/EnrichValue'
+              subject:
+                $ref: '#/components/schemas/EnrichValue'
+              organization:
+                $ref: '#/components/schemas/EnrichValue'
+              email:
+                type: array
+                items:
+                  type: string
+              alt_names:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              sources:
+                type: object
+                properties:
+                  active:
+                    type: integer
+                  passive:
+                    type: integer
+              common_name:
+                $ref: '#/components/schemas/EnrichValue'
+              issuer_common_name:
+                $ref: '#/components/schemas/EnrichValue'
+              not_after:
+                $ref: '#/components/schemas/EnrichValue'
+              not_before:
+                $ref: '#/components/schemas/EnrichValue'
+              duration:
+                $ref: '#/components/schemas/EnrichValue'
+        tld:
+          type: string
+        website_response:
+          type: number
+        data_updated_timestamp:
+          type: string
+          format: date-time
+        website_title:
+          $ref: '#/components/schemas/EnrichValue'
+        server_type:
+          $ref: '#/components/schemas/EnrichValue'
+        first_seen:
+          $ref: '#/components/schemas/EnrichValue'
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              scope:
+                type: string
+              tagged_at:
+                type: string
+        parsed_whois:
+          type: object
+          description: Parsed data from the domain's WHOIS record. Present only when the request includes `parsed_whois=true`.
+        parsed_domain_rdap:
+          type: object
+          description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    ReverseIpWhoisQuery:
+      type: object
+      description: Response for the Reverse IP WHOIS (Query) endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            has_more_pages:
+              type: boolean
+            page:
+              type: integer
+            total_count:
+              type: integer
+            record_count:
+              type: integer
+            records:
+              type: array
+              items:
+                type: object
+                properties:
+                  ip_from:
+                    type: string
+                  ip_to:
+                    type: string
+                  record_ip:
+                    type: string
+                  record_date:
+                    type: string
+                  server:
+                    type: string
+                  organization:
+                    type: string
+                  country:
+                    type: string
+                  range:
+                    type: string
+    Proximity:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - proximity
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+          example:
+          - dns
+      description: Indicates risk based on proximity to known threats or suspicious infrastructure.
+    WhoisLookup:
+      type: object
+      description: Response for the WHOIS Lookup endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            registrant:
+              type: string
+            registration:
+              type: object
+              properties:
+                created:
+                  type: string
+                expires:
+                  type: string
+                updated:
+                  type: string
+                registrar:
+                  type: string
+                statuses:
+                  type: array
+                  items:
+                    type: string
+            name_servers:
+              type: array
+              items:
+                type: string
+            whois:
+              type: object
+              properties:
+                date:
+                  type: string
+                record:
+                  type: string
+            record_source:
+              type: string
+    ParsedWhoisContact:
+      type: object
+      description: Contact information from a WHOIS record.
+      properties:
+        name:
+          type: string
+          description: Contact name.
+        org:
+          type: string
+          description: Organization name.
+        street:
+          type: array
+          description: Street address lines.
+          items:
+            type: string
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State or region.
+        postal:
+          type: string
+          description: Postal code.
+        country:
+          type: string
+          description: Country code.
+        phone:
+          type: string
+          description: Phone number.
+        fax:
+          type: string
+          description: Fax number.
+        email:
+          type: string
+          description: Email address.
+    DomainHistory:
+      type: object
+      description: Response for the Domain History endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain
+          - count
+          - registration_source
+          - changes
+          properties:
+            domain:
+              type: string
+              description: The domain name being queried.
+              example: domaintools.com
+            count:
+              type: integer
+              description: Total number of historical changes available for this domain.
+              example: 2479
+            registration_source:
+              type: string
+              description: The source of registration data used for the history.
+              enum:
+              - parsed_whois
+              - parsed_domain_rdap
+              example: parsed_whois
+            changes:
+              type: array
+              description: Array of historical changes to the domain.
+              items:
+                type: object
+                required:
+                - timestamp
+                - field
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: ISO 8601 timestamp when the change was detected.
+                    example: '2025-10-14T09:44:26Z'
+                  field:
+                    type: string
+                    description: 'The field that changed. This corresponds to top-level properties in the EnrichResult schema.
+
+
+                      Common values include:
+
+                      - Infrastructure: ip, mx, name_server, ssl_info
+
+                      - Registration: create_date, expiration_date, registrar, registrant_name, registrant_org, registrar_status, active
+
+                      - Web content: website_title, website_response, server_type, redirect, redirect_domain
+
+                      - Trackers: adsense, google_analytics, ga4, gtm_codes, fb_codes, hotjar_codes, baidu_codes, yandex_codes, matomo_codes, statcounter_project_codes, statcounter_security_codes
+
+                      - Contacts: admin_contact, billing_contact, registrant_contact, technical_contact
+
+                      - Other: domain_risk, tags, first_seen, tld
+
+
+                      Note: When using include_fields or exclude_fields parameters, some filter names map to
+
+                      different response field values (e.g., ssl_hash → ssl_info, mailserver_host → mx,
+
+                      nameserver_host → name_server). See parameter descriptions for complete field name mapping.
+
+                      '
+                    example: mx
+                  before:
+                    $ref: '#/components/schemas/EnrichResult'
+                  after:
+                    $ref: '#/components/schemas/EnrichResult'
+    ReverseIp:
+      type: object
+      description: Response for the Reverse IP endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            ip_addresses:
+              type: array
+              items:
+                type: object
+                properties:
+                  domain_count:
+                    type: integer
+                  domain_names:
+                    type: array
+                    items:
+                      type: string
+                  ip_address:
+                    type: string
+    DomainSearch:
+      type: object
+      description: Response for the Domain Search endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            query_info:
+              type: object
+              properties:
+                active_only:
+                  type: boolean
+                min_length:
+                  type: integer
+                total_results:
+                  type: integer
+                exclude_query:
+                  type: string
+                has_hyphen:
+                  type: boolean
+                max_length:
+                  type: integer
+                anchor_right:
+                  type: boolean
+                anchor_left:
+                  type: boolean
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                has_number:
+                  type: boolean
+                deleted_only:
+                  type: boolean
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  sld:
+                    type: string
+                  tlds:
+                    type: array
+                    items:
+                      type: string
+                  hashad_tlds:
+                    type: array
+                    items:
+                      type: string
+                  char_count:
+                    type: integer
+                  has_hyphen:
+                    type: integer
+                  has_deleted:
+                    type: integer
+                  has_number:
+                    type: integer
+                  tlds_count:
+                    type: integer
+                  has_active:
+                    type: integer
+    ThreatProfilePhishing:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_phishing
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as phishing-related.
+    DomainRiskScoreEvidence:
+      type: object
+      description: Response for the Risk Score Evidence endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain
+          - risk_score
+          - components
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              $ref: '#/components/schemas/RiskScoreValue'
+            components:
+              type: array
+              description: Array of risk components contributing to the overall score.
+              items:
+                $ref: '#/components/schemas/DomainRiskComponent'
+    ThreatProfileMalware:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_malware
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as malware-related.
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    EnrichTracker:
+      type: object
+      description: A tracker identifier.
+      properties:
+        value:
+          type: string
+    ParsedWhoisDomain:
+      type: object
+      description: Response for the Parsed WHOIS (Domain) endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - registration
+          - name_servers
+          - whois
+          - parsed_whois
+          - record_source
+          properties:
+            registrant:
+              type: string
+              description: Registrant organization name (if available).
+              example: GitHub, Inc.
+            registration:
+              type: object
+              description: Basic registration information.
+              required:
+              - created
+              - expires
+              - updated
+              - registrar
+              - statuses
+              properties:
+                created:
+                  type: string
+                  format: date
+                  description: Date the domain was created.
+                  example: '2007-10-09'
+                expires:
+                  type: string
+                  format: date
+                  description: Date the domain registration expires.
+                  example: '2026-10-09'
+                updated:
+                  type: string
+                  format: date
+                  description: Date the domain record was last updated.
+                  example: '2024-09-07'
+                registrar:
+                  type: string
+                  description: Name of the registrar.
+                  example: MarkMonitor Inc.
+                statuses:
+                  type: array
+                  description: Domain status codes.
+                  items:
+                    type: string
+                  example:
+                  - clientDeleteProhibited
+                  - clientTransferProhibited
+                  - clientUpdateProhibited
+            name_servers:
+              type: array
+              description: List of nameserver hostnames for the domain.
+              items:
+                type: string
+              example:
+              - DNS1.P08.NSONE.NET
+              - DNS2.P08.NSONE.NET
+            whois:
+              type: object
+              description: Raw WHOIS record information.
+              required:
+              - date
+              - record
+              properties:
+                date:
+                  type: string
+                  format: date
+                  description: Date the WHOIS record was retrieved.
+                  example: '2025-10-26'
+                record:
+                  type: string
+                  description: The raw WHOIS record text.
+            parsed_whois:
+              type: object
+              description: Parsed and normalized WHOIS data.
+              required:
+              - domain
+              - created_date
+              - updated_date
+              - expired_date
+              - statuses
+              - name_servers
+              - registrar
+              - contacts
+              properties:
+                domain:
+                  type: string
+                  description: The domain name.
+                  example: github.com
+                created_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain was created.
+                  example: '2007-10-09T18:20:50+00:00'
+                updated_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain was last updated.
+                  example: '2024-09-07T09:16:33+00:00'
+                expired_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain registration expires.
+                  example: '2026-10-09T00:00:00+00:00'
+                statuses:
+                  type: array
+                  description: Domain status codes.
+                  items:
+                    type: string
+                  example:
+                  - clientDeleteProhibited
+                  - clientTransferProhibited
+                name_servers:
+                  type: array
+                  description: List of nameserver hostnames.
+                  items:
+                    type: string
+                  example:
+                  - dns1.p08.nsone.net
+                  - dns2.p08.nsone.net
+                registrar:
+                  type: object
+                  description: Registrar information.
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the registrar.
+                      example: MarkMonitor, Inc.
+                    abuse_contact_phone:
+                      type: string
+                      description: Registrar abuse contact phone number.
+                      example: '+1.2086851750'
+                    abuse_contact_email:
+                      type: string
+                      description: Registrar abuse contact email.
+                      example: abusecomplaints@markmonitor.com
+                    iana_id:
+                      type: string
+                      description: IANA registrar ID.
+                      example: '292'
+                    url:
+                      type: string
+                      format: uri
+                      description: Registrar website URL.
+                      example: http://www.markmonitor.com
+                    whois_server:
+                      type: string
+                      description: Registrar WHOIS server hostname.
+                      example: whois.markmonitor.com
+                contacts:
+                  type: object
+                  description: Domain contact information organized by role.
+                  properties:
+                    registrant:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    admin:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    tech:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    billing:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                other_properties:
+                  type: object
+                  description: Additional properties from the WHOIS record that don't fit standard fields.
+                  additionalProperties: true
+                  example:
+                    dnssec: unsigned
+                    registry_domain_id: 1264983250_DOMAIN_COM-VRSN
+            record_source:
+              type: string
+              description: The domain name that was queried.
+              example: github.com
+    DomainRiskComponent:
+      description: A polymorphic schema representing one of several types of risk components.
+      oneOf:
+      - $ref: '#/components/schemas/Proximity'
+      - $ref: '#/components/schemas/ThreatProfile'
+      - $ref: '#/components/schemas/ThreatProfileMalware'
+      - $ref: '#/components/schemas/ThreatProfilePhishing'
+      - $ref: '#/components/schemas/ThreatProfileSpam'
+      - $ref: '#/components/schemas/ZeroListedScore'
+      discriminator:
+        propertyName: name
+        mapping:
+          proximity: '#/components/schemas/Proximity'
+          threat_profile: '#/components/schemas/ThreatProfile'
+          threat_profile_malware: '#/components/schemas/ThreatProfileMalware'
+          threat_profile_phishing: '#/components/schemas/ThreatProfilePhishing'
+          threat_profile_spam: '#/components/schemas/ThreatProfileSpam'
+          zerolist: '#/components/schemas/ZeroListedScore'
+  examples:
+    DomainHistoryParsedDomainRdap:
+      summary: Response with parsed_domain_rdap enabled
+      value:
+        response:
+          domain: domaintools.com
+          count: 1534
+          registration_source: parsed_domain_rdap
+          next: https://api.domaintools.demo/v1/domain-history/?domain=domaintools.com&page_size=5&parsed_domain_rdap=true&offset=5
+          changes:
+          - timestamp: '2025-10-14T09:44:26Z'
+            field: mx
+            before:
+              mx:
+              - host:
+                  value: aspmx2.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 10
+            after:
+              mx:
+              - host:
+                  value: alt1.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 5
+    DomainHistoryDefaultResponse:
+      summary: Default response (parsed_whois)
+      value:
+        response:
+          domain: domaintools.com
+          count: 2480
+          registration_source: parsed_whois
+          next: https://api.domaintools.demo/v1/domain-history/?domain=domaintools.com&page_size=10&offset=10
+          changes:
+          - timestamp: '2025-10-15T09:30:30Z'
+            field: mx
+            before:
+              mx:
+              - host:
+                  value: alt1.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 5
+              - host:
+                  value: aspmx2.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 10
+              - host:
+                  value: aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.99.26
+                priority: 1
+              - host:
+                  value: alt2.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.164.26
+                priority: 5
+              - host:
+                  value: aspmx3.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.164.27
+                priority: 10
+              - host:
+                  value: aspmx4.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.220.26
+                priority: 10
+            after:
+              mx:
+              - host:
+                  value: alt1.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 5
+              - host:
+                  value: aspmx2.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 10
+              - host:
+                  value: alt2.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.164.26
+                priority: 5
+              - host:
+                  value: aspmx3.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.164.27
+                priority: 10
+              - host:
+                  value: aspmx4.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 192.178.220.27
+                priority: 10
+              - host:
+                  value: aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 74.125.142.27
+                priority: 1
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

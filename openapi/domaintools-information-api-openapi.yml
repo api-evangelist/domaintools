@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Information API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Information
+  description: 'Access the latest information about your account, including service
+
+    limits.
+
+    '
+paths:
+  /v1/account/:
+    get:
+      operationId: getAccountInfo
+      summary: Account Information
+      description: 'Information of the active API endpoints, rate limits and usage for an account.
+
+        '
+      tags:
+      - Information
+      parameters:
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/account-info/
+components:
+  responses:
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    AccountSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountInformation'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
+    AccountInformation:
+      type: object
+      description: 'Contains the account details and a list of product subscriptions.
+
+        '
+      properties:
+        response:
+          type: object
+          properties:
+            account:
+              type: object
+              description: 'Basic details about the API account.
+
+                '
+              properties:
+                api_username:
+                  type: string
+                  description: 'The username associated with the account.
+
+                    '
+                  example: api_user
+                active:
+                  type: boolean
+                  description: 'Indicates if the account is currently active.
+
+                    '
+                  example: true
+            products:
+              type: array
+              description: 'A list of product subscriptions including usage limits and expiration dates.
+
+                '
+              items:
+                type: object
+                description: 'Details for a single product subscription. Keys include id, rate limits, usage, and expiration_date.
+
+                  '
+                example:
+                  id: domain-profile
+                  per_month_limit: '50000'
+                  per_hour_limit: null
+                  per_minute_limit: '120'
+                  absolute_limit: null
+                  usage:
+                    today: '0'
+                    month: '1'
+                  expiration_date: '2027-12-30'
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
+
+        '
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

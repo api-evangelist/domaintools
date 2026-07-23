@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Ping API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Ping
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: End-to-end connectivity test
+      description: This request is for end to end connectivity tests to the DNSDB API endpoint, letting you know that there are no firewall blockages.
+      responses:
+        '200':
+          description: ok
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/ping'
+      tags:
+      - Ping
+components:
+  schemas:
+    ping:
+      type: object
+      properties:
+        ping:
+          type: string
+          enum:
+          - ok
+      additionalProperties: false
+      required:
+      - ping
+      example:
+        ping: ok
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY

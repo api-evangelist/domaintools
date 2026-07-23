@@ -1,0 +1,583 @@
+openapi: 3.0.0
+info:
+  version: '2.0'
+  title: dnsdb Flex search Iris Enrich API
+  description: dnsdb
+  contact:
+    name: DomainTools Support
+    url: https://www.domaintools.com/support
+    email: enterprisesupport@domaintools.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.domaintools.com/company/terms-of-service/
+servers:
+- url: https://api.dnsdb.info/dnsdb/v2
+- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+tags:
+- name: Iris Enrich
+  description: 'Designed to support high query volumes with batch processing and fast response times, the Iris Enrich API provides actionable insights-at-scale with enterprise-scale ingestion of DomainTools data
+
+    '
+paths:
+  /v1/iris-enrich/:
+    get:
+      operationId: getIrisEnrich
+      summary: Returns results from a GET request to Iris Enrich.
+      tags:
+      - Iris Enrich
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      - $ref: '#/components/parameters/appPartner'
+      - $ref: '#/components/parameters/appVersion'
+      - $ref: '#/components/parameters/domainsQueryRequired'
+      - $ref: '#/components/parameters/parsedDomainRdapFlag'
+      - $ref: '#/components/parameters/parsedWhoisFlag'
+      - $ref: '#/components/parameters/responseFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnrichSuccess'
+        '206':
+          $ref: '#/components/responses/IrisPartialContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/enrich/
+    post:
+      operationId: postIrisEnrich
+      summary: Returns results from a POST request to Iris Enrich.
+      tags:
+      - Iris Enrich
+      requestBody:
+        $ref: '#/components/requestBodies/Enrich'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnrichSuccess'
+        '206':
+          $ref: '#/components/responses/IrisPartialContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      externalDocs:
+        url: https://docs.domaintools.com/api/iris/enrich/
+components:
+  parameters:
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    domainsQueryRequired:
+      in: query
+      name: domain
+      description: 'Required. One or more domains (comma-separated) to be investigated.
+
+        Example: `example.com,domaintools.com`
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApexDomainList'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    parsedDomainRdapFlag:
+      name: parsed_domain_rdap
+      in: query
+      description: 'Flag.
+
+        If set to `true`, includes the full parsed Domain RDAP record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    parsedWhoisFlag:
+      name: parsed_whois
+      in: query
+      description: 'Flag.
+
+        If set to ''true'', includes the full parsed WHOIS record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+  schemas:
+    EnrichValue:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+    EnrichRequestParameters:
+      type: object
+      required:
+      - domain
+      properties:
+        domain:
+          $ref: '#/components/schemas/ApexDomainList'
+        app_partner:
+          $ref: '#/components/schemas/IdentifierString'
+        app_name:
+          $ref: '#/components/schemas/IdentifierString'
+        app_version:
+          $ref: '#/components/schemas/IdentifierString'
+        format:
+          $ref: '#/components/schemas/ResponseFormat'
+        parsed_whois:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+        parsed_domain_rdap:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+    EnrichContact:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/EnrichValue'
+        org:
+          $ref: '#/components/schemas/EnrichValue'
+        street:
+          $ref: '#/components/schemas/EnrichValue'
+        city:
+          $ref: '#/components/schemas/EnrichValue'
+        state:
+          $ref: '#/components/schemas/EnrichValue'
+        postal:
+          $ref: '#/components/schemas/EnrichValue'
+        country:
+          $ref: '#/components/schemas/EnrichValue'
+        phone:
+          $ref: '#/components/schemas/EnrichValue'
+        fax:
+          $ref: '#/components/schemas/EnrichValue'
+        email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+    EnrichResult:
+      type: object
+      description: A comprehensive domain profile result from Iris Enrich API.
+      properties:
+        domain:
+          type: string
+        whois_url:
+          type: string
+        adsense:
+          $ref: '#/components/schemas/EnrichTracker'
+        alexa:
+          type: integer
+        popularity_rank:
+          type: number
+        active:
+          type: boolean
+        google_analytics:
+          $ref: '#/components/schemas/EnrichTracker'
+        ga4:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        gtm_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        fb_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        hotjar_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        baidu_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        yandex_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        matomo_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        statcounter_project_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        statcounter_security_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichTracker'
+        admin_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        billing_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        registrant_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        technical_contact:
+          $ref: '#/components/schemas/EnrichContact'
+        create_date:
+          $ref: '#/components/schemas/EnrichValue'
+        expiration_date:
+          $ref: '#/components/schemas/EnrichValue'
+        email_domain:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        soa_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        ssl_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        additional_whois_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+        ip:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                $ref: '#/components/schemas/EnrichValue'
+              asn:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              country_code:
+                $ref: '#/components/schemas/EnrichValue'
+              isp:
+                $ref: '#/components/schemas/EnrichValue'
+        mx:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                $ref: '#/components/schemas/EnrichValue'
+              domain:
+                $ref: '#/components/schemas/EnrichValue'
+              ip:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              priority:
+                type: number
+        name_server:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                $ref: '#/components/schemas/EnrichValue'
+              domain:
+                $ref: '#/components/schemas/EnrichValue'
+              ip:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+        domain_risk:
+          type: object
+          properties:
+            risk_score:
+              type: integer
+              minimum: 0
+              maximum: 99
+            components:
+              type: array
+              description: A list of risk components and their individual scores that contribute to the overall domain risk.
+              items:
+                type: object
+        redirect:
+          $ref: '#/components/schemas/EnrichValue'
+        redirect_domain:
+          $ref: '#/components/schemas/EnrichValue'
+        registrant_name:
+          $ref: '#/components/schemas/EnrichValue'
+        registrant_org:
+          $ref: '#/components/schemas/EnrichValue'
+        registrar:
+          $ref: '#/components/schemas/EnrichValue'
+        registrar_status:
+          type: array
+          items:
+            type: string
+        spf_info:
+          type: string
+        ssl_info:
+          type: array
+          items:
+            type: object
+            properties:
+              hash:
+                $ref: '#/components/schemas/EnrichValue'
+              subject:
+                $ref: '#/components/schemas/EnrichValue'
+              organization:
+                $ref: '#/components/schemas/EnrichValue'
+              email:
+                type: array
+                items:
+                  type: string
+              alt_names:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrichValue'
+              sources:
+                type: object
+                properties:
+                  active:
+                    type: integer
+                  passive:
+                    type: integer
+              common_name:
+                $ref: '#/components/schemas/EnrichValue'
+              issuer_common_name:
+                $ref: '#/components/schemas/EnrichValue'
+              not_after:
+                $ref: '#/components/schemas/EnrichValue'
+              not_before:
+                $ref: '#/components/schemas/EnrichValue'
+              duration:
+                $ref: '#/components/schemas/EnrichValue'
+        tld:
+          type: string
+        website_response:
+          type: number
+        data_updated_timestamp:
+          type: string
+          format: date-time
+        website_title:
+          $ref: '#/components/schemas/EnrichValue'
+        server_type:
+          $ref: '#/components/schemas/EnrichValue'
+        first_seen:
+          $ref: '#/components/schemas/EnrichValue'
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              scope:
+                type: string
+              tagged_at:
+                type: string
+        parsed_whois:
+          type: object
+          description: Parsed data from the domain's WHOIS record. Present only when the request includes `parsed_whois=true`.
+        parsed_domain_rdap:
+          type: object
+          description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    ApexDomainList:
+      type: string
+      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
+      description: A comma-separated list of one or more apex domains to investigate.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    EnrichTracker:
+      type: object
+      description: A tracker identifier.
+      properties:
+        value:
+          type: string
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
+
+        '
+  responses:
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    EnrichSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  limit_exceeded:
+                    type: boolean
+                  message:
+                    type: string
+                  results_count:
+                    type: integer
+                  has_more_results:
+                    type: boolean
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnrichResult'
+                  missing_domains:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApexDomain'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    IrisPartialContent:
+      description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  requestBodies:
+    Enrich:
+      description: A request to the Iris Enrich endpoint.
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/EnrichRequestParameters'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
