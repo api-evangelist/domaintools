@@ -1,0 +1,51 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/domaintools-iris-openapi.yml, openapi/domaintools-lookups-monitors-openapi.yml,
+  openapi/domaintools-dnsdb-openapi.yml; https://docs.domaintools.com/authentication/
+authentication:
+  styles:
+    - api-key-header (X-Api-Key) — recommended default
+    - hmac-signed (api_username + timestamp + signature) — recommended for production
+    - http-basic (open_key_auth: api_username + api_key) — discouraged
+    - query-string api key — discouraged
+  ref: authentication/domaintools-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No documented idempotency-key header. The intelligence/lookup surface is
+    overwhelmingly GET (safe/naturally idempotent); write operations are limited
+    to Iris Detect monitor/escalation management.
+pagination:
+  style: cursor
+  request_param: position_token
+  response_field: position_token / has_more
+  note: >-
+    Iris Investigate and Iris Detect use an opaque position_token cursor
+    returned in the response to fetch subsequent pages. Some feeds use
+    session/time-fenced windows rather than page cursors.
+response_format:
+  param: format
+  values: [json]
+  note: Several lookups also accept format=json (default) via the ResponseFormat schema.
+versioning:
+  scheme: uri-path
+  current: v1
+  notes: >-
+    Path-versioned (/v1/..., DNSDB /dnsdb/v2, domain-search /v2). Legacy v1 and a
+    deprecated v2 doc set are referenced in the docs navigation.
+error_envelope:
+  shape: '{ "error": { "code": <int>, "message": <string> }, "resources": { "support": <url> } }'
+  ref: errors/domaintools-problem-types.yml
+rate_limiting:
+  signal: >-
+    DNSDB exposes a dedicated /rate_limit endpoint and returns 429 on limit;
+    per-product plan limits apply across the platform.
+hosts:
+  - api.domaintools.com   # Iris, Lookups & Monitors, Threat Feeds
+  - api.dnsdb.info        # Farsight DNSDB
+  - batch.sie-remote.net  # Farsight SIE Batch
+cross_links:
+  authentication: authentication/domaintools-authentication.yml
+  errors: errors/domaintools-problem-types.yml
+  lifecycle: lifecycle/domaintools-lifecycle.yml

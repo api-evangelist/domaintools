@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of /.well-known/* on API and site hosts
+hosts:
+  - host: https://api.domaintools.com
+    documents:
+      - { path: /.well-known/security.txt, status: 400 }
+      - { path: /.well-known/openid-configuration, status: 400 }
+      - { path: /.well-known/oauth-authorization-server, status: 400 }
+      - { path: /.well-known/api-catalog, status: 400 }
+      - { path: /.well-known/ai-plugin.json, status: 400 }
+  - host: https://docs.domaintools.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+  - host: https://www.domaintools.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+  - host: https://api.dnsdb.info
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+result: none
+note: No /.well-known/ discovery documents are published on any probed host.

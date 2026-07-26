@@ -1,0 +1,45 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/domaintools-lookups-monitors-openapi.yml, openapi/domaintools-iris-openapi.yml,
+  openapi/domaintools-dnsdb-openapi.yml
+note: >-
+  Entity-relationship graph derived from OpenAPI response schemas and path
+  identifiers. The Domain is the central entity; most intelligence attaches to
+  it via WHOIS/RDAP, hosting, DNS, and risk facets. Relationships are keyed on
+  natural identifiers (domain, ip, name_server), not surrogate id-prefixes.
+entities:
+  - name: Domain
+    key: domain (apex or hostname)
+    facets: [DomainProfile, ParsedWhoisDomain, ParsedDomainRdapResponse, HostingHistory, DomainReputation, DomainRiskScore]
+  - name: WhoisRecord
+    schemas: [ParsedWhoisDomain, ParsedWhoisContact, ParsedWhoisIp, ParsedWhoisIpNetwork, ParsedWhoisIpContact]
+  - name: RiskScore
+    schemas: [DomainRiskScore, DomainRiskScoreEvidence]
+  - name: HostingHistory
+  - name: IpAddress
+    key: ip
+    schemas: [ReverseIp, ReverseIpWhoisIp, ReverseIpWhoisQuery]
+  - name: NameServer
+    key: name_server
+    schemas: [ReverseNameServer]
+  - name: DnsRecord
+    schemas: [pdns_cof, summarize, flex]
+  - name: DetectMonitor
+    schemas: [DetectDomain, DetectDomainList, DetectThreatProfile, DetectRiskComponents]
+  - name: DetectEscalation
+    schemas: [DetectEscalation, Escalations, EscalationTypeEnum]
+  - name: Monitor
+    schemas: [BrandMonitor, RegistrantMonitor, IpMonitor, NameServerMonitor]
+relationships:
+  - { from: Domain, to: WhoisRecord, kind: has_one, via: domain }
+  - { from: Domain, to: RiskScore, kind: has_one, via: domain }
+  - { from: Domain, to: HostingHistory, kind: has_many, via: domain }
+  - { from: Domain, to: DnsRecord, kind: has_many, via: rrname }
+  - { from: Domain, to: IpAddress, kind: has_many, via: reverse-ip }
+  - { from: Domain, to: NameServer, kind: has_many, via: name_server }
+  - { from: IpAddress, to: Domain, kind: has_many, via: host-domains }
+  - { from: NameServer, to: Domain, kind: has_many, via: name-server-domains }
+  - { from: DetectMonitor, to: DetectDomain, kind: has_many, via: monitor_id }
+  - { from: DetectDomain, to: DetectEscalation, kind: has_many, via: domain }
+  - { from: DetectDomain, to: RiskScore, kind: has_one, via: DetectRiskComponents }

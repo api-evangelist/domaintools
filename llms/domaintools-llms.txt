@@ -1,0 +1,18 @@
+# DomainTools Technical Documentation for LLMs
+
+> Plain-text API documentation for DomainTools products. Each linked file contains core documentation for one product in a single document.
+
+## API documentation
+
+- [DomainTools Domain Risk Score](https://docs.domaintools.com/llm/domain-risk-score-llm.txt): Real-time 0-100 domain threat scoring: Threat Profile classifiers, Proximity, and the risk evidence endpoint.
+- [DomainTools Farsight DNSDB API](https://docs.domaintools.com/llm/dnsdb-api-llm.txt): Passive DNS history: RRset and Rdata lookups, flexible search, time fencing, and dnsdbq CLI tools.
+- [DomainTools Farsight SIE API](https://docs.domaintools.com/llm/farsight-sie-api-llm.txt): Security Information Exchange access: SIE Batch REST API, Remote Access via the AXA toolkit, and the NMSG protocol.
+- [DomainTools Iris Detect API](https://docs.domaintools.com/llm/iris-detect-api-llm.txt): Brand-infringement monitoring: detect, triage, and act on newly registered lookalike domains.
+- [DomainTools Iris Enrich API](https://docs.domaintools.com/llm/iris-enrich-api-llm.txt): Bulk domain enrichment: risk scores, WHOIS, infrastructure, and screenshots for known domains.
+- [DomainTools Iris Investigate API](https://docs.domaintools.com/llm/iris-investigate-api-llm.txt): Pivot-based domain investigation: search and filter parameters, guided pivots, pagination, quota model, and IrisQL.
+- [DomainTools Lookups and Monitors API](https://docs.domaintools.com/llm/lookups-monitors-api-llm.txt): Core domain intelligence lookups (WHOIS, hosting, reputation, risk, reverse queries) and change monitors.
+- [DomainTools Threat Feeds API](https://docs.domaintools.com/llm/threat-feeds-api-llm.txt): Predictive risk and discovery feeds: domain/IP hotlists, newly observed domains and hostnames, and RPZ integration.
+
+## Optional
+
+- [Documentation home](https://docs.domaintools.com/): Full human-readable documentation site.

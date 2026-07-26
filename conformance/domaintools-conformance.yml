@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/domaintools-iris-openapi.yml, openapi/domaintools-lookups-monitors-openapi.yml,
+  openapi/domaintools-dnsdb-openapi.yml, openapi/domaintools-sie-openapi.yml
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security schemes declared; auth is API key / HMAC / basic.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom { error, resources } envelope, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt (404/400 on all hosts probed).
+  - id: rdap
+    conforms: true
+    evidence: Lookups & Monitors exposes RDAP parsing (getParsedDomainRdap, /rdap/parsed/).
+  - id: whois
+    conforms: true
+    evidence: WHOIS lookup, history, and parsed WHOIS operations across the platform.
+  - id: passive-dns-cof
+    conforms: true
+    evidence: DNSDB implements the Passive DNS Common Output Format (pdns_cof schema).
+  - id: dns-rpz
+    conforms: true
+    evidence: Threat Feeds document RPZ (Response Policy Zone) integration for DNS firewalling.
+  - id: cursor-pagination
+    conforms: true
+    evidence: Iris uses opaque position_token cursor pagination.

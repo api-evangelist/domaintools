@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  https://docs.domaintools.com/changelog/, https://domaintools.statuspage.io,
+  OpenAPI servers[] path versions
+versioning:
+  scheme: uri-path
+  current: v1
+  notes: >-
+    Path-versioned APIs (/v1/..., DNSDB /dnsdb/v2, domain-search /v2). A legacy
+    v1 and a deprecated v2 documentation set are referenced in the docs nav.
+deprecation:
+  policy_url: https://docs.domaintools.com/changelog/
+  sunset_header: false
+  notes: >-
+    Deprecation is communicated via the changelog and docs navigation (API v2
+    marked "Deprecated Doc", API v1 marked "Legacy"). No formal RFC 8594
+    Sunset/Deprecation header contract is documented.
+status_page: https://domaintools.statuspage.io
+sla:
+  url: null
+  notes: SLA/uptime target not published on the public developer surface.
+deprecated_operations: []

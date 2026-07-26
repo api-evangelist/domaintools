@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.domaintools.com/changelog/
+scheme: dated
+current_version: v1
+entries:
+  - date: '2026-06-23'
+    type: change
+    highlight: MCP Server now describes registration data as coming from WHOIS or RDAP.
+  - date: '2026-06-16'
+    type: addition
+    highlight: Python SDK v2.3–v2.8 adds IrisQL, Domain History, and real-time Threat Feeds.
+  - date: '2026-06-11'
+    type: addition
+    highlight: Group admins can manage API accounts from the admin page.
+  - date: '2026-05-19'
+    type: addition
+    highlight: Real-time IP Risk and IP Hotlist feeds launched.
+  - date: '2026-05-18'
+    type: addition
+    highlight: MCP Server adds DNSDB, Domain History, and OAuth support.
+  - date: '2026-05-10'
+    type: addition
+    highlight: Cortex XSOAR pack v1.0.7 enriches risk score details.
+  - date: '2026-05-06'
+    type: addition
+    highlight: IrisQL tool added to the MCP Server.
+  - date: '2026-05-04'
+    type: addition
+    highlight: IrisQL available in the Iris Investigate API.
+  - date: '2026-04-23'
+    type: addition
+    highlight: Google SecOps SOAR integration v11.0 released.
+  - date: '2026-04-09'
+    type: fix
+    highlight: Four bugs fixed in the Cortex XSOAR integration.

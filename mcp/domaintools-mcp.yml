@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: searched
+status: published
+source: https://docs.domaintools.com/mcp/
+server:
+  name: domaintools-mcp
+  transport: http
+  url: https://api.domaintools.com/v1/mcp
+  hosting: remote
+  operator: DomainTools
+  tls: TLSv1.3
+authentication:
+  scheme: apiKey
+  header: X-Api-Key
+  note: Clients pass their DomainTools API key as the X-Api-Key HTTP header.
+install:
+  claude_code: >-
+    claude mcp add --transport http domaintools-mcp
+    https://api.domaintools.com/v1/mcp --header 'X-Api-Key: your-key'
+tool_groups:
+  - platform: Iris Investigate
+    tool_count: 7
+    description: >-
+      Domain lookups, pivot searches, and infrastructure mapping across DNS,
+      passive DNS, WHOIS/RDAP, TLS certificates, and risk scoring.
+  - platform: DNSDB
+    tool_count: 4
+    description: >-
+      Passive DNS queries: forward lookups, inverse lookups, and pattern-based
+      (flexible) searches.
+  - platform: Domain History
+    tool_count: 4
+    description: >-
+      Timestamped records tracking changes in registration, infrastructure, and
+      website data.
+total_tools: 15

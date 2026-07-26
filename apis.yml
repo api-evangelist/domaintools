@@ -1,23 +1,275 @@
 aid: domaintools
 name: DomainTools
-description: DomainTools is a company surfaced as a portfolio company of battery-ventures and added to
-  the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  DomainTools is a domain and DNS intelligence company whose APIs power threat
+  investigation, hunting, and monitoring for security teams. Its product surface
+  spans Iris Investigate (pivot-based domain investigation), Iris Enrich (bulk
+  domain enrichment), and Iris Detect (brand-infringement monitoring); the
+  Farsight DNSDB passive DNS history API (300+ billion records); Lookups &
+  Monitors (WHOIS, RDAP, hosting history, reverse IP/WHOIS, reputation, risk
+  score, and change monitors); Threat Feeds (predictive risk and discovery
+  feeds with RPZ integration); and Farsight SIE real-time DNS event streaming.
+  DomainTools publishes OpenAPI specifications, an official Python SDK with a
+  bundled CLI, and a remotely hosted MCP server for AI agents. A Battery
+  Ventures portfolio company, enriched into the API Evangelist network.
 url: https://raw.githubusercontent.com/api-evangelist/domaintools/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.domaintools.com/wp-content/uploads/dt-logo.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Threat Intelligence
+- Domain Intelligence
+- DNS
+- WHOIS
+- Passive DNS
+- Cybersecurity
+- Domain Monitoring
+- Risk Scoring
+- Security
+apis:
+- aid: domaintools:domaintools-flex-search-api
+  name: DomainTools Flex search API
+  description: The Flex search API from DomainTools — 2 operation(s) for flex search.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Flex search
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-flex-search-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-information-api
+  name: DomainTools Information API
+  description: >-
+    Access the latest information about your account, including service
+
+    limits.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Information
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-information-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-iris-detect-api
+  name: DomainTools Iris Detect API
+  description: >-
+    Iris Detect is an Internet infrastructure detection, monitoring, and enforcement tool.
+
+    It rapidly discovers malicious domains that are engaged in brand impersonation, risk-scores them within
+    minutes, and supports your automation of detection, escalation, and enforcement actions.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Iris Detect
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-iris-detect-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-iris-enrich-api
+  name: DomainTools Iris Enrich API
+  description: >-
+    Designed to support high query volumes with batch processing and fast response times, the Iris Enrich
+    API provides actionable insights-at-scale with enterprise-scale ingestion of DomainTools data
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Iris Enrich
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-iris-enrich-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-iris-investigate-api
+  name: DomainTools Iris Investigate API
+  description: >-
+    The Iris Investigate API is ideally suited for investigate and orchestrate use cases at human scale.
+    Identify threats, map adversary infrastructure, and streamline investigations.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Iris Investigate
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-iris-investigate-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-lookups-api
+  name: DomainTools Lookups API
+  description: >-
+    Endpoints for retrieving detailed information about domains and IPs, and for finding connections between
+    domains and infrastructure.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-lookups-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-monitors-api
+  name: DomainTools Monitors API
+  description: >-
+    Endpoints for monitoring new domain registrations, changes to IP ranges, and other key infrastructure
+    events based on specific terms.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-monitors-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-ping-api
+  name: DomainTools Ping API
+  description: The Ping API from DomainTools — 1 operation(s) for ping.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-ping-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-rate-limit-api
+  name: DomainTools Rate Limit API
+  description: The Rate Limit API from DomainTools — 1 operation(s) for rate limit.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Rate Limit
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-rate-limit-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-rdata-lookups-api
+  name: DomainTools rdata Lookups API
+  description: The rdata Lookups API from DomainTools — 4 operation(s) for rdata lookups.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - rdata Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-rdata-lookups-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-rrset-lookups-api
+  name: DomainTools rrset Lookups API
+  description: The rrset Lookups API from DomainTools — 6 operation(s) for rrset lookups.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - rrset Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-rrset-lookups-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
+- aid: domaintools:domaintools-siebatchd-api
+  name: DomainTools Siebatchd API
+  description: The Siebatchd API from DomainTools — 4 operation(s) for siebatchd.
+  humanURL: https://docs.domaintools.com/api/iris/
+  baseURL: https://api.domaintools.com
+  tags:
+  - Siebatchd
+  properties:
+  - type: OpenAPI
+    url: openapi/domaintools-siebatchd-api-openapi.yml
+  - type: APIReference
+    url: https://docs.domaintools.com/api/iris/reference/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: DeveloperPortal
+  url: https://docs.domaintools.com/
+- type: Documentation
+  url: https://docs.domaintools.com/
+- type: APIReference
+  url: https://docs.domaintools.com/api/iris/reference/
+- type: GettingStarted
+  url: https://docs.domaintools.com/api/iris/
+- type: Authentication
+  url: authentication/domaintools-authentication.yml
+- type: Blog
+  url: https://www.domaintools.com/resources/blog/
+- type: Support
+  url: https://www.domaintools.com/support
+- type: GitHubOrganization
+  url: https://github.com/DomainTools
+- type: SignUp
+  url: https://www.domaintools.com/demo
+- type: TermsOfService
+  url: https://www.domaintools.com/company/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.domaintools.com/company/privacy-policy/
+- type: ChangeLog
+  url: changelog/domaintools-changelog.yml
+- type: StatusPage
+  url: https://domaintools.statuspage.io
+- type: Deprecation
+  url: lifecycle/domaintools-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/domaintools-lifecycle.yml
+- type: MCPServer
+  url: mcp/domaintools-mcp.yml
+- type: Packages
+  url: packages/domaintools-packages.yml
+- type: SDKs
+  url: packages/domaintools-packages.yml
+- type: CLI
+  url: cli/domaintools-cli.yml
+- type: LLMsTxt
+  url: llms/domaintools-llms.txt
+- type: Conventions
+  url: conventions/domaintools-conventions.yml
+- type: ErrorCatalog
+  url: errors/domaintools-problem-types.yml
+- type: Conformance
+  url: conformance/domaintools-conformance.yml
+- type: DataModel
+  url: data-model/domaintools-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/domaintools-well-known.yml
+- type: AgenticAccess
+  url: agentic-access/domaintools-agentic-access.yml
+- type: DomainSecurity
+  url: security/domaintools-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

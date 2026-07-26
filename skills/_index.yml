@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: generated
+source: >-
+  grounded in operationIds from openapi/domaintools-iris-openapi.yml,
+  openapi/domaintools-lookups-monitors-openapi.yml, openapi/domaintools-dnsdb-openapi.yml
+skills:
+  - file: domaintools-investigate-suspicious-domain.md
+    name: Investigate a suspicious domain
+    api: openapi/domaintools-lookups-monitors-openapi.yml
+    operations: [getDomainProfile, getWhoisLookup, getDomainRiskScore, getRiskScoreEvidence, getHostingHistory]
+  - file: domaintools-monitor-brand-lookalikes.md
+    name: Monitor a brand for lookalike domains
+    api: openapi/domaintools-iris-openapi.yml
+    operations: [postDetectMonitor, getDetectMonitors, getDetectNewDomains, getDomainsWatched, postDetectEscalations]
+  - file: domaintools-passive-dns-pivot.md
+    name: Pivot through passive DNS history
+    api: openapi/domaintools-dnsdb-openapi.yml
+    operations: [lookupRrset, lookupRdata, flexSearch, summarizeRrset]
+  - file: domaintools-enrich-domains-bulk.md
+    name: Bulk-enrich a list of domains
+    api: openapi/domaintools-iris-openapi.yml
+    operations: [postIrisEnrich, getIrisEnrich]

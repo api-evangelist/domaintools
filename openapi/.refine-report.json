@@ -1,0 +1,36 @@
+{
+  "provider": "domaintools",
+  "sources": [
+    "domaintools-flex-search-api-openapi.yml",
+    "domaintools-information-api-openapi.yml",
+    "domaintools-iris-detect-api-openapi.yml",
+    "domaintools-iris-enrich-api-openapi.yml",
+    "domaintools-iris-investigate-api-openapi.yml",
+    "domaintools-lookups-api-openapi.yml",
+    "domaintools-monitors-api-openapi.yml",
+    "domaintools-ping-api-openapi.yml",
+    "domaintools-rate-limit-api-openapi.yml",
+    "domaintools-rdata-lookups-api-openapi.yml",
+    "domaintools-rrset-lookups-api-openapi.yml",
+    "domaintools-siebatchd-api-openapi.yml"
+  ],
+  "outputs": [
+    "domaintools-flex-search-api-openapi.yml",
+    "domaintools-information-api-openapi.yml",
+    "domaintools-iris-detect-api-openapi.yml",
+    "domaintools-iris-enrich-api-openapi.yml",
+    "domaintools-iris-investigate-api-openapi.yml",
+    "domaintools-lookups-api-openapi.yml",
+    "domaintools-monitors-api-openapi.yml",
+    "domaintools-ping-api-openapi.yml",
+    "domaintools-rate-limit-api-openapi.yml",
+    "domaintools-rdata-lookups-api-openapi.yml",
+    "domaintools-rrset-lookups-api-openapi.yml",
+    "domaintools-siebatchd-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

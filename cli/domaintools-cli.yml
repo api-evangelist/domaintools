@@ -1,0 +1,33 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.domaintools.com/python-sdk/
+name: domaintools
+summary: >-
+  Command-line interface bundled with the official domaintools_api Python
+  package. Provides quick, scriptable access to the DomainTools API product
+  surface (Iris, Lookups & Monitors, Threat Feeds) from the shell.
+binary_in_package: packages/domaintools-packages.yml
+install:
+  - method: pip
+    command: pip install domaintools_api --upgrade
+authentication:
+  env:
+    - TOOLS_API_USERNAME
+    - TOOLS_API_KEY
+  note: >-
+    The CLI reads API credentials from environment variables or command flags;
+    header (X-Api-Key) and HMAC signing are supported per the API auth model.
+resources:
+  - iris-investigate
+  - iris-enrich
+  - iris-detect
+  - domain-profile
+  - whois
+  - whois-history
+  - parsed-whois
+  - hosting-history
+  - reverse-ip
+  - reverse-whois
+  - domain-reputation
+  - risk
+  - domain-search

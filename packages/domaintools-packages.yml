@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.domaintools.com/python-sdk/
+packages:
+  - language: python
+    registry: pypi
+    name: domaintools_api
+    url: https://pypi.org/project/domaintools-api/
+    install: pip install domaintools_api --upgrade
+    repo: https://github.com/DomainTools/python_api
+    official: true
+    description: >-
+      Official unified Python client for DomainTools APIs (Iris Investigate,
+      Iris Enrich, Iris Detect, Lookups and Monitors, Threat Feeds). Ships a
+      command-line interface for quick queries and scripting.
+    provides_cli: true

@@ -1,0 +1,50 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/domaintools-iris-openapi.yml, openapi/domaintools-lookups-monitors-openapi.yml,
+  openapi/domaintools-dnsdb-openapi.yml, openapi/domaintools-sie-openapi.yml
+format: custom
+envelope:
+  shape: '{ "error": { "code": <int>, "message": <string> }, "resources": { "support": <url> } }'
+  schema: ErrorResponse
+  note: >-
+    DomainTools returns a custom JSON error envelope (not RFC 9457
+    application/problem+json). The integer error.code is an internal code and
+    the HTTP status carries the class of failure.
+problems:
+  - status: 400
+    title: Bad request
+    meaning: Malformed request or invalid/missing query parameters.
+    remediation: Validate required parameters and value formats before retrying.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid API credentials.
+    remediation: Provide a valid X-Api-Key header (or HMAC signature) for your account.
+  - status: 403
+    title: Forbidden
+    meaning: Authenticated but not entitled to the product/endpoint, or account limit reached.
+    remediation: Confirm your account is provisioned for the product and within plan limits.
+  - status: 404
+    title: Not found
+    meaning: The requested resource, domain, or record was not found.
+    remediation: Confirm the identifier/path; an empty result is a valid outcome.
+  - status: 422
+    title: Unprocessable entity
+    meaning: Request understood but semantically invalid (Iris Detect operations).
+    remediation: Correct the request body/parameters per the operation schema.
+  - status: 429
+    title: Too many requests
+    meaning: Rate limit exceeded (DNSDB).
+    remediation: Back off and honor the rate_limit endpoint / retry guidance.
+  - status: 500
+    title: Internal server error
+    meaning: Unexpected server-side error.
+    remediation: Retry with backoff; contact enterprisesupport@domaintools.com if persistent.
+  - status: 502
+    title: Bad gateway
+    meaning: Upstream/gateway error (DNSDB).
+    remediation: Retry with backoff.
+  - status: 503
+    title: Service unavailable
+    meaning: Service temporarily unavailable or under maintenance.
+    remediation: Retry with backoff; check https://domaintools.statuspage.io.

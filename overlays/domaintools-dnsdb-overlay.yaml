@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for DomainTools Farsight DNSDB API
+  version: 1.0.0
+extends: openapi/domaintools-dnsdb-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-provider: domaintools
+    x-apievangelist-artifacts:
+    - authentication/domaintools-authentication.yml
+    - conventions/domaintools-conventions.yml
+    - errors/domaintools-problem-types.yml
+    - mcp/domaintools-mcp.yml
