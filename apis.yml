@@ -212,6 +212,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/domaintools-dnsdb-overlay.yaml
 - type: DeveloperPortal
   url: https://docs.domaintools.com/
 - type: Documentation
