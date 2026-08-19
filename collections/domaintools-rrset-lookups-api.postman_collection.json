@@ -1,0 +1,5138 @@
+{
+  "item": [
+    {
+      "id": "ac539919-a3fa-401a-9508-0c412868cf0e",
+      "name": "rrset Lookups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f3b981c-5515-455d-9897-78759cd7d922",
+          "name": "Forward DNS lookup by owner name",
+          "request": {
+            "name": "Forward DNS lookup by owner name",
+            "description": {
+              "content": "Lookup all RRsets whose owner name is ...",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lookup",
+                "rrset",
+                ":type",
+                ":value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ef10fa97-58e9-4fdd-9827-c35c22574045",
+              "name": "lookup response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "602f20cd-e386-4a4a-ad1b-d5dedabb5af1",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8c53e1b-7e15-4b66-912a-50ec40dca31e",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9283b00-f79e-4f4c-9a54-43a6e74bc2ab",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d98d8ed-96fc-45ce-8baa-fb4cdde72a9b",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fc5361d-10fe-4a27-8815-543adfce4641",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a091d7c9-119e-41ab-baa3-8d4a09fd9238",
+          "name": "Forward DNS lookup filtered by RR type",
+          "request": {
+            "name": "Forward DNS lookup filtered by RR type",
+            "description": {
+              "content": "Lookup all RRsets whose owner name ends in ... of type rrtype",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lookup",
+                "rrset",
+                ":type",
+                ":value",
+                ":rrtype"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rrtype",
+                  "description": "(Required) rrtype"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c114696-bc9f-4d1b-bb94-5fde31be5615",
+              "name": "lookup response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffc613e3-2b37-4ccc-8d4a-af180edda7e3",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "734acba8-c5af-46dc-b454-5c1601510c4b",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe96bdb1-7c28-4a25-a367-b409ef5cf1b4",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3099e72-d0a7-442f-8bf5-59aa773f42f8",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b02e19d0-b557-4824-9576-5a2625526e3e",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "650d5b05-6872-474f-bfd2-814a824bf4dd",
+          "name": "Forward DNS lookup filtered by RR type and bailiwick",
+          "request": {
+            "name": "Forward DNS lookup filtered by RR type and bailiwick",
+            "description": {},
+            "url": {
+              "path": [
+                "lookup",
+                "rrset",
+                ":type",
+                ":value",
+                ":rrtype",
+                ":bailiwick"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rrtype",
+                  "description": "(Required) rrtype"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bailiwick",
+                  "description": "(Required) bailiwick"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e912c680-e961-40ca-a8d7-a254e2f29036",
+              "name": "lookup response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8a13313-05aa-48ee-8b71-db3852cabff9",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4dce375-38f4-4ff9-bd11-76899911bf6d",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25217297-45ec-488c-b40d-5d43418f7751",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae03ddb2-3175-421d-a4dc-3a57195e5c9f",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7748c1d-5d63-4141-a3f1-ce5d1e75bac3",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4b05aab-f3dd-4704-be7a-e543c7d372d3",
+          "name": "Summary stats for RRsets by owner name",
+          "request": {
+            "name": "Summary stats for RRsets by owner name",
+            "description": {
+              "content": "Summarize all RRsets whose owner name is ...",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "summarize",
+                "rrset",
+                ":type",
+                ":value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_count",
+                  "value": "<number>",
+                  "description": "max count"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22723e6f-8443-437b-80fe-06c2b01722c2",
+              "name": "summarize response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "897f1d03-e190-4baa-bee2-6301fb5b894f",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3b2b5fd-40f5-4fab-be29-9889959bfb75",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d799b466-291e-4d15-bfbc-51628569d128",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21752a6a-ebda-4ebc-9e45-2b272a98871e",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c57b624-cae0-401d-bad0-2e23076f909c",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b64e4a3-9066-4f10-8c1a-275f48743f68",
+          "name": "Summary stats for RRsets filtered by type",
+          "request": {
+            "name": "Summary stats for RRsets filtered by type",
+            "description": {
+              "content": "Summarize all RRsets whose owner name is ... of rrtype",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "summarize",
+                "rrset",
+                ":type",
+                ":value",
+                ":rrtype"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_count",
+                  "value": "<number>",
+                  "description": "max count"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rrtype",
+                  "description": "(Required) rrtype"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e81758aa-27d1-4352-8661-876f21093274",
+              "name": "summarize response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc2762b-3ee8-4969-ace3-25f99dd2c027",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4d91022-af63-4c80-af47-535deab4e1db",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4ba0908-cc61-47a0-b65b-3d6ce3a41545",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c2cb1e0-910c-4a58-9406-e76bd25808a1",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03c85e83-e5cf-46cf-9180-a0f21ab7b4d8",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a19c6ed-e3ea-44db-8934-ec135a4b89e4",
+          "name": "Summary stats for RRsets filtered by type and bailiwick",
+          "request": {
+            "name": "Summary stats for RRsets filtered by type and bailiwick",
+            "description": {},
+            "url": {
+              "path": [
+                "summarize",
+                "rrset",
+                ":type",
+                ":value",
+                ":rrtype",
+                ":bailiwick"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_first_before",
+                  "value": "<number>",
+                  "description": "time first before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_first_after",
+                  "value": "<number>",
+                  "description": "time first after"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_before",
+                  "value": "<number>",
+                  "description": "time last before"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_last_after",
+                  "value": "<number>",
+                  "description": "time last after"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "swclient",
+                  "value": "<string>",
+                  "description": "swclient"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "version"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggr",
+                  "value": "<boolean>",
+                  "description": "aggr"
+                },
+                {
+                  "disabled": false,
+                  "key": "humantime",
+                  "value": "<boolean>",
+                  "description": "humantime"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_count",
+                  "value": "<number>",
+                  "description": "max count"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of query"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "value",
+                  "description": "(Required) Value"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rrtype",
+                  "description": "(Required) rrtype"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bailiwick",
+                  "description": "(Required) bailiwick"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19ade6e1-43c6-486f-9f3a-1599c9690b0f",
+              "name": "summarize response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "limit in period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "remaining in period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "44885047877"
+                },
+                {
+                  "disabled": false,
+                  "description": "when period expires",
+                  "key": "X-RateLimit-Expires",
+                  "value": "44885047877"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d26e91f-0e82-4105-b686-ccd676cceb42",
+              "name": "Unable to parse request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2755c77-e9ca-461f-b212-065477bc54b9",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70e98e4b-e15d-413a-b7d1-ee4b91a46b42",
+              "name": "Authenticated but not authorized for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2245fe3d-6bad-417e-8258-bd5b4f657565",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "965d1ac2-3b05-4063-86f7-44aa0adf8a76",
+              "name": "Upstream server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarize",
+                    "rrset",
+                    ":type",
+                    ":value",
+                    ":rrtype",
+                    ":bailiwick"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_first_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_first_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_before",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "time_last_after",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "swclient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggr",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "humantime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "max_count",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of query"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "value",
+                      "description": "(Required) Value"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rrtype",
+                      "description": "(Required) rrtype"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bailiwick",
+                      "description": "(Required) bailiwick"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dnsdb.info/dnsdb/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d0c91bc4-17c2-44e8-8d2e-51004f721537",
+    "name": "dnsdb Flex search rrset Lookups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "dnsdb\n\nContact Support:\n Name: DomainTools Support\n Email: enterprisesupport@domaintools.com",
+      "type": "text/plain"
+    }
+  }
+}

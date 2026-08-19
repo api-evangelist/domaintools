@@ -14,23 +14,24 @@ authentication:
   header: X-Api-Key
   note: Clients pass their DomainTools API key as the X-Api-Key HTTP header.
 install:
-  claude_code: >-
-    claude mcp add --transport http domaintools-mcp
-    https://api.domaintools.com/v1/mcp --header 'X-Api-Key: your-key'
+  claude_code: 'claude mcp add --transport http domaintools-mcp https://api.domaintools.com/v1/mcp --header
+    ''X-Api-Key: your-key'''
 tool_groups:
-  - platform: Iris Investigate
-    tool_count: 7
-    description: >-
-      Domain lookups, pivot searches, and infrastructure mapping across DNS,
-      passive DNS, WHOIS/RDAP, TLS certificates, and risk scoring.
-  - platform: DNSDB
-    tool_count: 4
-    description: >-
-      Passive DNS queries: forward lookups, inverse lookups, and pattern-based
-      (flexible) searches.
-  - platform: Domain History
-    tool_count: 4
-    description: >-
-      Timestamped records tracking changes in registration, infrastructure, and
-      website data.
+- platform: Iris Investigate
+  tool_count: 7
+  description: Domain lookups, pivot searches, and infrastructure mapping across DNS, passive DNS, WHOIS/RDAP,
+    TLS certificates, and risk scoring.
+- platform: DNSDB
+  tool_count: 4
+  description: 'Passive DNS queries: forward lookups, inverse lookups, and pattern-based (flexible) searches.'
+- platform: Domain History
+  tool_count: 4
+  description: Timestamped records tracking changes in registration, infrastructure, and website data.
 total_tools: 15
+deployment:
+  mode: remote
+  endpoint: https://api.domaintools.com/v1/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

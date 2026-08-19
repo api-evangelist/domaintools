@@ -1,0 +1,535 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Iris Detect API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Iris Detect",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add and remove domains from Watchlist or Ignored lists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/domains/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add and remove domains from Watchlist or Ignored lists."
+        },
+        {
+          "info": {
+            "name": "Provide ignored domains for active monitors in an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/domains/ignored/",
+            "params": [
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "changed_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the `/watched` endpoint to control the timeframe for changes to DNS or WHOIS fields for watched domains.\n"
+              },
+              {
+                "name": "discovered_before",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "discovered_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "domain_state",
+                "value": "",
+                "type": "query",
+                "description": "Filters domains based on their state.\n"
+              },
+              {
+                "name": "escalated_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)\n"
+              },
+              {
+                "name": "include_domain_data",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Performs a `contains` search."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "query",
+                "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+              },
+              {
+                "name": "mx_exists",
+                "value": "",
+                "type": "query",
+                "description": "Whether domain currently has an MX record in DNS."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+              },
+              {
+                "name": "risk_score_ranges",
+                "value": "",
+                "type": "query",
+                "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+              },
+              {
+                "name": "tlds",
+                "value": "",
+                "type": "query",
+                "description": "Filters on specific TLDs"
+              }
+            ]
+          },
+          "docs": "Provide ignored domains for active monitors in an account."
+        },
+        {
+          "info": {
+            "name": "Provide newly discovered domains for active monitors in an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/domains/new/",
+            "params": [
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "discovered_before",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "discovered_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "include_domain_data",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Performs a `contains` search."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "query",
+                "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+              },
+              {
+                "name": "mx_exists",
+                "value": "",
+                "type": "query",
+                "description": "Whether domain currently has an MX record in DNS."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+              },
+              {
+                "name": "risk_score_ranges",
+                "value": "",
+                "type": "query",
+                "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+              },
+              {
+                "name": "tlds",
+                "value": "",
+                "type": "query",
+                "description": "Filters on specific TLDs"
+              }
+            ]
+          },
+          "docs": "Provide newly discovered domains for active monitors in an account."
+        },
+        {
+          "info": {
+            "name": "Provide recently changed or escalated domains for active monitors in an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/domains/watched/",
+            "params": [
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "changed_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the `/watched` endpoint to control the timeframe for changes to DNS or WHOIS fields for watched domains.\n"
+              },
+              {
+                "name": "discovered_before",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "discovered_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+              },
+              {
+                "name": "escalated_since",
+                "value": "",
+                "type": "query",
+                "description": "Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)\n"
+              },
+              {
+                "name": "escalation_types",
+                "value": "",
+                "type": "query",
+                "description": "Filters domains based on specific escalation types. Multiple types can be provided.\n"
+              },
+              {
+                "name": "include_domain_data",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Performs a `contains` search."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "query",
+                "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+              },
+              {
+                "name": "mx_exists",
+                "value": "",
+                "type": "query",
+                "description": "Whether domain currently has an MX record in DNS."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+              },
+              {
+                "name": "risk_score_ranges",
+                "value": "",
+                "type": "query",
+                "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+              },
+              {
+                "name": "tlds",
+                "value": "",
+                "type": "query",
+                "description": "Filters on specific TLDs"
+              }
+            ]
+          },
+          "docs": "Provide recently changed or escalated domains for active monitors in an account."
+        },
+        {
+          "info": {
+            "name": "Escalate internally and externally.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/escalations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Escalate internally and externally."
+        },
+        {
+          "info": {
+            "name": "Retrieves monitors and monitor IDs for an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/monitors/",
+            "params": [
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "datetime_counts_since",
+                "value": "",
+                "type": "query",
+                "description": "Filters counts to include only those generated since the specified ISO-8601 date-time.\nThis parameter is conditionally required if `include_counts` is set to `true`.\nExample: `2022-02-10T00:00:00Z`\n"
+              },
+              {
+                "name": "include_counts",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the response will include counts for new, watched, changed, and escalated domains for each monitor.\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of monitors to retrieve.\nThe default is 500. The maximum is restricted to 100 if `include_counts=true`.\n"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+              },
+              {
+                "name": "sort[]",
+                "value": "",
+                "type": "query",
+                "description": "Provides options for sorting the monitor list."
+              }
+            ]
+          },
+          "docs": "Retrieves monitors and monitor IDs for an account."
+        },
+        {
+          "info": {
+            "name": "Create a new monitor to track lookalike domains for a specific term.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/monitors/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a monitor that begins discovering matching domains immediately.\nThe monitor `status` is `pending` after creation and changes to `completed`\nonce initial domain discovery finishes.\n\nRequires the \"manage monitors\" permission.\n"
+        },
+        {
+          "info": {
+            "name": "Update the configuration of an existing monitor.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/monitors/",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the monitor to operate on.\nRetrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies match settings and exclusions for an existing monitor.\nInclude only the fields you want to change; omitted fields retain their current values.\n\nA recently created monitor may not be immediately available for updates.\nWait until the monitor's `status` changes from `pending` to `completed`\nbefore sending update requests.\n\nRequires the \"manage monitors\" permission.\n"
+        },
+        {
+          "info": {
+            "name": "Permanently delete a monitor and stop tracking its associated domains.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-detect/monitors/",
+            "params": [
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the monitor to operate on.\nRetrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).\n"
+              }
+            ]
+          },
+          "docs": "Deletes the specified monitor. This action is permanent and can't be undone.\n\nRequires the \"manage monitors\" permission.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

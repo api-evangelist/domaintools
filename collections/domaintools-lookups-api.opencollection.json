@@ -1,0 +1,892 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Lookups API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Domain Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:domain/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Basic registrant, server, and registration data for a domain name, plus preview data for other products.\n"
+        },
+        {
+          "info": {
+            "name": "Hosting History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:domain/hosting-history/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Provides the registrar, IP and name server history for a domain name.\n"
+        },
+        {
+          "info": {
+            "name": "Parsed Domain RDAP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:domain/rdap/parsed/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              }
+            ]
+          },
+          "docs": "Returns the most recent Domain-RDAP registration record."
+        },
+        {
+          "info": {
+            "name": "WHOIS Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:query/whois/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name or IP address."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "WHOIS records for domain names and IP addresses."
+        },
+        {
+          "info": {
+            "name": "WHOIS History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:domain/whois/history/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort the records returned in either ascending or descending order by date."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "- `list` (default): Returns the historical records.\n- `count`: Returns only the total count of historical records.\n- `check_existence`: Returns a boolean indicating if history exists.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve historical WHOIS records of a given domain name."
+        },
+        {
+          "info": {
+            "name": "Parsed WHOIS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:query/whois/parsed/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name or IP address."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Parsed results for WHOIS records for domain names and IP addresses."
+        },
+        {
+          "info": {
+            "name": "Domain Reputation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/reputation/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Required. A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "This functionality is superseded by the Domain Risk Score `/risk/` endpoint, which offers a more complete and robust evaluation and should be used for all new development."
+        },
+        {
+          "info": {
+            "name": "Domain Risk Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/risk/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Required. A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Provides risk scores and threat predictions based on DomainTools Proximity and Threat Profile algorithms."
+        },
+        {
+          "info": {
+            "name": "Risk Score Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/risk/evidence/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Required. A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Provides the reasons for a domain's risk score, categorized by evidence type."
+        },
+        {
+          "info": {
+            "name": "Reverse IP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:ip/host-domains/",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "The IP Address to query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "List of domains that share the same network host (IP Address)."
+        },
+        {
+          "info": {
+            "name": "Reverse Name Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:nameServer/name-server-domains/",
+            "params": [
+              {
+                "name": "nameServer",
+                "value": "",
+                "type": "path",
+                "description": "The name server hostname to query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "List of domains that share the same primary name server."
+        },
+        {
+          "info": {
+            "name": "Reverse IP (from Domain)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/:domain/reverse-ip/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "A valid domain name."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "List of domains that share the same IP address as the given domain."
+        },
+        {
+          "info": {
+            "name": "Reverse IP WHOIS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/reverse-ip-whois/",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "IPv4 address the registered domain was last known to point to during an active DNS check."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A space-separated list of free text query terms with support for `+` (must include), `-` (must not include), and `*` (prefix) modifiers.\n"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Limits results to IP addresses allocated to an entity with a particular country.\nMust be a valid ISO 3166-1 two-character country code.\n"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Limits results to ranges from a particular RIR WHOIS server.\n"
+              },
+              {
+                "name": "include_total_count",
+                "value": "",
+                "type": "query",
+                "description": "Returns the total number of results for a query. This should typically be used only for the first page of a large result set."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+              },
+              {
+                "name": "ip_version",
+                "value": "",
+                "type": "query",
+                "description": "Limits the query search results to a particular IP version. If omitted, the default is IPv4.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Provides a list of IP network ranges with WHOIS records that match a specific query.\nNOTE: Either an `ip` or `query` parameter is required.\n"
+        },
+        {
+          "info": {
+            "name": "Reverse WHOIS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/reverse-whois/",
+            "params": [
+              {
+                "name": "terms",
+                "value": "",
+                "type": "query",
+                "description": "One or more terms, where the pipe character `|` may be used as a logical AND to require that all strings be present in order to match.\n"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.\n"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Sets the scope of the report to include only current WHOIS records, or to include both current and historic records.\n"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "- `quote`: Returns the size and estimated price of the query.\n- `purchase`: Returns the complete list of matching domain names.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Provides a list of domain names with WHOIS records that match specific query terms."
+        },
+        {
+          "info": {
+            "name": "Domain Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v2/domain-search/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Terms to search for. Each term must be at least three characters long. Use spaces to separate multiple terms.\n"
+              },
+              {
+                "name": "exclude_query",
+                "value": "",
+                "type": "query",
+                "description": "Terms to exclude from matching. Each term must be at least three characters long. Use spaces to separate multiple terms.\n"
+              },
+              {
+                "name": "max_length",
+                "value": "",
+                "type": "query",
+                "description": "Limit the maximum domain character count."
+              },
+              {
+                "name": "min_length",
+                "value": "",
+                "type": "query",
+                "description": "Limit the minimum domain character count."
+              },
+              {
+                "name": "has_hyphen",
+                "value": "",
+                "type": "query",
+                "description": "Return results with hyphens in the domain name."
+              },
+              {
+                "name": "has_number",
+                "value": "",
+                "type": "query",
+                "description": "Return results with numbers in the domain name."
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query",
+                "description": "Return only domains currently registered."
+              },
+              {
+                "name": "deleted_only",
+                "value": "",
+                "type": "query",
+                "description": "Return only domains previously registered but not currently registered."
+              },
+              {
+                "name": "anchor_left",
+                "value": "",
+                "type": "query",
+                "description": "Return only domains that start with the query term."
+              },
+              {
+                "name": "anchor_right",
+                "value": "",
+                "type": "query",
+                "description": "Return only domains that end with the query term."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Searches active and deleted domain names that match a query string."
+        },
+        {
+          "info": {
+            "name": "Domain History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/domain-history/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Required. A valid domain name."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts the number of results returned per page.\nThe default is 500. Use this parameter to request a smaller page size.\n"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+              },
+              {
+                "name": "parsed_domain_rdap",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to `true`, includes the full parsed Domain RDAP record in the response.\n"
+              },
+              {
+                "name": "parsed_whois",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to 'true', includes the full parsed WHOIS record in the response.\n"
+              },
+              {
+                "name": "include_fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response. Only change events matching these fields will appear in the results.\n\nFiltering occurs at the event level—it determines which change events are returned, not which properties appear in the `before` and `after` objects. Each returned change event includes the complete `before` and `after` state for that field.\n\n**Field Name Mapping:**\n\nFilter parameter names (used in this parameter) may differ from the response `field` values. For example:\n- Filter: `ssl_hash` → Response field: `ssl_info`\n- Filter: `mailserver_host` → Response field: `mx`\n- Filter: `nameserver_host` → Response field: `name_server`\n\nThis design allows precise filtering using property-level names while maintaining complete context in change events.\n\n**Valid values include:**\n\n- **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.\n- **Aggregated categories:** Groups of related fields like `all_ip` (includes all IP-related changes), `all_ssl` (includes all SSL-related changes), `all_contact_information`, etc.\n\n**Example:** `include_fields=ip,ssl_hash` returns change events where the `field` property is `ip` or `ssl_info`.\n\n**Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.\n"
+              },
+              {
+                "name": "exclude_fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to exclude from the response. Change events matching these fields will be omitted from the results.\n\nFiltering occurs at the event level—it determines which change events are excluded, not which properties are removed from the `before` and `after` objects. Defaults to returning all change types.\n\n**Field Name Mapping:**\n\nFilter parameter names (used in this parameter) may differ from the response `field` values. For example:\n- Filter: `ssl_hash` → Response field: `ssl_info`\n- Filter: `mailserver_host` → Response field: `mx`\n- Filter: `nameserver_host` → Response field: `name_server`\n\n**Valid values include:**\n\n- **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.\n- **Aggregated categories:** Groups of related fields like `all_ip` (excludes all IP-related changes), `all_ssl` (excludes all SSL-related changes), `all_contact_information`, etc.\n\n**Example:** `exclude_fields=all_ip,all_ssl` removes change events where the `field` property is `ip`, `ssl_info`, or related fields.\n\n**Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve the complete historical record of changes to a domain's infrastructure, registration, and content. Filter results by specific field types to focus on relevant events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

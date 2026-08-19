@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Ping API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "End-to-end connectivity test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/ping"
+          },
+          "docs": "This request is for end to end connectivity tests to the DNSDB API endpoint, letting you know that there are no firewall blockages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

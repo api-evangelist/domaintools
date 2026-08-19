@@ -1,0 +1,830 @@
+{
+  "item": [
+    {
+      "id": "4321ae16-3142-4261-a49e-1cdf2cdffdc5",
+      "name": "Siebatchd",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a64d9756-78ad-40a1-8f73-325aa8f17d1e",
+          "name": "Validate API Key",
+          "request": {
+            "name": "Validate API Key",
+            "description": {
+              "content": "Validates a provided API Key and returns profile and provisioning information associated with it.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "siebatchd",
+                "v1",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apikey\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ed208a4-21b6-4ead-8743-c5251efa0732",
+              "name": "API key is valid. Returns profile and provisioning info.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profile\": {\n    \"username\": \"siebatch-customer\",\n    \"siebatch\": {\n      \"ch212\": {\n        \"description\": \"Newly Observed Domains\"\n      },\n      \"ch213\": {\n        \"description\": \"Newly Observed Fully Qualified Domain Names\"\n      }\n    }\n  },\n  \"_status\": \"OK\",\n  \"_message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0abfbe8-7d4d-477f-99d6-7bd401cb745e",
+              "name": "Client error (authentication or validation failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"API key not present\",\n  \"logid\": \"30fd25e0-0130-4ab1-a375-fabf1d57430e\",\n  \"status\": 403,\n  \"type\": \"missing-api-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ddba57b-e31a-46d7-8b1f-6be7cde000aa",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"string\",\n  \"contact_url\": \"https://YezpnDwGsqRW.nzzjqHx1j.HWDYQZrwj7VkPZWTx2g9dImYGhedDT\",\n  \"invalid_parameters\": {\n    \"name\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"status\": 4762,\n  \"type\": \"string\",\n  \"detail\": \"string\",\n  \"logid\": \"cc935ccd-9c61-5e88-a71b-284268386219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e3e3b72-56da-423c-8e2a-53b922306729",
+          "name": "Get Channel Details",
+          "request": {
+            "name": "Get Channel Details",
+            "description": {
+              "content": "Request details of one or more channels such as available datetime ranges, download filetype, and the size of data available. Channel data is always in motion so the details represent a moving window of data available for download.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "siebatchd",
+                "v1",
+                "siebatch",
+                "chdetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apikey\": \"<password>\",\n  \"channels\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ce3ea53-9362-43f5-a390-f45a78a8baa5",
+              "name": "Channel details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chdetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channels\": [\n    212,\n    213\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channels\": {\n    \"ch212\": {\n      \"earliest\": \"2020-01-28 00:40:00\",\n      \"latest\": \"2020-01-28 20:06:00\",\n      \"size\": 83837922,\n      \"mimetype\": \"application/x-ndjson\"\n    },\n    \"ch213\": {\n      \"earliest\": \"2020-01-28 00:40:00\",\n      \"latest\": \"2020-01-28 20:06:01\",\n      \"size\": 10397567992,\n      \"mimetype\": \"application/x-ndjson\"\n    }\n  },\n  \"_status\": \"OK\",\n  \"_message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f34a2c-661f-4baa-905d-3c0f60f4f1de",
+              "name": "Client error (authentication or validation failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chdetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channels\": [\n    212,\n    213\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"API key not present\",\n  \"logid\": \"30fd25e0-0130-4ab1-a375-fabf1d57430e\",\n  \"status\": 403,\n  \"type\": \"missing-api-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a747d11-e522-4056-94fe-6b710f1445c8",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chdetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channels\": [\n    212,\n    213\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"string\",\n  \"contact_url\": \"https://YezpnDwGsqRW.nzzjqHx1j.HWDYQZrwj7VkPZWTx2g9dImYGhedDT\",\n  \"invalid_parameters\": {\n    \"name\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"status\": 4762,\n  \"type\": \"string\",\n  \"detail\": \"string\",\n  \"logid\": \"cc935ccd-9c61-5e88-a71b-284268386219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73370fdd-f8e5-4eff-81a9-37169d3819a3",
+          "name": "Fetch Channel Data",
+          "request": {
+            "name": "Fetch Channel Data",
+            "description": {
+              "content": "Download data associated with a given channel. The seconds portion of start/end times are ignored, but for API consistency, seconds must be given. If no data is available then an HTTP 404 is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "siebatchd",
+                "v1",
+                "siebatch",
+                "chfetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apikey\": \"<password>\",\n  \"channel\": \"<integer>\",\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "835108f1-fa78-4da3-8228-ae06dbf7fd4b",
+              "name": "Channel data stream. Content-Type varies by channel (typically application/x-ndjson or application/octet-stream for NMSG).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chfetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-ndjson"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ade7886b-9c8e-4669-9725-9e4bec22a73b",
+              "name": "Client error (authentication or validation failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chfetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"API key not present\",\n  \"logid\": \"30fd25e0-0130-4ab1-a375-fabf1d57430e\",\n  \"status\": 403,\n  \"type\": \"missing-api-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8c71580-e9f7-49c2-b733-03fc8742d074",
+              "name": "No data available for the requested time range.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chfetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"string\",\n  \"contact_url\": \"https://YezpnDwGsqRW.nzzjqHx1j.HWDYQZrwj7VkPZWTx2g9dImYGhedDT\",\n  \"invalid_parameters\": {\n    \"name\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"status\": 4762,\n  \"type\": \"string\",\n  \"detail\": \"string\",\n  \"logid\": \"cc935ccd-9c61-5e88-a71b-284268386219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08a3207b-b0b6-4d6f-830e-c2377e1aa7ef",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "chfetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"string\",\n  \"contact_url\": \"https://YezpnDwGsqRW.nzzjqHx1j.HWDYQZrwj7VkPZWTx2g9dImYGhedDT\",\n  \"invalid_parameters\": {\n    \"name\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"status\": 4762,\n  \"type\": \"string\",\n  \"detail\": \"string\",\n  \"logid\": \"cc935ccd-9c61-5e88-a71b-284268386219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69ea1cf6-1471-409a-8fcc-f3dda49dbca0",
+          "name": "Make Download URL",
+          "request": {
+            "name": "Make Download URL",
+            "description": {
+              "content": "Generate a presigned URL to download data associated with a channel\nlater or independently of the SIE Batch webserver. Generated URLs\nare shareable and do not reveal credentials. The seconds portion of\nstart/end times are ignored.\n\nThe requested `start_time`/`end_time` must fall within the\nchannel's data retention window. Use `chdetails` to check the\n`earliest` and `latest` timestamps before generating a URL.\nThe `makeurl` call itself succeeds even if the requested range\nextends beyond available data — the error occurs when\ndownloading from the returned URL:\n\n- **404 (NoSuchKey)**: The requested data range is outside the\n  channel's retention window.\n- **403 (Unable to authenticate)**: The generated URL has\n  expired. Generate a new URL with `makeurl`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "siebatchd",
+                "v1",
+                "siebatch",
+                "makeurl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apikey\": \"<password>\",\n  \"channel\": \"<integer>\",\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7df21254-f29e-41dd-93ca-7169675df0a1",
+              "name": "Presigned download URL generated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "makeurl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"OK\",\n  \"_message\": \"\",\n  \"url\": \"https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5102b3b2-ac6c-4aa8-985a-d355bb97aa91",
+              "name": "Client error (authentication or validation failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "makeurl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"API key not present\",\n  \"logid\": \"30fd25e0-0130-4ab1-a375-fabf1d57430e\",\n  \"status\": 403,\n  \"type\": \"missing-api-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4243bf37-9a32-4443-8049-ee11db779f11",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "siebatchd",
+                    "v1",
+                    "siebatch",
+                    "makeurl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apikey\": \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"channel\": 213,\n  \"start_time\": \"2020-01-28 12:00:00\",\n  \"end_time\": \"2020-01-28 12:01:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": \"NOK\",\n  \"_message\": \"string\",\n  \"contact_url\": \"https://YezpnDwGsqRW.nzzjqHx1j.HWDYQZrwj7VkPZWTx2g9dImYGhedDT\",\n  \"invalid_parameters\": {\n    \"name\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"status\": 4762,\n  \"type\": \"string\",\n  \"detail\": \"string\",\n  \"logid\": \"cc935ccd-9c61-5e88-a71b-284268386219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dnsdb.info/dnsdb/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c2a0acc5-9026-40e3-8f5f-be9ae4091fd7",
+    "name": "dnsdb Flex search Siebatchd API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "dnsdb\n\nContact Support:\n Name: DomainTools Support\n Email: enterprisesupport@domaintools.com",
+      "type": "text/plain"
+    }
+  }
+}

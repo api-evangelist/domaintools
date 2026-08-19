@@ -1,0 +1,418 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search rdata Lookups API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "rdata Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inverse DNS lookup by rdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/lookup/rdata/:type/:value",
+            "params": [
+              {
+                "name": "value",
+                "value": "",
+                "type": "path",
+                "description": "Value"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Type of query"
+              },
+              {
+                "name": "time_first_before",
+                "value": "",
+                "type": "query",
+                "description": "time first before"
+              },
+              {
+                "name": "time_first_after",
+                "value": "",
+                "type": "query",
+                "description": "time first after"
+              },
+              {
+                "name": "time_last_before",
+                "value": "",
+                "type": "query",
+                "description": "time last before"
+              },
+              {
+                "name": "time_last_after",
+                "value": "",
+                "type": "query",
+                "description": "time last after"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "swclient",
+                "value": "",
+                "type": "query",
+                "description": "swclient"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "id"
+              },
+              {
+                "name": "aggr",
+                "value": "",
+                "type": "query",
+                "description": "aggr"
+              },
+              {
+                "name": "humantime",
+                "value": "",
+                "type": "query",
+                "description": "humantime"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lookup all resource records whose Rdata values are ..."
+        },
+        {
+          "info": {
+            "name": "Inverse DNS lookup filtered by RR type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/lookup/rdata/:type/:value/:rrtype",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Type of query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "path",
+                "description": "Value"
+              },
+              {
+                "name": "rrtype",
+                "value": "",
+                "type": "path",
+                "description": "rrtype"
+              },
+              {
+                "name": "time_first_before",
+                "value": "",
+                "type": "query",
+                "description": "time first before"
+              },
+              {
+                "name": "time_first_after",
+                "value": "",
+                "type": "query",
+                "description": "time first after"
+              },
+              {
+                "name": "time_last_before",
+                "value": "",
+                "type": "query",
+                "description": "time last before"
+              },
+              {
+                "name": "time_last_after",
+                "value": "",
+                "type": "query",
+                "description": "time last after"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "swclient",
+                "value": "",
+                "type": "query",
+                "description": "swclient"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "id"
+              },
+              {
+                "name": "aggr",
+                "value": "",
+                "type": "query",
+                "description": "aggr"
+              },
+              {
+                "name": "humantime",
+                "value": "",
+                "type": "query",
+                "description": "humantime"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lookup all resource records whose Rdata values are ... of type rrtype"
+        },
+        {
+          "info": {
+            "name": "Summary stats for rdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/summarize/rdata/:type/:value",
+            "params": [
+              {
+                "name": "value",
+                "value": "",
+                "type": "path",
+                "description": "Value"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Type of query"
+              },
+              {
+                "name": "time_first_before",
+                "value": "",
+                "type": "query",
+                "description": "time first before"
+              },
+              {
+                "name": "time_first_after",
+                "value": "",
+                "type": "query",
+                "description": "time first after"
+              },
+              {
+                "name": "time_last_before",
+                "value": "",
+                "type": "query",
+                "description": "time last before"
+              },
+              {
+                "name": "time_last_after",
+                "value": "",
+                "type": "query",
+                "description": "time last after"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "swclient",
+                "value": "",
+                "type": "query",
+                "description": "swclient"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "id"
+              },
+              {
+                "name": "aggr",
+                "value": "",
+                "type": "query",
+                "description": "aggr"
+              },
+              {
+                "name": "humantime",
+                "value": "",
+                "type": "query",
+                "description": "humantime"
+              },
+              {
+                "name": "max_count",
+                "value": "",
+                "type": "query",
+                "description": "max count"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Summarize all resource records whose Rdata values are ..."
+        },
+        {
+          "info": {
+            "name": "Summary stats for rdata filtered by type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/summarize/rdata/:type/:value/:rrtype",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Type of query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "path",
+                "description": "Value"
+              },
+              {
+                "name": "rrtype",
+                "value": "",
+                "type": "path",
+                "description": "rrtype"
+              },
+              {
+                "name": "time_first_before",
+                "value": "",
+                "type": "query",
+                "description": "time first before"
+              },
+              {
+                "name": "time_first_after",
+                "value": "",
+                "type": "query",
+                "description": "time first after"
+              },
+              {
+                "name": "time_last_before",
+                "value": "",
+                "type": "query",
+                "description": "time last before"
+              },
+              {
+                "name": "time_last_after",
+                "value": "",
+                "type": "query",
+                "description": "time last after"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "swclient",
+                "value": "",
+                "type": "query",
+                "description": "swclient"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "id"
+              },
+              {
+                "name": "aggr",
+                "value": "",
+                "type": "query",
+                "description": "aggr"
+              },
+              {
+                "name": "humantime",
+                "value": "",
+                "type": "query",
+                "description": "humantime"
+              },
+              {
+                "name": "max_count",
+                "value": "",
+                "type": "query",
+                "description": "max count"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Summarize all resource records whose Rdata values are ... of rrtype"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

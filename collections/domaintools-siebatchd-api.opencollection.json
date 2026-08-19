@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Siebatchd API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Siebatchd",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/siebatchd/v1/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates a provided API Key and returns profile and provisioning information associated with it.\n"
+        },
+        {
+          "info": {
+            "name": "Get Channel Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/siebatchd/v1/siebatch/chdetails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request details of one or more channels such as available datetime ranges, download filetype, and the size of data available. Channel data is always in motion so the details represent a moving window of data available for download.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch Channel Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/siebatchd/v1/siebatch/chfetch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download data associated with a given channel. The seconds portion of start/end times are ignored, but for API consistency, seconds must be given. If no data is available then an HTTP 404 is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Make Download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/siebatchd/v1/siebatch/makeurl",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a presigned URL to download data associated with a channel\nlater or independently of the SIE Batch webserver. Generated URLs\nare shareable and do not reveal credentials. The seconds portion of\nstart/end times are ignored.\n\nThe requested `start_time`/`end_time` must fall within the\nchannel's data retention window. Use `chdetails` to check the\n`earliest` and `latest` timestamps before generating a URL.\nThe `makeurl` call itself succeeds even if the requested range\nextends beyond available"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,472 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Iris Investigate API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Iris Investigate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns data from a GET request.\nParameters are identified in descriptions as either base or filter.\nSearch with base parameters and filter down base results with filter parameters.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-investigate/",
+            "params": [
+              {
+                "name": "adsense",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter. Domains with a Google AdSense tracking code.\n"
+              },
+              {
+                "name": "baidu_analytics",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter. Baidu Analytics code.\n"
+              },
+              {
+                "name": "contact_name",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nContact name from domain registration data.\nSupports WHOIS/RDAP Fields Search.\n"
+              },
+              {
+                "name": "contact_phone",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nContact phone number from domain registration data.\nSupports WHOIS/RDAP Fields Search.\n"
+              },
+              {
+                "name": "contact_street",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nContact street address from domain registration data.\nSupports WHOIS/RDAP Fields Search.\n"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nIPv4 address the registered domain was last known to point to during an active DNS check.\n"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nOne or more domains (comma-separated) to be investigated.\nExample: `example.com,domaintools.com`.\n"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nEmail address from the most recently available WHOIS record, DNS SOA record or SSL certificate.\n"
+              },
+              {
+                "name": "email_dns_soa",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter. DNS SOA email.\n"
+              },
+              {
+                "name": "email_domain",
+                "value": "",
+                "type": "query",
+                "description": "Only the domain portion of a WHOIS or DNS SOA email address."
+              },
+              {
+                "name": "facebook",
+                "value": "",
+                "type": "query",
+                "description": "Facebook/Meta tracking code.\n"
+              },
+              {
+                "name": "ga4",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains with a Google Analytics tracking code.\n"
+              },
+              {
+                "name": "google_analytics",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains with a Google Analytics tracking code.\n"
+              },
+              {
+                "name": "google_tag_manager",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nGoogle Tag Manager tracking code.\n"
+              },
+              {
+                "name": "hotjar",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nHotjar tracking code.\n"
+              },
+              {
+                "name": "iana_id",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nRegistrar IANA code from most recent RDAP record for a domain.\n"
+              },
+              {
+                "name": "mailserver_domain",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nOnly the registered domain portion of the mail server (e.g., `domaintools.net`).\n"
+              },
+              {
+                "name": "mailserver_host",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nFully-qualified mail server hostname (e.g., mx.domaintools.net).\nPerforms a Reverse MX lookup to identify domains using this mail server.\n"
+              },
+              {
+                "name": "mailserver_ip",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nIP address of the mail server.\n"
+              },
+              {
+                "name": "matomo",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nMatomo tracking code.\n"
+              },
+              {
+                "name": "nameserver_domain",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nThe registered domain name of the nameserver (e.g., `example.com`).\n"
+              },
+              {
+                "name": "nameserver_host",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nFully-qualified domain name (FQDN) of the name server.\n"
+              },
+              {
+                "name": "nameserver_ip",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nThe IPv4 address of the name server.\n"
+              },
+              {
+                "name": "redirect_domain",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains observed to redirect to another domain name.\n"
+              },
+              {
+                "name": "registrant",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nExact match to the WHOIS registrant field.\n"
+              },
+              {
+                "name": "historical_registrant",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nRegistrant names from historical WHOIS records.\n"
+              },
+              {
+                "name": "registrant_org",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nExact match to the WHOIS registrant organization field\n"
+              },
+              {
+                "name": "registrar",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nExact match to the WHOIS registrar field.\n"
+              },
+              {
+                "name": "search_hash",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nToken returned by the Iris Investigate UI when exporting a search.\nUse this value to import and continue an existing search via the API.\n"
+              },
+              {
+                "name": "server_type",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains hosted on a specific server type (e.g., from the 'Server' HTTP header). Must be an exact match.\n"
+              },
+              {
+                "name": "ssl_alt_names",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains with a matching Subject Alternative Name (SAN) in their SSL certificate.\n"
+              },
+              {
+                "name": "ssl_common_name",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains with a matching Common Name (CN) in their SSL certificate's subject.\n"
+              },
+              {
+                "name": "ssl_duration",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nDomains with an SSL certificate valid for a specific number of days.\n"
+              },
+              {
+                "name": "ssl_email",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nEmail address extracted from the SSL certificate associated with a domain.\n"
+              },
+              {
+                "name": "ssl_hash",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nThe SHA-1 hash of an SSL certificate, used to filter for domains associated with a specific certificate.\n"
+              },
+              {
+                "name": "ssl_org",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nOrganization name from the SSL certificate. Must be an exact string match.\n"
+              },
+              {
+                "name": "ssl_subject",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nExact match to the Subject distinguished name (DN) string from the SSL certificate.\n"
+              },
+              {
+                "name": "ssl_issuer_common_name",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nCertificate issuer Common Name.\n"
+              },
+              {
+                "name": "statcounter_project",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nStatcounter Project tracker code.\n"
+              },
+              {
+                "name": "statcounter_security",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nStatcounter Security tracker code.\n"
+              },
+              {
+                "name": "tagged_with_all",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nComma-separated list of tags. Only returns domains tagged with the full list of tags.\n"
+              },
+              {
+                "name": "tagged_with_any",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nComma-separated list of Iris Investigate tags. Returns domains tagged with any of the tags in a list.\n"
+              },
+              {
+                "name": "website_title",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nThe value of the website’s `<title>` HTML tag. Must be an exact match.\n"
+              },
+              {
+                "name": "whois",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nFree text search of a domain's most recent WHOIS record.\n"
+              },
+              {
+                "name": "historical_free_text",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nFree text search of a domain's historical WHOIS records.\n"
+              },
+              {
+                "name": "yandex_metrica",
+                "value": "",
+                "type": "query",
+                "description": "Base search parameter.\nYandex Metrica tracker code.\n"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nSet to `true` to only return domains that have either an entry in the global Domain Name System, OR are listed as registered by the registry.\nSet to `false` to only return domains that do not have an entry in the global DNS, AND are not listed as registered by the registry.\n"
+              },
+              {
+                "name": "create_date",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nFilters domains based on the `create_date` field.\nSupports [`>`, `>=`, `<`, `<=`] operators, or no operator for exact matches.\n"
+              },
+              {
+                "name": "create_date_within",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nFilter domains based on the `create_date` field: the maximum number of days since a domain was first discovered.\n"
+              },
+              {
+                "name": "expiration_date",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nOnly include domains expiring on a specific date.\n"
+              },
+              {
+                "name": "first_seen_since",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nFilter domains based on the `first_seen` timestamp.\nReturns domains whose `current_lifecycle_first_seen` value is *after* the given datetime.\n"
+              },
+              {
+                "name": "first_seen_within",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nFilter domains based on the `first_seen` field.\nReturns only those domains first discovered within the last N seconds.\n"
+              },
+              {
+                "name": "ip_country_code",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nCountry code for IP A-record.\n"
+              },
+              {
+                "name": "not_tagged_with_all",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nExclude all domains that are tagged with **all** of the specified tags in the Iris Investigation platform.\nThis parameter accepts a comma-separated list of tag names.\n"
+              },
+              {
+                "name": "not_tagged_with_any",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nExclude all domains that are tagged with **any** of the specified tags in the Iris Investigation platform.\nAccepts a comma-separated list of tags.\n"
+              },
+              {
+                "name": "rank",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nPopularity rank (replaces Alexa ranking).\n"
+              },
+              {
+                "name": "risk_score",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nReturns domains with a Domain Risk Score greater than this value. See [Domain Risk Scores](https://docs.domaintools.com/riskscore/).\n"
+              },
+              {
+                "name": "ssl_not_after",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nValidity end date for a certificate (YYYY-MM-DD).\n"
+              },
+              {
+                "name": "ssl_not_before",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nValidity begin date for a certificate (YYYY-MM-DD).\n"
+              },
+              {
+                "name": "tld",
+                "value": "",
+                "type": "query",
+                "description": "Search filter parameter.\nRestrict results to domains under the specified top-level domain (TLD).\n"
+              },
+              {
+                "name": "parsed_domain_rdap",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to `true`, includes the full parsed Domain RDAP record in the response.\n"
+              },
+              {
+                "name": "parsed_whois",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to 'true', includes the full parsed WHOIS record in the response.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "The URL for the next page of search results, emitted as a `next` field in the response, using the `position` marker."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts the number of results returned per page.\nThe default is 500. Use this parameter to request a smaller page size.\n"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for paginated results. Use the value returned in a previous response to retrieve the next page.\n"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the field to sort the results by.\n"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Determines the sort direction, either ascending or descending.\nThis is used in combination with the 'sort_by' parameter.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              }
+            ]
+          },
+          "docs": "Consider using POST for complex requests.\n"
+        },
+        {
+          "info": {
+            "name": "Returns data from a POST request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-investigate/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "The GET method is available for simple queries.\n\nThe POST method supports two request formats:\n\n- **Form parameters** (application/x-www-form-urlencoded): Traditional parameter-based searches\n- **IrisQL** (text/plain): Complex queries using IrisQL query language for advanced filtering and OR logic\n\nFor IrisQL usage and syntax, see the [IrisQL API Guide](https://docs.domaintools.com/api/iris/investigate/irisql/).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "3cda809a-0c74-48b2-bde9-22cdc12764c0",
+      "name": "Information",
+      "description": {
+        "content": "Access the latest information about your account, including service\nlimits.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d39bad87-18b6-461d-95d4-71e138e7fe0d",
+          "name": "Account Information",
+          "request": {
+            "name": "Account Information",
+            "description": {
+              "content": "Information of the active API endpoints, rate limits and usage for an account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "account",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Specifies the desired response format.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d849c9f-ca33-480c-b935-f9aa161fde50",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "account",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"account\": {\n      \"api_username\": \"api_user\",\n      \"active\": true\n    },\n    \"products\": [\n      {\n        \"per_month_limit\": \"50000\",\n        \"per_hour_limit\": null,\n        \"per_minute_limit\": \"120\",\n        \"absolute_limit\": null,\n        \"usage\": {\n          \"today\": \"0\",\n          \"month\": \"1\"\n        },\n        \"expiration_date\": \"2027-12-30\"\n      },\n      {\n        \"per_month_limit\": \"50000\",\n        \"per_hour_limit\": null,\n        \"per_minute_limit\": \"120\",\n        \"absolute_limit\": null,\n        \"usage\": {\n          \"today\": \"0\",\n          \"month\": \"1\"\n        },\n        \"expiration_date\": \"2027-12-30\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76a9f5da-e735-410f-9475-927affa689fa",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "account",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 4773,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d8f229-d768-45e3-a5af-ba180278ccb8",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "account",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 4773,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dnsdb.info/dnsdb/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15057f32-88ab-43aa-835b-002c1c25a942",
+    "name": "dnsdb Flex search Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "dnsdb\n\nContact Support:\n Name: DomainTools Support\n Email: enterprisesupport@domaintools.com",
+      "type": "text/plain"
+    }
+  }
+}

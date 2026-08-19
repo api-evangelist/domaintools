@@ -1,0 +1,2268 @@
+{
+  "item": [
+    {
+      "id": "dc0da89b-e4fe-495b-a36c-da59911539ab",
+      "name": "Monitors",
+      "description": {
+        "content": "Endpoints for monitoring new domain registrations, changes to IP ranges, and other key infrastructure events based on specific terms.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5bc4068b-5157-470d-b094-cbe339fd912e",
+          "name": "IP Monitor",
+          "request": {
+            "name": "IP Monitor",
+            "description": {
+              "content": "Receive notifications for new and/or deleted domains on a given IP Address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ip-monitor",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<ipv4>",
+                  "description": "(Required) The IP Address to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "days_back",
+                  "value": "<integer>",
+                  "description": "Search domains registered up to six days prior to the current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Specifies the desired response format.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f43713d8-ec42-4466-86ad-c9d9030af833",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"limit\": 6882,\n    \"date\": \"string\",\n    \"ip_address\": \"string\",\n    \"total\": \"string\",\n    \"page\": 3387,\n    \"page_count\": 7977,\n    \"alerts\": [\n      {\n        \"previous_ip_address\": \"string\",\n        \"new_ip_address\": \"string\",\n        \"action\": \"string\",\n        \"domain\": \"string\"\n      },\n      {\n        \"previous_ip_address\": \"string\",\n        \"new_ip_address\": \"string\",\n        \"action\": \"string\",\n        \"domain\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "138f973f-05b3-4b47-8409-56bdd2476dfe",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c93ad57a-0d77-4180-bef3-a02d47a0be8b",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43d711cb-3f39-4c49-95b3-f90a8fec7702",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "548dd391-986c-499c-be68-3204d86ad35b",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6966d653-d310-4681-92d8-79f09b8bbb8e",
+              "name": "500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c0c52ca-e3c4-4904-95c2-35fbe3c024f6",
+              "name": "503: Service Unavailable. The service is temporarily unavailable.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ip-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d825dd9-c0cb-4efa-9c39-b2ac5103e3d0",
+          "name": "Brand Monitor",
+          "request": {
+            "name": "Brand Monitor",
+            "description": {
+              "content": "Monitor new domain registrations for specific keywords.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mark-alert",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>",
+                  "description": "Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_status",
+                  "value": "<string>",
+                  "description": "Sets the scope of domain names to search. Defaults to searching both `new` and `on-hold` domains.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "days_back",
+                  "value": "<integer>",
+                  "description": "Search domains registered up to six days prior to the current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Specifies the desired response format.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "545970b3-9103-45e1-9b60-c5f18718665f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"query\": \"string\",\n    \"exclude\": \"string\",\n    \"new\": true,\n    \"on-hold\": true,\n    \"date\": \"string\",\n    \"total\": 4538,\n    \"alerts\": [\n      {\n        \"domain\": \"string\",\n        \"status\": \"string\"\n      },\n      {\n        \"domain\": \"string\",\n        \"status\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58b832a7-9092-420d-838c-6cd1dddfa227",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d575f4d-5933-454f-b717-9fde1cc96e00",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "901b2c9a-7db4-49fc-a144-958b049f05b4",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ed0432f-b06c-4b18-9bc5-ec6c5ef683ec",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c20d039a-368f-4c9f-ba7b-c4ec2a6b5234",
+              "name": "500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba69f682-63bd-45e3-ad85-d2d2c3b8d8fd",
+              "name": "503: Service Unavailable. The service is temporarily unavailable.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mark-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8d3a190-4bf6-4ac2-b989-4017548ddf8d",
+          "name": "Name Server Monitor",
+          "request": {
+            "name": "Name Server Monitor",
+            "description": {
+              "content": "Receive notification when there are new and/or deleted domains on a given Domain Name Server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "name-server-monitor",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<hostname>",
+                  "description": "(Required) The name server hostname to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "days_back",
+                  "value": "<integer>",
+                  "description": "Search domains registered up to six days prior to the current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Specifies the desired response format.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3cca137-ad56-475d-b815-bb99a3cceb8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"limit\": 9827,\n    \"date\": \"string\",\n    \"name_server\": \"string\",\n    \"total\": 37,\n    \"page\": 8112,\n    \"page_count\": 8886,\n    \"alerts\": [\n      {\n        \"new_name_server\": \"string\",\n        \"old_name_server\": \"string\",\n        \"action\": \"string\",\n        \"domain\": \"string\"\n      },\n      {\n        \"new_name_server\": \"string\",\n        \"old_name_server\": \"string\",\n        \"action\": \"string\",\n        \"domain\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86c5eb14-c406-4399-aa2c-79a2a47eec1c",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92626def-38b9-4905-8e08-4593ae5f264b",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbc42f53-4e44-4f1e-9beb-2b2a7c289a0d",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a93f6bce-e77e-4a60-975d-db0d0f4d4cf1",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26a03a3a-0ac0-4641-b098-6a454b760ce6",
+              "name": "500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "601b1ecf-db22-4b51-96b7-4209fc57c556",
+              "name": "503: Service Unavailable. The service is temporarily unavailable.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "name-server-monitor",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<hostname>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efaa507b-5174-4b43-89d4-0d0180f1a1d4",
+          "name": "Registrant Monitor",
+          "request": {
+            "name": "Registrant Monitor",
+            "description": {
+              "content": "Receive notification when specific people or organizations register, renew, or delete domain names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "registrant-alert",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>",
+                  "description": "Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "days_back",
+                  "value": "<integer>",
+                  "description": "Search domains registered up to six days prior to the current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Specifies the desired response format.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9eb383ac-de54-4865-9589-2bc0575866c9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"query\": \"string\",\n    \"limit\": 137.65073699277264,\n    \"total\": 1249.8288314111362,\n    \"date\": \"string\",\n    \"alerts\": [\n      {\n        \"domain\": \"string\",\n        \"match_type\": \"string\",\n        \"current_owner\": \"string\",\n        \"created\": \"string\",\n        \"modified\": \"string\",\n        \"last_owner\": \"string\"\n      },\n      {\n        \"domain\": \"string\",\n        \"match_type\": \"string\",\n        \"current_owner\": \"string\",\n        \"created\": \"string\",\n        \"modified\": \"string\",\n        \"last_owner\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e33a1683-1a97-4e25-9e49-4348a4d93516",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13b0a43e-1065-4af5-95f6-870424373faf",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27bebe3d-b712-4d09-be5d-c5611a7d01ff",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e4fdf8a-48d6-4080-a2d3-854c058b4b02",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f83f973a-a185-4f48-b4ab-88f1ed187c4a",
+              "name": "500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "449aeb85-aeeb-4223-9dde-39f4265aafaa",
+              "name": "503: Service Unavailable. The service is temporarily unavailable.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "registrant-alert",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days_back",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7957,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dnsdb.info/dnsdb/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "175a4ee4-0b77-4e43-8bc6-02e75ca2bb6a",
+    "name": "dnsdb Flex search Monitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "dnsdb\n\nContact Support:\n Name: DomainTools Support\n Email: enterprisesupport@domaintools.com",
+      "type": "text/plain"
+    }
+  }
+}

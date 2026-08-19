@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Information API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/account/",
+            "params": [
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Information of the active API endpoints, rate limits and usage for an account.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Monitors API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "IP Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/ip-monitor/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The IP Address to query."
+              },
+              {
+                "name": "days_back",
+                "value": "",
+                "type": "query",
+                "description": "Search domains registered up to six days prior to the current date."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Receive notifications for new and/or deleted domains on a given IP Address."
+        },
+        {
+          "info": {
+            "name": "Brand Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/mark-alert/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.\n"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.\n"
+              },
+              {
+                "name": "domain_status",
+                "value": "",
+                "type": "query",
+                "description": "Sets the scope of domain names to search. Defaults to searching both `new` and `on-hold` domains.\n"
+              },
+              {
+                "name": "days_back",
+                "value": "",
+                "type": "query",
+                "description": "Search domains registered up to six days prior to the current date."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Monitor new domain registrations for specific keywords."
+        },
+        {
+          "info": {
+            "name": "Name Server Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/name-server-monitor/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The name server hostname to query."
+              },
+              {
+                "name": "days_back",
+                "value": "",
+                "type": "query",
+                "description": "Search domains registered up to six days prior to the current date."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page of results to retrieve from the server (used in services that support pagination)."
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Receive notification when there are new and/or deleted domains on a given Domain Name Server."
+        },
+        {
+          "info": {
+            "name": "Registrant Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/registrant-alert/",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.\n"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.\n"
+              },
+              {
+                "name": "days_back",
+                "value": "",
+                "type": "query",
+                "description": "Search domains registered up to six days prior to the current date."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Receive notification when specific people or organizations register, renew, or delete domain names."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

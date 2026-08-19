@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dnsdb Flex search Iris Enrich API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Iris Enrich",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns results from a GET request to Iris Enrich.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-enrich/",
+            "params": [
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "Appliance, module, or playbook, or any combination of these.\n"
+              },
+              {
+                "name": "app_partner",
+                "value": "",
+                "type": "query",
+                "description": "Your product name.\n"
+              },
+              {
+                "name": "app_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of your integration/connector.\n"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Required. One or more domains (comma-separated) to be investigated.\nExample: `example.com,domaintools.com`\n"
+              },
+              {
+                "name": "parsed_domain_rdap",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to `true`, includes the full parsed Domain RDAP record in the response.\n"
+              },
+              {
+                "name": "parsed_whois",
+                "value": "",
+                "type": "query",
+                "description": "Flag.\nIf set to 'true', includes the full parsed WHOIS record in the response.\n"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the desired response format.\n"
+              }
+            ]
+          },
+          "docs": "Returns results from a GET request to Iris Enrich."
+        },
+        {
+          "info": {
+            "name": "Returns results from a POST request to Iris Enrich.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dnsdb.info/dnsdb/v2/v1/iris-enrich/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Returns results from a POST request to Iris Enrich."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

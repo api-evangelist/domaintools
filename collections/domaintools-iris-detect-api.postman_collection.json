@@ -1,0 +1,4399 @@
+{
+  "item": [
+    {
+      "id": "f42bf988-add9-47cd-82f6-3a9b3c6ae22c",
+      "name": "Iris Detect",
+      "description": {
+        "content": "Iris Detect is an Internet infrastructure detection, monitoring, and enforcement tool.\nIt rapidly discovers malicious domains that are engaged in brand impersonation, risk-scores them within minutes, and supports your automation of detection, escalation, and enforcement actions.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fd8c7bd-bfcc-4b43-b0c6-dd9536ef5c02",
+          "name": "Add and remove domains from Watchlist or Ignored lists.",
+          "request": {
+            "name": "Add and remove domains from Watchlist or Ignored lists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "domains",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d0e0f3d-782e-4386-8f0d-106be400a1bf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"watchlist_domains\": [\n    {\n      \"state\": \"watched\",\n      \"domain\": \"string\",\n      \"discovered_date\": \"string\",\n      \"changed_date\": \"string\",\n      \"id\": \"string\",\n      \"assigned_by\": \"string\",\n      \"assigned_date\": \"string\"\n    },\n    {\n      \"state\": \"watched\",\n      \"domain\": \"string\",\n      \"discovered_date\": \"string\",\n      \"changed_date\": \"string\",\n      \"id\": \"string\",\n      \"assigned_by\": \"string\",\n      \"assigned_date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0794d127-815b-427d-98a6-cd831ee249c9",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31707cc2-78a4-4365-b5c3-1d646b9be1db",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd7830d6-47ec-4720-b13e-fe850a4dc485",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eb16e43-2fff-41f6-9490-c97e76d1db8b",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db12c5f4-6ea7-422d-b0a6-7131f8234ce6",
+              "name": "422: Unprocessable Entity. The request is syntactically valid JSON but\ncontains values that fail validation. The response includes per-field\nerror messages.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 422,\n    \"summary\": \"The given data was invalid.\",\n    \"messages\": {\n      \"term\": [\n        \"The term field is required.\"\n      ]\n    }\n  },\n  \"resources\": {\n    \"support\": \"https://docs.domaintools.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b7f7bd5-cb61-4f2a-9f7b-bc7460108d3b",
+          "name": "Provide ignored domains for active monitors in an account.",
+          "request": {
+            "name": "Provide ignored domains for active monitors in an account.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "domains",
+                "ignored",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "changed_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the `/watched` endpoint to control the timeframe for changes to DNS or WHOIS fields for watched domains.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_before",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_state",
+                  "value": "<string>",
+                  "description": "Filters domains based on their state.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "escalated_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_domain_data",
+                  "value": "<boolean>",
+                  "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Performs a `contains` search."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_id",
+                  "value": "<string>",
+                  "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+                },
+                {
+                  "disabled": false,
+                  "key": "mx_exists",
+                  "value": "<boolean>",
+                  "description": "Whether domain currently has an MX record in DNS."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "preview",
+                  "value": "<boolean>",
+                  "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db0083c0-8774-4c8f-b108-ea6c0d7054e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "ignored",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"watchlist_domains\": [\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"inactive\",\n      \"discovered_date\": \"1962-11-11T19:25:10.255Z\",\n      \"changed_date\": \"2011-05-14T12:18:31.823Z\",\n      \"risk_score\": 4704,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 501,\n        \"threat_profile\": {\n          \"phishing\": 5239,\n          \"malware\": 7411,\n          \"spam\": 3490\n        }\n      },\n      \"mx_exists\": true,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"blocked\",\n          \"id\": \"string\",\n          \"created\": \"1967-05-25T22:51:43.126Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"blocked\",\n          \"id\": \"string\",\n          \"created\": \"1966-10-14T20:13:57.530Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 8789,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    },\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"inactive\",\n      \"discovered_date\": \"1951-07-18T03:37:28.033Z\",\n      \"changed_date\": \"2014-10-24T05:27:25.282Z\",\n      \"risk_score\": 6065,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 5274,\n        \"threat_profile\": {\n          \"phishing\": 2865,\n          \"malware\": 8837,\n          \"spam\": 3196\n        }\n      },\n      \"mx_exists\": true,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"blocked\",\n          \"id\": \"string\",\n          \"created\": \"1981-01-12T14:21:52.453Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"google_safe\",\n          \"id\": \"string\",\n          \"created\": \"2014-04-01T20:56:49.558Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 3805,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total_count\": 4143,\n  \"count\": 2611,\n  \"offset\": 4255,\n  \"limit\": 8823\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e98dbe8-6fb2-4121-aede-458852627edd",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "ignored",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f28f2edc-1bb8-484e-a529-0f1d2ac15462",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "ignored",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "843f2e0f-2023-4f26-81c7-1e8913e45075",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "ignored",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98307c76-96e1-4556-b3f4-7be44f549e1f",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "ignored",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e233ede-d44b-4198-ab7d-d2cffac28ff0",
+          "name": "Provide newly discovered domains for active monitors in an account.",
+          "request": {
+            "name": "Provide newly discovered domains for active monitors in an account.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "domains",
+                "new",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_before",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_domain_data",
+                  "value": "<boolean>",
+                  "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Performs a `contains` search."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_id",
+                  "value": "<string>",
+                  "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+                },
+                {
+                  "disabled": false,
+                  "key": "mx_exists",
+                  "value": "<boolean>",
+                  "description": "Whether domain currently has an MX record in DNS."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "preview",
+                  "value": "<boolean>",
+                  "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53fbb065-2c67-49ba-b7b1-07a2160d8f92",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "new",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"watchlist_domains\": [\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"active\",\n      \"discovered_date\": \"1996-07-06T22:47:19.091Z\",\n      \"changed_date\": \"1961-12-20T21:02:20.587Z\",\n      \"risk_score\": 7054,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 3877,\n        \"threat_profile\": {\n          \"phishing\": 8,\n          \"malware\": 5966,\n          \"spam\": 3172\n        }\n      },\n      \"mx_exists\": false,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"google_safe\",\n          \"id\": \"string\",\n          \"created\": \"1988-10-05T06:04:27.373Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"blocked\",\n          \"id\": \"string\",\n          \"created\": \"1971-11-28T01:38:50.196Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 6474,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    },\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"inactive\",\n      \"discovered_date\": \"1998-11-01T09:53:20.150Z\",\n      \"changed_date\": \"1957-04-23T12:43:10.033Z\",\n      \"risk_score\": 5982,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 6157,\n        \"threat_profile\": {\n          \"phishing\": 9745,\n          \"malware\": 5772,\n          \"spam\": 4111\n        }\n      },\n      \"mx_exists\": true,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"google_safe\",\n          \"id\": \"string\",\n          \"created\": \"2019-12-30T08:26:41.509Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"google_safe\",\n          \"id\": \"string\",\n          \"created\": \"2023-03-19T15:19:08.800Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 4248,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total_count\": 2042,\n  \"count\": 4547,\n  \"offset\": 8629,\n  \"limit\": 2131\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c434d2-581a-4696-a301-243e41223f82",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "new",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "715bba49-1ffc-4a06-9e31-01732e9c5585",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "new",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66fe4b0b-cfce-498c-b89a-cddbf41fd04b",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "new",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3885c32a-2d11-4734-8cb2-1b6fcd8e2f1d",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "new",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "008e381d-ac8a-4926-88d7-6491641ecdd9",
+          "name": "Provide recently changed or escalated domains for active monitors in an account.",
+          "request": {
+            "name": "Provide recently changed or escalated domains for active monitors in an account.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "domains",
+                "watched",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "changed_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the `/watched` endpoint to control the timeframe for changes to DNS or WHOIS fields for watched domains.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_before",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "discovered_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered.\nExample: `2022-02-10T00:00:00Z (ISO-8601)`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "escalated_since",
+                  "value": "<integer>",
+                  "description": "Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "escalation_types",
+                  "value": "<string>",
+                  "description": "Filters domains based on specific escalation types. Multiple types can be provided.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_domain_data",
+                  "value": "<boolean>",
+                  "description": "If set to true, includes additional DNS and WHOIS details in the response.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Performs a `contains` search."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specify the maximum number of records to retrieve in an API query.\nThe maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_id",
+                  "value": "<string>",
+                  "description": "Monitor ID from the monitors response - only used when requesting domains for specific monitors."
+                },
+                {
+                  "disabled": false,
+                  "key": "mx_exists",
+                  "value": "<boolean>",
+                  "description": "Whether domain currently has an MX record in DNS."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "preview",
+                  "value": "<boolean>",
+                  "description": "Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "risk_score_ranges",
+                  "value": "<string>",
+                  "description": "Filters domains based on their risk score. Multiple ranges can be selected to broaden the filter. Consult [Domain Risk Scores](https://docs.domaintools.com/riskscore/) for help interpreting scores.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sorts the domain list response. Valid fields to sort by are 'discovered_date', 'changed_date', and 'risk_score'.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tlds",
+                  "value": "<string>",
+                  "description": "Filters on specific TLDs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1f25918-49d5-4efc-8a80-9fe40517ec55",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "watched",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalation_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"watchlist_domains\": [\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"inactive\",\n      \"discovered_date\": \"1973-06-28T08:42:36.321Z\",\n      \"changed_date\": \"1987-10-08T13:18:27.631Z\",\n      \"risk_score\": 9740,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 843,\n        \"threat_profile\": {\n          \"phishing\": 2365,\n          \"malware\": 7588,\n          \"spam\": 4262\n        }\n      },\n      \"mx_exists\": true,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"<string>\",\n          \"id\": \"string\",\n          \"created\": \"2020-12-02T01:25:33.095Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"<string>\",\n          \"id\": \"string\",\n          \"created\": \"2011-03-12T21:17:00.281Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 9527,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    },\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"status\": \"inactive\",\n      \"discovered_date\": \"2020-03-06T15:57:30.573Z\",\n      \"changed_date\": \"2019-12-24T03:20:14.847Z\",\n      \"risk_score\": 6369,\n      \"risk_score_status\": \"string\",\n      \"risk_score_components\": {\n        \"proximity\": 3633,\n        \"threat_profile\": {\n          \"phishing\": 6626,\n          \"malware\": 5783,\n          \"spam\": 4386\n        }\n      },\n      \"mx_exists\": false,\n      \"tld\": \"string\",\n      \"id\": \"string\",\n      \"escalations\": [\n        {\n          \"escalation_type\": \"<string>\",\n          \"id\": \"string\",\n          \"created\": \"1962-08-17T13:13:38.518Z\",\n          \"created_by\": \"string\"\n        },\n        {\n          \"escalation_type\": \"<string>\",\n          \"id\": \"string\",\n          \"created\": \"1947-01-16T20:00:40.702Z\",\n          \"created_by\": \"string\"\n        }\n      ],\n      \"monitor_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name_server\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ],\n      \"registrant_contact_email\": [\n        \"string\",\n        \"string\"\n      ],\n      \"registrar\": \"string\",\n      \"create_date\": 1225,\n      \"ip\": [\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        },\n        {\n          \"country_code\": \"string\",\n          \"ip\": \"string\",\n          \"isp\": \"string\"\n        }\n      ],\n      \"mx\": [\n        {\n          \"host\": \"string\"\n        },\n        {\n          \"host\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total_count\": 7959,\n  \"count\": 1374,\n  \"offset\": 1238,\n  \"limit\": 6219\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6b5a27b-cffb-4df9-9386-81e24739e54d",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "watched",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalation_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c903aa2b-e211-45e4-b8fd-015c9b240c22",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "watched",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalation_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1959ad1c-c1de-4087-8f39-0cdc80b4add7",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "watched",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalation_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "267d76fc-ed1c-49fc-b39c-f6577ea3efce",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "domains",
+                    "watched",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changed_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_before",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "discovered_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalated_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "escalation_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_domain_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mx_exists",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "risk_score_ranges",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "437edde7-63cf-4c32-bfee-5217cc99d26c",
+          "name": "Escalate internally and externally.",
+          "request": {
+            "name": "Escalate internally and externally.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "escalations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a23808a-9fab-4632-b5f0-8fc9bec4ffc6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"watchlist_domains\": [\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"discovered_date\": \"string\",\n      \"changed_date\": \"string\",\n      \"id\": \"string\",\n      \"assigned_by\": \"string\",\n      \"assigned_date\": \"string\"\n    },\n    {\n      \"state\": \"string\",\n      \"domain\": \"string\",\n      \"discovered_date\": \"string\",\n      \"changed_date\": \"string\",\n      \"id\": \"string\",\n      \"assigned_by\": \"string\",\n      \"assigned_date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a83d2c-07b1-4ebf-a905-5fbcb76f4ae2",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "867018e5-bcfa-43b6-9cac-7672684dc01e",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36ab5d66-d0b9-4f00-8c5d-f0cda261a6f7",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d4997d-6f32-4609-8441-4790cca00fd1",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "674f4c1f-ccb8-4111-920e-ab906f69c671",
+              "name": "422: Unprocessable Entity. The request is syntactically valid JSON but\ncontains values that fail validation. The response includes per-field\nerror messages.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "escalations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"watchlist_domain_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_partner\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_version\": \"<string>\",\n  \"escalation_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 422,\n    \"summary\": \"The given data was invalid.\",\n    \"messages\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"resources\": {\n    \"support\": \"https://docs.domaintools.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afc4474f-5ff2-42e1-a026-db3fb3efa3fa",
+          "name": "Retrieves monitors and monitor IDs for an account.",
+          "request": {
+            "name": "Retrieves monitors and monitor IDs for an account.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_name",
+                  "value": "<string>",
+                  "description": "Appliance, module, or playbook, or any combination of these.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_partner",
+                  "value": "<string>",
+                  "description": "Your product name.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "app_version",
+                  "value": "<string>",
+                  "description": "Version of your integration/connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "datetime_counts_since",
+                  "value": "<integer>",
+                  "description": "Filters counts to include only those generated since the specified ISO-8601 date-time.\nThis parameter is conditionally required if `include_counts` is set to `true`.\nExample: `2022-02-10T00:00:00Z`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_counts",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the response will include counts for new, watched, changed, and escalated domains for each monitor.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specifies the maximum number of monitors to retrieve.\nThe default is 500. The maximum is restricted to 100 if `include_counts=true`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[]",
+                  "value": "<string>",
+                  "description": "Provides options for sorting the monitor list."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afb1dde9-5355-4a1d-81c6-e4817cc1b3e9",
+              "name": "OK. A list of monitors was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datetime_counts_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_counts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_count\": 5486,\n  \"offset\": 2255,\n  \"limit\": 2166,\n  \"monitors\": [\n    {\n      \"term\": \"string\",\n      \"match_substring_variations\": true,\n      \"nameserver_exclusions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"text_exclusions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"created_date\": \"2003-06-10T15:04:20.473Z\",\n      \"updated_date\": \"1973-07-31T03:33:00.264Z\",\n      \"state\": \"inactive\",\n      \"status\": \"string\",\n      \"domain_counts\": {\n        \"new\": 2455,\n        \"watched\": 2504,\n        \"escalated\": 7428,\n        \"changed\": 5591\n      },\n      \"created_by\": \"string\"\n    },\n    {\n      \"term\": \"string\",\n      \"match_substring_variations\": true,\n      \"nameserver_exclusions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"text_exclusions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"created_date\": \"1985-03-19T11:33:49.287Z\",\n      \"updated_date\": \"2010-12-23T13:28:48.842Z\",\n      \"state\": \"inactive\",\n      \"status\": \"string\",\n      \"domain_counts\": {\n        \"new\": 5897,\n        \"watched\": 3692,\n        \"escalated\": 6483,\n        \"changed\": 6675\n      },\n      \"created_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "095c0b15-964e-422c-89df-39f7dfa97c55",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datetime_counts_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_counts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9f84958-4651-4e22-8393-7b753b1e32f8",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datetime_counts_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_counts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "965796ac-159d-49f0-ab23-729b1f1ca5b8",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datetime_counts_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_counts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fcc16a5-659c-47be-84a5-b20ed853e402",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_partner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datetime_counts_since",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_counts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6b7aff5-4c26-41f9-a239-c2e2aa15c7d9",
+          "name": "Create a new monitor to track lookalike domains for a specific term.",
+          "request": {
+            "name": "Create a new monitor to track lookalike domains for a specific term.",
+            "description": {
+              "content": "Creates a monitor that begins discovering matching domains immediately.\nThe monitor `status` is `pending` after creation and changes to `completed`\nonce initial domain discovery finishes.\n\nRequires the \"manage monitors\" permission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47f8e07c-417f-4bf1-be53-abd6a5e189b6",
+              "name": "Monitor created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"monitor\": {\n    \"term\": \"string\",\n    \"match_substring_variations\": true,\n    \"nameserver_exclusions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"text_exclusions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"created_date\": \"1998-08-14T07:22:40.752Z\",\n    \"updated_date\": \"2018-08-14T22:41:09.971Z\",\n    \"state\": \"inactive\",\n    \"status\": \"string\",\n    \"domain_counts\": {\n      \"new\": 4717,\n      \"watched\": 3181,\n      \"escalated\": 1591,\n      \"changed\": 4229\n    },\n    \"created_by\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab40782f-9b0c-4bce-8583-0c116591da11",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a32bfac2-92e6-457b-a990-519c418e915c",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb648103-12f9-432c-8cbb-6ea1bbcf17b6",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62060a77-96d0-4b32-a935-65e06dc6b3f3",
+              "name": "422: Unprocessable Entity. The request is syntactically valid JSON but\ncontains values that fail validation. The response includes per-field\nerror messages.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"match_substring_variations\": false,\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 422,\n    \"summary\": \"The given data was invalid.\",\n    \"messages\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"resources\": {\n    \"support\": \"https://docs.domaintools.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80a6f84c-a6cd-47f5-953f-eedaf780d666",
+          "name": "Update the configuration of an existing monitor.",
+          "request": {
+            "name": "Update the configuration of an existing monitor.",
+            "description": {
+              "content": "Modifies match settings and exclusions for an existing monitor.\nInclude only the fields you want to change; omitted fields retain their current values.\n\nA recently created monitor may not be immediately available for updates.\nWait until the monitor's `status` changes from `pending` to `completed`\nbefore sending update requests.\n\nRequires the \"manage monitors\" permission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "monitor_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the monitor to operate on.\nRetrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9aaae5b-4f8f-481d-8f78-c472acac3862",
+              "name": "Monitor updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"monitor\": {\n    \"term\": \"string\",\n    \"match_substring_variations\": true,\n    \"nameserver_exclusions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"text_exclusions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"created_date\": \"1955-07-04T17:15:36.317Z\",\n    \"updated_date\": \"1975-11-26T17:17:04.194Z\",\n    \"state\": \"active\",\n    \"status\": \"string\",\n    \"domain_counts\": {\n      \"new\": 315,\n      \"watched\": 7060,\n      \"escalated\": 7022,\n      \"changed\": 8275\n    },\n    \"created_by\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35b49ce5-7535-4019-9225-ffa13c9ab8c5",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "605358e9-38fa-44f0-9c65-e16474e55176",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "734cc406-ada8-496c-b55d-2a1f3c278e20",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58e57b60-5ec1-4bcd-ba93-e916d5e97c42",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9277c1b-17fc-4315-b064-3ca580024f25",
+              "name": "422: Unprocessable Entity. The request is syntactically valid JSON but\ncontains values that fail validation. The response includes per-field\nerror messages.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match_substring_variations\": \"<boolean>\",\n  \"nameserver_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"text_exclusions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 422,\n    \"summary\": \"The given data was invalid.\",\n    \"messages\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"resources\": {\n    \"support\": \"https://docs.domaintools.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2583fc24-2372-4ece-b336-914f4eea9a36",
+          "name": "Permanently delete a monitor and stop tracking its associated domains.",
+          "request": {
+            "name": "Permanently delete a monitor and stop tracking its associated domains.",
+            "description": {
+              "content": "Deletes the specified monitor. This action is permanent and can't be undone.\n\nRequires the \"manage monitors\" permission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "iris-detect",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "monitor_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the monitor to operate on.\nRetrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48f245fb-1b82-46f2-976a-e2de10d24f8c",
+              "name": "Monitor deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"monitor\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3484d537-cdf8-45ed-bb8f-58a8a8c47464",
+              "name": "400: Bad Request. The request was invalid. The response will contain details about the error.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2805584c-6464-4f25-882e-378ff68df3f5",
+              "name": "401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fadfdfc-db4e-4516-a579-e620887f73e3",
+              "name": "403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40606b6e-c5c6-4342-8f89-be2a3068b669",
+              "name": "404: Not Found. The requested resource does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "iris-detect",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "monitor_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 831,\n    \"message\": \"string\"\n  },\n  \"resources\": {\n    \"support\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dnsdb.info/dnsdb/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "de7b8785-d713-448b-9a81-25651bb20895",
+    "name": "dnsdb Flex search Iris Detect API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "dnsdb\n\nContact Support:\n Name: DomainTools Support\n Email: enterprisesupport@domaintools.com",
+      "type": "text/plain"
+    }
+  }
+}
