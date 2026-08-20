@@ -164,6 +164,8 @@ apis:
   humanURL: https://docs.domaintools.com/api/iris/
   baseURL: https://api.domaintools.com
   tags:
+  - Rate-Limit
+  tags_raw:
   - Rate Limit
   properties:
   - type: OpenAPI
