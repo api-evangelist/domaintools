@@ -1,8 +1,22 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: dnsdb Flex search Siebatchd API
-  description: dnsdb
+  description: 'Designed to combat the challenges with consuming real-time data, SIE Batch
+
+    allows subscribers to select, or "batch", their available real-time data
+
+    sets and pinpoint data needed for their investigations. Available via both
+
+    API and a Web interface, subscribers can log into SIE Batch and download a
+
+    recent sample of data (from 2 minutes to 12 hours in length) or download a
+
+    specific time period of data they need. In addition, Farsight offers a SIE
+
+    Batch API that lets subscribers easily access SIE data (in file format)
+
+    from a program or script.
+
+    '
   contact:
     name: DomainTools Support
     url: https://www.domaintools.com/support
@@ -11,9 +25,11 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.domaintools.com/company/terms-of-service/
+  version: 1.0.0
+  title: SIE Batch REST Siebatchd API
 servers:
-- url: https://api.dnsdb.info/dnsdb/v2
-- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+- url: https://batch.sie-remote.net
+  description: prod
 tags:
 - name: Siebatchd
 paths:
@@ -145,30 +161,30 @@ paths:
       - Siebatchd
 components:
   schemas:
-    ChannelTimeRange:
+    ChannelDetail:
       type: object
-      required:
-      - apikey
-      - channel
-      - start_time
-      - end_time
       properties:
-        apikey:
-          $ref: '#/components/schemas/ApiKeyField'
-        channel:
+        earliest:
+          type: string
+          description: Earliest available data timestamp
+          example: '2020-01-28 00:40:00'
+        latest:
+          type: string
+          description: Latest available data timestamp
+          example: '2020-01-28 20:06:00'
+        size:
           type: integer
-          description: Channel number (1-255)
-          minimum: 1
-          maximum: 255
-          example: 213
-        start_time:
+          description: Size of available data in bytes
+          example: 83837922
+        mimetype:
           type: string
-          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:00:00'
-        end_time:
-          type: string
-          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:01:00'
+          description: MIME type of the data
+          example: application/x-ndjson
+    ApiKeyField:
+      type: string
+      format: password
+      description: Your Farsight SIE Batch API Key (UUID format)
+      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     ErrorResponse:
       type: object
       properties:
@@ -204,36 +220,12 @@ components:
           type: string
           format: uuid
           description: Server-side log correlation ID
-    ChannelDetail:
-      type: object
-      properties:
-        earliest:
-          type: string
-          description: Earliest available data timestamp
-          example: '2020-01-28 00:40:00'
-        latest:
-          type: string
-          description: Latest available data timestamp
-          example: '2020-01-28 20:06:00'
-        size:
-          type: integer
-          description: Size of available data in bytes
-          example: 83837922
-        mimetype:
-          type: string
-          description: MIME type of the data
-          example: application/x-ndjson
     ChannelDescription:
       type: object
       properties:
         description:
           type: string
           example: Newly Observed Domains
-    ApiKeyField:
-      type: string
-      format: password
-      description: Your Farsight SIE Batch API Key (UUID format)
-      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     ApiKeyOnly:
       type: object
       required:
@@ -241,34 +233,31 @@ components:
       properties:
         apikey:
           $ref: '#/components/schemas/ApiKeyField'
+    ChannelTimeRange:
+      type: object
+      required:
+      - apikey
+      - channel
+      - start_time
+      - end_time
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+        channel:
+          type: integer
+          description: Channel number (1-255)
+          minimum: 1
+          maximum: 255
+          example: 213
+        start_time:
+          type: string
+          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:00:00'
+        end_time:
+          type: string
+          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:01:00'
   responses:
-    5xx:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    200_makeurl:
-      description: Presigned download URL generated successfully.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              _status:
-                type: string
-                enum:
-                - OK
-              _message:
-                type: string
-              url:
-                type: string
-                format: uri
-                description: Presigned shareable URL to the specified SIE data
-          example:
-            _status: OK
-            _message: ''
-            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
     4xx:
       description: Client error (authentication or validation failure)
       content:
@@ -295,6 +284,27 @@ components:
                 invalid_parameters:
                   name: foobar
                   reason: should be an integer but received a string
+    200_makeurl:
+      description: Presigned download URL generated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+              url:
+                type: string
+                format: uri
+                description: Presigned shareable URL to the specified SIE data
+          example:
+            _status: OK
+            _message: ''
+            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
     200_chdetails:
       description: Channel details returned successfully.
       content:
@@ -329,6 +339,12 @@ components:
                 mimetype: application/x-ndjson
             _status: OK
             _message: ''
+    5xx:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     200_validate:
       description: API key is valid. Returns profile and provisioning info.
       content:
@@ -376,8 +392,5 @@ components:
                   description: Newly Observed Fully Qualified Domain Names
             _status: OK
             _message: ''
-  securitySchemes:
-    apikey:
-      type: apiKey
-      in: header
-      name: X-API-KEY
+externalDocs:
+  url: https://batch.sie-remote.net/apidoc

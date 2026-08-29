@@ -1,8 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: dnsdb Flex search Information API
-  description: dnsdb
+  title: Domaintools Information API
+  version: 1.0.0
   contact:
     name: DomainTools Support
     url: https://www.domaintools.com/support
@@ -11,9 +10,14 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.domaintools.com/company/terms-of-service/
+  description: 'Operations tagged Information across 2 of this provider''s published API definitions: domaintools-iris-openapi.yml, domaintools-lookups-monitors-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.dnsdb.info/dnsdb/v2
-- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+- description: DomainTools APIs
+  url: https://api.domaintools.com
+security:
+- header_auth: []
+- open_key_auth: []
+- hmac_auth: []
 tags:
 - name: Information
   description: 'Access the latest information about your account, including service
@@ -45,94 +49,11 @@ paths:
           $ref: '#/components/responses/Forbidden'
       externalDocs:
         url: https://docs.domaintools.com/api/iris/account-info/
+    servers:
+    - description: DomainTools APIs
+      url: https://api.domaintools.com
 components:
-  responses:
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    AccountSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AccountInformation'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
     HtmlResponse:
       type: string
       description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
@@ -185,6 +106,30 @@ components:
                     today: '0'
                     month: '1'
                   expiration_date: '2027-12-30'
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
     XmlResponse:
       type: string
       description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
@@ -199,8 +144,129 @@ components:
       description: 'The desired response format.
 
         '
+  parameters:
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+  responses:
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    AccountSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountInformation'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
-    apikey:
+    header_auth:
       type: apiKey
       in: header
-      name: X-API-KEY
+      name: X-Api-Key
+      description: 'A secure authentication method where the API key is provided in the `X-Api-Key` HTTP request header.
+
+        '
+    open_key_auth:
+      type: http
+      scheme: basic
+      description: 'A simple authentication scheme using your `api_username` as the username and your `api_key` as the password. We strongly recommend using HMAC or Header authentication instead to avoid exposing your credentials.
+
+        '
+    hmac_auth:
+      type: apiKey
+      in: query
+      name: signature
+      description: 'A secure scheme using a Hashed Message Authentication Code (HMAC).
+
+        This method requires three query parameters to be sent with the request:
+
+        1. `api_username`: Your API username.
+
+        2. `timestamp`: The current timestamp in ISO 8601 format (e.g., `2020-02-01T22:37:59Z`).
+
+        3. `signature`: The HMAC signature of the request. This is a hash (SHA-256 recommended) of your username, the timestamp, and the request URI, signed with your secret API key.
+
+        '
+x-refined-from:
+- domaintools-iris-openapi.yml
+- domaintools-lookups-monitors-openapi.yml

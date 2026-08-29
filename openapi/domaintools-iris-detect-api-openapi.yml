@@ -1,8 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: dnsdb Flex search Iris Detect API
-  description: dnsdb
+  title: DomainTools Iris Iris Detect API
+  version: 1.0.0
+  description: 'The OpenAPI spec for DomainTools Iris endpoints.
+
+    '
   contact:
     name: DomainTools Support
     url: https://www.domaintools.com/support
@@ -12,8 +14,12 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.domaintools.com/company/terms-of-service/
 servers:
-- url: https://api.dnsdb.info/dnsdb/v2
-- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+- description: DomainTools APIs
+  url: https://api.domaintools.com
+security:
+- header_auth: []
+- open_key_auth: []
+- hmac_auth: []
 tags:
 - name: Iris Detect
   description: 'Iris Detect is an Internet infrastructure detection, monitoring, and enforcement tool.
@@ -352,22 +358,29 @@ paths:
         url: https://docs.domaintools.com/api/iris/detect/guide/#delete-monitor
 components:
   parameters:
-    includeDomainData:
+    preview:
       in: query
-      name: include_domain_data
-      description: 'If set to true, includes additional DNS and WHOIS details in the response.
+      name: preview
+      description: 'Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.
+
+        '
+      required: false
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    mxExists:
+      in: query
+      name: mx_exists
+      description: Whether domain currently has an MX record in DNS.
+      schema:
+        type: boolean
+    includeCounts:
+      in: query
+      name: include_counts
+      description: 'If set to `true`, the response will include counts for new, watched, changed, and escalated domains for each monitor.
 
         '
       schema:
         $ref: '#/components/schemas/BooleanOptInFlag'
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
     sortDetect:
       in: query
       name: sort
@@ -390,6 +403,16 @@ components:
       description: Monitor ID from the monitors response - only used when requesting domains for specific monitors.
       schema:
         type: string
+    discoveredBefore:
+      in: query
+      name: discovered_before
+      description: 'Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.
+
+        Example: `2022-02-10T00:00:00Z (ISO-8601)`
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
     changedSince:
       in: query
       name: changed_since
@@ -398,24 +421,25 @@ components:
         '
       schema:
         $ref: '#/components/schemas/TimestampFilter'
-    irisResultsLimit:
+    order:
       in: query
-      name: limit
-      description: 'Specify the maximum number of records to retrieve in an API query.
-
-        The maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.
+      name: order
+      description: Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    escalationTypes:
+      in: query
+      name: escalation_types
+      description: 'Filters domains based on specific escalation types. Multiple types can be provided.
 
         '
+      style: form
+      explode: true
       schema:
-        type: integer
-        maximum: 100
-        minimum: 1
-    irisContainsSearch:
-      in: query
-      name: search
-      description: Performs a `contains` search.
-      schema:
-        $ref: '#/components/schemas/BasicString'
+        $ref: '#/components/schemas/EscalationTypeEnum'
     limitMonitors:
       in: query
       name: limit
@@ -428,75 +452,6 @@ components:
         type: integer
         minimum: 1
         maximum: 500
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    escalationTypes:
-      in: query
-      name: escalation_types
-      description: 'Filters domains based on specific escalation types. Multiple types can be provided.
-
-        '
-      style: form
-      explode: true
-      schema:
-        $ref: '#/components/schemas/EscalationTypeEnum'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    resultsOffset:
-      name: offset
-      in: query
-      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
-      schema:
-        type: integer
-        minimum: 0
-    mxExists:
-      in: query
-      name: mx_exists
-      description: Whether domain currently has an MX record in DNS.
-      schema:
-        type: boolean
-    discoveredBefore:
-      in: query
-      name: discovered_before
-      description: 'Most relevant for the /new endpoint to control the timeframe for when a new domain was discovered. Returns domains discovered before provided date/time. Use with `discovered_since` to return domains discovered in a specific time window.
-
-        Example: `2022-02-10T00:00:00Z (ISO-8601)`
-
-        '
-      schema:
-        $ref: '#/components/schemas/TimestampFilter'
-    datetimeCountsSince:
-      in: query
-      name: datetime_counts_since
-      description: 'Filters counts to include only those generated since the specified ISO-8601 date-time.
-
-        This parameter is conditionally required if `include_counts` is set to `true`.
-
-        Example: `2022-02-10T00:00:00Z`
-
-        '
-      schema:
-        $ref: '#/components/schemas/TimestampFilter'
-    includeCounts:
-      in: query
-      name: include_counts
-      description: 'If set to `true`, the response will include counts for new, watched, changed, and escalated domains for each monitor.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
     discoveredSince:
       in: query
       name: discovered_since
@@ -507,14 +462,57 @@ components:
         '
       schema:
         $ref: '#/components/schemas/TimestampFilter'
-    escalatedSince:
+    irisContainsSearch:
       in: query
-      name: escalated_since
-      description: 'Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)
+      name: search
+      description: Performs a `contains` search.
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    includeDomainData:
+      in: query
+      name: include_domain_data
+      description: 'If set to true, includes additional DNS and WHOIS details in the response.
 
         '
       schema:
-        $ref: '#/components/schemas/TimestampFilter'
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    monitorIdRequired:
+      in: query
+      name: monitor_id
+      required: true
+      description: 'The ID of the monitor to operate on.
+
+        Retrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).
+
+        '
+      schema:
+        type: string
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    tlds:
+      in: query
+      name: tlds
+      description: Filters on specific TLDs
+      schema:
+        type: array
+        items:
+          type: string
+      allowReserved: true
+      style: form
+      explode: true
+    resultsOffset:
+      name: offset
+      in: query
+      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
+      schema:
+        type: integer
+        minimum: 0
     riskScoreRanges:
       in: query
       name: risk_score_ranges
@@ -533,57 +531,34 @@ components:
           - 100-100
       style: form
       explode: true
-    tlds:
+    irisResultsLimit:
       in: query
-      name: tlds
-      description: Filters on specific TLDs
-      schema:
-        type: array
-        items:
-          type: string
-      allowReserved: true
-      style: form
-      explode: true
-    domainState:
-      in: query
-      name: domain_state
-      description: 'Filters domains based on their state.
+      name: limit
+      description: 'Specify the maximum number of records to retrieve in an API query.
+
+        The maximum value is **100**, but this is reduced to **50** if `include_domain_data=true`.
 
         '
       schema:
-        type: string
-        enum:
-        - active
-        - inactive
-    preview:
+        type: integer
+        maximum: 100
+        minimum: 1
+    appVersion:
+      name: app_version
       in: query
-      name: preview
-      description: 'Use during API implementation and testing. Will limit results to 2 but not be limited by hourly restrictions. Use for development and testing only. Sustained usage violates Terms of Service and can result in service suspension.
-
-        '
-      required: false
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    monitorIdRequired:
-      in: query
-      name: monitor_id
-      required: true
-      description: 'The ID of the monitor to operate on.
-
-        Retrieve monitor IDs from the monitor list endpoint (`GET /v1/iris-detect/monitors/`).
+      description: 'Version of your integration/connector.
 
         '
       schema:
-        type: string
-    order:
+        $ref: '#/components/schemas/IdentifierString'
+    appName:
+      name: app_name
       in: query
-      name: order
-      description: Specifies the sort order for the results, either ascending or descending. Used in conjunction with the 'sort' parameter. Defaults to `desc`.
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
       schema:
-        type: string
-        enum:
-        - asc
-        - desc
+        $ref: '#/components/schemas/IdentifierString'
     sortMonitorList:
       in: query
       name: sort[]
@@ -595,117 +570,38 @@ components:
         - created_date
         - domain_counts_changed
         - domain_counts_discovered
+    escalatedSince:
+      in: query
+      name: escalated_since
+      description: 'Most relevant for the /watched endpoint to control the timeframe for when a domain was most recently escalated. Example: 2022-02-10T00:00:00Z (ISO-8601)
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    domainState:
+      in: query
+      name: domain_state
+      description: 'Filters domains based on their state.
+
+        '
+      schema:
+        type: string
+        enum:
+        - active
+        - inactive
+    datetimeCountsSince:
+      in: query
+      name: datetime_counts_since
+      description: 'Filters counts to include only those generated since the specified ISO-8601 date-time.
+
+        This parameter is conditionally required if `include_counts` is set to `true`.
+
+        Example: `2022-02-10T00:00:00Z`
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
   schemas:
-    MonitorList:
-      type: object
-      description: A list of Iris Detect monitors and associated metadata.
-      properties:
-        total_count:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        monitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Monitor'
-    DetectRiskComponents:
-      type: object
-      properties:
-        proximity:
-          type: integer
-        threat_profile:
-          oneOf:
-          - $ref: '#/components/schemas/DetectThreatProfile'
-          - type: array
-            items: {}
-            description: Empty array when no threat profile data is available.
-    TimestampFilter:
-      title: Timestamp filter
-      description: "Defines a point in time for filtering results.\n\nAccepts one of:\n\n  - relative time, in negative seconds\n\n  - absolute time, in an ISO 8601 timestamp\n"
-      oneOf:
-      - type: integer
-        minimum: -432000
-        maximum: -1
-        description: 'Relative offset in seconds before the current UTC time.
-
-
-          Must be between -1 (1 second ago) and -432000 (5 days ago).
-
-          '
-      - type: string
-        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
-        format: date-time
-        description: 'ISO 8601 datetime in UTC format with no milliseconds or timezone offset. Format: `YYYY-MM-DDTHH:MM:SSZ`.
-
-
-          The timestamp must represent a point between *1 second ago* and *5 days ago*, relative to the current UTC time.
-
-          '
-    BasicString:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: A non-empty string with a standard length limit.
-    CreateMonitorResponse:
-      type: object
-      description: Response returned after successfully creating a monitor.
-      properties:
-        status:
-          type: string
-          description: The result of the operation (for example, `created`).
-        monitor:
-          $ref: '#/components/schemas/Monitor'
-    DeleteMonitorResponse:
-      type: object
-      description: Response returned after successfully deleting a monitor.
-      properties:
-        status:
-          type: string
-          description: The result of the operation (for example, `deleted`).
-        monitor:
-          type: object
-          description: The deleted monitor.
-          properties:
-            id:
-              type: string
-              description: The ID of the deleted monitor.
-    CreateMonitorRequest:
-      type: object
-      description: Request body for creating a new Iris Detect monitor.
-      required:
-      - term
-      properties:
-        term:
-          type: string
-          description: The keyword to monitor for domain variations.
-        match_substring_variations:
-          type: boolean
-          default: false
-          description: 'When `true`, includes domains where variations of the term appear
-
-            as substrings within matched domains.
-
-            '
-        nameserver_exclusions:
-          type: array
-          items:
-            type: string
-          description: 'Nameserver patterns to exclude. Wildcards (`*`) are accepted.
-
-            A domain is excluded only when all of its nameservers match an exclusion pattern.
-
-            '
-        text_exclusions:
-          type: array
-          items:
-            type: string
-          description: 'Text strings to exclude from results.
-
-            Domains containing any of these strings are excluded.
-
-            '
     DetectDomainList:
       type: object
       properties:
@@ -721,6 +617,24 @@ components:
           type: integer
         limit:
           type: integer
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    WatchlistBase:
+      type: object
+      properties:
+        watchlist_domain_ids:
+          type: array
+          items:
+            type: string
+        app_partner:
+          $ref: '#/components/schemas/IdentifierString'
+        app_name:
+          $ref: '#/components/schemas/IdentifierString'
+        app_version:
+          $ref: '#/components/schemas/IdentifierString'
     Monitor:
       type: object
       description: Details of a single Iris Detect monitor.
@@ -756,34 +670,62 @@ components:
           $ref: '#/components/schemas/MonitorDomainCounts'
         created_by:
           type: string
-    WatchlistBase:
+    UpdateMonitorResponse:
+      type: object
+      description: Response returned after successfully updating a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `updated`).
+        monitor:
+          $ref: '#/components/schemas/Monitor'
+    Escalations:
       type: object
       properties:
-        watchlist_domain_ids:
+        watchlist_domains:
           type: array
           items:
-            type: string
-        app_partner:
-          $ref: '#/components/schemas/IdentifierString'
-        app_name:
-          $ref: '#/components/schemas/IdentifierString'
-        app_version:
-          $ref: '#/components/schemas/IdentifierString'
-    WatchlistState:
-      allOf:
-      - $ref: '#/components/schemas/WatchlistBase'
-      - type: object
-        properties:
-          state:
-            type: string
-            enum:
-            - watched
-            - ignored
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
+            type: object
+            properties:
+              state:
+                type: string
+              domain:
+                type: string
+              discovered_date:
+                type: string
+              changed_date:
+                type: string
+              id:
+                type: string
+              assigned_by:
+                type: string
+              assigned_date:
+                type: string
+    DetectThreatProfile:
+      type: object
+      properties:
+        phishing:
+          type: integer
+        malware:
+          type: integer
+        spam:
+          type: integer
+    MonitorDomainCounts:
+      type: object
+      description: Counts of domains associated with a monitor in various states.
+      properties:
+        new:
+          type: integer
+          description: The number of new domains discovered.
+        watched:
+          type: integer
+          description: The number of domains currently on the watchlist.
+        escalated:
+          type: integer
+          description: The number of domains that have been escalated.
+        changed:
+          type: integer
+          description: The number of watched domains that have changed.
     Watchlist:
       type: object
       properties:
@@ -809,29 +751,6 @@ components:
                 type: string
               assigned_date:
                 type: string
-    MonitorDomainCounts:
-      type: object
-      description: Counts of domains associated with a monitor in various states.
-      properties:
-        new:
-          type: integer
-          description: The number of new domains discovered.
-        watched:
-          type: integer
-          description: The number of domains currently on the watchlist.
-        escalated:
-          type: integer
-          description: The number of domains that have been escalated.
-        changed:
-          type: integer
-          description: The number of watched domains that have changed.
-    BooleanOptInFlag:
-      type: boolean
-      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
-
-        If `false` or omitted, the feature is ignored.
-
-        '
     DetectValidationError:
       type: object
       description: 'Validation error returned by Iris Detect endpoints when the request body
@@ -874,34 +793,79 @@ components:
               type: string
               description: A link to the DomainTools documentation.
               example: https://docs.domaintools.com
-    EscalationTypeEnum:
-      type: string
-      description: The type of escalation action.
-      enum:
-      - blocked
-      - google_safe
-    Escalations:
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    DetectEscalation:
       type: object
       properties:
-        watchlist_domains:
+        escalation_type:
+          $ref: '#/components/schemas/EscalationTypeEnum'
+        id:
+          type: string
+        created:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+    TimestampFilter:
+      title: Timestamp filter
+      description: "Defines a point in time for filtering results.\n\nAccepts one of:\n\n  - relative time, in negative seconds\n\n  - absolute time, in an ISO 8601 timestamp\n"
+      oneOf:
+      - type: integer
+        minimum: -432000
+        maximum: -1
+        description: 'Relative offset in seconds before the current UTC time.
+
+
+          Must be between -1 (1 second ago) and -432000 (5 days ago).
+
+          '
+      - type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+        format: date-time
+        description: 'ISO 8601 datetime in UTC format with no milliseconds or timezone offset. Format: `YYYY-MM-DDTHH:MM:SSZ`.
+
+
+          The timestamp must represent a point between *1 second ago* and *5 days ago*, relative to the current UTC time.
+
+          '
+    UpdateMonitorRequest:
+      type: object
+      description: 'Request body for updating an existing Iris Detect monitor.
+
+        Include only the fields you want to change.
+
+        '
+      properties:
+        match_substring_variations:
+          type: boolean
+          description: Enable or disable substring variation matching.
+        nameserver_exclusions:
           type: array
           items:
-            type: object
-            properties:
-              state:
-                type: string
-              domain:
-                type: string
-              discovered_date:
-                type: string
-              changed_date:
-                type: string
-              id:
-                type: string
-              assigned_by:
-                type: string
-              assigned_date:
-                type: string
+            type: string
+          description: Replace the current nameserver exclusion list. Wildcards (`*`) are accepted.
+        text_exclusions:
+          type: array
+          items:
+            type: string
+          description: Replace the current text exclusion list.
+    DetectRiskComponents:
+      type: object
+      properties:
+        proximity:
+          type: integer
+        threat_profile:
+          oneOf:
+          - $ref: '#/components/schemas/DetectThreatProfile'
+          - type: array
+            items: {}
+            description: Empty array when no threat profile data is available.
     DetectDomain:
       type: object
       properties:
@@ -921,14 +885,16 @@ components:
           type: string
           format: date-time
         risk_score:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         risk_score_status:
           description: 'Indicates if the risk score is ''provisional'' (initial calculation) or full.
 
             '
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         risk_score_components:
           $ref: '#/components/schemas/DetectRiskComponents'
         mx_exists:
@@ -981,6 +947,99 @@ components:
             properties:
               host:
                 type: string
+    CreateMonitorResponse:
+      type: object
+      description: Response returned after successfully creating a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `created`).
+        monitor:
+          $ref: '#/components/schemas/Monitor'
+    BasicString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    WatchlistState:
+      allOf:
+      - $ref: '#/components/schemas/WatchlistBase'
+      - type: object
+        properties:
+          state:
+            type: string
+            enum:
+            - watched
+            - ignored
+    DeleteMonitorResponse:
+      type: object
+      description: Response returned after successfully deleting a monitor.
+      properties:
+        status:
+          type: string
+          description: The result of the operation (for example, `deleted`).
+        monitor:
+          type: object
+          description: The deleted monitor.
+          properties:
+            id:
+              type: string
+              description: The ID of the deleted monitor.
+    CreateMonitorRequest:
+      type: object
+      description: Request body for creating a new Iris Detect monitor.
+      required:
+      - term
+      properties:
+        term:
+          type: string
+          description: The keyword to monitor for domain variations.
+        match_substring_variations:
+          type: boolean
+          default: false
+          description: 'When `true`, includes domains where variations of the term appear
+
+            as substrings within matched domains.
+
+            '
+        nameserver_exclusions:
+          type: array
+          items:
+            type: string
+          description: 'Nameserver patterns to exclude. Wildcards (`*`) are accepted.
+
+            A domain is excluded only when all of its nameservers match an exclusion pattern.
+
+            '
+        text_exclusions:
+          type: array
+          items:
+            type: string
+          description: 'Text strings to exclude from results.
+
+            Domains containing any of these strings are excluded.
+
+            '
+    EscalationTypeEnum:
+      type: string
+      description: The type of escalation action.
+      enum:
+      - blocked
+      - google_safe
+    MonitorList:
+      type: object
+      description: A list of Iris Detect monitors and associated metadata.
+      properties:
+        total_count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Monitor'
     ErrorResponse:
       type: object
       properties:
@@ -1000,57 +1059,6 @@ components:
             support:
               type: string
               description: URL to API documentation or support.
-    UpdateMonitorResponse:
-      type: object
-      description: Response returned after successfully updating a monitor.
-      properties:
-        status:
-          type: string
-          description: The result of the operation (for example, `updated`).
-        monitor:
-          $ref: '#/components/schemas/Monitor'
-    UpdateMonitorRequest:
-      type: object
-      description: 'Request body for updating an existing Iris Detect monitor.
-
-        Include only the fields you want to change.
-
-        '
-      properties:
-        match_substring_variations:
-          type: boolean
-          description: Enable or disable substring variation matching.
-        nameserver_exclusions:
-          type: array
-          items:
-            type: string
-          description: Replace the current nameserver exclusion list. Wildcards (`*`) are accepted.
-        text_exclusions:
-          type: array
-          items:
-            type: string
-          description: Replace the current text exclusion list.
-    DetectEscalation:
-      type: object
-      properties:
-        escalation_type:
-          $ref: '#/components/schemas/EscalationTypeEnum'
-        id:
-          type: string
-        created:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-    DetectThreatProfile:
-      type: object
-      properties:
-        phishing:
-          type: integer
-        malware:
-          type: integer
-        spam:
-          type: integer
     WatchlistEscalation:
       allOf:
       - $ref: '#/components/schemas/WatchlistBase'
@@ -1059,14 +1067,20 @@ components:
           escalation_type:
             $ref: '#/components/schemas/EscalationTypeEnum'
   responses:
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
 
         '
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    DetectMonitorSuccess:
+      description: OK. A list of monitors was successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MonitorList'
     NotFound:
       description: '404: Not Found. The requested resource does not exist.
 
@@ -1081,8 +1095,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Watchlist'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
 
         '
       content:
@@ -1101,22 +1123,32 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DetectValidationError'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    DetectMonitorSuccess:
-      description: OK. A list of monitors was successfully retrieved.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MonitorList'
   securitySchemes:
-    apikey:
+    header_auth:
       type: apiKey
       in: header
-      name: X-API-KEY
+      name: X-Api-Key
+      description: 'A secure authentication method where the API key is provided in the `X-Api-Key` HTTP request header.
+
+        '
+    open_key_auth:
+      type: http
+      scheme: basic
+      description: 'A simple authentication scheme using your `api_username` as the username and your `api_key` as the password. We strongly recommend using HMAC or Header authentication instead to avoid exposing your credentials.
+
+        '
+    hmac_auth:
+      type: apiKey
+      in: query
+      name: signature
+      description: 'A secure scheme using a Hashed Message Authentication Code (HMAC).
+
+        This method requires three query parameters to be sent with the request:
+
+        1. `api_username`: Your API username.
+
+        2. `timestamp`: The current timestamp in ISO 8601 format (e.g., `2020-02-01T22:37:59Z`).
+
+        3. `signature`: The HMAC signature of the request. This is a hash (SHA-256 recommended) of your username, the timestamp, and the request URI, signed with your secret API key.
+
+        '

@@ -1,8 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: dnsdb Flex search Lookups API
-  description: dnsdb
+  title: DomainTools and Monitors Lookups API
+  version: 1.0.0
+  description: 'The OpenAPI spec for DomainTools Lookup, Reversing, and Monitoring endpoints.
+
+    '
   contact:
     name: DomainTools Support
     url: https://www.domaintools.com/support
@@ -12,8 +14,12 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.domaintools.com/company/terms-of-service/
 servers:
-- url: https://api.dnsdb.info/dnsdb/v2
-- url: https://dnsdbfront.labs.fsi.io/dnsdb/v2
+- url: https://api.domaintools.com
+  description: DomainTools APIs
+security:
+- header_auth: []
+- open_key_auth: []
+- hmac_auth: []
 tags:
 - name: Lookups
   description: 'Endpoints for retrieving detailed information about domains and IPs, and for finding connections between domains and infrastructure.
@@ -560,640 +566,188 @@ paths:
       externalDocs:
         url: https://docs.domaintools.com/api/lookups/domain-history/
 components:
-  parameters:
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    includeTotalCount:
-      in: query
-      name: include_total_count
-      description: Returns the total number of results for a query. This should typically be used only for the first page of a large result set.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    hasHyphen:
-      in: query
-      name: has_hyphen
-      description: Return results with hyphens in the domain name.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    excludeTerms:
-      in: query
-      name: exclude
-      description: 'Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    hasNumber:
-      in: query
-      name: has_number
-      description: Return results with numbers in the domain name.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    excludeFields:
-      in: query
-      name: exclude_fields
-      description: 'Comma-separated list of fields to exclude from the response. Change events matching these fields will be omitted from the results.
-
-
-        Filtering occurs at the event level—it determines which change events are excluded, not which properties are removed from the `before` and `after` objects. Defaults to returning all change types.
-
-
-        **Field Name Mapping:**
-
-
-        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
-
-        - Filter: `ssl_hash` → Response field: `ssl_info`
-
-        - Filter: `mailserver_host` → Response field: `mx`
-
-        - Filter: `nameserver_host` → Response field: `name_server`
-
-
-        **Valid values include:**
-
-
-        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
-
-        - **Aggregated categories:** Groups of related fields like `all_ip` (excludes all IP-related changes), `all_ssl` (excludes all SSL-related changes), `all_contact_information`, etc.
-
-
-        **Example:** `exclude_fields=all_ip,all_ssl` removes change events where the `field` property is `ip`, `ssl_info`, or related fields.
-
-
-        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
-
-        '
-      schema:
-        $ref: '#/components/schemas/DomainHistoryFieldsList'
-    reverseWhoisScope:
-      in: query
-      name: scope
-      description: 'Sets the scope of the report to include only current WHOIS records, or to include both current and historic records.
-
-        '
-      schema:
-        type: string
-        enum:
-        - current
-        - historic
-        default: current
-    deletedOnly:
-      in: query
-      name: deleted_only
-      description: Return only domains previously registered but not currently registered.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    domainQueryRequired:
-      in: query
-      name: domain
-      description: Required. A valid domain name.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ApexDomain'
-    maxLength:
-      in: query
-      name: max_length
-      description: Limit the maximum domain character count.
-      schema:
-        type: integer
-        maximum: 63
-    reverseIpWhoisQuery:
-      name: query
-      in: query
-      description: 'A space-separated list of free text query terms with support for `+` (must include), `-` (must not include), and `*` (prefix) modifiers.
-
-        '
-      schema:
-        type: string
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
-    ipAddressPath:
-      in: path
-      name: ip
-      description: The IP Address to query.
-      required: true
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    ipVersion:
-      in: query
-      name: ip_version
-      description: 'Limits the query search results to a particular IP version. If omitted, the default is IPv4.
-
-        '
-      schema:
-        type: integer
-        enum:
-        - 4
-        - 6
-        default: 4
-    nameServerPath:
-      in: path
-      name: nameServer
-      description: The name server hostname to query.
-      required: true
-      schema:
-        $ref: '#/components/schemas/Hostname'
-    domainPath:
-      in: path
-      name: domain
-      description: A valid domain name.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ApexDomain'
-    activeOnly:
-      in: query
-      name: active_only
-      description: Return only domains currently registered.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    minLength:
-      in: query
-      name: min_length
-      description: Limit the minimum domain character count.
-      schema:
-        type: integer
-        minimum: 1
-    domainOrIpPath:
-      in: path
-      name: query
-      description: A valid domain name or IP address.
-      required: true
-      schema:
-        type: string
-    ipQuery:
-      in: query
-      name: ip
-      description: IPv4 address the registered domain was last known to point to during an active DNS check.
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    excludeQuery:
-      in: query
-      name: exclude_query
-      description: 'Terms to exclude from matching. Each term must be at least three characters long. Use spaces to separate multiple terms.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    domainSearchQuery:
-      in: query
-      name: query
-      description: 'Terms to search for. Each term must be at least three characters long. Use spaces to separate multiple terms.
-
-        '
-      required: true
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    resultsOffset:
-      name: offset
-      in: query
-      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
-      schema:
-        type: integer
-        minimum: 0
-    includeFields:
-      in: query
-      name: include_fields
-      description: 'Comma-separated list of fields to include in the response. Only change events matching these fields will appear in the results.
-
-
-        Filtering occurs at the event level—it determines which change events are returned, not which properties appear in the `before` and `after` objects. Each returned change event includes the complete `before` and `after` state for that field.
-
-
-        **Field Name Mapping:**
-
-
-        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
-
-        - Filter: `ssl_hash` → Response field: `ssl_info`
-
-        - Filter: `mailserver_host` → Response field: `mx`
-
-        - Filter: `nameserver_host` → Response field: `name_server`
-
-
-        This design allows precise filtering using property-level names while maintaining complete context in change events.
-
-
-        **Valid values include:**
-
-
-        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
-
-        - **Aggregated categories:** Groups of related fields like `all_ip` (includes all IP-related changes), `all_ssl` (includes all SSL-related changes), `all_contact_information`, etc.
-
-
-        **Example:** `include_fields=ip,ssl_hash` returns change events where the `field` property is `ip` or `ssl_info`.
-
-
-        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
-
-        '
-      schema:
-        $ref: '#/components/schemas/DomainHistoryFieldsList'
-    parsedDomainRdapFlag:
-      name: parsed_domain_rdap
-      in: query
-      description: 'Flag.
-
-        If set to `true`, includes the full parsed Domain RDAP record in the response.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    resultsPageSize:
-      name: page_size
-      in: query
-      description: 'Adjusts the number of results returned per page.
-
-        The default is 500. Use this parameter to request a smaller page size.
-
-        '
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-    page:
-      in: query
-      name: page
-      description: Sets the page of results to retrieve from the server (used in services that support pagination).
-      schema:
-        type: integer
-        minimum: 1
-    countryCode:
-      in: query
-      name: country
-      description: 'Limits results to IP addresses allocated to an entity with a particular country.
-
-        Must be a valid ISO 3166-1 two-character country code.
-
-        '
-      schema:
-        type: string
-        pattern: ^[A-Z]{2}$
-    whoisHistorySort:
-      in: query
-      name: sort
-      description: Sort the records returned in either ascending or descending order by date.
-      schema:
-        type: string
-        enum:
-        - date_asc
-        - date_desc
-    reverseWhoisTerms:
-      in: query
-      name: terms
-      description: 'One or more terms, where the pipe character `|` may be used as a logical AND to require that all strings be present in order to match.
-
-        '
-      required: true
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    anchorRight:
-      in: query
-      name: anchor_right
-      description: Return only domains that end with the query term.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    parsedWhoisFlag:
-      name: parsed_whois
-      in: query
-      description: 'Flag.
-
-        If set to ''true'', includes the full parsed WHOIS record in the response.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    whoisHistoryMode:
-      in: query
-      name: mode
-      description: '- `list` (default): Returns the historical records.
-
-        - `count`: Returns only the total count of historical records.
-
-        - `check_existence`: Returns a boolean indicating if history exists.
-
-        '
-      schema:
-        type: string
-        enum:
-        - list
-        - count
-        - check_existence
-        default: list
-    resultsLimit:
-      name: limit
-      in: query
-      description: 'Specify the maximum number of records to retrieve in an API query.
-
-        The maximum value is **100**.
-
-        '
-      schema:
-        type: integer
-        maximum: 100
-        minimum: 1
-    reverseWhoisMode:
-      in: query
-      name: mode
-      description: '- `quote`: Returns the size and estimated price of the query.
-
-        - `purchase`: Returns the complete list of matching domain names.
-
-        '
-      schema:
-        type: string
-        enum:
-        - quote
-        - purchase
-    whoisServer:
-      in: query
-      name: server
-      description: 'Limits results to ranges from a particular RIR WHOIS server.
-
-        '
-      schema:
-        type: string
-        enum:
-        - whois.arin.net
-        - whois.apnic.net
-        - whois.ripe.net
-        - whois.lacnic.net
-        - whois.afrinic.net
-    anchorLeft:
-      in: query
-      name: anchor_left
-      description: Return only domains that start with the query term.
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-  responses:
-    ReverseNameServerSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReverseNameServer'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    DomainProfileSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainProfile'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    WhoisLookupSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WhoisLookup'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    ReverseWhoisSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReverseWhois'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    WhoisHistorySuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WhoisHistory'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    DomainSearchSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainSearch'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    ParsedWhoisSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/ParsedWhoisDomain'
-            - $ref: '#/components/schemas/ParsedWhoisIp'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    DomainHistorySuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainHistory'
-          examples:
-            default_response:
-              $ref: '#/components/examples/DomainHistoryDefaultResponse'
-            parsed_domain_rdap:
-              $ref: '#/components/examples/DomainHistoryParsedDomainRdap'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    DomainReputationSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainReputation'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    NotFound:
-      description: '404: Not Found. The requested resource does not exist.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ReverseIpSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReverseIp'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    ReverseIpWhoisSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/ReverseIpWhoisIp'
-            - $ref: '#/components/schemas/ReverseIpWhoisQuery'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    InternalServerError:
-      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    DomainRiskScoreSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainRiskScore'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    ServiceUnavailable:
-      description: '503: Service Unavailable. The service is temporarily unavailable.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ParsedDomainRdapSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ParsedDomainRdapResponse'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    RiskScoreEvidenceSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainRiskScoreEvidence'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    HostingHistorySuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HostingHistory'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
   schemas:
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    ParsedWhoisContact:
+      type: object
+      description: Contact information from a WHOIS record.
+      properties:
+        name:
+          type: string
+          description: Contact name.
+        org:
+          type: string
+          description: Organization name.
+        street:
+          type: array
+          description: Street address lines.
+          items:
+            type: string
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State or region.
+        postal:
+          type: string
+          description: Postal code.
+        country:
+          type: string
+          description: Country code.
+        phone:
+          type: string
+          description: Phone number.
+        fax:
+          type: string
+          description: Fax number.
+        email:
+          type: string
+          description: Email address.
+    ParsedWhoisIpContact:
+      type: object
+      description: Contact information from IP WHOIS record.
+      properties:
+        id:
+          type: string
+          description: Contact identifier/handle.
+          example: NFSNI-1
+        type:
+          type: string
+          description: Contact type.
+          enum:
+          - organization
+          - person
+          example: organization
+        name:
+          type: string
+          description: Contact name.
+          example: NearlyFreeSpeech.NET
+        address:
+          type: array
+          description: Postal address lines.
+          items:
+            type: string
+          example:
+          - 1540 INTERNATIONAL PKWY STE 2000
+          - LAKE MARY
+          - FL
+          - '32746'
+        country:
+          type: string
+          description: Country code (lowercase).
+          example: us
+        phone:
+          type: array
+          description: Phone numbers.
+          items:
+            type: string
+          example:
+          - '18887414678'
+        fax:
+          type: array
+          description: Fax numbers.
+          items:
+            type: string
+        email:
+          type: array
+          description: Email addresses.
+          items:
+            type: string
+          example:
+          - noc@nearlyfreespeech.net
+        descr:
+          type: array
+          description: Description or comments.
+          items:
+            type: string
+        contact_keys:
+          type: object
+          description: References to other contact IDs by role.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        remarks:
+          type: array
+          description: Additional remarks.
+          items:
+            type: string
+        notify_email:
+          type: array
+          description: Notification email addresses.
+          items:
+            type: string
+        abuse_mailbox:
+          type: array
+          description: Abuse reporting email addresses.
+          items:
+            type: string
+        mnt_keys:
+          type: object
+          description: Maintainer keys.
+          additionalProperties: true
+        created_date:
+          type: string
+          format: date-time
+          description: Date the contact was created.
+          example: '2008-02-01T00:00:00'
+        updated_date:
+          type: string
+          format: date-time
+          description: Date the contact was last updated.
+          example: '2018-05-22T00:00:00'
+        changed_by:
+          type: array
+          description: Change history.
+          items:
+            type: string
+        source:
+          type: string
+          description: Data source.
+        ref:
+          type: string
+          format: uri
+          description: Reference URL for this contact.
+          example: https://rdap.arin.net/registry/entity/NFSNI-1
+        other:
+          type: object
+          description: Additional properties.
+          additionalProperties: true
+    RiskScoreValue:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: A domain risk score value ranging from 0 (lowest risk) to 100 (highest risk).
+    BasicString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    ReverseIp:
+      type: object
+      description: Response for the Reverse IP endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            ip_addresses:
+              type: array
+              items:
+                type: object
+                properties:
+                  domain_count:
+                    type: integer
+                  domain_names:
+                    type: array
+                    items:
+                      type: string
+                  ip_address:
+                    type: string
     ParsedDomainRdapResponse:
       type: object
       description: Response for the Parsed Domain RDAP endpoint.
@@ -1415,174 +969,7 @@ components:
               type: string
               description: The domain name that was queried.
               example: domaintools.com
-    DomainProfile:
-      type: object
-      description: Response for the Domain Profile endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            registrant:
-              type: object
-              properties:
-                name:
-                  type: string
-                domain:
-                  type: integer
-                domains:
-                  type: integer
-                product_url:
-                  type: string
-            server:
-              type: object
-              properties:
-                ip_address:
-                  type: string
-                other_domains:
-                  type: integer
-                product_url:
-                  type: string
-            registration:
-              type: object
-              properties:
-                created:
-                  type: string
-                expires:
-                  type: string
-                updated:
-                  type: string
-                registrar:
-                  type: string
-                statuses:
-                  type: array
-                  items:
-                    type: string
-            name_servers:
-              type: array
-              items:
-                type: object
-                properties:
-                  server:
-                    type: string
-                  product_url:
-                    type: string
-            history:
-              type: object
-              properties:
-                registrar:
-                  type: object
-                  properties:
-                    earliest_event:
-                      type: string
-                    events:
-                      type: integer
-                    product_url:
-                      type: string
-                name_server:
-                  type: object
-                  properties:
-                    events:
-                      type: integer
-                    timespan_in_years:
-                      type: integer
-                    product_url:
-                      type: string
-                ip_address:
-                  type: object
-                  properties:
-                    events:
-                      type: integer
-                    timespan_in_years:
-                      type: integer
-                    product_url:
-                      type: string
-                whois:
-                  type: object
-                  properties:
-                    records:
-                      type: integer
-                    earliest_event:
-                      type: string
-                    product_url:
-                      type: string
-            seo:
-              type: object
-              properties:
-                score:
-                  oneOf:
-                  - type: integer
-                  - type: string
-                product_url:
-                  type: string
-            website_data:
-              type: object
-              properties:
-                response_code:
-                  oneOf:
-                  - type: integer
-                  - type: string
-                title:
-                  type: string
-                server:
-                  type: string
-                meta:
-                  type: array
-                  items:
-                    type: string
-                product_url:
-                  type: string
-    EnrichContact:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/EnrichValue'
-        org:
-          $ref: '#/components/schemas/EnrichValue'
-        street:
-          $ref: '#/components/schemas/EnrichValue'
-        city:
-          $ref: '#/components/schemas/EnrichValue'
-        state:
-          $ref: '#/components/schemas/EnrichValue'
-        postal:
-          $ref: '#/components/schemas/EnrichValue'
-        country:
-          $ref: '#/components/schemas/EnrichValue'
-        phone:
-          $ref: '#/components/schemas/EnrichValue'
-        fax:
-          $ref: '#/components/schemas/EnrichValue'
-        email:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrichValue'
-    ReverseNameServer:
-      type: object
-      description: Response for the Reverse Name Server endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            name_server:
-              type: object
-              properties:
-                hostname:
-                  type: string
-                primary:
-                  type: integer
-                secondary:
-                  type: string
-                total:
-                  type: integer
-            primary_domains:
-              type: array
-              items:
-                type: string
-            secondary_domains:
-              type: array
-              items:
-                type: string
-    ZeroListedScore:
+    ThreatProfileMalware:
       type: object
       required:
       - name
@@ -1592,29 +979,97 @@ components:
           type: string
           description: The type of risk component.
           enum:
-          - zerolist
+          - threat_profile_malware
         risk_score:
-          type: integer
-          description: The risk score for a zerolisted domain, which is always 0.
-          enum:
-          - 0
-      description: Indicates the domain is on a known-good 'zero list' and is not considered a threat.
-    ParsedWhoisIp:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as malware-related.
+    ThreatProfilePhishing:
       type: object
-      description: Response for the Parsed WHOIS (IP) endpoint.
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_phishing
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as phishing-related.
+    ParsedWhoisDomain:
+      type: object
+      description: Response for the Parsed WHOIS (Domain) endpoint.
       properties:
         response:
           type: object
           required:
+          - registration
+          - name_servers
           - whois
-          - source
           - parsed_whois
           - record_source
           properties:
             registrant:
               type: string
-              description: Top-level organization name for the IP range.
-              example: NearlyFreeSpeech.NET (NFSNI-1)
+              description: Registrant organization name (if available).
+              example: GitHub, Inc.
+            registration:
+              type: object
+              description: Basic registration information.
+              required:
+              - created
+              - expires
+              - updated
+              - registrar
+              - statuses
+              properties:
+                created:
+                  type: string
+                  format: date
+                  description: Date the domain was created.
+                  example: '2007-10-09'
+                expires:
+                  type: string
+                  format: date
+                  description: Date the domain registration expires.
+                  example: '2026-10-09'
+                updated:
+                  type: string
+                  format: date
+                  description: Date the domain record was last updated.
+                  example: '2024-09-07'
+                registrar:
+                  type: string
+                  description: Name of the registrar.
+                  example: MarkMonitor Inc.
+                statuses:
+                  type: array
+                  description: Domain status codes.
+                  items:
+                    type: string
+                  example:
+                  - clientDeleteProhibited
+                  - clientTransferProhibited
+                  - clientUpdateProhibited
+            name_servers:
+              type: array
+              description: List of nameserver hostnames for the domain.
+              items:
+                type: string
+              example:
+              - DNS1.P08.NSONE.NET
+              - DNS2.P08.NSONE.NET
             whois:
               type: object
               description: Raw WHOIS record information.
@@ -1626,135 +1081,110 @@ components:
                   type: string
                   format: date
                   description: Date the WHOIS record was retrieved.
-                  example: '2025-10-16'
+                  example: '2025-10-26'
                 record:
                   type: string
                   description: The raw WHOIS record text.
-            source:
-              type: string
-              description: The Regional Internet Registry (RIR) source of the WHOIS data.
-              enum:
-              - ARIN
-              - RIPE
-              - APNIC
-              - LACNIC
-              - AFRINIC
-              example: ARIN
             parsed_whois:
               type: object
-              description: Parsed and normalized IP WHOIS data.
+              description: Parsed and normalized WHOIS data.
               required:
-              - networks
+              - domain
+              - created_date
+              - updated_date
+              - expired_date
+              - statuses
+              - name_servers
+              - registrar
               - contacts
               properties:
-                networks:
+                domain:
+                  type: string
+                  description: The domain name.
+                  example: github.com
+                created_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain was created.
+                  example: '2007-10-09T18:20:50+00:00'
+                updated_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain was last updated.
+                  example: '2024-09-07T09:16:33+00:00'
+                expired_date:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 timestamp of when the domain registration expires.
+                  example: '2026-10-09T00:00:00+00:00'
+                statuses:
                   type: array
-                  description: IP network blocks and their allocation details.
-                  items:
-                    $ref: '#/components/schemas/ParsedWhoisIpNetwork'
-                contacts:
-                  type: array
-                  description: Organizations and persons associated with the networks.
-                  items:
-                    $ref: '#/components/schemas/ParsedWhoisIpContact'
-                routes:
-                  type: array
-                  description: Routing information (typically empty).
-                  items:
-                    type: object
-                referral_servers:
-                  type: array
-                  description: Referral server information (typically empty).
+                  description: Domain status codes.
                   items:
                     type: string
-                other_properties:
+                  example:
+                  - clientDeleteProhibited
+                  - clientTransferProhibited
+                name_servers:
                   type: array
-                  description: Additional properties from the WHOIS record.
+                  description: List of nameserver hostnames.
                   items:
-                    type: object
+                    type: string
+                  example:
+                  - dns1.p08.nsone.net
+                  - dns2.p08.nsone.net
+                registrar:
+                  type: object
+                  description: Registrar information.
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the registrar.
+                      example: MarkMonitor, Inc.
+                    abuse_contact_phone:
+                      type: string
+                      description: Registrar abuse contact phone number.
+                      example: '+1.2086851750'
+                    abuse_contact_email:
+                      type: string
+                      description: Registrar abuse contact email.
+                      example: abusecomplaints@markmonitor.com
+                    iana_id:
+                      type: string
+                      description: IANA registrar ID.
+                      example: '292'
+                    url:
+                      type: string
+                      format: uri
+                      description: Registrar website URL.
+                      example: http://www.markmonitor.com
+                    whois_server:
+                      type: string
+                      description: Registrar WHOIS server hostname.
+                      example: whois.markmonitor.com
+                contacts:
+                  type: object
+                  description: Domain contact information organized by role.
+                  properties:
+                    registrant:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    admin:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    tech:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                    billing:
+                      $ref: '#/components/schemas/ParsedWhoisContact'
+                other_properties:
+                  type: object
+                  description: Additional properties from the WHOIS record that don't fit standard fields.
+                  additionalProperties: true
+                  example:
+                    dnssec: unsigned
+                    registry_domain_id: 1264983250_DOMAIN_COM-VRSN
             record_source:
               type: string
-              description: The IP address that was queried.
-              example: 208.94.117.131
-    DomainHistoryFieldsList:
-      type: string
-      description: 'Comma-separated list of field names to include or exclude from Domain History responses.
-
-
-        Field filtering works at the **event level**: it determines which change events appear in the response based on the value of the `field` property. Each change event''s `before` and `after` objects always contain the complete state for that field—filtering doesn''t remove properties from these objects.
-
-
-        **Two types of field names are supported:**
-
-
-        1. **Individual fields**: Top-level properties from the response structure (e.g., `ip`, `mx`, `name_server`, `ssl_info`, `create_date`)
-
-        2. **Aggregated categories**: Groups of related fields that simplify filtering multiple event types at once
-
-
-        **Valid field names:**
-
-
-        - **Individual fields**: ip, asn, ip_country_code, isp_name, mailserver_host, mailserver_ip, nameserver_host, nameserver_ip, ssl_hash, ssl_common_name, ssl_alt_names, ssl_not_before, ssl_not_after, create_date, expiration_date, registrant, registrar, registrar_status, active, redirect, redirect_domain, screenshot_collected_timestamp, server_type, website_response, website_title, adsense, baidu_analytics, google_analytics, ga4, facebook, google_tag_manager, hotjar, matomo, statcounter_project, statcounter_security, yandex_metrica, contact_name, contact_phone, contact_street, contact_city, contact_state, contact_fax, contact_organization, admin_contact_email, billing_contact_email, email_dns_soa, technical_contact_email, registrant_contact_email, additional_whois_email
-
-
-        - **Aggregated categories**: all_contact_information, all_emails, all_ip, all_mailserver, all_nameserver, all_ssl, all_web_content, all_web_trackers, all_other
-
-        '
-      pattern: ^[a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*$
-      example: ip,nameserver_host,mailserver_host,ssl_hash
-    RiskScoreValue:
-      type: integer
-      minimum: 0
-      maximum: 100
-      description: A domain risk score value ranging from 0 (lowest risk) to 100 (highest risk).
-    DomainRiskScore:
-      type: object
-      properties:
-        response:
-          type: object
-          properties:
-            domain:
-              $ref: '#/components/schemas/ApexDomain'
-            risk_score:
-              $ref: '#/components/schemas/RiskScoreValue'
-            components:
-              type: array
-              items:
-                $ref: '#/components/schemas/DomainRiskComponent'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
-    HtmlResponse:
-      type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
-
-        '
-    ResponseFormat:
-      type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
-
-        '
+              description: The domain name that was queried.
+              example: github.com
     EnrichValue:
       type: object
       properties:
@@ -1762,279 +1192,7 @@ components:
           oneOf:
           - type: string
           - type: integer
-    ParsedWhoisIpContact:
-      type: object
-      description: Contact information from IP WHOIS record.
-      properties:
-        id:
-          type: string
-          description: Contact identifier/handle.
-          example: NFSNI-1
-        type:
-          type: string
-          description: Contact type.
-          enum:
-          - organization
-          - person
-          example: organization
-        name:
-          type: string
-          description: Contact name.
-          example: NearlyFreeSpeech.NET
-        address:
-          type: array
-          description: Postal address lines.
-          items:
-            type: string
-          example:
-          - 1540 INTERNATIONAL PKWY STE 2000
-          - LAKE MARY
-          - FL
-          - '32746'
-        country:
-          type: string
-          description: Country code (lowercase).
-          example: us
-        phone:
-          type: array
-          description: Phone numbers.
-          items:
-            type: string
-          example:
-          - '18887414678'
-        fax:
-          type: array
-          description: Fax numbers.
-          items:
-            type: string
-        email:
-          type: array
-          description: Email addresses.
-          items:
-            type: string
-          example:
-          - noc@nearlyfreespeech.net
-        descr:
-          type: array
-          description: Description or comments.
-          items:
-            type: string
-        contact_keys:
-          type: object
-          description: References to other contact IDs by role.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        remarks:
-          type: array
-          description: Additional remarks.
-          items:
-            type: string
-        notify_email:
-          type: array
-          description: Notification email addresses.
-          items:
-            type: string
-        abuse_mailbox:
-          type: array
-          description: Abuse reporting email addresses.
-          items:
-            type: string
-        mnt_keys:
-          type: object
-          description: Maintainer keys.
-          additionalProperties: true
-        created_date:
-          type: string
-          format: date-time
-          description: Date the contact was created.
-          example: '2008-02-01T00:00:00'
-        updated_date:
-          type: string
-          format: date-time
-          description: Date the contact was last updated.
-          example: '2018-05-22T00:00:00'
-        changed_by:
-          type: array
-          description: Change history.
-          items:
-            type: string
-        source:
-          type: string
-          description: Data source.
-        ref:
-          type: string
-          format: uri
-          description: Reference URL for this contact.
-          example: https://rdap.arin.net/registry/entity/NFSNI-1
-        other:
-          type: object
-          description: Additional properties.
-          additionalProperties: true
-    Hostname:
-      type: string
-      format: hostname
-      description: A valid, fully-qualified domain name (FQDN).
-    ApexDomain:
-      type: string
-      description: A base (apex) domain like example.com, excluding subdomains.
-      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
-    ReverseIpWhoisIp:
-      type: object
-      description: Response for the Reverse IP WHOIS (IP) endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            ip_from:
-              type: string
-            ip_to:
-              type: string
-            ip_from_alloc:
-              type: string
-            ip_to_alloc:
-              type: string
-            record_ip:
-              type: string
-            record_date:
-              type: string
-            server:
-              type: string
-            organization:
-              type: string
-            country:
-              type: string
-            range:
-              type: string
-            whois_record:
-              type: string
-    HostingHistory:
-      type: object
-      description: Response for the Hosting History endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            domain_name:
-              type: string
-              description: The queried domain name.
-              example: domaintools.com
-            ip_history:
-              type: array
-              description: 'Chronological list of IP address changes for the domain.
-
-                '
-              items:
-                type: object
-                properties:
-                  action:
-                    type: string
-                    description: 'Event type code. One of: `N` (New — first observed),
-
-                      `C` (Change — IP changed), `D` (Not Resolvable — domain
-
-                      stopped resolving).
-
-                      '
-                    enum:
-                    - N
-                    - C
-                    - D
-                    example: C
-                  action_in_words:
-                    type: string
-                    description: Human-readable label for the action code.
-                    example: Change
-                  actiondate:
-                    type: string
-                    description: Date the event was recorded (YYYY-MM-DD).
-                    example: '2007-03-10'
-                  domain:
-                    type: string
-                    description: The domain name associated with this event.
-                    example: DOMAINTOOLS.COM
-                  post_ip:
-                    type: string
-                    nullable: true
-                    description: IP address after the change. Null or empty string when the domain became unresolvable.
-                    example: 66.249.17.251
-                  pre_ip:
-                    type: string
-                    nullable: true
-                    description: IP address before the change. Null for New events.
-                    example: 66.249.4.251
-            nameserver_history:
-              type: array
-              description: 'Chronological list of nameserver changes for the domain.
-
-                '
-              items:
-                type: object
-                properties:
-                  action:
-                    type: string
-                    description: 'Event type code. One of: `T` (Transfer — nameserver
-
-                      provider changed), `N` (New), `C` (Change).
-
-                      '
-                    example: T
-                  action_in_words:
-                    type: string
-                    description: Human-readable label for the action code.
-                    example: Transfer
-                  actiondate:
-                    type: string
-                    description: Date the event was recorded (YYYY-MM-DD).
-                    example: '2020-01-11'
-                  domain:
-                    type: string
-                    description: The domain name associated with this event.
-                    example: DOMAINTOOLS.COM
-                  post_mns:
-                    type: string
-                    description: Nameserver provider after the change.
-                    example: Nsone.net
-                  pre_mns:
-                    type: string
-                    description: Nameserver provider before the change.
-                    example: Dynect.net
-            registrar_history:
-              type: array
-              deprecated: true
-              description: 'Deprecated. This field is retained for backward compatibility and always returns an empty array. Do not rely on it for new integrations.
-
-                '
-              items: {}
-    IPv4Address:
-      type: string
-      format: ipv4
-      description: A standard IPv4 address.
-    DomainReputation:
-      type: object
-      description: Response for the Domain Reputation endpoint.
-      properties:
-        response:
-          type: object
-          required:
-          - domain
-          - risk_score
-          properties:
-            domain:
-              $ref: '#/components/schemas/ApexDomain'
-            risk_score:
-              type: number
-              minimum: 0
-              maximum: 100
-              description: Domain risk score ranging from 0 (lowest risk) to 100 (highest risk). May include decimal values for more precise risk assessment.
-              example: 12.19
-            reasons:
-              type: array
-              description: Optional list of reasons contributing to the risk score. May not be present in all responses.
-              items:
-                type: string
-    ThreatProfile:
+    Proximity:
       type: object
       required:
       - name
@@ -2044,7 +1202,7 @@ components:
           type: string
           description: The type of risk component.
           enum:
-          - threat_profile
+          - proximity
         risk_score:
           $ref: '#/components/schemas/RiskScoreValue'
         evidence:
@@ -2052,204 +1210,9 @@ components:
           description: Optional array of evidence types supporting the risk score for this component.
           items:
             type: string
-      description: Indicates risk based on machine-learning models.
-    BasicString:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: A non-empty string with a standard length limit.
-    ParsedWhoisIpNetwork:
-      type: object
-      description: IP network block information from WHOIS.
-      properties:
-        id:
-          type: string
-          description: Network identifier/handle.
-          example: NET-208-94-116-0-1
-        range:
-          type: object
-          description: IP address range information.
-          properties:
-            from:
-              type: string
-              description: Starting IP address.
-              example: 208.94.116.0
-            to:
-              type: string
-              description: Ending IP address.
-              example: 208.94.119.255
-            cidr:
-              type: array
-              description: CIDR notation for the range.
-              items:
-                type: string
-              example:
-              - 208.94.116.0/22
-            count:
-              type: integer
-              description: Number of IP addresses in the range.
-              example: 1024
-        asn:
-          type: array
-          description: Autonomous System Numbers.
-          items:
-            type: string
-        name:
-          type: string
-          description: Network name.
-          example: GF-PHX-IPV4-1
-        org:
-          type: string
-          description: Organization name and ID.
-          example: GridFury, LLC (CELL-1)
-        parent:
-          type: string
-          description: Parent network name and ID.
-          example: NET208 (NET-208-0-0-0-0)
-        parent_id:
-          type: string
-          description: Parent network ID.
-          example: NET-208-0-0-0-0
-        customer:
-          type: string
-          description: Customer information.
-        country:
-          type: string
-          description: Country code.
-        phone:
-          type: array
-          description: Contact phone numbers.
-          items:
-            type: string
-        descr:
-          type: array
-          description: Description or comments.
-          items:
-            type: string
           example:
-          - http://www.gridfury.com/
-        contact_keys:
-          type: object
-          description: References to contact IDs by role.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          example:
-            org:
-            - CELL-1
-            tech:
-            - GNO70-ARIN
-            abuse:
-            - GNAT1-ARIN
-        status:
-          type: string
-          description: Network allocation status.
-          example: Direct Allocation
-        remarks:
-          type: array
-          description: Additional remarks.
-          items:
-            type: string
-        notify_email:
-          type: array
-          description: Notification email addresses.
-          items:
-            type: string
-        mnt_keys:
-          type: object
-          description: Maintainer keys.
-          additionalProperties: true
-        created_date:
-          type: string
-          format: date-time
-          description: Date the network was created.
-          example: '2008-08-28T00:00:00'
-        updated_date:
-          type: string
-          format: date-time
-          description: Date the network was last updated.
-          example: '2019-05-31T00:00:00'
-        changed_by:
-          type: array
-          description: Change history.
-          items:
-            type: string
-        source:
-          type: string
-          description: Data source.
-        ref:
-          type: string
-          format: uri
-          description: Reference URL for this network.
-          example: https://rdap.arin.net/registry/ip/208.94.116.0
-        other:
-          type: object
-          description: Additional properties.
-          additionalProperties: true
-    ThreatProfileSpam:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_spam
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as spam-related.
-    WhoisHistory:
-      type: object
-      description: Response for the WHOIS History endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            record_count:
-              type: number
-            history:
-              type: array
-              items:
-                type: object
-                properties:
-                  date:
-                    type: string
-                  is_private:
-                    type: string
-                  whois:
-                    type: object
-                    properties:
-                      registrant:
-                        type: string
-                      registration:
-                        type: object
-                        properties:
-                          created:
-                            type: string
-                          expires:
-                            type: string
-                          registrar:
-                            type: string
-                          statuses:
-                            type: array
-                            items:
-                              type: string
-                      name_servers:
-                        type: array
-                        items:
-                          type: string
-                      server:
-                        type: string
-                      record:
-                        type: string
+          - dns
+      description: Indicates risk based on proximity to known threats or suspicious infrastructure.
     ReverseWhois:
       type: object
       description: Response for the Reverse WHOIS endpoint.
@@ -2275,6 +1238,58 @@ components:
                   type: integer
                 historic:
                   type: integer
+    DomainReputation:
+      type: object
+      description: Response for the Domain Reputation endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain
+          - risk_score
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Domain risk score ranging from 0 (lowest risk) to 100 (highest risk). May include decimal values for more precise risk assessment.
+              example: 12.19
+            reasons:
+              type: array
+              description: Optional list of reasons contributing to the risk score. May not be present in all responses.
+              items:
+                type: string
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
+
+        '
+    DomainRiskScoreEvidence:
+      type: object
+      description: Response for the Risk Score Evidence endpoint.
+      properties:
+        response:
+          type: object
+          required:
+          - domain
+          - risk_score
+          - components
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              $ref: '#/components/schemas/RiskScoreValue'
+            components:
+              type: array
+              description: Array of risk components contributing to the overall score.
+              items:
+                $ref: '#/components/schemas/DomainRiskComponent'
     EnrichResult:
       type: object
       description: A comprehensive domain profile result from Iris Enrich API.
@@ -2494,16 +1509,9 @@ components:
         parsed_domain_rdap:
           type: object
           description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
-    IdentifierString:
+    HtmlResponse:
       type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    BooleanOptInFlag:
-      type: boolean
-      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
-
-        If `false` or omitted, the feature is ignored.
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
 
         '
     ReverseIpWhoisQuery:
@@ -2542,7 +1550,206 @@ components:
                     type: string
                   range:
                     type: string
-    Proximity:
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    Hostname:
+      type: string
+      format: hostname
+      description: A valid, fully-qualified domain name (FQDN).
+    DomainHistoryFieldsList:
+      type: string
+      description: 'Comma-separated list of field names to include or exclude from Domain History responses.
+
+
+        Field filtering works at the **event level**: it determines which change events appear in the response based on the value of the `field` property. Each change event''s `before` and `after` objects always contain the complete state for that field—filtering doesn''t remove properties from these objects.
+
+
+        **Two types of field names are supported:**
+
+
+        1. **Individual fields**: Top-level properties from the response structure (e.g., `ip`, `mx`, `name_server`, `ssl_info`, `create_date`)
+
+        2. **Aggregated categories**: Groups of related fields that simplify filtering multiple event types at once
+
+
+        **Valid field names:**
+
+
+        - **Individual fields**: ip, asn, ip_country_code, isp_name, mailserver_host, mailserver_ip, nameserver_host, nameserver_ip, ssl_hash, ssl_common_name, ssl_alt_names, ssl_not_before, ssl_not_after, create_date, expiration_date, registrant, registrar, registrar_status, active, redirect, redirect_domain, screenshot_collected_timestamp, server_type, website_response, website_title, adsense, baidu_analytics, google_analytics, ga4, facebook, google_tag_manager, hotjar, matomo, statcounter_project, statcounter_security, yandex_metrica, contact_name, contact_phone, contact_street, contact_city, contact_state, contact_fax, contact_organization, admin_contact_email, billing_contact_email, email_dns_soa, technical_contact_email, registrant_contact_email, additional_whois_email
+
+
+        - **Aggregated categories**: all_contact_information, all_emails, all_ip, all_mailserver, all_nameserver, all_ssl, all_web_content, all_web_trackers, all_other
+
+        '
+      pattern: ^[a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*$
+      example: ip,nameserver_host,mailserver_host,ssl_hash
+    DomainRiskComponent:
+      description: A polymorphic schema representing one of several types of risk components.
+      oneOf:
+      - $ref: '#/components/schemas/Proximity'
+      - $ref: '#/components/schemas/ThreatProfile'
+      - $ref: '#/components/schemas/ThreatProfileMalware'
+      - $ref: '#/components/schemas/ThreatProfilePhishing'
+      - $ref: '#/components/schemas/ThreatProfileSpam'
+      - $ref: '#/components/schemas/ZeroListedScore'
+      discriminator:
+        propertyName: name
+        mapping:
+          proximity: '#/components/schemas/Proximity'
+          threat_profile: '#/components/schemas/ThreatProfile'
+          threat_profile_malware: '#/components/schemas/ThreatProfileMalware'
+          threat_profile_phishing: '#/components/schemas/ThreatProfilePhishing'
+          threat_profile_spam: '#/components/schemas/ThreatProfileSpam'
+          zerolist: '#/components/schemas/ZeroListedScore'
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    ReverseIpWhoisIp:
+      type: object
+      description: Response for the Reverse IP WHOIS (IP) endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            ip_from:
+              type: string
+            ip_to:
+              type: string
+            ip_from_alloc:
+              type: string
+            ip_to_alloc:
+              type: string
+            record_ip:
+              type: string
+            record_date:
+              type: string
+            server:
+              type: string
+            organization:
+              type: string
+            country:
+              type: string
+            range:
+              type: string
+            whois_record:
+              type: string
+    IPv4Address:
+      type: string
+      format: ipv4
+      description: A standard IPv4 address.
+    DomainSearch:
+      type: object
+      description: Response for the Domain Search endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            query_info:
+              type: object
+              properties:
+                active_only:
+                  type: boolean
+                min_length:
+                  type: integer
+                total_results:
+                  type: integer
+                exclude_query:
+                  type: string
+                has_hyphen:
+                  type: boolean
+                max_length:
+                  type: integer
+                anchor_right:
+                  type: boolean
+                anchor_left:
+                  type: boolean
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                has_number:
+                  type: boolean
+                deleted_only:
+                  type: boolean
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  sld:
+                    type: string
+                  tlds:
+                    type: array
+                    items:
+                      type: string
+                  hashad_tlds:
+                    type: array
+                    items:
+                      type: string
+                  char_count:
+                    type: integer
+                  has_hyphen:
+                    type: integer
+                  has_deleted:
+                    type: integer
+                  has_number:
+                    type: integer
+                  tlds_count:
+                    type: integer
+                  has_active:
+                    type: integer
+    DomainRiskScore:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            domain:
+              $ref: '#/components/schemas/ApexDomain'
+            risk_score:
+              $ref: '#/components/schemas/RiskScoreValue'
+            components:
+              type: array
+              items:
+                $ref: '#/components/schemas/DomainRiskComponent'
+    ReverseNameServer:
+      type: object
+      description: Response for the Reverse Name Server endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            name_server:
+              type: object
+              properties:
+                hostname:
+                  type: string
+                primary:
+                  type: integer
+                secondary:
+                  type: string
+                total:
+                  type: integer
+            primary_domains:
+              type: array
+              items:
+                type: string
+            secondary_domains:
+              type: array
+              items:
+                type: string
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    ZeroListedScore:
       type: object
       required:
       - name
@@ -2552,7 +1759,140 @@ components:
           type: string
           description: The type of risk component.
           enum:
-          - proximity
+          - zerolist
+        risk_score:
+          type: integer
+          description: The risk score for a zerolisted domain, which is always 0.
+          enum:
+          - 0
+      description: Indicates the domain is on a known-good 'zero list' and is not considered a threat.
+    DomainProfile:
+      type: object
+      description: Response for the Domain Profile endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            registrant:
+              type: object
+              properties:
+                name:
+                  type: string
+                domain:
+                  type: integer
+                domains:
+                  type: integer
+                product_url:
+                  type: string
+            server:
+              type: object
+              properties:
+                ip_address:
+                  type: string
+                other_domains:
+                  type: integer
+                product_url:
+                  type: string
+            registration:
+              type: object
+              properties:
+                created:
+                  type: string
+                expires:
+                  type: string
+                updated:
+                  type: string
+                registrar:
+                  type: string
+                statuses:
+                  type: array
+                  items:
+                    type: string
+            name_servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  server:
+                    type: string
+                  product_url:
+                    type: string
+            history:
+              type: object
+              properties:
+                registrar:
+                  type: object
+                  properties:
+                    earliest_event:
+                      type: string
+                    events:
+                      type: integer
+                    product_url:
+                      type: string
+                name_server:
+                  type: object
+                  properties:
+                    events:
+                      type: integer
+                    timespan_in_years:
+                      type: integer
+                    product_url:
+                      type: string
+                ip_address:
+                  type: object
+                  properties:
+                    events:
+                      type: integer
+                    timespan_in_years:
+                      type: integer
+                    product_url:
+                      type: string
+                whois:
+                  type: object
+                  properties:
+                    records:
+                      type: integer
+                    earliest_event:
+                      type: string
+                    product_url:
+                      type: string
+            seo:
+              type: object
+              properties:
+                score:
+                  oneOf:
+                  - type: integer
+                  - type: string
+                product_url:
+                  type: string
+            website_data:
+              type: object
+              properties:
+                response_code:
+                  oneOf:
+                  - type: integer
+                  - type: string
+                title:
+                  type: string
+                server:
+                  type: string
+                meta:
+                  type: array
+                  items:
+                    type: string
+                product_url:
+                  type: string
+    ThreatProfileSpam:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_spam
         risk_score:
           $ref: '#/components/schemas/RiskScoreValue'
         evidence:
@@ -2560,9 +1900,57 @@ components:
           description: Optional array of evidence types supporting the risk score for this component.
           items:
             type: string
-          example:
-          - dns
-      description: Indicates risk based on proximity to known threats or suspicious infrastructure.
+      description: Indicates risk based on a machine-learning model that classifies domains as spam-related.
+    EnrichContact:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/EnrichValue'
+        org:
+          $ref: '#/components/schemas/EnrichValue'
+        street:
+          $ref: '#/components/schemas/EnrichValue'
+        city:
+          $ref: '#/components/schemas/EnrichValue'
+        state:
+          $ref: '#/components/schemas/EnrichValue'
+        postal:
+          $ref: '#/components/schemas/EnrichValue'
+        country:
+          $ref: '#/components/schemas/EnrichValue'
+        phone:
+          $ref: '#/components/schemas/EnrichValue'
+        fax:
+          $ref: '#/components/schemas/EnrichValue'
+        email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
+    EnrichTracker:
+      type: object
+      description: A tracker identifier.
+      properties:
+        value:
+          type: string
+    ThreatProfile:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on machine-learning models.
     WhoisLookup:
       type: object
       description: Response for the WHOIS Lookup endpoint.
@@ -2600,42 +1988,106 @@ components:
                   type: string
             record_source:
               type: string
-    ParsedWhoisContact:
+    HostingHistory:
       type: object
-      description: Contact information from a WHOIS record.
+      description: Response for the Hosting History endpoint.
       properties:
-        name:
-          type: string
-          description: Contact name.
-        org:
-          type: string
-          description: Organization name.
-        street:
-          type: array
-          description: Street address lines.
-          items:
-            type: string
-        city:
-          type: string
-          description: City.
-        state:
-          type: string
-          description: State or region.
-        postal:
-          type: string
-          description: Postal code.
-        country:
-          type: string
-          description: Country code.
-        phone:
-          type: string
-          description: Phone number.
-        fax:
-          type: string
-          description: Fax number.
-        email:
-          type: string
-          description: Email address.
+        response:
+          type: object
+          properties:
+            domain_name:
+              type: string
+              description: The queried domain name.
+              example: domaintools.com
+            ip_history:
+              type: array
+              description: 'Chronological list of IP address changes for the domain.
+
+                '
+              items:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    description: 'Event type code. One of: `N` (New — first observed),
+
+                      `C` (Change — IP changed), `D` (Not Resolvable — domain
+
+                      stopped resolving).
+
+                      '
+                    enum:
+                    - N
+                    - C
+                    - D
+                    example: C
+                  action_in_words:
+                    type: string
+                    description: Human-readable label for the action code.
+                    example: Change
+                  actiondate:
+                    type: string
+                    description: Date the event was recorded (YYYY-MM-DD).
+                    example: '2007-03-10'
+                  domain:
+                    type: string
+                    description: The domain name associated with this event.
+                    example: DOMAINTOOLS.COM
+                  post_ip:
+                    type:
+                    - string
+                    - 'null'
+                    description: IP address after the change. Null or empty string when the domain became unresolvable.
+                    example: 66.249.17.251
+                  pre_ip:
+                    type:
+                    - string
+                    - 'null'
+                    description: IP address before the change. Null for New events.
+                    example: 66.249.4.251
+            nameserver_history:
+              type: array
+              description: 'Chronological list of nameserver changes for the domain.
+
+                '
+              items:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    description: 'Event type code. One of: `T` (Transfer — nameserver
+
+                      provider changed), `N` (New), `C` (Change).
+
+                      '
+                    example: T
+                  action_in_words:
+                    type: string
+                    description: Human-readable label for the action code.
+                    example: Transfer
+                  actiondate:
+                    type: string
+                    description: Date the event was recorded (YYYY-MM-DD).
+                    example: '2020-01-11'
+                  domain:
+                    type: string
+                    description: The domain name associated with this event.
+                    example: DOMAINTOOLS.COM
+                  post_mns:
+                    type: string
+                    description: Nameserver provider after the change.
+                    example: Nsone.net
+                  pre_mns:
+                    type: string
+                    description: Nameserver provider before the change.
+                    example: Dynect.net
+            registrar_history:
+              type: array
+              deprecated: true
+              description: 'Deprecated. This field is retained for backward compatibility and always returns an empty array. Do not rely on it for new integrations.
+
+                '
+              items: {}
     DomainHistory:
       type: object
       description: Response for the Domain History endpoint.
@@ -2709,219 +2161,66 @@ components:
                     $ref: '#/components/schemas/EnrichResult'
                   after:
                     $ref: '#/components/schemas/EnrichResult'
-    ReverseIp:
+    WhoisHistory:
       type: object
-      description: Response for the Reverse IP endpoint.
+      description: Response for the WHOIS History endpoint.
       properties:
         response:
           type: object
           properties:
-            ip_addresses:
+            record_count:
+              type: number
+            history:
               type: array
               items:
                 type: object
                 properties:
-                  domain_count:
-                    type: integer
-                  domain_names:
-                    type: array
-                    items:
-                      type: string
-                  ip_address:
+                  date:
                     type: string
-    DomainSearch:
-      type: object
-      description: Response for the Domain Search endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            query_info:
-              type: object
-              properties:
-                active_only:
-                  type: boolean
-                min_length:
-                  type: integer
-                total_results:
-                  type: integer
-                exclude_query:
-                  type: string
-                has_hyphen:
-                  type: boolean
-                max_length:
-                  type: integer
-                anchor_right:
-                  type: boolean
-                anchor_left:
-                  type: boolean
-                page:
-                  type: integer
-                limit:
-                  type: integer
-                has_number:
-                  type: boolean
-                deleted_only:
-                  type: boolean
-            results:
-              type: array
-              items:
-                type: object
-                properties:
-                  sld:
+                  is_private:
                     type: string
-                  tlds:
-                    type: array
-                    items:
-                      type: string
-                  hashad_tlds:
-                    type: array
-                    items:
-                      type: string
-                  char_count:
-                    type: integer
-                  has_hyphen:
-                    type: integer
-                  has_deleted:
-                    type: integer
-                  has_number:
-                    type: integer
-                  tlds_count:
-                    type: integer
-                  has_active:
-                    type: integer
-    ThreatProfilePhishing:
+                  whois:
+                    type: object
+                    properties:
+                      registrant:
+                        type: string
+                      registration:
+                        type: object
+                        properties:
+                          created:
+                            type: string
+                          expires:
+                            type: string
+                          registrar:
+                            type: string
+                          statuses:
+                            type: array
+                            items:
+                              type: string
+                      name_servers:
+                        type: array
+                        items:
+                          type: string
+                      server:
+                        type: string
+                      record:
+                        type: string
+    ParsedWhoisIp:
       type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_phishing
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as phishing-related.
-    DomainRiskScoreEvidence:
-      type: object
-      description: Response for the Risk Score Evidence endpoint.
+      description: Response for the Parsed WHOIS (IP) endpoint.
       properties:
         response:
           type: object
           required:
-          - domain
-          - risk_score
-          - components
-          properties:
-            domain:
-              $ref: '#/components/schemas/ApexDomain'
-            risk_score:
-              $ref: '#/components/schemas/RiskScoreValue'
-            components:
-              type: array
-              description: Array of risk components contributing to the overall score.
-              items:
-                $ref: '#/components/schemas/DomainRiskComponent'
-    ThreatProfileMalware:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_malware
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as malware-related.
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
-
-        '
-    EnrichTracker:
-      type: object
-      description: A tracker identifier.
-      properties:
-        value:
-          type: string
-    ParsedWhoisDomain:
-      type: object
-      description: Response for the Parsed WHOIS (Domain) endpoint.
-      properties:
-        response:
-          type: object
-          required:
-          - registration
-          - name_servers
           - whois
+          - source
           - parsed_whois
           - record_source
           properties:
             registrant:
               type: string
-              description: Registrant organization name (if available).
-              example: GitHub, Inc.
-            registration:
-              type: object
-              description: Basic registration information.
-              required:
-              - created
-              - expires
-              - updated
-              - registrar
-              - statuses
-              properties:
-                created:
-                  type: string
-                  format: date
-                  description: Date the domain was created.
-                  example: '2007-10-09'
-                expires:
-                  type: string
-                  format: date
-                  description: Date the domain registration expires.
-                  example: '2026-10-09'
-                updated:
-                  type: string
-                  format: date
-                  description: Date the domain record was last updated.
-                  example: '2024-09-07'
-                registrar:
-                  type: string
-                  description: Name of the registrar.
-                  example: MarkMonitor Inc.
-                statuses:
-                  type: array
-                  description: Domain status codes.
-                  items:
-                    type: string
-                  example:
-                  - clientDeleteProhibited
-                  - clientTransferProhibited
-                  - clientUpdateProhibited
-            name_servers:
-              type: array
-              description: List of nameserver hostnames for the domain.
-              items:
-                type: string
-              example:
-              - DNS1.P08.NSONE.NET
-              - DNS2.P08.NSONE.NET
+              description: Top-level organization name for the IP range.
+              example: NearlyFreeSpeech.NET (NFSNI-1)
             whois:
               type: object
               description: Raw WHOIS record information.
@@ -2933,158 +2232,838 @@ components:
                   type: string
                   format: date
                   description: Date the WHOIS record was retrieved.
-                  example: '2025-10-26'
+                  example: '2025-10-16'
                 record:
                   type: string
                   description: The raw WHOIS record text.
+            source:
+              type: string
+              description: The Regional Internet Registry (RIR) source of the WHOIS data.
+              enum:
+              - ARIN
+              - RIPE
+              - APNIC
+              - LACNIC
+              - AFRINIC
+              example: ARIN
             parsed_whois:
               type: object
-              description: Parsed and normalized WHOIS data.
+              description: Parsed and normalized IP WHOIS data.
               required:
-              - domain
-              - created_date
-              - updated_date
-              - expired_date
-              - statuses
-              - name_servers
-              - registrar
+              - networks
               - contacts
               properties:
-                domain:
-                  type: string
-                  description: The domain name.
-                  example: github.com
-                created_date:
-                  type: string
-                  format: date-time
-                  description: ISO 8601 timestamp of when the domain was created.
-                  example: '2007-10-09T18:20:50+00:00'
-                updated_date:
-                  type: string
-                  format: date-time
-                  description: ISO 8601 timestamp of when the domain was last updated.
-                  example: '2024-09-07T09:16:33+00:00'
-                expired_date:
-                  type: string
-                  format: date-time
-                  description: ISO 8601 timestamp of when the domain registration expires.
-                  example: '2026-10-09T00:00:00+00:00'
-                statuses:
+                networks:
                   type: array
-                  description: Domain status codes.
+                  description: IP network blocks and their allocation details.
                   items:
-                    type: string
-                  example:
-                  - clientDeleteProhibited
-                  - clientTransferProhibited
-                name_servers:
-                  type: array
-                  description: List of nameserver hostnames.
-                  items:
-                    type: string
-                  example:
-                  - dns1.p08.nsone.net
-                  - dns2.p08.nsone.net
-                registrar:
-                  type: object
-                  description: Registrar information.
-                  properties:
-                    name:
-                      type: string
-                      description: Name of the registrar.
-                      example: MarkMonitor, Inc.
-                    abuse_contact_phone:
-                      type: string
-                      description: Registrar abuse contact phone number.
-                      example: '+1.2086851750'
-                    abuse_contact_email:
-                      type: string
-                      description: Registrar abuse contact email.
-                      example: abusecomplaints@markmonitor.com
-                    iana_id:
-                      type: string
-                      description: IANA registrar ID.
-                      example: '292'
-                    url:
-                      type: string
-                      format: uri
-                      description: Registrar website URL.
-                      example: http://www.markmonitor.com
-                    whois_server:
-                      type: string
-                      description: Registrar WHOIS server hostname.
-                      example: whois.markmonitor.com
+                    $ref: '#/components/schemas/ParsedWhoisIpNetwork'
                 contacts:
-                  type: object
-                  description: Domain contact information organized by role.
-                  properties:
-                    registrant:
-                      $ref: '#/components/schemas/ParsedWhoisContact'
-                    admin:
-                      $ref: '#/components/schemas/ParsedWhoisContact'
-                    tech:
-                      $ref: '#/components/schemas/ParsedWhoisContact'
-                    billing:
-                      $ref: '#/components/schemas/ParsedWhoisContact'
+                  type: array
+                  description: Organizations and persons associated with the networks.
+                  items:
+                    $ref: '#/components/schemas/ParsedWhoisIpContact'
+                routes:
+                  type: array
+                  description: Routing information (typically empty).
+                  items:
+                    type: object
+                referral_servers:
+                  type: array
+                  description: Referral server information (typically empty).
+                  items:
+                    type: string
                 other_properties:
-                  type: object
-                  description: Additional properties from the WHOIS record that don't fit standard fields.
-                  additionalProperties: true
-                  example:
-                    dnssec: unsigned
-                    registry_domain_id: 1264983250_DOMAIN_COM-VRSN
+                  type: array
+                  description: Additional properties from the WHOIS record.
+                  items:
+                    type: object
             record_source:
               type: string
-              description: The domain name that was queried.
-              example: github.com
-    DomainRiskComponent:
-      description: A polymorphic schema representing one of several types of risk components.
-      oneOf:
-      - $ref: '#/components/schemas/Proximity'
-      - $ref: '#/components/schemas/ThreatProfile'
-      - $ref: '#/components/schemas/ThreatProfileMalware'
-      - $ref: '#/components/schemas/ThreatProfilePhishing'
-      - $ref: '#/components/schemas/ThreatProfileSpam'
-      - $ref: '#/components/schemas/ZeroListedScore'
-      discriminator:
-        propertyName: name
-        mapping:
-          proximity: '#/components/schemas/Proximity'
-          threat_profile: '#/components/schemas/ThreatProfile'
-          threat_profile_malware: '#/components/schemas/ThreatProfileMalware'
-          threat_profile_phishing: '#/components/schemas/ThreatProfilePhishing'
-          threat_profile_spam: '#/components/schemas/ThreatProfileSpam'
-          zerolist: '#/components/schemas/ZeroListedScore'
+              description: The IP address that was queried.
+              example: 208.94.117.131
+    ParsedWhoisIpNetwork:
+      type: object
+      description: IP network block information from WHOIS.
+      properties:
+        id:
+          type: string
+          description: Network identifier/handle.
+          example: NET-208-94-116-0-1
+        range:
+          type: object
+          description: IP address range information.
+          properties:
+            from:
+              type: string
+              description: Starting IP address.
+              example: 208.94.116.0
+            to:
+              type: string
+              description: Ending IP address.
+              example: 208.94.119.255
+            cidr:
+              type: array
+              description: CIDR notation for the range.
+              items:
+                type: string
+              example:
+              - 208.94.116.0/22
+            count:
+              type: integer
+              description: Number of IP addresses in the range.
+              example: 1024
+        asn:
+          type: array
+          description: Autonomous System Numbers.
+          items:
+            type: string
+        name:
+          type: string
+          description: Network name.
+          example: GF-PHX-IPV4-1
+        org:
+          type: string
+          description: Organization name and ID.
+          example: GridFury, LLC (CELL-1)
+        parent:
+          type: string
+          description: Parent network name and ID.
+          example: NET208 (NET-208-0-0-0-0)
+        parent_id:
+          type: string
+          description: Parent network ID.
+          example: NET-208-0-0-0-0
+        customer:
+          type: string
+          description: Customer information.
+        country:
+          type: string
+          description: Country code.
+        phone:
+          type: array
+          description: Contact phone numbers.
+          items:
+            type: string
+        descr:
+          type: array
+          description: Description or comments.
+          items:
+            type: string
+          example:
+          - http://www.gridfury.com/
+        contact_keys:
+          type: object
+          description: References to contact IDs by role.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            org:
+            - CELL-1
+            tech:
+            - GNO70-ARIN
+            abuse:
+            - GNAT1-ARIN
+        status:
+          type: string
+          description: Network allocation status.
+          example: Direct Allocation
+        remarks:
+          type: array
+          description: Additional remarks.
+          items:
+            type: string
+        notify_email:
+          type: array
+          description: Notification email addresses.
+          items:
+            type: string
+        mnt_keys:
+          type: object
+          description: Maintainer keys.
+          additionalProperties: true
+        created_date:
+          type: string
+          format: date-time
+          description: Date the network was created.
+          example: '2008-08-28T00:00:00'
+        updated_date:
+          type: string
+          format: date-time
+          description: Date the network was last updated.
+          example: '2019-05-31T00:00:00'
+        changed_by:
+          type: array
+          description: Change history.
+          items:
+            type: string
+        source:
+          type: string
+          description: Data source.
+        ref:
+          type: string
+          format: uri
+          description: Reference URL for this network.
+          example: https://rdap.arin.net/registry/ip/208.94.116.0
+        other:
+          type: object
+          description: Additional properties.
+          additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+  parameters:
+    whoisHistorySort:
+      in: query
+      name: sort
+      description: Sort the records returned in either ascending or descending order by date.
+      schema:
+        type: string
+        enum:
+        - date_asc
+        - date_desc
+    whoisHistoryMode:
+      in: query
+      name: mode
+      description: '- `list` (default): Returns the historical records.
+
+        - `count`: Returns only the total count of historical records.
+
+        - `check_existence`: Returns a boolean indicating if history exists.
+
+        '
+      schema:
+        type: string
+        enum:
+        - list
+        - count
+        - check_existence
+        default: list
+    parsedDomainRdapFlag:
+      name: parsed_domain_rdap
+      in: query
+      description: 'Flag.
+
+        If set to `true`, includes the full parsed Domain RDAP record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    excludeTerms:
+      in: query
+      name: exclude
+      description: 'Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    excludeQuery:
+      in: query
+      name: exclude_query
+      description: 'Terms to exclude from matching. Each term must be at least three characters long. Use spaces to separate multiple terms.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    resultsPageSize:
+      name: page_size
+      in: query
+      description: 'Adjusts the number of results returned per page.
+
+        The default is 500. Use this parameter to request a smaller page size.
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    domainSearchQuery:
+      in: query
+      name: query
+      description: 'Terms to search for. Each term must be at least three characters long. Use spaces to separate multiple terms.
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    maxLength:
+      in: query
+      name: max_length
+      description: Limit the maximum domain character count.
+      schema:
+        type: integer
+        maximum: 63
+    includeTotalCount:
+      in: query
+      name: include_total_count
+      description: Returns the total number of results for a query. This should typically be used only for the first page of a large result set.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    activeOnly:
+      in: query
+      name: active_only
+      description: Return only domains currently registered.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    nameServerPath:
+      in: path
+      name: nameServer
+      description: The name server hostname to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/Hostname'
+    deletedOnly:
+      in: query
+      name: deleted_only
+      description: Return only domains previously registered but not currently registered.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    countryCode:
+      in: query
+      name: country
+      description: 'Limits results to IP addresses allocated to an entity with a particular country.
+
+        Must be a valid ISO 3166-1 two-character country code.
+
+        '
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+    parsedWhoisFlag:
+      name: parsed_whois
+      in: query
+      description: 'Flag.
+
+        If set to ''true'', includes the full parsed WHOIS record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    anchorLeft:
+      in: query
+      name: anchor_left
+      description: Return only domains that start with the query term.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    hasNumber:
+      in: query
+      name: has_number
+      description: Return results with numbers in the domain name.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    reverseWhoisMode:
+      in: query
+      name: mode
+      description: '- `quote`: Returns the size and estimated price of the query.
+
+        - `purchase`: Returns the complete list of matching domain names.
+
+        '
+      schema:
+        type: string
+        enum:
+        - quote
+        - purchase
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    anchorRight:
+      in: query
+      name: anchor_right
+      description: Return only domains that end with the query term.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    hasHyphen:
+      in: query
+      name: has_hyphen
+      description: Return results with hyphens in the domain name.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    reverseWhoisScope:
+      in: query
+      name: scope
+      description: 'Sets the scope of the report to include only current WHOIS records, or to include both current and historic records.
+
+        '
+      schema:
+        type: string
+        enum:
+        - current
+        - historic
+        default: current
+    domainPath:
+      in: path
+      name: domain
+      description: A valid domain name.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    domainOrIpPath:
+      in: path
+      name: query
+      description: A valid domain name or IP address.
+      required: true
+      schema:
+        type: string
+    minLength:
+      in: query
+      name: min_length
+      description: Limit the minimum domain character count.
+      schema:
+        type: integer
+        minimum: 1
+    reverseIpWhoisQuery:
+      name: query
+      in: query
+      description: 'A space-separated list of free text query terms with support for `+` (must include), `-` (must not include), and `*` (prefix) modifiers.
+
+        '
+      schema:
+        type: string
+    includeFields:
+      in: query
+      name: include_fields
+      description: 'Comma-separated list of fields to include in the response. Only change events matching these fields will appear in the results.
+
+
+        Filtering occurs at the event level—it determines which change events are returned, not which properties appear in the `before` and `after` objects. Each returned change event includes the complete `before` and `after` state for that field.
+
+
+        **Field Name Mapping:**
+
+
+        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
+
+        - Filter: `ssl_hash` → Response field: `ssl_info`
+
+        - Filter: `mailserver_host` → Response field: `mx`
+
+        - Filter: `nameserver_host` → Response field: `name_server`
+
+
+        This design allows precise filtering using property-level names while maintaining complete context in change events.
+
+
+        **Valid values include:**
+
+
+        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
+
+        - **Aggregated categories:** Groups of related fields like `all_ip` (includes all IP-related changes), `all_ssl` (includes all SSL-related changes), `all_contact_information`, etc.
+
+
+        **Example:** `include_fields=ip,ssl_hash` returns change events where the `field` property is `ip` or `ssl_info`.
+
+
+        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DomainHistoryFieldsList'
+    resultsOffset:
+      name: offset
+      in: query
+      description: Specifies the starting point for the result set, used for paginating when the number of results exceeds the 'limit'. An offset of 0 starts from the first result.
+      schema:
+        type: integer
+        minimum: 0
+    whoisServer:
+      in: query
+      name: server
+      description: 'Limits results to ranges from a particular RIR WHOIS server.
+
+        '
+      schema:
+        type: string
+        enum:
+        - whois.arin.net
+        - whois.apnic.net
+        - whois.ripe.net
+        - whois.lacnic.net
+        - whois.afrinic.net
+    resultsLimit:
+      name: limit
+      in: query
+      description: 'Specify the maximum number of records to retrieve in an API query.
+
+        The maximum value is **100**.
+
+        '
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
+    page:
+      in: query
+      name: page
+      description: Sets the page of results to retrieve from the server (used in services that support pagination).
+      schema:
+        type: integer
+        minimum: 1
+    excludeFields:
+      in: query
+      name: exclude_fields
+      description: 'Comma-separated list of fields to exclude from the response. Change events matching these fields will be omitted from the results.
+
+
+        Filtering occurs at the event level—it determines which change events are excluded, not which properties are removed from the `before` and `after` objects. Defaults to returning all change types.
+
+
+        **Field Name Mapping:**
+
+
+        Filter parameter names (used in this parameter) may differ from the response `field` values. For example:
+
+        - Filter: `ssl_hash` → Response field: `ssl_info`
+
+        - Filter: `mailserver_host` → Response field: `mx`
+
+        - Filter: `nameserver_host` → Response field: `name_server`
+
+
+        **Valid values include:**
+
+
+        - **Individual fields:** Specific properties like `ip`, `mailserver_host`, `nameserver_host`, `ssl_hash`, `create_date`, `expiration_date`, `registrar`, etc.
+
+        - **Aggregated categories:** Groups of related fields like `all_ip` (excludes all IP-related changes), `all_ssl` (excludes all SSL-related changes), `all_contact_information`, etc.
+
+
+        **Example:** `exclude_fields=all_ip,all_ssl` removes change events where the `field` property is `ip`, `ssl_info`, or related fields.
+
+
+        **Tip:** To discover all available field names, you can intentionally provide an invalid field name in your request. The API will return an error message listing all valid field names.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DomainHistoryFieldsList'
+    domainQueryRequired:
+      in: query
+      name: domain
+      description: Required. A valid domain name.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    reverseWhoisTerms:
+      in: query
+      name: terms
+      description: 'One or more terms, where the pipe character `|` may be used as a logical AND to require that all strings be present in order to match.
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    ipAddressPath:
+      in: path
+      name: ip
+      description: The IP Address to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    ipVersion:
+      in: query
+      name: ip_version
+      description: 'Limits the query search results to a particular IP version. If omitted, the default is IPv4.
+
+        '
+      schema:
+        type: integer
+        enum:
+        - 4
+        - 6
+        default: 4
+    ipQuery:
+      in: query
+      name: ip
+      description: IPv4 address the registered domain was last known to point to during an active DNS check.
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+  responses:
+    WhoisLookupSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhoisLookup'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ReverseIpSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseIp'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ReverseWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseWhois'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ReverseIpWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/ReverseIpWhoisIp'
+            - $ref: '#/components/schemas/ReverseIpWhoisQuery'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ParsedDomainRdapSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ParsedDomainRdapResponse'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainHistory'
+          examples:
+            default_response:
+              $ref: '#/components/examples/DomainHistoryDefaultResponse'
+            parsed_domain_rdap:
+              $ref: '#/components/examples/DomainHistoryParsedDomainRdap'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainSearchSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainSearch'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ParsedWhoisSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/ParsedWhoisDomain'
+            - $ref: '#/components/schemas/ParsedWhoisIp'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainRiskScoreSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainRiskScore'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    RiskScoreEvidenceSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainRiskScoreEvidence'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DomainReputationSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainReputation'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    DomainProfileSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomainProfile'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ReverseNameServerSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseNameServer'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    WhoisHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhoisHistory'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    HostingHistorySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HostingHistory'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   examples:
-    DomainHistoryParsedDomainRdap:
-      summary: Response with parsed_domain_rdap enabled
-      value:
-        response:
-          domain: domaintools.com
-          count: 1534
-          registration_source: parsed_domain_rdap
-          next: https://api.domaintools.demo/v1/domain-history/?domain=domaintools.com&page_size=5&parsed_domain_rdap=true&offset=5
-          changes:
-          - timestamp: '2025-10-14T09:44:26Z'
-            field: mx
-            before:
-              mx:
-              - host:
-                  value: aspmx2.googlemail.com
-                domain:
-                  value: null
-                ip:
-                - value: 142.250.101.26
-                priority: 10
-            after:
-              mx:
-              - host:
-                  value: alt1.aspmx.l.google.com
-                domain:
-                  value: null
-                ip:
-                - value: 142.250.101.26
-                priority: 5
     DomainHistoryDefaultResponse:
       summary: Default response (parsed_whois)
       value:
@@ -3184,8 +3163,61 @@ components:
                 ip:
                 - value: 74.125.142.27
                 priority: 1
+    DomainHistoryParsedDomainRdap:
+      summary: Response with parsed_domain_rdap enabled
+      value:
+        response:
+          domain: domaintools.com
+          count: 1534
+          registration_source: parsed_domain_rdap
+          next: https://api.domaintools.demo/v1/domain-history/?domain=domaintools.com&page_size=5&parsed_domain_rdap=true&offset=5
+          changes:
+          - timestamp: '2025-10-14T09:44:26Z'
+            field: mx
+            before:
+              mx:
+              - host:
+                  value: aspmx2.googlemail.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 10
+            after:
+              mx:
+              - host:
+                  value: alt1.aspmx.l.google.com
+                domain:
+                  value: null
+                ip:
+                - value: 142.250.101.26
+                priority: 5
   securitySchemes:
-    apikey:
+    header_auth:
       type: apiKey
       in: header
-      name: X-API-KEY
+      name: X-Api-Key
+      description: 'A secure authentication method where the API key is provided in the `X-Api-Key` HTTP request header.
+
+        '
+    open_key_auth:
+      type: http
+      scheme: basic
+      description: 'A simple authentication scheme using your `api_username` as the username and your `api_key` as the password. We strongly recommend using HMAC or Header authentication instead to avoid exposing your credentials.
+
+        '
+    hmac_auth:
+      type: apiKey
+      in: query
+      name: signature
+      description: 'A secure scheme using a Hashed Message Authentication Code (HMAC).
+
+        This method requires three query parameters to be sent with the request:
+
+        1. `api_username`: Your API username.
+
+        2. `timestamp`: The current timestamp in ISO 8601 format (e.g., `2020-02-01T22:37:59Z`).
+
+        3. `signature`: The HMAC signature of the request. This is a hash (SHA-256 recommended) of your username, the timestamp, and the request URI, signed with your secret API key.
+
+        '
