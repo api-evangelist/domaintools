@@ -1,0 +1,35 @@
+slug: domaintools
+provider: DomainTools
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Iris Investigate
+  spec_file: domaintools-iris-investigate-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.72
+  evidence: schemas DomainRisk, RiskScoreValue, ThreatProfileMalware, ThreatProfilePhishing, PivotedTracker
+    on /v1/iris-investigate/
+  reason: Pivot-based domain investigation with malware/phishing threat profiles and risk scoring — squarely
+    security investigation (SOC/threat detection & response).
+- tag: Lookups
+  spec_file: domaintools-lookups-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: GET /v1/risk/ getDomainRiskScore 'Domain Risk Score'; GET /v1/reputation/ 'Domain Reputation';
+    schemas ThreatProfileMalware, ThreatProfilePhishing
+  reason: WHOIS/RDAP lookups combined with domain reputation, risk scores and threat profiles are threat-intelligence
+    inputs to security detection and investigation.

@@ -226,6 +226,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/domaintools-capability-edges.yml
+  name: DomainTools Business Capability Map
 - type: Overlay
   url: overlays/domaintools-dnsdb-overlay.yaml
 - type: DeveloperPortal
