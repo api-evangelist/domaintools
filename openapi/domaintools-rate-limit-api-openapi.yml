@@ -99,6 +99,12 @@ components:
         burst_window:
           type: number
   responses:
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
     Unauthorized:
       description: Invalid or missing API key.
       content:
@@ -108,20 +114,14 @@ components:
             properties:
               error:
                 type: string
-    BadGateway:
-      description: Upstream server error.
-      content:
-        text/html:
-          schema:
-            type: string
-    RateLimited:
-      description: Rate limit exceeded.
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
       content:
         text/plain:
           schema:
             type: string
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
+    RateLimited:
+      description: Rate limit exceeded.
       content:
         text/plain:
           schema:

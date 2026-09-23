@@ -1,27 +1,70 @@
-generated: '2026-07-18'
+generated: '2026-09-19'
 method: searched
 source: live probes of /.well-known/* on API and site hosts
 hosts:
-  - host: https://api.domaintools.com
-    documents:
-      - { path: /.well-known/security.txt, status: 400 }
-      - { path: /.well-known/openid-configuration, status: 400 }
-      - { path: /.well-known/oauth-authorization-server, status: 400 }
-      - { path: /.well-known/api-catalog, status: 400 }
-      - { path: /.well-known/ai-plugin.json, status: 400 }
-  - host: https://docs.domaintools.com
-    documents:
-      - { path: /.well-known/security.txt, status: 404 }
-      - { path: /.well-known/openid-configuration, status: 404 }
-      - { path: /.well-known/oauth-authorization-server, status: 404 }
-      - { path: /.well-known/api-catalog, status: 404 }
-      - { path: /.well-known/ai-plugin.json, status: 404 }
-  - host: https://www.domaintools.com
-    documents:
-      - { path: /.well-known/security.txt, status: 404 }
-  - host: https://api.dnsdb.info
-    documents:
-      - { path: /.well-known/security.txt, status: 404 }
-      - { path: /.well-known/openid-configuration, status: 404 }
+- host: https://api.domaintools.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+  - path: /.well-known/openid-configuration
+    status: 400
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+  - path: /.well-known/api-catalog
+    status: 400
+  - path: /.well-known/ai-plugin.json
+    status: 400
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: domaintools-api-oauth-protected-resource.json
+    bytes: 208
+  path_echo_control: passed
+- host: https://docs.domaintools.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://www.domaintools.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://api.dnsdb.info
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://account.domaintools.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: domaintools-account-oauth-authorization-server.json
+    bytes: 1147
+  path_echo_control: passed
 result: none
-note: No /.well-known/ discovery documents are published on any probed host.
+note: 'No /.well-known/ discovery documents are published on any probed host.
+
+
+  MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s primary
+  hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed and
+  were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://api.domaintools.com
+    path: /.well-known/oauth-protected-resource
+    file: domaintools-api-oauth-protected-resource.json
+  - host: https://account.domaintools.com
+    path: /.well-known/oauth-authorization-server
+    file: domaintools-account-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host

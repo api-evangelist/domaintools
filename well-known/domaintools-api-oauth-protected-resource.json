@@ -1,0 +1,1 @@
+{"resource":"https://api.domaintools.com/v1","authorization_servers":["https://account.domaintools.com"],"bearer_methods_supported":["header"],"scopes_supported":["openid","email","profile","offline_access"]}

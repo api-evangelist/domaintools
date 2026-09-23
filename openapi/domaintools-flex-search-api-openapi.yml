@@ -196,15 +196,6 @@ components:
         type: string
         pattern: ^\d+$
       allowEmptyValue: true
-    X-RateLimit-Reset:
-      description: when period resets
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
     X-RateLimit-Remaining:
       description: remaining in period
       schema:
@@ -223,32 +214,20 @@ components:
         - type: string
           enum:
           - unlimited
+    X-RateLimit-Reset:
+      description: when period resets
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
   parameters:
-    rrtype:
-      in: path
-      name: rrtype
-      description: rrtype
-      required: true
-      schema:
-        type: string
-    version:
+    time_first_after:
       in: query
-      name: version
-      description: version
-      required: false
-      schema:
-        type: string
-    time_last_after:
-      in: query
-      name: time_last_after
-      description: time last after
-      required: false
-      schema:
-        type: number
-    time_first_before:
-      in: query
-      name: time_first_before
-      description: time first before
+      name: time_first_after
+      description: time first after
       required: false
       schema:
         type: number
@@ -260,31 +239,10 @@ components:
       schema:
         type: number
         minimum: 0
-    time_first_after:
-      in: query
-      name: time_first_after
-      description: time first after
-      required: false
-      schema:
-        type: number
-    time_last_before:
-      in: query
-      name: time_last_before
-      description: time last before
-      required: false
-      schema:
-        type: number
     swclient:
       in: query
       name: swclient
       description: swclient
-      required: false
-      schema:
-        type: string
-    id:
-      in: query
-      name: id
-      description: id
       required: false
       schema:
         type: string
@@ -295,6 +253,20 @@ components:
       required: true
       schema:
         type: string
+    time_last_before:
+      in: query
+      name: time_last_before
+      description: time last before
+      required: false
+      schema:
+        type: number
+    time_last_after:
+      in: query
+      name: time_last_after
+      description: time last after
+      required: false
+      schema:
+        type: number
     limit:
       in: query
       name: limit
@@ -303,38 +275,45 @@ components:
       schema:
         type: number
         minimum: 1
-  schemas:
-    flex:
-      type: object
-      properties:
-        rrname:
-          type: string
-        rdata:
-          type: string
-        rdata_raw:
-          type: string
-        rrtype:
-          type: string
-      required:
-      - rrtype
-      additionalProperties: false
-      oneOf:
-      - required:
-        - rrname
-      - required:
-        - rdata
-        - rdata_raw
+    id:
+      in: query
+      name: id
+      description: id
+      required: false
+      schema:
+        type: string
+    version:
+      in: query
+      name: version
+      description: version
+      required: false
+      schema:
+        type: string
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
+      schema:
+        type: string
+    time_first_before:
+      in: query
+      name: time_first_before
+      description: time first before
+      required: false
+      schema:
+        type: number
   responses:
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
-      content:
-        text/plain:
-          schema:
-            type: string
     BadGateway:
       description: Upstream server error.
       content:
         text/html:
+          schema:
+            type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
           schema:
             type: string
     RateLimited:
@@ -358,6 +337,27 @@ components:
             properties:
               error:
                 type: string
+  schemas:
+    flex:
+      type: object
+      properties:
+        rrname:
+          type: string
+        rdata:
+          type: string
+        rdata_raw:
+          type: string
+        rrtype:
+          type: string
+      required:
+      - rrtype
+      additionalProperties: false
+      oneOf:
+      - required:
+        - rrname
+      - required:
+        - rdata
+        - rdata_raw
   securitySchemes:
     apikey:
       type: apiKey

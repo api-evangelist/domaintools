@@ -1,0 +1,29 @@
+# Front Door AI Index — domaintools — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: domaintools
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.domaintools.com
+  final_host: www.domaintools.com
+  ownership: own
+  owner: domaintools
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 8
+  host_score: 8
+  density: 8.12
+  words: 985
+  tiers:
+    agentic: 4
+    core: 4
+    model: 0
+  ambiguous: 17
+  top_terms:
+    intelligence: 14
+    MCP: 4
+    predictive: 3
+    AI: 2
+    LLMs: 2

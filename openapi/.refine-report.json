@@ -41,7 +41,8 @@
     "domaintools-sie-openapi.yml: tagged paths POST /siebatchd/v1/siebatch/chfetch -> Siebatchd",
     "domaintools-sie-openapi.yml: tagged paths POST /siebatchd/v1/siebatch/makeurl -> Siebatchd",
     "domaintools-sie-openapi.yml: declared missing tag: Siebatchd",
-    "tag 'Information' spans 2 source specs (domaintools-iris-openapi.yml, domaintools-lookups-monitors-openapi.yml): per-path servers applied"
+    "tag 'Information' spans 2 source specs (domaintools-iris-openapi.yml, domaintools-lookups-monitors-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "domaintools-flex-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
