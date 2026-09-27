@@ -99,10 +99,10 @@ components:
         burst_window:
           type: number
   responses:
-    BadGateway:
-      description: Upstream server error.
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
       content:
-        text/html:
+        text/plain:
           schema:
             type: string
     Unauthorized:
@@ -114,16 +114,16 @@ components:
             properties:
               error:
                 type: string
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
-      content:
-        text/plain:
-          schema:
-            type: string
     RateLimited:
       description: Rate limit exceeded.
       content:
         text/plain:
+          schema:
+            type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
           schema:
             type: string
   securitySchemes:

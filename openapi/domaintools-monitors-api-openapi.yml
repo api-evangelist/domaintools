@@ -153,21 +153,215 @@ paths:
       externalDocs:
         url: https://docs.domaintools.com/api/monitors/registrant-monitor/
 components:
+  parameters:
+    excludeTerms:
+      in: query
+      name: exclude
+      description: 'Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    domainStatus:
+      in: query
+      name: domain_status
+      description: 'Sets the scope of domain names to search. Defaults to searching both `new` and `on-hold` domains.
+
+        '
+      schema:
+        type: string
+        enum:
+        - new
+        - on-hold
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    page:
+      in: query
+      name: page
+      description: Sets the page of results to retrieve from the server (used in services that support pagination).
+      schema:
+        type: integer
+        minimum: 1
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    resultsLimit:
+      name: limit
+      in: query
+      description: 'Specify the maximum number of records to retrieve in an API query.
+
+        The maximum value is **100**.
+
+        '
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
+    ipAddressQuery:
+      in: query
+      name: query
+      description: The IP Address to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    monitorQuery:
+      in: query
+      name: query
+      description: 'One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.
+
+        '
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicString'
+    daysBack:
+      in: query
+      name: days_back
+      description: Search domains registered up to six days prior to the current date.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 6
+    nameServerQuery:
+      in: query
+      name: query
+      description: The name server hostname to query.
+      required: true
+      schema:
+        $ref: '#/components/schemas/Hostname'
+  responses:
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    IpMonitorSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IpMonitor'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    RegistrantMonitorSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegistrantMonitor'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NameServerMonitorSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NameServerMonitor'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    BrandMonitorSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BrandMonitor'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     XmlResponse:
       type: string
       description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
 
         '
-    ResponseFormat:
+    Hostname:
       type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
-
-        '
+      format: hostname
+      description: A valid, fully-qualified domain name (FQDN).
     ErrorResponse:
       type: object
       properties:
@@ -187,80 +381,6 @@ components:
             support:
               type: string
               description: URL to API documentation or support.
-    BrandMonitor:
-      type: object
-      description: Response for the Brand Monitor endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            query:
-              type: string
-            exclude:
-              type: string
-            new:
-              type: boolean
-            on-hold:
-              type: boolean
-            date:
-              type: string
-            total:
-              type: integer
-            alerts:
-              type: array
-              items:
-                type: object
-                properties:
-                  domain:
-                    type: string
-                  status:
-                    type: string
-    BasicString:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: A non-empty string with a standard length limit.
-    HtmlResponse:
-      type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
-
-        '
-    Hostname:
-      type: string
-      format: hostname
-      description: A valid, fully-qualified domain name (FQDN).
-    NameServerMonitor:
-      type: object
-      description: Response for the Name Server Monitor endpoint.
-      properties:
-        response:
-          type: object
-          properties:
-            limit:
-              type: integer
-            date:
-              type: string
-            name_server:
-              type: string
-            total:
-              type: integer
-            page:
-              type: integer
-            page_count:
-              type: integer
-            alerts:
-              type: array
-              items:
-                type: object
-                properties:
-                  new_name_server:
-                    type: string
-                  old_name_server:
-                    type: string
-                  action:
-                    type: string
-                  domain:
-                    type: string
     IpMonitor:
       type: object
       description: Response for the IP Monitor endpoint.
@@ -293,15 +413,6 @@ components:
                     type: string
                   domain:
                     type: string
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    IPv4Address:
-      type: string
-      format: ipv4
-      description: A standard IPv4 address.
     RegistrantMonitor:
       type: object
       description: Response for the Registrant Monitor endpoint.
@@ -334,205 +445,94 @@ components:
                     type: string
                   last_owner:
                     type: string
-  parameters:
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
 
         '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    excludeTerms:
-      in: query
-      name: exclude
-      description: 'Domain names with these words will be excluded from the result set. For exclusions of multiple terms, use the `|` character as a separator.
+    IPv4Address:
+      type: string
+      format: ipv4
+      description: A standard IPv4 address.
+    NameServerMonitor:
+      type: object
+      description: Response for the Name Server Monitor endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            limit:
+              type: integer
+            date:
+              type: string
+            name_server:
+              type: string
+            total:
+              type: integer
+            page:
+              type: integer
+            page_count:
+              type: integer
+            alerts:
+              type: array
+              items:
+                type: object
+                properties:
+                  new_name_server:
+                    type: string
+                  old_name_server:
+                    type: string
+                  action:
+                    type: string
+                  domain:
+                    type: string
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
 
         '
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    page:
-      in: query
-      name: page
-      description: Sets the page of results to retrieve from the server (used in services that support pagination).
-      schema:
-        type: integer
-        minimum: 1
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
-    nameServerQuery:
-      in: query
-      name: query
-      description: The name server hostname to query.
-      required: true
-      schema:
-        $ref: '#/components/schemas/Hostname'
-    ipAddressQuery:
-      in: query
-      name: query
-      description: The IP Address to query.
-      required: true
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    domainStatus:
-      in: query
-      name: domain_status
-      description: 'Sets the scope of domain names to search. Defaults to searching both `new` and `on-hold` domains.
-
-        '
-      schema:
-        type: string
-        enum:
-        - new
-        - on-hold
-    resultsLimit:
-      name: limit
-      in: query
-      description: 'Specify the maximum number of records to retrieve in an API query.
-
-        The maximum value is **100**.
-
-        '
-      schema:
-        type: integer
-        maximum: 100
-        minimum: 1
-    monitorQuery:
-      in: query
-      name: query
-      description: 'One or more terms, where the pipe character ( | ) may be used as a logical AND to require that all strings be present in order to match.
-
-        '
-      required: true
-      schema:
-        $ref: '#/components/schemas/BasicString'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    daysBack:
-      in: query
-      name: days_back
-      description: Search domains registered up to six days prior to the current date.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 6
-  responses:
-    IpMonitorSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IpMonitor'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    InternalServerError:
-      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: '404: Not Found. The requested resource does not exist.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NameServerMonitorSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NameServerMonitor'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    RegistrantMonitorSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RegistrantMonitor'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ServiceUnavailable:
-      description: '503: Service Unavailable. The service is temporarily unavailable.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BrandMonitorSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BrandMonitor'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
+    BasicString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    BrandMonitor:
+      type: object
+      description: Response for the Brand Monitor endpoint.
+      properties:
+        response:
+          type: object
+          properties:
+            query:
+              type: string
+            exclude:
+              type: string
+            new:
+              type: boolean
+            on-hold:
+              type: boolean
+            date:
+              type: string
+            total:
+              type: integer
+            alerts:
+              type: array
+              items:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  status:
+                    type: string
   securitySchemes:
     header_auth:
       type: apiKey

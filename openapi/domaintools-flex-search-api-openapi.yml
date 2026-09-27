@@ -189,45 +189,45 @@ paths:
         '502':
           $ref: '#/components/responses/BadGateway'
 components:
-  headers:
-    X-RateLimit-Expires:
-      description: when period expires
-      schema:
-        type: string
-        pattern: ^\d+$
-      allowEmptyValue: true
-    X-RateLimit-Remaining:
-      description: remaining in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
-    X-RateLimit-Limit:
-      description: limit in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - unlimited
-    X-RateLimit-Reset:
-      description: when period resets
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+    BadRequest:
+      description: Unable to parse request.
+      content:
+        text/plain:
+          schema:
+            type: string
   parameters:
-    time_first_after:
+    time_first_before:
       in: query
-      name: time_first_after
-      description: time first after
+      name: time_first_before
+      description: time first before
       required: false
       schema:
         type: number
@@ -239,10 +239,25 @@ components:
       schema:
         type: number
         minimum: 0
-    swclient:
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
+      schema:
+        type: string
+    limit:
       in: query
-      name: swclient
-      description: swclient
+      name: limit
+      description: Limit
+      required: false
+      schema:
+        type: number
+        minimum: 1
+    version:
+      in: query
+      name: version
+      description: version
       required: false
       schema:
         type: string
@@ -253,28 +268,6 @@ components:
       required: true
       schema:
         type: string
-    time_last_before:
-      in: query
-      name: time_last_before
-      description: time last before
-      required: false
-      schema:
-        type: number
-    time_last_after:
-      in: query
-      name: time_last_after
-      description: time last after
-      required: false
-      schema:
-        type: number
-    limit:
-      in: query
-      name: limit
-      description: Limit
-      required: false
-      schema:
-        type: number
-        minimum: 1
     id:
       in: query
       name: id
@@ -282,61 +275,34 @@ components:
       required: false
       schema:
         type: string
-    version:
+    time_last_before:
       in: query
-      name: version
-      description: version
-      required: false
-      schema:
-        type: string
-    rrtype:
-      in: path
-      name: rrtype
-      description: rrtype
-      required: true
-      schema:
-        type: string
-    time_first_before:
-      in: query
-      name: time_first_before
-      description: time first before
+      name: time_last_before
+      description: time last before
       required: false
       schema:
         type: number
-  responses:
-    BadGateway:
-      description: Upstream server error.
-      content:
-        text/html:
-          schema:
-            type: string
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
-      content:
-        text/plain:
-          schema:
-            type: string
-    RateLimited:
-      description: Rate limit exceeded.
-      content:
-        text/plain:
-          schema:
-            type: string
-    BadRequest:
-      description: Unable to parse request.
-      content:
-        text/plain:
-          schema:
-            type: string
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
+    time_first_after:
+      in: query
+      name: time_first_after
+      description: time first after
+      required: false
+      schema:
+        type: number
+    swclient:
+      in: query
+      name: swclient
+      description: swclient
+      required: false
+      schema:
+        type: string
+    time_last_after:
+      in: query
+      name: time_last_after
+      description: time last after
+      required: false
+      schema:
+        type: number
   schemas:
     flex:
       type: object
@@ -358,6 +324,40 @@ components:
       - required:
         - rdata
         - rdata_raw
+  headers:
+    X-RateLimit-Expires:
+      description: when period expires
+      schema:
+        type: string
+        pattern: ^\d+$
+      allowEmptyValue: true
+    X-RateLimit-Remaining:
+      description: remaining in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Reset:
+      description: when period resets
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Limit:
+      description: limit in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - unlimited
   securitySchemes:
     apikey:
       type: apiKey

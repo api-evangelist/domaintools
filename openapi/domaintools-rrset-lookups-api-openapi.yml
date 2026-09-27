@@ -238,186 +238,20 @@ paths:
         '502':
           $ref: '#/components/responses/BadGateway'
 components:
-  headers:
-    X-RateLimit-Expires:
-      description: when period expires
-      schema:
-        type: string
-        pattern: ^\d+$
-      allowEmptyValue: true
-    X-RateLimit-Remaining:
-      description: remaining in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
-    X-RateLimit-Limit:
-      description: limit in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - unlimited
-    X-RateLimit-Reset:
-      description: when period resets
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
-  parameters:
-    time_first_after:
-      in: query
-      name: time_first_after
-      description: time first after
-      required: false
-      schema:
-        type: number
-    offset:
-      in: query
-      name: offset
-      description: offset
-      required: false
-      schema:
-        type: number
-        minimum: 0
-    humantime:
-      in: query
-      name: humantime
-      description: humantime
-      required: false
-      schema:
-        type: boolean
-    swclient:
-      in: query
-      name: swclient
-      description: swclient
-      required: false
-      schema:
-        type: string
-    bailiwick:
-      in: path
-      name: bailiwick
-      description: bailiwick
-      required: true
-      schema:
-        type: string
-    value:
-      in: path
-      name: value
-      description: Value
-      required: true
-      schema:
-        type: string
-    time_last_before:
-      in: query
-      name: time_last_before
-      description: time last before
-      required: false
-      schema:
-        type: number
-    time_last_after:
-      in: query
-      name: time_last_after
-      description: time last after
-      required: false
-      schema:
-        type: number
-    limit:
-      in: query
-      name: limit
-      description: Limit
-      required: false
-      schema:
-        type: number
-        minimum: 1
-    rrset_type:
-      in: path
-      name: type
-      description: Type of query
-      required: true
-      schema:
-        type: string
-        enum:
-        - name
-        - raw
-    id:
-      in: query
-      name: id
-      description: id
-      required: false
-      schema:
-        type: string
-    version:
-      in: query
-      name: version
-      description: version
-      required: false
-      schema:
-        type: string
-    rrtype:
-      in: path
-      name: rrtype
-      description: rrtype
-      required: true
-      schema:
-        type: string
-    aggr:
-      in: query
-      name: aggr
-      description: aggr
-      required: false
-      schema:
-        type: boolean
-    max_count:
-      in: query
-      name: max_count
-      description: max count
-      required: false
-      schema:
-        type: number
-        minimum: 1
-    time_first_before:
-      in: query
-      name: time_first_before
-      description: time first before
-      required: false
-      schema:
-        type: number
   responses:
-    summarize:
-      description: 'summarize response
-
-        '
+    Unauthorized:
+      description: Invalid or missing API key.
       content:
-        application/x-ndjson:
+        application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                obj:
-                  $ref: '#/components/schemas/summarize'
-      headers:
-        X-RateLimit-Limit:
-          $ref: '#/components/headers/X-RateLimit-Limit'
-        X-RateLimit-Remaining:
-          $ref: '#/components/headers/X-RateLimit-Remaining'
-        X-RateLimit-Reset:
-          $ref: '#/components/headers/X-RateLimit-Reset'
-        X-RateLimit-Expires:
-          $ref: '#/components/headers/X-RateLimit-Expires'
-    BadGateway:
-      description: Upstream server error.
+            type: object
+            properties:
+              error:
+                type: string
+    RateLimited:
+      description: Rate limit exceeded.
       content:
-        text/html:
+        text/plain:
           schema:
             type: string
     Forbidden:
@@ -426,16 +260,10 @@ components:
         text/plain:
           schema:
             type: string
-    RateLimited:
-      description: Rate limit exceeded.
+    BadGateway:
+      description: Upstream server error.
       content:
-        text/plain:
-          schema:
-            type: string
-    BadRequest:
-      description: Unable to parse request.
-      content:
-        text/plain:
+        text/html:
           schema:
             type: string
     lookup:
@@ -460,15 +288,153 @@ components:
           $ref: '#/components/headers/X-RateLimit-Reset'
         X-RateLimit-Expires:
           $ref: '#/components/headers/X-RateLimit-Expires'
-    Unauthorized:
-      description: Invalid or missing API key.
+    BadRequest:
+      description: Unable to parse request.
       content:
-        application/json:
+        text/plain:
           schema:
-            type: object
-            properties:
-              error:
-                type: string
+            type: string
+    summarize:
+      description: 'summarize response
+
+        '
+      content:
+        application/x-ndjson:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                obj:
+                  $ref: '#/components/schemas/summarize'
+      headers:
+        X-RateLimit-Limit:
+          $ref: '#/components/headers/X-RateLimit-Limit'
+        X-RateLimit-Remaining:
+          $ref: '#/components/headers/X-RateLimit-Remaining'
+        X-RateLimit-Reset:
+          $ref: '#/components/headers/X-RateLimit-Reset'
+        X-RateLimit-Expires:
+          $ref: '#/components/headers/X-RateLimit-Expires'
+  parameters:
+    time_first_before:
+      in: query
+      name: time_first_before
+      description: time first before
+      required: false
+      schema:
+        type: number
+    offset:
+      in: query
+      name: offset
+      description: offset
+      required: false
+      schema:
+        type: number
+        minimum: 0
+    max_count:
+      in: query
+      name: max_count
+      description: max count
+      required: false
+      schema:
+        type: number
+        minimum: 1
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
+      schema:
+        type: string
+    humantime:
+      in: query
+      name: humantime
+      description: humantime
+      required: false
+      schema:
+        type: boolean
+    rrset_type:
+      in: path
+      name: type
+      description: Type of query
+      required: true
+      schema:
+        type: string
+        enum:
+        - name
+        - raw
+    limit:
+      in: query
+      name: limit
+      description: Limit
+      required: false
+      schema:
+        type: number
+        minimum: 1
+    bailiwick:
+      in: path
+      name: bailiwick
+      description: bailiwick
+      required: true
+      schema:
+        type: string
+    version:
+      in: query
+      name: version
+      description: version
+      required: false
+      schema:
+        type: string
+    value:
+      in: path
+      name: value
+      description: Value
+      required: true
+      schema:
+        type: string
+    id:
+      in: query
+      name: id
+      description: id
+      required: false
+      schema:
+        type: string
+    time_last_before:
+      in: query
+      name: time_last_before
+      description: time last before
+      required: false
+      schema:
+        type: number
+    time_first_after:
+      in: query
+      name: time_first_after
+      description: time first after
+      required: false
+      schema:
+        type: number
+    swclient:
+      in: query
+      name: swclient
+      description: swclient
+      required: false
+      schema:
+        type: string
+    time_last_after:
+      in: query
+      name: time_last_after
+      description: time last after
+      required: false
+      schema:
+        type: number
+    aggr:
+      in: query
+      name: aggr
+      description: aggr
+      required: false
+      schema:
+        type: boolean
   schemas:
     pdns_cof:
       type: object
@@ -532,6 +498,40 @@ components:
       - required:
         - zone_time_first
         - zone_time_last
+  headers:
+    X-RateLimit-Expires:
+      description: when period expires
+      schema:
+        type: string
+        pattern: ^\d+$
+      allowEmptyValue: true
+    X-RateLimit-Remaining:
+      description: remaining in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Reset:
+      description: when period resets
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Limit:
+      description: limit in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - unlimited
   securitySchemes:
     apikey:
       type: apiKey
