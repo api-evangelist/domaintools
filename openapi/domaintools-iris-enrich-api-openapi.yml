@@ -83,60 +83,15 @@ paths:
         url: https://docs.domaintools.com/api/iris/enrich/
 components:
   schemas:
-    ApexDomain:
+    ResponseFormat:
       type: string
-      description: A base (apex) domain like example.com, excluding subdomains.
-      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
-    BooleanOptInFlag:
-      type: boolean
-      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
-
-        If `false` or omitted, the feature is ignored.
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
 
         '
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
-
-        '
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
-    EnrichRequestParameters:
-      type: object
-      required:
-      - domain
-      properties:
-        domain:
-          $ref: '#/components/schemas/ApexDomainList'
-        app_partner:
-          $ref: '#/components/schemas/IdentifierString'
-        app_name:
-          $ref: '#/components/schemas/IdentifierString'
-        app_version:
-          $ref: '#/components/schemas/IdentifierString'
-        format:
-          $ref: '#/components/schemas/ResponseFormat'
-        parsed_whois:
-          $ref: '#/components/schemas/BooleanOptInFlag'
-        parsed_domain_rdap:
-          $ref: '#/components/schemas/BooleanOptInFlag'
     EnrichContact:
       type: object
       properties:
@@ -162,42 +117,76 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EnrichValue'
-    EnrichValue:
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    EnrichRequestParameters:
+      type: object
+      required:
+      - domain
+      properties:
+        domain:
+          $ref: '#/components/schemas/ApexDomainList'
+        app_partner:
+          $ref: '#/components/schemas/IdentifierString'
+        app_name:
+          $ref: '#/components/schemas/IdentifierString'
+        app_version:
+          $ref: '#/components/schemas/IdentifierString'
+        format:
+          $ref: '#/components/schemas/ResponseFormat'
+        parsed_whois:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+        parsed_domain_rdap:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
+    ErrorResponse:
       type: object
       properties:
-        value:
-          oneOf:
-          - type: string
-          - type: integer
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
     EnrichTracker:
       type: object
       description: A tracker identifier.
       properties:
         value:
           type: string
-    ApexDomainList:
-      type: string
-      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
-      description: A comma-separated list of one or more apex domains to investigate.
-    HtmlResponse:
-      type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
-
-        '
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    ResponseFormat:
-      type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
-
-        '
     EnrichResult:
       type: object
       description: A comprehensive domain profile result from Iris Enrich API.
@@ -417,6 +406,17 @@ components:
         parsed_domain_rdap:
           type: object
           description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
+    ApexDomainList:
+      type: string
+      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
+      description: A comma-separated list of one or more apex domains to investigate.
+    EnrichValue:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - type: string
+          - type: integer
   responses:
     InternalServerError:
       description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
@@ -428,6 +428,22 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
 
         '
       content:
@@ -466,22 +482,6 @@ components:
         text/html:
           schema:
             $ref: '#/components/schemas/HtmlResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ServiceUnavailable:
-      description: '503: Service Unavailable. The service is temporarily unavailable.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     IrisPartialContent:
       description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
 
@@ -498,8 +498,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: '404: Not Found. The requested resource does not exist.
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
 
         '
       content:
@@ -507,40 +507,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    parsedDomainRdapFlag:
-      name: parsed_domain_rdap
-      in: query
-      description: 'Flag.
-
-        If set to `true`, includes the full parsed Domain RDAP record in the response.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
     parsedWhoisFlag:
       name: parsed_whois
       in: query
@@ -551,6 +517,40 @@ components:
         '
       schema:
         $ref: '#/components/schemas/BooleanOptInFlag'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    parsedDomainRdapFlag:
+      name: parsed_domain_rdap
+      in: query
+      description: 'Flag.
+
+        If set to `true`, includes the full parsed Domain RDAP record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
     domainsQueryRequired:
       in: query
       name: domain
@@ -562,10 +562,10 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/ApexDomainList'
-    appName:
-      name: app_name
+    appPartner:
+      name: app_partner
       in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
+      description: 'Your product name.
 
         '
       schema:

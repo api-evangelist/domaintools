@@ -50,6 +50,49 @@ paths:
       url: https://api.domaintools.com
 components:
   schemas:
+    ResponseFormat:
+      type: string
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
+
+        '
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
     AccountInformation:
       type: object
       description: 'Contains the account details and a list of product subscriptions.
@@ -97,50 +140,23 @@ components:
                     today: '0'
                     month: '1'
                   expiration_date: '2027-12-30'
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
-
-        '
-    ResponseFormat:
-      type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
-
-        '
-    HtmlResponse:
-      type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
-
-        '
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
   responses:
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     AccountSuccess:
       description: OK
       content:
@@ -153,24 +169,16 @@ components:
         text/html:
           schema:
             $ref: '#/components/schemas/HtmlResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
 
         '
       content:
@@ -193,19 +201,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+  parameters:
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    appVersion:
-      name: app_version
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
       in: query
-      description: 'Version of your integration/connector.
+      description: 'Your product name.
 
         '
       schema:
@@ -218,18 +226,10 @@ components:
         '
       schema:
         $ref: '#/components/schemas/ResponseFormat'
-    appPartner:
-      name: app_partner
+    appVersion:
+      name: app_version
       in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
+      description: 'Version of your integration/connector.
 
         '
       schema:

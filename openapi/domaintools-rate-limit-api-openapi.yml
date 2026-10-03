@@ -66,6 +66,34 @@ paths:
       tags:
       - Rate Limit
 components:
+  responses:
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
   schemas:
     rate_limit:
       type: object
@@ -98,34 +126,6 @@ components:
           type: number
         burst_window:
           type: number
-  responses:
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
-      content:
-        text/plain:
-          schema:
-            type: string
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    RateLimited:
-      description: Rate limit exceeded.
-      content:
-        text/plain:
-          schema:
-            type: string
-    BadGateway:
-      description: Upstream server error.
-      content:
-        text/html:
-          schema:
-            type: string
   securitySchemes:
     apikey:
       type: apiKey
