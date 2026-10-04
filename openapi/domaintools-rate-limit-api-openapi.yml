@@ -73,15 +73,6 @@ components:
         text/html:
           schema:
             type: string
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     Forbidden:
       description: Authenticated but not authorized for this resource.
       content:
@@ -94,6 +85,15 @@ components:
         text/plain:
           schema:
             type: string
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
     rate_limit:
       type: object

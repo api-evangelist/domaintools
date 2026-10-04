@@ -59,6 +59,11 @@ components:
       description: 'The desired response format.
 
         '
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
     ErrorResponse:
       type: object
       properties:
@@ -78,21 +83,6 @@ components:
             support:
               type: string
               description: URL to API documentation or support.
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
-
-        '
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    HtmlResponse:
-      type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
-
-        '
     AccountInformation:
       type: object
       description: 'Contains the account details and a list of product subscriptions.
@@ -140,23 +130,17 @@ components:
                     today: '0'
                     month: '1'
                   expiration_date: '2027-12-30'
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
   responses:
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     AccountSuccess:
       description: OK
       content:
@@ -169,8 +153,16 @@ components:
         text/html:
           schema:
             $ref: '#/components/schemas/HtmlResponse'
-    InternalServerError:
-      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
 
         '
       content:
@@ -193,6 +185,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: '404: Not Found. The requested resource does not exist.
 
@@ -202,22 +202,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
     responseFormat:
       name: format
       in: query
@@ -226,10 +210,26 @@ components:
         '
       schema:
         $ref: '#/components/schemas/ResponseFormat'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
     appVersion:
       name: app_version
       in: query
       description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
 
         '
       schema:

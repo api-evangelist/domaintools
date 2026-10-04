@@ -170,130 +170,7 @@ paths:
       tags:
       - Siebatchd
 components:
-  schemas:
-    ChannelTimeRange:
-      type: object
-      required:
-      - apikey
-      - channel
-      - start_time
-      - end_time
-      properties:
-        apikey:
-          $ref: '#/components/schemas/ApiKeyField'
-        channel:
-          type: integer
-          description: Channel number (1-255)
-          minimum: 1
-          maximum: 255
-          example: 213
-        start_time:
-          type: string
-          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:00:00'
-        end_time:
-          type: string
-          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:01:00'
-    ErrorResponse:
-      type: object
-      properties:
-        _status:
-          type: string
-          enum:
-          - NOK
-        _message:
-          type: string
-          description: Short description of what went wrong
-        contact_url:
-          type: string
-          format: uri
-          description: Support contact URL
-        invalid_parameters:
-          type: object
-          description: Details about which parameters were invalid (RFC 7807)
-          properties:
-            name:
-              type: string
-            reason:
-              type: string
-        status:
-          type: integer
-          description: HTTP status code
-        type:
-          type: string
-          description: Hyphenated error mnemonic
-        detail:
-          type: string
-          description: Additional error details (optional)
-        logid:
-          type: string
-          format: uuid
-          description: Server-side log correlation ID
-    ChannelDetail:
-      type: object
-      properties:
-        earliest:
-          type: string
-          description: Earliest available data timestamp
-          example: '2020-01-28 00:40:00'
-        latest:
-          type: string
-          description: Latest available data timestamp
-          example: '2020-01-28 20:06:00'
-        size:
-          type: integer
-          description: Size of available data in bytes
-          example: 83837922
-        mimetype:
-          type: string
-          description: MIME type of the data
-          example: application/x-ndjson
-    ChannelDescription:
-      type: object
-      properties:
-        description:
-          type: string
-          example: Newly Observed Domains
-    ApiKeyOnly:
-      type: object
-      required:
-      - apikey
-      properties:
-        apikey:
-          $ref: '#/components/schemas/ApiKeyField'
-    ApiKeyField:
-      type: string
-      format: password
-      description: Your Farsight SIE Batch API Key (UUID format)
-      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   responses:
-    4xx:
-      description: Client error (authentication or validation failure)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            missing_api_key:
-              summary: Missing API Key
-              value:
-                _status: NOK
-                _message: API key not present
-                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
-                status: 403
-                type: missing-api-key
-            invalid_parameters:
-              summary: Invalid Parameters
-              value:
-                _status: NOK
-                _message: Invalid parameter value
-                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
-                status: 403
-                type: invalid-parameters
-                invalid_parameters:
-                  name: foobar
-                  reason: should be an integer but received a string
     200_validate:
       description: API key is valid. Returns profile and provisioning info.
       content:
@@ -341,6 +218,59 @@ components:
                   description: Newly Observed Fully Qualified Domain Names
             _status: OK
             _message: ''
+    4xx:
+      description: Client error (authentication or validation failure)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            missing_api_key:
+              summary: Missing API Key
+              value:
+                _status: NOK
+                _message: API key not present
+                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
+                status: 403
+                type: missing-api-key
+            invalid_parameters:
+              summary: Invalid Parameters
+              value:
+                _status: NOK
+                _message: Invalid parameter value
+                logid: 30fd25e0-0130-4ab1-a375-fabf1d57430e
+                status: 403
+                type: invalid-parameters
+                invalid_parameters:
+                  name: foobar
+                  reason: should be an integer but received a string
+    5xx:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    200_makeurl:
+      description: Presigned download URL generated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+              url:
+                type: string
+                format: uri
+                description: Presigned shareable URL to the specified SIE data
+          example:
+            _status: OK
+            _message: ''
+            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
     200_chdetails:
       description: Channel details returned successfully.
       content:
@@ -375,32 +305,102 @@ components:
                 mimetype: application/x-ndjson
             _status: OK
             _message: ''
-    200_makeurl:
-      description: Presigned download URL generated successfully.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              _status:
-                type: string
-                enum:
-                - OK
-              _message:
-                type: string
-              url:
-                type: string
-                format: uri
-                description: Presigned shareable URL to the specified SIE data
-          example:
-            _status: OK
-            _message: ''
-            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
-    5xx:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ChannelDescription:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Newly Observed Domains
+    ApiKeyOnly:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+    ChannelDetail:
+      type: object
+      properties:
+        earliest:
+          type: string
+          description: Earliest available data timestamp
+          example: '2020-01-28 00:40:00'
+        latest:
+          type: string
+          description: Latest available data timestamp
+          example: '2020-01-28 20:06:00'
+        size:
+          type: integer
+          description: Size of available data in bytes
+          example: 83837922
+        mimetype:
+          type: string
+          description: MIME type of the data
+          example: application/x-ndjson
+    ErrorResponse:
+      type: object
+      properties:
+        _status:
+          type: string
+          enum:
+          - NOK
+        _message:
+          type: string
+          description: Short description of what went wrong
+        contact_url:
+          type: string
+          format: uri
+          description: Support contact URL
+        invalid_parameters:
+          type: object
+          description: Details about which parameters were invalid (RFC 7807)
+          properties:
+            name:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+          description: HTTP status code
+        type:
+          type: string
+          description: Hyphenated error mnemonic
+        detail:
+          type: string
+          description: Additional error details (optional)
+        logid:
+          type: string
+          format: uuid
+          description: Server-side log correlation ID
+    ApiKeyField:
+      type: string
+      format: password
+      description: Your Farsight SIE Batch API Key (UUID format)
+      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ChannelTimeRange:
+      type: object
+      required:
+      - apikey
+      - channel
+      - start_time
+      - end_time
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+        channel:
+          type: integer
+          description: Channel number (1-255)
+          minimum: 1
+          maximum: 255
+          example: 213
+        start_time:
+          type: string
+          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:00:00'
+        end_time:
+          type: string
+          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:01:00'
 externalDocs:
   url: https://batch.sie-remote.net/apidoc

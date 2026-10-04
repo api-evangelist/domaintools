@@ -160,29 +160,69 @@ paths:
         url: https://docs.domaintools.com/api/iris/
 components:
   schemas:
-    Hostname:
+    PivotedTracker:
+      type: object
+      description: A tracker identifier and its associated pivot count.
+      properties:
+        value:
+          type: string
+        count:
+          type: integer
+          format: int64
+          description: The number of other domains that share this exact value.
+    BasicString:
       type: string
-      format: hostname
-      description: A valid, fully-qualified domain name (FQDN).
-    RiskScoreValue:
-      type: integer
-      minimum: 0
-      maximum: 100
-      description: A domain risk score value ranging from 0 (lowest risk) to 100 (highest risk).
-    Fqdn:
+      minLength: 1
+      maxLength: 255
+      description: A non-empty string with a standard length limit.
+    ParsedWhois:
+      type: object
+      description: Parsed data from the domain's WHOIS record. Present only when the request includes `parsed_whois=true`.
+      properties:
+        technical_contact:
+          $ref: '#/components/schemas/WhoisContact'
+        registrant_contact:
+          $ref: '#/components/schemas/WhoisContact'
+        admin_contact:
+          $ref: '#/components/schemas/WhoisContact'
+        additional_whois_email:
+          type: array
+          items:
+            $ref: '#/components/schemas/PivotedValue'
+        registrar:
+          $ref: '#/components/schemas/PivotedValue'
+        create_date:
+          $ref: '#/components/schemas/PivotedValue'
+        expiration_date:
+          $ref: '#/components/schemas/PivotedValue'
+        registrant_name:
+          $ref: '#/components/schemas/PivotedValue'
+        registrant_org:
+          $ref: '#/components/schemas/PivotedValue'
+        registrar_status:
+          type: array
+          items:
+            $ref: '#/components/schemas/PivotedValue'
+    TopLevelDomain:
       type: string
-      format: hostname
-      description: 'A Fully Qualified Domain Name (FQDN), including subdomains (e.g., www.example.com).
-
-        Must be a valid DNS hostname per RFC 1123, excluding trailing dot.
+      minLength: 2
+      maxLength: 128
+      pattern: ^[a-z]{2,63}(\.[a-z]{2,63})*$
+      description: 'A top-level or public suffix domain, such as `com`, `org`, or `co.uk`. Must not include a leading dot.
 
         '
-      minLength: 1
-      maxLength: 253
-      pattern: ^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$
-    WhoisContact:
+    SearchHashToken:
+      type: string
+      description: 'Opaque token representing a saved search from the Iris Investigate UI.
+
+        Exported via “Search → Export” in the Iris UI.
+
+        Example: `aGVsbG93b3yY2hfaGFzaF9jb2RlJsZF9zZWFcw==`
+
+        '
+    RdapContact:
       type: object
-      description: Contact details from a WHOIS record.
+      description: Contact details from an RDAP record.
       properties:
         name:
           $ref: '#/components/schemas/PivotedValue'
@@ -206,6 +246,47 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PivotedValue'
+    IPv4Address:
+      type: string
+      format: ipv4
+      description: A standard IPv4 address.
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    ZeroListedScore:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - zerolist
+        risk_score:
+          type: integer
+          description: The risk score for a zerolisted domain, which is always 0.
+          enum:
+          - 0
+      description: Indicates the domain is on a known-good 'zero list' and is not considered a threat.
+    BaseContact:
+      type: object
+      description: A template for contact information blocks.
+      properties:
+        name: {}
+        org: {}
+        street: {}
+        city: {}
+        state: {}
+        postal: {}
+        country: {}
+        phone: {}
+        fax: {}
+        email:
+          type: array
+          items: {}
     InvestigateResult:
       allOf:
       - $ref: '#/components/schemas/DomainProfileTemplate'
@@ -363,153 +444,22 @@ components:
                 $ref: '#/components/schemas/PivotedValue'
               duration:
                 $ref: '#/components/schemas/PivotedValue'
-    IPv4Address:
+    CommaSeparatedTags:
       type: string
-      format: ipv4
-      description: A standard IPv4 address.
-    DomainRiskComponent:
-      description: A polymorphic schema representing one of several types of risk components.
-      oneOf:
-      - $ref: '#/components/schemas/Proximity'
-      - $ref: '#/components/schemas/ThreatProfile'
-      - $ref: '#/components/schemas/ThreatProfileMalware'
-      - $ref: '#/components/schemas/ThreatProfilePhishing'
-      - $ref: '#/components/schemas/ThreatProfileSpam'
-      - $ref: '#/components/schemas/ZeroListedScore'
-      discriminator:
-        propertyName: name
-        mapping:
-          proximity: '#/components/schemas/Proximity'
-          threat_profile: '#/components/schemas/ThreatProfile'
-          threat_profile_malware: '#/components/schemas/ThreatProfileMalware'
-          threat_profile_phishing: '#/components/schemas/ThreatProfilePhishing'
-          threat_profile_spam: '#/components/schemas/ThreatProfileSpam'
-          zerolist: '#/components/schemas/ZeroListedScore'
-    ThreatProfilePhishing:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_phishing
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as phishing-related.
-    ParsedDomainRdap:
-      type: object
-      description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
-      properties:
-        registrant_contact:
-          $ref: '#/components/schemas/RdapContact'
-        admin_contact:
-          $ref: '#/components/schemas/RdapContact'
-        technical_contact:
-          $ref: '#/components/schemas/RdapContact'
-        registrant_name:
-          $ref: '#/components/schemas/PivotedValue'
-        registrar_iana_id:
-          $ref: '#/components/schemas/PivotedValue'
-        additional_whois_email:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-        registrar:
-          $ref: '#/components/schemas/PivotedValue'
-        create_date:
-          $ref: '#/components/schemas/PivotedValue'
-        expiration_date:
-          $ref: '#/components/schemas/PivotedValue'
-        registrar_status:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-        email_domain:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-    PositionToken:
-      type: string
-      description: 'An opaque string token used for cursor-based pagination.
+      description: 'A comma-separated list of tag names.
 
-        Returned in the `position` field of a paginated response when `has_more_results` is true, and used as a query parameter to retrieve the next result set.
+        Tags are matched exactly and compared case-insensitively
 
-        Example: `2c056abadfb64b67ba18896af2c5b900`
+        unless otherwise specified.
 
         '
-    ThreatProfileSpam:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_spam
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as spam-related.
-    ThreatProfileMalware:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile_malware
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
-          type: array
-          description: Optional array of evidence types supporting the risk score for this component.
-          items:
-            type: string
-      description: Indicates risk based on a machine-learning model that classifies domains as malware-related.
-    HtmlResponse:
+      maxLength: 512
+    DateFilter:
       type: string
-      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+      format: date
+      description: 'A calendar date in the format YYYY-MM-DD, per RFC 3339 (full-date).
 
-        '
-    BooleanOptInFlag:
-      type: boolean
-      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
-
-        If `false` or omitted, the feature is ignored.
-
-        '
-    DateOperatorsFilter:
-      type: string
-      description: 'A date in YYYY-MM-DD format, optionally prefixed with an operator (`>`, `>=`, `<`, `<=`) for comparison.
-
-        Example: `<=2025-01-01`
-
-        '
-      pattern: ^(>|>=|<|<=)?\d{4}-\d{2}-\d{2}$
-    ResponseFormat:
-      type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
+        Does not include a time or timezone.
 
         '
     Proximity:
@@ -533,46 +483,20 @@ components:
           example:
           - dns
       description: Indicates risk based on proximity to known threats or suspicious infrastructure.
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
 
         '
-    RdapContact:
-      type: object
-      description: Contact details from an RDAP record.
-      properties:
-        name:
-          $ref: '#/components/schemas/PivotedValue'
-        org:
-          $ref: '#/components/schemas/PivotedValue'
-        street:
-          $ref: '#/components/schemas/PivotedValue'
-        city:
-          $ref: '#/components/schemas/PivotedValue'
-        state:
-          $ref: '#/components/schemas/PivotedValue'
-        postal:
-          $ref: '#/components/schemas/PivotedValue'
-        country:
-          $ref: '#/components/schemas/PivotedValue'
-        phone:
-          $ref: '#/components/schemas/PivotedValue'
-        fax:
-          $ref: '#/components/schemas/PivotedValue'
-        email:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-    SslSubjectDnString:
+    PositionToken:
       type: string
-      minLength: 1
-      maxLength: 1024
-      description: 'A distinguished name (DN) string representing the Subject field of an SSL certificate.
+      description: 'An opaque string token used for cursor-based pagination.
 
-        Typically includes components like CN, O, C, ST, and L in a comma-separated format.
+        Returned in the `position` field of a paginated response when `has_more_results` is true, and used as a query parameter to retrieve the next result set.
 
-        Example: `C=US, ST=California, L=San Francisco, O=Example Corp, CN=example.com`
+        Example: `2c056abadfb64b67ba18896af2c5b900`
 
         '
     PivotedValue:
@@ -586,19 +510,106 @@ components:
           type: integer
           format: int64
           description: The number of other domains that share this exact value.
-    CommaSeparatedTags:
+    ResponseFormat:
       type: string
-      description: 'A comma-separated list of tag names.
-
-        Tags are matched exactly and compared case-insensitively
-
-        unless otherwise specified.
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
 
         '
-      maxLength: 512
-    PivotedContact:
-      allOf:
-      - $ref: '#/components/schemas/BaseContact'
+    DomainRisk:
+      type: object
+      description: Domain risk assessment including overall score and contributing components.
+      properties:
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        components:
+          type: array
+          description: A list of risk components and their individual scores that contribute to the overall domain risk.
+          items:
+            $ref: '#/components/schemas/DomainRiskComponent'
+    HtmlResponse:
+      type: string
+      description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
+
+        '
+    TimestampFilter:
+      title: Timestamp filter
+      description: "Defines a point in time for filtering results.\n\nAccepts one of:\n\n  - relative time, in negative seconds\n\n  - absolute time, in an ISO 8601 timestamp\n"
+      oneOf:
+      - type: integer
+        minimum: -432000
+        maximum: -1
+        description: 'Relative offset in seconds before the current UTC time.
+
+
+          Must be between -1 (1 second ago) and -432000 (5 days ago).
+
+          '
+      - type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+        format: date-time
+        description: 'ISO 8601 datetime in UTC format with no milliseconds or timezone offset. Format: `YYYY-MM-DDTHH:MM:SSZ`.
+
+
+          The timestamp must represent a point between *1 second ago* and *5 days ago*, relative to the current UTC time.
+
+          '
+    EmailAddress:
+      type: string
+      format: email
+      maxLength: 254
+      description: 'A valid email address, as defined by RFC 5322 and commonly used in WHOIS, SSL certificates, RDAP records, or domain registration contacts.
+
+        '
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    GenericString:
+      type: string
+      description: A generic and unconstrained string value.
+    Hostname:
+      type: string
+      format: hostname
+      description: A valid, fully-qualified domain name (FQDN).
+    DomainRiskComponent:
+      description: A polymorphic schema representing one of several types of risk components.
+      oneOf:
+      - $ref: '#/components/schemas/Proximity'
+      - $ref: '#/components/schemas/ThreatProfile'
+      - $ref: '#/components/schemas/ThreatProfileMalware'
+      - $ref: '#/components/schemas/ThreatProfilePhishing'
+      - $ref: '#/components/schemas/ThreatProfileSpam'
+      - $ref: '#/components/schemas/ZeroListedScore'
+      discriminator:
+        propertyName: name
+        mapping:
+          proximity: '#/components/schemas/Proximity'
+          threat_profile: '#/components/schemas/ThreatProfile'
+          threat_profile_malware: '#/components/schemas/ThreatProfileMalware'
+          threat_profile_phishing: '#/components/schemas/ThreatProfilePhishing'
+          threat_profile_spam: '#/components/schemas/ThreatProfileSpam'
+          zerolist: '#/components/schemas/ZeroListedScore'
+    ApexDomainList:
+      type: string
+      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
+      description: A comma-separated list of one or more apex domains to investigate.
+    TimeWindowSeconds:
+      type: integer
+      format: int64
+      minimum: 1
+      description: 'A positive integer representing a time window, in seconds.
+
+        Used to filter results based on how recently an event occurred.
+
+        '
+    WhoisContact:
+      type: object
+      description: Contact details from a WHOIS record.
       properties:
         name:
           $ref: '#/components/schemas/PivotedValue'
@@ -622,90 +633,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PivotedValue'
-    BaseContact:
-      type: object
-      description: A template for contact information blocks.
-      properties:
-        name: {}
-        org: {}
-        street: {}
-        city: {}
-        state: {}
-        postal: {}
-        country: {}
-        phone: {}
-        fax: {}
-        email:
-          type: array
-          items: {}
-    ApexDomainList:
+    Sha1HexString:
       type: string
-      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
-      description: A comma-separated list of one or more apex domains to investigate.
-    EmailAddress:
-      type: string
-      format: email
-      maxLength: 254
-      description: 'A valid email address, as defined by RFC 5322 and commonly used in WHOIS, SSL certificates, RDAP records, or domain registration contacts.
+      description: 'A 40-character hexadecimal SHA-1 hash string, typically used to identify SSL certificates or digital signatures.
 
         '
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
-    ParsedWhois:
-      type: object
-      description: Parsed data from the domain's WHOIS record. Present only when the request includes `parsed_whois=true`.
-      properties:
-        technical_contact:
-          $ref: '#/components/schemas/WhoisContact'
-        registrant_contact:
-          $ref: '#/components/schemas/WhoisContact'
-        admin_contact:
-          $ref: '#/components/schemas/WhoisContact'
-        additional_whois_email:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-        registrar:
-          $ref: '#/components/schemas/PivotedValue'
-        create_date:
-          $ref: '#/components/schemas/PivotedValue'
-        expiration_date:
-          $ref: '#/components/schemas/PivotedValue'
-        registrant_name:
-          $ref: '#/components/schemas/PivotedValue'
-        registrant_org:
-          $ref: '#/components/schemas/PivotedValue'
-        registrar_status:
-          type: array
-          items:
-            $ref: '#/components/schemas/PivotedValue'
-    BasicString:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: A non-empty string with a standard length limit.
-    DateFilter:
-      type: string
-      format: date
-      description: 'A calendar date in the format YYYY-MM-DD, per RFC 3339 (full-date).
-
-        Does not include a time or timezone.
-
-        '
-    DomainRisk:
-      type: object
-      description: Domain risk assessment including overall score and contributing components.
-      properties:
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        components:
-          type: array
-          description: A list of risk components and their individual scores that contribute to the overall domain risk.
-          items:
-            $ref: '#/components/schemas/DomainRiskComponent'
+      pattern: ^[a-fA-F0-9]{40}$
     BaseSslInfo:
       type: object
       description: A template for SSL certificate information blocks.
@@ -892,122 +825,38 @@ components:
           $ref: '#/components/schemas/IdentifierString'
         app_version:
           $ref: '#/components/schemas/IdentifierString'
-    TimeWindowSeconds:
-      type: integer
-      format: int64
-      minimum: 1
-      description: 'A positive integer representing a time window, in seconds.
-
-        Used to filter results based on how recently an event occurred.
-
-        '
-    PivotedTracker:
+    ParsedDomainRdap:
       type: object
-      description: A tracker identifier and its associated pivot count.
+      description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
       properties:
-        value:
-          type: string
-        count:
-          type: integer
-          format: int64
-          description: The number of other domains that share this exact value.
-    SearchHashToken:
-      type: string
-      description: 'Opaque token representing a saved search from the Iris Investigate UI.
-
-        Exported via “Search → Export” in the Iris UI.
-
-        Example: `aGVsbG93b3yY2hfaGFzaF9jb2RlJsZF9zZWFcw==`
-
-        '
-    OrgNameString:
-      type: string
-      minLength: 1
-      maxLength: 256
-      pattern: ^[\p{L}\p{N} .,\-&()'/"]+$
-      description: 'A human-readable organization name as used in WHOIS or RDAP records, such as a registrar, registrant, or sponsoring organization.
-
-        Supports Unicode letters and numbers, along with common punctuation.
-
-        '
-    ThreatProfile:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - threat_profile
-        risk_score:
-          $ref: '#/components/schemas/RiskScoreValue'
-        evidence:
+        registrant_contact:
+          $ref: '#/components/schemas/RdapContact'
+        admin_contact:
+          $ref: '#/components/schemas/RdapContact'
+        technical_contact:
+          $ref: '#/components/schemas/RdapContact'
+        registrant_name:
+          $ref: '#/components/schemas/PivotedValue'
+        registrar_iana_id:
+          $ref: '#/components/schemas/PivotedValue'
+        additional_whois_email:
           type: array
-          description: Optional array of evidence types supporting the risk score for this component.
           items:
-            type: string
-      description: Indicates risk based on machine-learning models.
-    Sha1HexString:
-      type: string
-      description: 'A 40-character hexadecimal SHA-1 hash string, typically used to identify SSL certificates or digital signatures.
-
-        '
-      pattern: ^[a-fA-F0-9]{40}$
-    GenericString:
-      type: string
-      description: A generic and unconstrained string value.
-    WebsiteTitleString:
-      type: string
-      minLength: 1
-      maxLength: 512
-      description: 'The exact value of the `<title>` tag from a website''s HTML.
-
-        '
-    ZeroListedScore:
-      type: object
-      required:
-      - name
-      - risk_score
-      properties:
-        name:
-          type: string
-          description: The type of risk component.
-          enum:
-          - zerolist
-        risk_score:
-          type: integer
-          description: The risk score for a zerolisted domain, which is always 0.
-          enum:
-          - 0
-      description: Indicates the domain is on a known-good 'zero list' and is not considered a threat.
-    TimestampFilter:
-      title: Timestamp filter
-      description: "Defines a point in time for filtering results.\n\nAccepts one of:\n\n  - relative time, in negative seconds\n\n  - absolute time, in an ISO 8601 timestamp\n"
-      oneOf:
-      - type: integer
-        minimum: -432000
-        maximum: -1
-        description: 'Relative offset in seconds before the current UTC time.
-
-
-          Must be between -1 (1 second ago) and -432000 (5 days ago).
-
-          '
-      - type: string
-        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
-        format: date-time
-        description: 'ISO 8601 datetime in UTC format with no milliseconds or timezone offset. Format: `YYYY-MM-DDTHH:MM:SSZ`.
-
-
-          The timestamp must represent a point between *1 second ago* and *5 days ago*, relative to the current UTC time.
-
-          '
-    ApexDomain:
-      type: string
-      description: A base (apex) domain like example.com, excluding subdomains.
-      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+            $ref: '#/components/schemas/PivotedValue'
+        registrar:
+          $ref: '#/components/schemas/PivotedValue'
+        create_date:
+          $ref: '#/components/schemas/PivotedValue'
+        expiration_date:
+          $ref: '#/components/schemas/PivotedValue'
+        registrar_status:
+          type: array
+          items:
+            $ref: '#/components/schemas/PivotedValue'
+        email_domain:
+          type: array
+          items:
+            $ref: '#/components/schemas/PivotedValue'
     DomainProfileTemplate:
       type: object
       description: A comprehensive template defining the complete structure of a domain profile. Specific data types are defined in inheriting schemas.
@@ -1167,91 +1016,182 @@ components:
             support:
               type: string
               description: URL to API documentation or support.
-    TopLevelDomain:
-      type: string
-      minLength: 2
-      maxLength: 128
-      pattern: ^[a-z]{2,63}(\.[a-z]{2,63})*$
-      description: 'A top-level or public suffix domain, such as `com`, `org`, or `co.uk`. Must not include a leading dot.
-
-        '
     MaxDaysSince:
       type: integer
       minimum: 1
       description: A positive integer representing the maximum number of days.
+    ThreatProfilePhishing:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_phishing
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as phishing-related.
+    PivotedContact:
+      allOf:
+      - $ref: '#/components/schemas/BaseContact'
+      properties:
+        name:
+          $ref: '#/components/schemas/PivotedValue'
+        org:
+          $ref: '#/components/schemas/PivotedValue'
+        street:
+          $ref: '#/components/schemas/PivotedValue'
+        city:
+          $ref: '#/components/schemas/PivotedValue'
+        state:
+          $ref: '#/components/schemas/PivotedValue'
+        postal:
+          $ref: '#/components/schemas/PivotedValue'
+        country:
+          $ref: '#/components/schemas/PivotedValue'
+        phone:
+          $ref: '#/components/schemas/PivotedValue'
+        fax:
+          $ref: '#/components/schemas/PivotedValue'
+        email:
+          type: array
+          items:
+            $ref: '#/components/schemas/PivotedValue'
+    Fqdn:
+      type: string
+      format: hostname
+      description: 'A Fully Qualified Domain Name (FQDN), including subdomains (e.g., www.example.com).
+
+        Must be a valid DNS hostname per RFC 1123, excluding trailing dot.
+
+        '
+      minLength: 1
+      maxLength: 253
+      pattern: ^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$
+    DateOperatorsFilter:
+      type: string
+      description: 'A date in YYYY-MM-DD format, optionally prefixed with an operator (`>`, `>=`, `<`, `<=`) for comparison.
+
+        Example: `<=2025-01-01`
+
+        '
+      pattern: ^(>|>=|<|<=)?\d{4}-\d{2}-\d{2}$
+    ThreatProfileSpam:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_spam
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as spam-related.
+    RiskScoreValue:
+      type: integer
+      minimum: 0
+      maximum: 100
+      description: A domain risk score value ranging from 0 (lowest risk) to 100 (highest risk).
+    WebsiteTitleString:
+      type: string
+      minLength: 1
+      maxLength: 512
+      description: 'The exact value of the `<title>` tag from a website''s HTML.
+
+        '
+    OrgNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
+      pattern: ^[\p{L}\p{N} .,\-&()'/"]+$
+      description: 'A human-readable organization name as used in WHOIS or RDAP records, such as a registrar, registrant, or sponsoring organization.
+
+        Supports Unicode letters and numbers, along with common punctuation.
+
+        '
+    ThreatProfile:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on machine-learning models.
+    ThreatProfileMalware:
+      type: object
+      required:
+      - name
+      - risk_score
+      properties:
+        name:
+          type: string
+          description: The type of risk component.
+          enum:
+          - threat_profile_malware
+        risk_score:
+          $ref: '#/components/schemas/RiskScoreValue'
+        evidence:
+          type: array
+          description: Optional array of evidence types supporting the risk score for this component.
+          items:
+            type: string
+      description: Indicates risk based on a machine-learning model that classifies domains as malware-related.
+    SslSubjectDnString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      description: 'A distinguished name (DN) string representing the Subject field of an SSL certificate.
+
+        Typically includes components like CN, O, C, ST, and L in a comma-separated format.
+
+        Example: `C=US, ST=California, L=San Francisco, O=Example Corp, CN=example.com`
+
+        '
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
   parameters:
-    parsedWhoisFlag:
-      name: parsed_whois
+    riskScore:
       in: query
-      description: 'Flag.
-
-        If set to ''true'', includes the full parsed WHOIS record in the response.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    sslOrg:
-      in: query
-      name: ssl_org
-      description: 'Base search parameter.
-
-        Organization name from the SSL certificate. Must be an exact string match.
-
-        '
-      schema:
-        $ref: '#/components/schemas/OrgNameString'
-    ipCountryCode:
-      in: query
-      name: ip_country_code
+      name: risk_score
       description: 'Search filter parameter.
 
-        Country code for IP A-record.
+        Returns domains with a Domain Risk Score greater than this value. See [Domain Risk Scores](https://docs.domaintools.com/riskscore/).
 
         '
       schema:
-        type: string
-        pattern: ^[A-Z]{2}$
-        description: Two-letter ISO country code (uppercase)
-    websiteTitle:
-      in: query
-      name: website_title
-      description: 'Base search parameter.
-
-        The value of the website’s `<title>` HTML tag. Must be an exact match.
-
-        '
-      schema:
-        $ref: '#/components/schemas/WebsiteTitleString'
-    yandexCode:
-      in: query
-      name: yandex_metrica
-      description: 'Base search parameter.
-
-        Yandex Metrica tracker code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    nameserverDomain:
-      in: query
-      name: nameserver_domain
-      description: 'Base search parameter.
-
-        The registered domain name of the nameserver (e.g., `example.com`).
-
-        '
-      schema:
-        $ref: '#/components/schemas/Hostname'
-    sslIssuerCommonName:
-      in: query
-      name: ssl_issuer_common_name
-      description: 'Base search parameter.
-
-        Certificate issuer Common Name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
+        type: integer
+        minimum: 0
+        maximum: 100
     serverType:
       in: query
       name: server_type
@@ -1262,34 +1202,70 @@ components:
         '
       schema:
         $ref: '#/components/schemas/BasicString'
-    nextPageUrl:
+    mailserverIp:
       in: query
-      name: next
-      description: The URL for the next page of search results, emitted as a `next` field in the response, using the `position` marker.
+      name: mailserver_ip
+      description: 'Base search parameter.
+
+        IP address of the mail server.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    createDate:
+      in: query
+      name: create_date
+      description: 'Search filter parameter.
+
+        Filters domains based on the `create_date` field.
+
+        Supports [`>`, `>=`, `<`, `<=`] operators, or no operator for exact matches.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DateOperatorsFilter'
+    parsedWhoisFlag:
+      name: parsed_whois
+      in: query
+      description: 'Flag.
+
+        If set to ''true'', includes the full parsed WHOIS record in the response.
+
+        '
       schema:
         $ref: '#/components/schemas/BooleanOptInFlag'
-    topLevelDomain:
+    searchHash:
       in: query
-      name: tld
-      description: 'Search filter parameter.
+      name: search_hash
+      description: 'Base search parameter.
 
-        Restrict results to domains under the specified top-level domain (TLD).
+        Token returned by the Iris Investigate UI when exporting a search.
+
+        Use this value to import and continue an existing search via the API.
 
         '
       schema:
-        $ref: '#/components/schemas/TopLevelDomain'
-    firstSeenSince:
+        $ref: '#/components/schemas/SearchHashToken'
+    sslOrg:
       in: query
-      name: first_seen_since
-      description: 'Search filter parameter.
+      name: ssl_org
+      description: 'Base search parameter.
 
-        Filter domains based on the `first_seen` timestamp.
-
-        Returns domains whose `current_lifecycle_first_seen` value is *after* the given datetime.
+        Organization name from the SSL certificate. Must be an exact string match.
 
         '
       schema:
-        $ref: '#/components/schemas/TimestampFilter'
+        $ref: '#/components/schemas/OrgNameString'
+    emailAny:
+      in: query
+      name: email
+      description: 'Base search parameter.
+
+        Email address from the most recently available WHOIS record, DNS SOA record or SSL certificate.
+
+        '
+      schema:
+        $ref: '#/components/schemas/EmailAddress'
     googleAnalyticsCode:
       in: query
       name: google_analytics
@@ -1300,6 +1276,102 @@ components:
         '
       schema:
         $ref: '#/components/schemas/IdentifierString'
+    parsedDomainRdapFlag:
+      name: parsed_domain_rdap
+      in: query
+      description: 'Flag.
+
+        If set to `true`, includes the full parsed Domain RDAP record in the response.
+
+        '
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
+    emailDomain:
+      in: query
+      name: email_domain
+      description: Only the domain portion of a WHOIS or DNS SOA email address.
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    domainLastIp:
+      in: query
+      name: ip
+      description: 'Base search parameter.
+
+        IPv4 address the registered domain was last known to point to during an active DNS check.
+
+        '
+      required: false
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
+    statCounterProjectCode:
+      in: query
+      name: statcounter_project
+      description: 'Base search parameter.
+
+        Statcounter Project tracker code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    googleAnalytics4Code:
+      in: query
+      name: ga4
+      description: 'Base search parameter.
+
+        Domains with a Google Analytics tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    nameserverHost:
+      in: query
+      name: nameserver_host
+      description: 'Base search parameter.
+
+        Fully-qualified domain name (FQDN) of the name server.
+
+        '
+      required: false
+      schema:
+        $ref: '#/components/schemas/Hostname'
+    taggedWithAll:
+      in: query
+      name: tagged_with_all
+      description: 'Search filter parameter.
+
+        Comma-separated list of tags. Only returns domains tagged with the full list of tags.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    sslIssuerCommonName:
+      in: query
+      name: ssl_issuer_common_name
+      description: 'Base search parameter.
+
+        Certificate issuer Common Name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    nameserverIp:
+      in: query
+      name: nameserver_ip
+      description: 'Base search parameter.
+
+        The IPv4 address of the name server.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IPv4Address'
     ianaId:
       in: query
       name: iana_id
@@ -1320,568 +1392,6 @@ components:
         '
       schema:
         $ref: '#/components/schemas/GenericString'
-    sslCommonName:
-      in: query
-      name: ssl_common_name
-      description: 'Base search parameter.
-
-        Domains with a matching Common Name (CN) in their SSL certificate''s subject.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    statCounterSecurityCode:
-      in: query
-      name: statcounter_security
-      description: 'Base search parameter.
-
-        Statcounter Security tracker code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    hotJarCode:
-      in: query
-      name: hotjar
-      description: 'Base search parameter.
-
-        Hotjar tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    googleAnalytics4Code:
-      in: query
-      name: ga4
-      description: 'Base search parameter.
-
-        Domains with a Google Analytics tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    googleTagManagerCode:
-      in: query
-      name: google_tag_manager
-      description: 'Base search parameter.
-
-        Google Tag Manager tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    expirationDate:
-      in: query
-      name: expiration_date
-      description: 'Search filter parameter.
-
-        Only include domains expiring on a specific date.
-
-        '
-      schema:
-        $ref: '#/components/schemas/DateFilter'
-    createDate:
-      in: query
-      name: create_date
-      description: 'Search filter parameter.
-
-        Filters domains based on the `create_date` field.
-
-        Supports [`>`, `>=`, `<`, `<=`] operators, or no operator for exact matches.
-
-        '
-      schema:
-        $ref: '#/components/schemas/DateOperatorsFilter'
-    emailAny:
-      in: query
-      name: email
-      description: 'Base search parameter.
-
-        Email address from the most recently available WHOIS record, DNS SOA record or SSL certificate.
-
-        '
-      schema:
-        $ref: '#/components/schemas/EmailAddress'
-    parsedDomainRdapFlag:
-      name: parsed_domain_rdap
-      in: query
-      description: 'Flag.
-
-        If set to `true`, includes the full parsed Domain RDAP record in the response.
-
-        '
-      schema:
-        $ref: '#/components/schemas/BooleanOptInFlag'
-    emailDnsSoa:
-      in: query
-      name: email_dns_soa
-      description: 'Base search parameter. DNS SOA email.
-
-        '
-      schema:
-        $ref: '#/components/schemas/EmailAddress'
-    sslSubject:
-      in: query
-      name: ssl_subject
-      description: 'Base search parameter.
-
-        Exact match to the Subject distinguished name (DN) string from the SSL certificate.
-
-        '
-      schema:
-        $ref: '#/components/schemas/SslSubjectDnString'
-    adsense:
-      in: query
-      name: adsense
-      description: 'Base search parameter. Domains with a Google AdSense tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    matomoCode:
-      in: query
-      name: matomo
-      description: 'Base search parameter.
-
-        Matomo tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    nameserverIp:
-      in: query
-      name: nameserver_ip
-      description: 'Base search parameter.
-
-        The IPv4 address of the name server.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    createDateWithin:
-      in: query
-      name: create_date_within
-      description: 'Search filter parameter.
-
-        Filter domains based on the `create_date` field: the maximum number of days since a domain was first discovered.
-
-        '
-      schema:
-        $ref: '#/components/schemas/MaxDaysSince'
-    resultsSortBy:
-      in: query
-      name: sort_by
-      description: 'Specifies the field to sort the results by.
-
-        '
-      schema:
-        type: string
-        enum:
-        - first_seen_since
-        - create_date
-        - domain
-        - risk_score
-    whoisFreeText:
-      in: query
-      name: whois
-      description: 'Base search parameter.
-
-        Free text search of a domain''s most recent WHOIS record.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    domainLastIp:
-      in: query
-      name: ip
-      description: 'Base search parameter.
-
-        IPv4 address the registered domain was last known to point to during an active DNS check.
-
-        '
-      required: false
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    whoisHistoricalFreeText:
-      in: query
-      name: historical_free_text
-      description: 'Base search parameter.
-
-        Free text search of a domain''s historical WHOIS records.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    sslHash:
-      in: query
-      name: ssl_hash
-      description: 'Base search parameter.
-
-        The SHA-1 hash of an SSL certificate, used to filter for domains associated with a specific certificate.
-
-        '
-      schema:
-        $ref: '#/components/schemas/Sha1HexString'
-    resultsPageSize:
-      name: page_size
-      in: query
-      description: 'Adjusts the number of results returned per page.
-
-        The default is 500. Use this parameter to request a smaller page size.
-
-        '
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    mailserverDomain:
-      in: query
-      name: mailserver_domain
-      description: 'Base search parameter.
-
-        Only the registered domain portion of the mail server (e.g., `domaintools.net`).
-
-        '
-      schema:
-        $ref: '#/components/schemas/ApexDomain'
-    notTaggedWithAll:
-      in: query
-      name: not_tagged_with_all
-      description: 'Search filter parameter.
-
-        Exclude all domains that are tagged with **all** of the specified tags in the Iris Investigation platform.
-
-        This parameter accepts a comma-separated list of tag names.
-
-        '
-      schema:
-        $ref: '#/components/schemas/CommaSeparatedTags'
-    resultsPosition:
-      in: query
-      name: position
-      description: 'Cursor for paginated results. Use the value returned in a previous response to retrieve the next page.
-
-        '
-      required: false
-      schema:
-        $ref: '#/components/schemas/PositionToken'
-    searchHash:
-      in: query
-      name: search_hash
-      description: 'Base search parameter.
-
-        Token returned by the Iris Investigate UI when exporting a search.
-
-        Use this value to import and continue an existing search via the API.
-
-        '
-      schema:
-        $ref: '#/components/schemas/SearchHashToken'
-    contactPhone:
-      in: query
-      name: contact_phone
-      description: 'Base search parameter.
-
-        Contact phone number from domain registration data.
-
-        Supports WHOIS/RDAP Fields Search.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    mailserverIp:
-      in: query
-      name: mailserver_ip
-      description: 'Base search parameter.
-
-        IP address of the mail server.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IPv4Address'
-    sslNotAfter:
-      in: query
-      name: ssl_not_after
-      description: 'Search filter parameter.
-
-        Validity end date for a certificate (YYYY-MM-DD).
-
-        '
-      schema:
-        $ref: '#/components/schemas/DateFilter'
-    registrantOrg:
-      in: query
-      name: registrant_org
-      description: 'Base search parameter.
-
-        Exact match to the WHOIS registrant organization field
-
-        '
-      schema:
-        $ref: '#/components/schemas/OrgNameString'
-    domainsQuery:
-      in: query
-      name: domain
-      description: 'Base search parameter.
-
-        One or more domains (comma-separated) to be investigated.
-
-        Example: `example.com,domaintools.com`.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ApexDomainList'
-    sslDuration:
-      in: query
-      name: ssl_duration
-      description: 'Base search parameter.
-
-        Domains with an SSL certificate valid for a specific number of days.
-
-        '
-      schema:
-        type: integer
-        minimum: 1
-    emailDomain:
-      in: query
-      name: email_domain
-      description: Only the domain portion of a WHOIS or DNS SOA email address.
-      schema:
-        $ref: '#/components/schemas/ApexDomain'
-    contactStreet:
-      in: query
-      name: contact_street
-      description: 'Base search parameter.
-
-        Contact street address from domain registration data.
-
-        Supports WHOIS/RDAP Fields Search.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    registrantHistoricalWhois:
-      in: query
-      name: historical_registrant
-      description: 'Base search parameter.
-
-        Registrant names from historical WHOIS records.
-
-        '
-      schema:
-        $ref: '#/components/schemas/OrgNameString'
-    mailserverHost:
-      in: query
-      name: mailserver_host
-      description: 'Base search parameter.
-
-        Fully-qualified mail server hostname (e.g., mx.domaintools.net).
-
-        Performs a Reverse MX lookup to identify domains using this mail server.
-
-        '
-      schema:
-        $ref: '#/components/schemas/Fqdn'
-    notTaggedWithAny:
-      in: query
-      name: not_tagged_with_any
-      description: 'Search filter parameter.
-
-        Exclude all domains that are tagged with **any** of the specified tags in the Iris Investigation platform.
-
-        Accepts a comma-separated list of tags.
-
-        '
-      schema:
-        $ref: '#/components/schemas/CommaSeparatedTags'
-    rank:
-      in: query
-      name: rank
-      description: 'Search filter parameter.
-
-        Popularity rank (replaces Alexa ranking).
-
-        '
-      schema:
-        type: integer
-        minimum: 1
-    statCounterProjectCode:
-      in: query
-      name: statcounter_project
-      description: 'Base search parameter.
-
-        Statcounter Project tracker code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    facebookCode:
-      in: query
-      name: facebook
-      description: 'Facebook/Meta tracking code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    taggedWithAll:
-      in: query
-      name: tagged_with_all
-      description: 'Search filter parameter.
-
-        Comma-separated list of tags. Only returns domains tagged with the full list of tags.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    redirectDomain:
-      in: query
-      name: redirect_domain
-      description: 'Base search parameter.
-
-        Domains observed to redirect to another domain name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    riskScore:
-      in: query
-      name: risk_score
-      description: 'Search filter parameter.
-
-        Returns domains with a Domain Risk Score greater than this value. See [Domain Risk Scores](https://docs.domaintools.com/riskscore/).
-
-        '
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 100
-    nameserverHost:
-      in: query
-      name: nameserver_host
-      description: 'Base search parameter.
-
-        Fully-qualified domain name (FQDN) of the name server.
-
-        '
-      required: false
-      schema:
-        $ref: '#/components/schemas/Hostname'
-    registrant:
-      in: query
-      name: registrant
-      description: 'Base search parameter.
-
-        Exact match to the WHOIS registrant field.
-
-        '
-      schema:
-        $ref: '#/components/schemas/OrgNameString'
-    taggedWithAny:
-      in: query
-      name: tagged_with_any
-      description: 'Search filter parameter.
-
-        Comma-separated list of Iris Investigate tags. Returns domains tagged with any of the tags in a list.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    sslEmail:
-      in: query
-      name: ssl_email
-      description: 'Base search parameter.
-
-        Email address extracted from the SSL certificate associated with a domain.
-
-        '
-      schema:
-        $ref: '#/components/schemas/EmailAddress'
-    baiduCode:
-      in: query
-      name: baidu_analytics
-      description: 'Base search parameter. Baidu Analytics code.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    contactName:
-      in: query
-      name: contact_name
-      description: 'Base search parameter.
-
-        Contact name from domain registration data.
-
-        Supports WHOIS/RDAP Fields Search.
-
-        '
-      schema:
-        $ref: '#/components/schemas/GenericString'
-    firstSeenWithin:
-      in: query
-      name: first_seen_within
-      description: 'Search filter parameter.
-
-        Filter domains based on the `first_seen` field.
-
-        Returns only those domains first discovered within the last N seconds.
-
-        '
-      schema:
-        $ref: '#/components/schemas/TimeWindowSeconds'
-    active:
-      in: query
-      name: active
-      description: 'Search filter parameter.
-
-        Set to `true` to only return domains that have either an entry in the global Domain Name System, OR are listed as registered by the registry.
-
-        Set to `false` to only return domains that do not have an entry in the global DNS, AND are not listed as registered by the registry.
-
-        '
-      schema:
-        type: boolean
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    sslNotBefore:
-      in: query
-      name: ssl_not_before
-      description: 'Search filter parameter.
-
-        Validity begin date for a certificate (YYYY-MM-DD).
-
-        '
-      schema:
-        $ref: '#/components/schemas/DateFilter'
     registrar:
       in: query
       name: registrar
@@ -1905,49 +1415,499 @@ components:
         enum:
         - asc
         - dsc
+    taggedWithAny:
+      in: query
+      name: tagged_with_any
+      description: 'Search filter parameter.
+
+        Comma-separated list of Iris Investigate tags. Returns domains tagged with any of the tags in a list.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    whoisFreeText:
+      in: query
+      name: whois
+      description: 'Base search parameter.
+
+        Free text search of a domain''s most recent WHOIS record.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    createDateWithin:
+      in: query
+      name: create_date_within
+      description: 'Search filter parameter.
+
+        Filter domains based on the `create_date` field: the maximum number of days since a domain was first discovered.
+
+        '
+      schema:
+        $ref: '#/components/schemas/MaxDaysSince'
+    googleTagManagerCode:
+      in: query
+      name: google_tag_manager
+      description: 'Base search parameter.
+
+        Google Tag Manager tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    sslEmail:
+      in: query
+      name: ssl_email
+      description: 'Base search parameter.
+
+        Email address extracted from the SSL certificate associated with a domain.
+
+        '
+      schema:
+        $ref: '#/components/schemas/EmailAddress'
+    contactStreet:
+      in: query
+      name: contact_street
+      description: 'Base search parameter.
+
+        Contact street address from domain registration data.
+
+        Supports WHOIS/RDAP Fields Search.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    contactName:
+      in: query
+      name: contact_name
+      description: 'Base search parameter.
+
+        Contact name from domain registration data.
+
+        Supports WHOIS/RDAP Fields Search.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    hotJarCode:
+      in: query
+      name: hotjar
+      description: 'Base search parameter.
+
+        Hotjar tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    nextPageUrl:
+      in: query
+      name: next
+      description: The URL for the next page of search results, emitted as a `next` field in the response, using the `position` marker.
+      schema:
+        $ref: '#/components/schemas/BooleanOptInFlag'
+    redirectDomain:
+      in: query
+      name: redirect_domain
+      description: 'Base search parameter.
+
+        Domains observed to redirect to another domain name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    contactPhone:
+      in: query
+      name: contact_phone
+      description: 'Base search parameter.
+
+        Contact phone number from domain registration data.
+
+        Supports WHOIS/RDAP Fields Search.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    registrantHistoricalWhois:
+      in: query
+      name: historical_registrant
+      description: 'Base search parameter.
+
+        Registrant names from historical WHOIS records.
+
+        '
+      schema:
+        $ref: '#/components/schemas/OrgNameString'
+    adsense:
+      in: query
+      name: adsense
+      description: 'Base search parameter. Domains with a Google AdSense tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    mailserverHost:
+      in: query
+      name: mailserver_host
+      description: 'Base search parameter.
+
+        Fully-qualified mail server hostname (e.g., mx.domaintools.net).
+
+        Performs a Reverse MX lookup to identify domains using this mail server.
+
+        '
+      schema:
+        $ref: '#/components/schemas/Fqdn'
+    statCounterSecurityCode:
+      in: query
+      name: statcounter_security
+      description: 'Base search parameter.
+
+        Statcounter Security tracker code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    websiteTitle:
+      in: query
+      name: website_title
+      description: 'Base search parameter.
+
+        The value of the website’s `<title>` HTML tag. Must be an exact match.
+
+        '
+      schema:
+        $ref: '#/components/schemas/WebsiteTitleString'
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    whoisHistoricalFreeText:
+      in: query
+      name: historical_free_text
+      description: 'Base search parameter.
+
+        Free text search of a domain''s historical WHOIS records.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    resultsPageSize:
+      name: page_size
+      in: query
+      description: 'Adjusts the number of results returned per page.
+
+        The default is 500. Use this parameter to request a smaller page size.
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    sslNotBefore:
+      in: query
+      name: ssl_not_before
+      description: 'Search filter parameter.
+
+        Validity begin date for a certificate (YYYY-MM-DD).
+
+        '
+      schema:
+        $ref: '#/components/schemas/DateFilter'
+    sslHash:
+      in: query
+      name: ssl_hash
+      description: 'Base search parameter.
+
+        The SHA-1 hash of an SSL certificate, used to filter for domains associated with a specific certificate.
+
+        '
+      schema:
+        $ref: '#/components/schemas/Sha1HexString'
+    sslNotAfter:
+      in: query
+      name: ssl_not_after
+      description: 'Search filter parameter.
+
+        Validity end date for a certificate (YYYY-MM-DD).
+
+        '
+      schema:
+        $ref: '#/components/schemas/DateFilter'
+    registrant:
+      in: query
+      name: registrant
+      description: 'Base search parameter.
+
+        Exact match to the WHOIS registrant field.
+
+        '
+      schema:
+        $ref: '#/components/schemas/OrgNameString'
+    topLevelDomain:
+      in: query
+      name: tld
+      description: 'Search filter parameter.
+
+        Restrict results to domains under the specified top-level domain (TLD).
+
+        '
+      schema:
+        $ref: '#/components/schemas/TopLevelDomain'
+    ipCountryCode:
+      in: query
+      name: ip_country_code
+      description: 'Search filter parameter.
+
+        Country code for IP A-record.
+
+        '
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+        description: Two-letter ISO country code (uppercase)
+    yandexCode:
+      in: query
+      name: yandex_metrica
+      description: 'Base search parameter.
+
+        Yandex Metrica tracker code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    emailDnsSoa:
+      in: query
+      name: email_dns_soa
+      description: 'Base search parameter. DNS SOA email.
+
+        '
+      schema:
+        $ref: '#/components/schemas/EmailAddress'
+    matomoCode:
+      in: query
+      name: matomo
+      description: 'Base search parameter.
+
+        Matomo tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    firstSeenWithin:
+      in: query
+      name: first_seen_within
+      description: 'Search filter parameter.
+
+        Filter domains based on the `first_seen` field.
+
+        Returns only those domains first discovered within the last N seconds.
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimeWindowSeconds'
+    registrantOrg:
+      in: query
+      name: registrant_org
+      description: 'Base search parameter.
+
+        Exact match to the WHOIS registrant organization field
+
+        '
+      schema:
+        $ref: '#/components/schemas/OrgNameString'
+    domainsQuery:
+      in: query
+      name: domain
+      description: 'Base search parameter.
+
+        One or more domains (comma-separated) to be investigated.
+
+        Example: `example.com,domaintools.com`.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ApexDomainList'
+    sslSubject:
+      in: query
+      name: ssl_subject
+      description: 'Base search parameter.
+
+        Exact match to the Subject distinguished name (DN) string from the SSL certificate.
+
+        '
+      schema:
+        $ref: '#/components/schemas/SslSubjectDnString'
+    resultsPosition:
+      in: query
+      name: position
+      description: 'Cursor for paginated results. Use the value returned in a previous response to retrieve the next page.
+
+        '
+      required: false
+      schema:
+        $ref: '#/components/schemas/PositionToken'
+    firstSeenSince:
+      in: query
+      name: first_seen_since
+      description: 'Search filter parameter.
+
+        Filter domains based on the `first_seen` timestamp.
+
+        Returns domains whose `current_lifecycle_first_seen` value is *after* the given datetime.
+
+        '
+      schema:
+        $ref: '#/components/schemas/TimestampFilter'
+    baiduCode:
+      in: query
+      name: baidu_analytics
+      description: 'Base search parameter. Baidu Analytics code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    facebookCode:
+      in: query
+      name: facebook
+      description: 'Facebook/Meta tracking code.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    sslDuration:
+      in: query
+      name: ssl_duration
+      description: 'Base search parameter.
+
+        Domains with an SSL certificate valid for a specific number of days.
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+    notTaggedWithAll:
+      in: query
+      name: not_tagged_with_all
+      description: 'Search filter parameter.
+
+        Exclude all domains that are tagged with **all** of the specified tags in the Iris Investigation platform.
+
+        This parameter accepts a comma-separated list of tag names.
+
+        '
+      schema:
+        $ref: '#/components/schemas/CommaSeparatedTags'
+    notTaggedWithAny:
+      in: query
+      name: not_tagged_with_any
+      description: 'Search filter parameter.
+
+        Exclude all domains that are tagged with **any** of the specified tags in the Iris Investigation platform.
+
+        Accepts a comma-separated list of tags.
+
+        '
+      schema:
+        $ref: '#/components/schemas/CommaSeparatedTags'
+    rank:
+      in: query
+      name: rank
+      description: 'Search filter parameter.
+
+        Popularity rank (replaces Alexa ranking).
+
+        '
+      schema:
+        type: integer
+        minimum: 1
+    active:
+      in: query
+      name: active
+      description: 'Search filter parameter.
+
+        Set to `true` to only return domains that have either an entry in the global Domain Name System, OR are listed as registered by the registry.
+
+        Set to `false` to only return domains that do not have an entry in the global DNS, AND are not listed as registered by the registry.
+
+        '
+      schema:
+        type: boolean
+    sslCommonName:
+      in: query
+      name: ssl_common_name
+      description: 'Base search parameter.
+
+        Domains with a matching Common Name (CN) in their SSL certificate''s subject.
+
+        '
+      schema:
+        $ref: '#/components/schemas/GenericString'
+    mailserverDomain:
+      in: query
+      name: mailserver_domain
+      description: 'Base search parameter.
+
+        Only the registered domain portion of the mail server (e.g., `domaintools.net`).
+
+        '
+      schema:
+        $ref: '#/components/schemas/ApexDomain'
+    expirationDate:
+      in: query
+      name: expiration_date
+      description: 'Search filter parameter.
+
+        Only include domains expiring on a specific date.
+
+        '
+      schema:
+        $ref: '#/components/schemas/DateFilter'
+    resultsSortBy:
+      in: query
+      name: sort_by
+      description: 'Specifies the field to sort the results by.
+
+        '
+      schema:
+        type: string
+        enum:
+        - first_seen_since
+        - create_date
+        - domain
+        - risk_score
+    nameserverDomain:
+      in: query
+      name: nameserver_domain
+      description: 'Base search parameter.
+
+        The registered domain name of the nameserver (e.g., `example.com`).
+
+        '
+      schema:
+        $ref: '#/components/schemas/Hostname'
   responses:
-    InternalServerError:
-      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: '404: Not Found. The requested resource does not exist.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    IrisPartialContent:
-      description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
 
         '
       content:
@@ -1988,8 +1948,48 @@ components:
         text/html:
           schema:
             $ref: '#/components/schemas/HtmlResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    IrisPartialContent:
+      description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     ServiceUnavailable:
       description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
 
         '
       content:

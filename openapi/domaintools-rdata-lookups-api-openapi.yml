@@ -157,27 +157,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    BadGateway:
-      description: Upstream server error.
-      content:
-        text/html:
-          schema:
-            type: string
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    RateLimited:
-      description: Rate limit exceeded.
-      content:
-        text/plain:
-          schema:
-            type: string
     lookup:
       description: 'lookup response
 
@@ -200,6 +179,30 @@ components:
           $ref: '#/components/headers/X-RateLimit-Reset'
         X-RateLimit-Expires:
           $ref: '#/components/headers/X-RateLimit-Expires'
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
+    BadRequest:
+      description: Unable to parse request.
+      content:
+        text/plain:
+          schema:
+            type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
     summarize:
       description: 'summarize response
 
@@ -222,73 +225,54 @@ components:
           $ref: '#/components/headers/X-RateLimit-Reset'
         X-RateLimit-Expires:
           $ref: '#/components/headers/X-RateLimit-Expires'
-    BadRequest:
-      description: Unable to parse request.
+    Unauthorized:
+      description: Invalid or missing API key.
       content:
-        text/plain:
+        application/json:
           schema:
-            type: string
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
-      content:
-        text/plain:
-          schema:
-            type: string
-  parameters:
-    max_count:
-      in: query
-      name: max_count
-      description: max count
-      required: false
+            type: object
+            properties:
+              error:
+                type: string
+  headers:
+    X-RateLimit-Reset:
+      description: when period resets
       schema:
-        type: number
-        minimum: 1
-    value:
-      in: path
-      name: value
-      description: Value
-      required: true
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Limit:
+      description: limit in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - unlimited
+    X-RateLimit-Expires:
+      description: when period expires
       schema:
         type: string
-    time_last_after:
-      in: query
-      name: time_last_after
-      description: time last after
-      required: false
+        pattern: ^\d+$
+      allowEmptyValue: true
+    X-RateLimit-Remaining:
+      description: remaining in period
       schema:
-        type: number
-    aggr:
-      in: query
-      name: aggr
-      description: aggr
-      required: false
-      schema:
-        type: boolean
-    time_last_before:
-      in: query
-      name: time_last_before
-      description: time last before
-      required: false
-      schema:
-        type: number
-    time_first_before:
-      in: query
-      name: time_first_before
-      description: time first before
-      required: false
-      schema:
-        type: number
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+  parameters:
     id:
       in: query
       name: id
       description: id
-      required: false
-      schema:
-        type: string
-    swclient:
-      in: query
-      name: swclient
-      description: swclient
       required: false
       schema:
         type: string
@@ -300,13 +284,28 @@ components:
       schema:
         type: number
         minimum: 1
-    time_first_after:
+    humantime:
       in: query
-      name: time_first_after
-      description: time first after
+      name: humantime
+      description: humantime
+      required: false
+      schema:
+        type: boolean
+    max_count:
+      in: query
+      name: max_count
+      description: max count
       required: false
       schema:
         type: number
+        minimum: 1
+    version:
+      in: query
+      name: version
+      description: version
+      required: false
+      schema:
+        type: string
     offset:
       in: query
       name: offset
@@ -315,6 +314,62 @@ components:
       schema:
         type: number
         minimum: 0
+    aggr:
+      in: query
+      name: aggr
+      description: aggr
+      required: false
+      schema:
+        type: boolean
+    time_first_before:
+      in: query
+      name: time_first_before
+      description: time first before
+      required: false
+      schema:
+        type: number
+    swclient:
+      in: query
+      name: swclient
+      description: swclient
+      required: false
+      schema:
+        type: string
+    time_last_after:
+      in: query
+      name: time_last_after
+      description: time last after
+      required: false
+      schema:
+        type: number
+    time_first_after:
+      in: query
+      name: time_first_after
+      description: time first after
+      required: false
+      schema:
+        type: number
+    value:
+      in: path
+      name: value
+      description: Value
+      required: true
+      schema:
+        type: string
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
+      schema:
+        type: string
+    time_last_before:
+      in: query
+      name: time_last_before
+      description: time last before
+      required: false
+      schema:
+        type: number
     rdata_type:
       in: path
       name: type
@@ -326,61 +381,6 @@ components:
         - name
         - ip
         - raw
-    rrtype:
-      in: path
-      name: rrtype
-      description: rrtype
-      required: true
-      schema:
-        type: string
-    version:
-      in: query
-      name: version
-      description: version
-      required: false
-      schema:
-        type: string
-    humantime:
-      in: query
-      name: humantime
-      description: humantime
-      required: false
-      schema:
-        type: boolean
-  headers:
-    X-RateLimit-Limit:
-      description: limit in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - unlimited
-    X-RateLimit-Remaining:
-      description: remaining in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
-    X-RateLimit-Expires:
-      description: when period expires
-      schema:
-        type: string
-        pattern: ^\d+$
-      allowEmptyValue: true
-    X-RateLimit-Reset:
-      description: when period resets
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
   schemas:
     summarize:
       type: object
