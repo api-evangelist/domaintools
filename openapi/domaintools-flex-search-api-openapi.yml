@@ -189,48 +189,14 @@ paths:
         '502':
           $ref: '#/components/responses/BadGateway'
 components:
-  headers:
-    X-RateLimit-Reset:
-      description: when period resets
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
-    X-RateLimit-Limit:
-      description: limit in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - unlimited
-    X-RateLimit-Expires:
-      description: when period expires
-      schema:
-        type: string
-        pattern: ^\d+$
-      allowEmptyValue: true
-    X-RateLimit-Remaining:
-      description: remaining in period
-      schema:
-        oneOf:
-        - type: string
-          pattern: ^\d+$
-        - type: string
-          enum:
-          - n/a
   parameters:
-    id:
+    time_first_before:
       in: query
-      name: id
-      description: id
+      name: time_first_before
+      description: time first before
       required: false
       schema:
-        type: string
+        type: number
     limit:
       in: query
       name: limit
@@ -239,11 +205,32 @@ components:
       schema:
         type: number
         minimum: 1
+    time_first_after:
+      in: query
+      name: time_first_after
+      description: time first after
+      required: false
+      schema:
+        type: number
     version:
       in: query
       name: version
       description: version
       required: false
+      schema:
+        type: string
+    value:
+      in: path
+      name: value
+      description: Value
+      required: true
+      schema:
+        type: string
+    rrtype:
+      in: path
+      name: rrtype
+      description: rrtype
+      required: true
       schema:
         type: string
     offset:
@@ -254,10 +241,10 @@ components:
       schema:
         type: number
         minimum: 0
-    time_first_before:
+    time_last_before:
       in: query
-      name: time_first_before
-      description: time first before
+      name: time_last_before
+      description: time last before
       required: false
       schema:
         type: number
@@ -275,55 +262,16 @@ components:
       required: false
       schema:
         type: number
-    time_first_after:
+    id:
       in: query
-      name: time_first_after
-      description: time first after
+      name: id
+      description: id
       required: false
       schema:
-        type: number
-    value:
-      in: path
-      name: value
-      description: Value
-      required: true
-      schema:
         type: string
-    rrtype:
-      in: path
-      name: rrtype
-      description: rrtype
-      required: true
-      schema:
-        type: string
-    time_last_before:
-      in: query
-      name: time_last_before
-      description: time last before
-      required: false
-      schema:
-        type: number
   responses:
-    RateLimited:
-      description: Rate limit exceeded.
-      content:
-        text/plain:
-          schema:
-            type: string
     BadRequest:
       description: Unable to parse request.
-      content:
-        text/plain:
-          schema:
-            type: string
-    BadGateway:
-      description: Upstream server error.
-      content:
-        text/html:
-          schema:
-            type: string
-    Forbidden:
-      description: Authenticated but not authorized for this resource.
       content:
         text/plain:
           schema:
@@ -337,6 +285,58 @@ components:
             properties:
               error:
                 type: string
+    BadGateway:
+      description: Upstream server error.
+      content:
+        text/html:
+          schema:
+            type: string
+    Forbidden:
+      description: Authenticated but not authorized for this resource.
+      content:
+        text/plain:
+          schema:
+            type: string
+    RateLimited:
+      description: Rate limit exceeded.
+      content:
+        text/plain:
+          schema:
+            type: string
+  headers:
+    X-RateLimit-Reset:
+      description: when period resets
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Expires:
+      description: when period expires
+      schema:
+        type: string
+        pattern: ^\d+$
+      allowEmptyValue: true
+    X-RateLimit-Remaining:
+      description: remaining in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - n/a
+    X-RateLimit-Limit:
+      description: limit in period
+      schema:
+        oneOf:
+        - type: string
+          pattern: ^\d+$
+        - type: string
+          enum:
+          - unlimited
   schemas:
     flex:
       type: object

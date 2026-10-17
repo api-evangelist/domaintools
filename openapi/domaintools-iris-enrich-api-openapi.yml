@@ -82,33 +82,122 @@ paths:
       externalDocs:
         url: https://docs.domaintools.com/api/iris/enrich/
 components:
-  schemas:
-    EnrichRequestParameters:
-      type: object
-      required:
-      - domain
-      properties:
-        domain:
-          $ref: '#/components/schemas/ApexDomainList'
-        app_partner:
-          $ref: '#/components/schemas/IdentifierString'
-        app_name:
-          $ref: '#/components/schemas/IdentifierString'
-        app_version:
-          $ref: '#/components/schemas/IdentifierString'
-        format:
-          $ref: '#/components/schemas/ResponseFormat'
-        parsed_whois:
-          $ref: '#/components/schemas/BooleanOptInFlag'
-        parsed_domain_rdap:
-          $ref: '#/components/schemas/BooleanOptInFlag'
-    BooleanOptInFlag:
-      type: boolean
-      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
-
-        If `false` or omitted, the feature is ignored.
+  responses:
+    EnrichSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  limit_exceeded:
+                    type: boolean
+                  message:
+                    type: string
+                  results_count:
+                    type: integer
+                  has_more_results:
+                    type: boolean
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnrichResult'
+                  missing_domains:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApexDomain'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    IrisPartialContent:
+      description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ApexDomain:
+      type: string
+      description: A base (apex) domain like example.com, excluding subdomains.
+      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
+    EnrichValue:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+    XmlResponse:
+      type: string
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+
+        '
+    ApexDomainList:
+      type: string
+      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
+      description: A comma-separated list of one or more apex domains to investigate.
+    EnrichTracker:
+      type: object
+      description: A tracker identifier.
+      properties:
+        value:
+          type: string
     ResponseFormat:
       type: string
       enum:
@@ -118,36 +207,37 @@ components:
       description: 'The desired response format.
 
         '
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+    BooleanOptInFlag:
+      type: boolean
+      description: 'An optional boolean flag that enables a specific feature or response extension when set to `true`.
+
+        If `false` or omitted, the feature is ignored.
+
+        '
     HtmlResponse:
       type: string
       description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
 
         '
-    EnrichContact:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/EnrichValue'
-        org:
-          $ref: '#/components/schemas/EnrichValue'
-        street:
-          $ref: '#/components/schemas/EnrichValue'
-        city:
-          $ref: '#/components/schemas/EnrichValue'
-        state:
-          $ref: '#/components/schemas/EnrichValue'
-        postal:
-          $ref: '#/components/schemas/EnrichValue'
-        country:
-          $ref: '#/components/schemas/EnrichValue'
-        phone:
-          $ref: '#/components/schemas/EnrichValue'
-        fax:
-          $ref: '#/components/schemas/EnrichValue'
-        email:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrichValue'
     EnrichResult:
       type: object
       description: A comprehensive domain profile result from Iris Enrich API.
@@ -367,65 +457,72 @@ components:
         parsed_domain_rdap:
           type: object
           description: Parsed data from the domain's RDAP record. Present only when the request includes `parsed_domain_rdap=true`.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
-    XmlResponse:
-      type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
-
-        '
     IdentifierString:
       type: string
       minLength: 1
       maxLength: 128
       description: A short identifier, code, or handle.
-    ApexDomain:
-      type: string
-      description: A base (apex) domain like example.com, excluding subdomains.
-      pattern: ^(?!\-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$
-    ApexDomainList:
-      type: string
-      pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(,([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})*$
-      description: A comma-separated list of one or more apex domains to investigate.
-    EnrichValue:
+    EnrichRequestParameters:
+      type: object
+      required:
+      - domain
+      properties:
+        domain:
+          $ref: '#/components/schemas/ApexDomainList'
+        app_partner:
+          $ref: '#/components/schemas/IdentifierString'
+        app_name:
+          $ref: '#/components/schemas/IdentifierString'
+        app_version:
+          $ref: '#/components/schemas/IdentifierString'
+        format:
+          $ref: '#/components/schemas/ResponseFormat'
+        parsed_whois:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+        parsed_domain_rdap:
+          $ref: '#/components/schemas/BooleanOptInFlag'
+    EnrichContact:
       type: object
       properties:
-        value:
-          oneOf:
-          - type: string
-          - type: integer
-    EnrichTracker:
-      type: object
-      description: A tracker identifier.
-      properties:
-        value:
-          type: string
+        name:
+          $ref: '#/components/schemas/EnrichValue'
+        org:
+          $ref: '#/components/schemas/EnrichValue'
+        street:
+          $ref: '#/components/schemas/EnrichValue'
+        city:
+          $ref: '#/components/schemas/EnrichValue'
+        state:
+          $ref: '#/components/schemas/EnrichValue'
+        postal:
+          $ref: '#/components/schemas/EnrichValue'
+        country:
+          $ref: '#/components/schemas/EnrichValue'
+        phone:
+          $ref: '#/components/schemas/EnrichValue'
+        fax:
+          $ref: '#/components/schemas/EnrichValue'
+        email:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichValue'
   parameters:
-    appName:
-      name: app_name
+    appVersion:
+      name: app_version
       in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
+      description: 'Version of your integration/connector.
 
         '
       schema:
         $ref: '#/components/schemas/IdentifierString'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
     parsedWhoisFlag:
       name: parsed_whois
       in: query
@@ -436,10 +533,10 @@ components:
         '
       schema:
         $ref: '#/components/schemas/BooleanOptInFlag'
-    appVersion:
-      name: app_version
+    appName:
+      name: app_name
       in: query
-      description: 'Version of your integration/connector.
+      description: 'Appliance, module, or playbook, or any combination of these.
 
         '
       schema:
@@ -454,14 +551,6 @@ components:
         '
       schema:
         $ref: '#/components/schemas/BooleanOptInFlag'
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
-
-        '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
     domainsQueryRequired:
       in: query
       name: domain
@@ -481,95 +570,6 @@ components:
         '
       schema:
         $ref: '#/components/schemas/IdentifierString'
-  responses:
-    InternalServerError:
-      description: '500: Internal Server Error. An unexpected error occurred on the server. If the problem persists, contact DomainTools support.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: '404: Not Found. The requested resource does not exist.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    EnrichSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              response:
-                type: object
-                properties:
-                  limit_exceeded:
-                    type: boolean
-                  message:
-                    type: string
-                  results_count:
-                    type: integer
-                  has_more_results:
-                    type: boolean
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EnrichResult'
-                  missing_domains:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ApexDomain'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    IrisPartialContent:
-      description: '206: Partial Content. The response is a subset of the full results. The `has_more_results` field in the response will be `true`.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ServiceUnavailable:
-      description: '503: Service Unavailable. The service is temporarily unavailable.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: '401: Unauthorized. API credentials are required and were not provided, or the provided credentials are not valid.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   requestBodies:
     Enrich:
       description: A request to the Iris Enrich endpoint.

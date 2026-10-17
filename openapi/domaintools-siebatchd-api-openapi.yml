@@ -218,6 +218,27 @@ components:
                   description: Newly Observed Fully Qualified Domain Names
             _status: OK
             _message: ''
+    200_makeurl:
+      description: Presigned download URL generated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _status:
+                type: string
+                enum:
+                - OK
+              _message:
+                type: string
+              url:
+                type: string
+                format: uri
+                description: Presigned shareable URL to the specified SIE data
+          example:
+            _status: OK
+            _message: ''
+            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
     4xx:
       description: Client error (authentication or validation failure)
       content:
@@ -250,27 +271,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    200_makeurl:
-      description: Presigned download URL generated successfully.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              _status:
-                type: string
-                enum:
-                - OK
-              _message:
-                type: string
-              url:
-                type: string
-                format: uri
-                description: Presigned shareable URL to the specified SIE data
-          example:
-            _status: OK
-            _message: ''
-            url: https://batch-dl.sie-remote.net/range/ch213/20200128.1200.20200128.1201?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
     200_chdetails:
       description: Channel details returned successfully.
       content:
@@ -306,19 +306,41 @@ components:
             _status: OK
             _message: ''
   schemas:
+    ChannelTimeRange:
+      type: object
+      required:
+      - apikey
+      - channel
+      - start_time
+      - end_time
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
+        channel:
+          type: integer
+          description: Channel number (1-255)
+          minimum: 1
+          maximum: 255
+          example: 213
+        start_time:
+          type: string
+          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:00:00'
+        end_time:
+          type: string
+          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
+          example: '2020-01-28 12:01:00'
     ChannelDescription:
       type: object
       properties:
         description:
           type: string
           example: Newly Observed Domains
-    ApiKeyOnly:
-      type: object
-      required:
-      - apikey
-      properties:
-        apikey:
-          $ref: '#/components/schemas/ApiKeyField'
+    ApiKeyField:
+      type: string
+      format: password
+      description: Your Farsight SIE Batch API Key (UUID format)
+      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     ChannelDetail:
       type: object
       properties:
@@ -338,6 +360,13 @@ components:
           type: string
           description: MIME type of the data
           example: application/x-ndjson
+    ApiKeyOnly:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          $ref: '#/components/schemas/ApiKeyField'
     ErrorResponse:
       type: object
       properties:
@@ -373,34 +402,5 @@ components:
           type: string
           format: uuid
           description: Server-side log correlation ID
-    ApiKeyField:
-      type: string
-      format: password
-      description: Your Farsight SIE Batch API Key (UUID format)
-      example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    ChannelTimeRange:
-      type: object
-      required:
-      - apikey
-      - channel
-      - start_time
-      - end_time
-      properties:
-        apikey:
-          $ref: '#/components/schemas/ApiKeyField'
-        channel:
-          type: integer
-          description: Channel number (1-255)
-          minimum: 1
-          maximum: 255
-          example: 213
-        start_time:
-          type: string
-          description: Start date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:00:00'
-        end_time:
-          type: string
-          description: End date in "YYYY-MM-DD HH:MM:SS" format (UTC)
-          example: '2020-01-28 12:01:00'
 externalDocs:
   url: https://batch.sie-remote.net/apidoc

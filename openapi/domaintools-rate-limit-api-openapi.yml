@@ -67,10 +67,10 @@ paths:
       - Rate Limit
 components:
   responses:
-    BadGateway:
-      description: Upstream server error.
+    RateLimited:
+      description: Rate limit exceeded.
       content:
-        text/html:
+        text/plain:
           schema:
             type: string
     Forbidden:
@@ -79,10 +79,10 @@ components:
         text/plain:
           schema:
             type: string
-    RateLimited:
-      description: Rate limit exceeded.
+    BadGateway:
+      description: Upstream server error.
       content:
-        text/plain:
+        text/html:
           schema:
             type: string
     Unauthorized:

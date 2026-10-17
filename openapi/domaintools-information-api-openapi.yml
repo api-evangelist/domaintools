@@ -50,13 +50,9 @@ paths:
       url: https://api.domaintools.com
 components:
   schemas:
-    ResponseFormat:
+    XmlResponse:
       type: string
-      enum:
-      - html
-      - json
-      - xml
-      description: 'The desired response format.
+      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
 
         '
     HtmlResponse:
@@ -64,25 +60,11 @@ components:
       description: 'HTML-formatted response body. JSON is the primary documented format; HTML response schemas are not individually documented.
 
         '
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: An internal error code.
-            message:
-              type: string
-              description: A human-readable error message.
-        resources:
-          type: object
-          description: Links to support or documentation resources.
-          properties:
-            support:
-              type: string
-              description: URL to API documentation or support.
+    IdentifierString:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: A short identifier, code, or handle.
     AccountInformation:
       type: object
       description: 'Contains the account details and a list of product subscriptions.
@@ -130,29 +112,68 @@ components:
                     today: '0'
                     month: '1'
                   expiration_date: '2027-12-30'
-    XmlResponse:
+    ResponseFormat:
       type: string
-      description: 'XML-formatted response body. JSON is the primary documented format; XML response schemas are not individually documented.
+      enum:
+      - html
+      - json
+      - xml
+      description: 'The desired response format.
 
         '
-    IdentifierString:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: A short identifier, code, or handle.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: An internal error code.
+            message:
+              type: string
+              description: A human-readable error message.
+        resources:
+          type: object
+          description: Links to support or documentation resources.
+          properties:
+            support:
+              type: string
+              description: URL to API documentation or support.
+  parameters:
+    appName:
+      name: app_name
+      in: query
+      description: 'Appliance, module, or playbook, or any combination of these.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appPartner:
+      name: app_partner
+      in: query
+      description: 'Your product name.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    appVersion:
+      name: app_version
+      in: query
+      description: 'Version of your integration/connector.
+
+        '
+      schema:
+        $ref: '#/components/schemas/IdentifierString'
+    responseFormat:
+      name: format
+      in: query
+      description: 'Specifies the desired response format.
+
+        '
+      schema:
+        $ref: '#/components/schemas/ResponseFormat'
   responses:
-    AccountSuccess:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AccountInformation'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/XmlResponse'
-        text/html:
-          schema:
-            $ref: '#/components/schemas/HtmlResponse'
     Forbidden:
       description: '403: Forbidden. The API credentials provided do not have access to the requested resource or endpoint.
 
@@ -169,16 +190,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
-
-        '
+    AccountSuccess:
+      description: OK
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ServiceUnavailable:
-      description: '503: Service Unavailable. The service is temporarily unavailable.
+            $ref: '#/components/schemas/AccountInformation'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/XmlResponse'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/HtmlResponse'
+    NotFound:
+      description: '404: Not Found. The requested resource does not exist.
 
         '
       content:
@@ -193,47 +218,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: '404: Not Found. The requested resource does not exist.
+    ServiceUnavailable:
+      description: '503: Service Unavailable. The service is temporarily unavailable.
 
         '
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    responseFormat:
-      name: format
-      in: query
-      description: 'Specifies the desired response format.
+    BadRequest:
+      description: '400: Bad Request. The request was invalid. The response will contain details about the error.
 
         '
-      schema:
-        $ref: '#/components/schemas/ResponseFormat'
-    appName:
-      name: app_name
-      in: query
-      description: 'Appliance, module, or playbook, or any combination of these.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appVersion:
-      name: app_version
-      in: query
-      description: 'Version of your integration/connector.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
-    appPartner:
-      name: app_partner
-      in: query
-      description: 'Your product name.
-
-        '
-      schema:
-        $ref: '#/components/schemas/IdentifierString'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     header_auth:
       type: apiKey
