@@ -2,7 +2,14 @@ generated: '2026-10-13'
 method: searched
 checked:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
+- https://api.nuget.org/v3
 - https://azuremarketplace.microsoft.com/
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 - palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml
 marketplace_apps: []
@@ -82,6 +89,36 @@ edges:
   badges:
   - support:partner
   - certification:certified
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/domaintools_api/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: domaintools_api
+      version: 2.10.0
+      released: '2026-09-08'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/domaintools_api/
+      repo_leg: github-org:domaintools
+      publisher_leg: email:domaintools.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
