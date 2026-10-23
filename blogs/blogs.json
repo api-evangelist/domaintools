@@ -5,7 +5,7 @@
       "source": "https://www.domaintools.com/blog",
       "feed_url": "https://www.domaintools.com/blog/rss.xml",
       "title": "",
-      "saved": 4,
+      "saved": 0,
       "method": "discovered"
     },
     {
@@ -21,8 +21,15 @@
       "title": "",
       "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "https://www.domaintools.com/resources/blog/rss.xml",
+      "feed_url": "https://www.domaintools.com/resources/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 50,
+  "fetched": "2026-10-17T14:53:57Z"
 }
