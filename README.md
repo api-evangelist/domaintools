@@ -64,6 +64,145 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-DomainTools is a company surfaced as a portfolio company of battery-ventures and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+DomainTools is a domain and DNS intelligence company whose APIs power threat investigation, hunting, and monitoring for security teams. Its product surface spans Iris Investigate (pivot-based domain investigation), Iris Enrich (bulk domain enrichment), and Iris Detect (brand-infringement monitoring); the Farsight DNSDB passive DNS history API (300+ billion records); Lookups & Monitors (WHOIS, RDAP, hosting history, reverse IP/WHOIS, reputation, risk score, and change monitors); Threat Feeds (predictive risk and discovery feeds with RPZ integration); and Farsight SIE real-time DNS event streaming. DomainTools publishes OpenAPI specifications, an official Python SDK with a bundled CLI, and a remotely hosted MCP server for AI agents. A Battery Ventures portfolio company, enriched into the API Evangelist network.
 
-Backed by: battery-ventures
+**Areas:** Company · Threat Intelligence · Domain Intelligence · DNS · WHOIS · Passive DNS · Cybersecurity · Domain Monitoring · Risk Scoring · Security
+
+## DomainTools on APIs.io
+
+Everything profiled for DomainTools is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/domaintools/](https://apis.io/providers/domaintools/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [DomainTools Flex search API](https://apis.io/apis/domaintools/domaintools-flex-search-api/) — The Flex search API from DomainTools — 2 operation(s) for flex search.
+- [DomainTools Information API](https://apis.io/apis/domaintools/domaintools-information-api/) — Access the latest information about your account, including service limits.
+- [DomainTools Iris Detect API](https://apis.io/apis/domaintools/domaintools-iris-detect-api/) — Iris Detect is an Internet infrastructure detection, monitoring, and enforcement tool. It rapidly discovers malicious domains that are engaged in brand…
+- [DomainTools Iris Enrich API](https://apis.io/apis/domaintools/domaintools-iris-enrich-api/) — Designed to support high query volumes with batch processing and fast response times, the Iris Enrich API provides actionable insights-at-scale with…
+- [DomainTools Iris Investigate API](https://apis.io/apis/domaintools/domaintools-iris-investigate-api/) — The Iris Investigate API is ideally suited for investigate and orchestrate use cases at human scale. Identify threats, map adversary infrastructure, and…
+- [DomainTools Lookups API](https://apis.io/apis/domaintools/domaintools-lookups-api/) — Endpoints for retrieving detailed information about domains and IPs, and for finding connections between domains and infrastructure.
+- [DomainTools Monitors API](https://apis.io/apis/domaintools/domaintools-monitors-api/) — Endpoints for monitoring new domain registrations, changes to IP ranges, and other key infrastructure events based on specific terms.
+- [DomainTools Ping API](https://apis.io/apis/domaintools/domaintools-ping-api/) — The Ping API from DomainTools — 1 operation(s) for ping.
+- [DomainTools Rate Limit API](https://apis.io/apis/domaintools/domaintools-rate-limit-api/) — The Rate Limit API from DomainTools — 1 operation(s) for rate limit.
+- [DomainTools rdata Lookups API](https://apis.io/apis/domaintools/domaintools-rdata-lookups-api/) — The rdata Lookups API from DomainTools — 4 operation(s) for rdata lookups.
+- [DomainTools rrset Lookups API](https://apis.io/apis/domaintools/domaintools-rrset-lookups-api/) — The rrset Lookups API from DomainTools — 6 operation(s) for rrset lookups.
+- [DomainTools Siebatchd API](https://apis.io/apis/domaintools/domaintools-siebatchd-api/) — The Siebatchd API from DomainTools — 4 operation(s) for siebatchd.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [domaintools-mcp](https://apis.io/servers/domaintools/domaintools-mcp/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Domaintools Agentic Access](https://apis.io/agentic-access/domaintools/domaintools-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [dnsdb Flex search API](https://apis.io/collections/domaintools/open-domaintools-flex-search-api/)
+- [dnsdb Flex search Information API](https://apis.io/collections/domaintools/open-domaintools-information-api/)
+- [dnsdb Flex search Iris Detect API](https://apis.io/collections/domaintools/open-domaintools-iris-detect-api/)
+- [dnsdb Flex search Iris Enrich API](https://apis.io/collections/domaintools/open-domaintools-iris-enrich-api/)
+- [dnsdb Flex search Iris Investigate API](https://apis.io/collections/domaintools/open-domaintools-iris-investigate-api/)
+- [dnsdb Flex search Lookups API](https://apis.io/collections/domaintools/open-domaintools-lookups-api/)
+- [dnsdb Flex search Monitors API](https://apis.io/collections/domaintools/open-domaintools-monitors-api/)
+- [dnsdb Flex search Ping API](https://apis.io/collections/domaintools/open-domaintools-ping-api/)
+- [dnsdb Flex search Rate Limit API](https://apis.io/collections/domaintools/open-domaintools-rate-limit-api/)
+- [dnsdb Flex search rdata Lookups API](https://apis.io/collections/domaintools/open-domaintools-rdata-lookups-api/)
+- [dnsdb Flex search rrset Lookups API](https://apis.io/collections/domaintools/open-domaintools-rrset-lookups-api/)
+- [dnsdb Flex search Siebatchd API](https://apis.io/collections/domaintools/open-domaintools-siebatchd-api/)
+
+#### Overlays (4)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Domaintools Dnsdb Overlay](https://apis.io/overlays/domaintools/domaintools-dnsdb-overlay/)
+- [Domaintools Iris Overlay](https://apis.io/overlays/domaintools/domaintools-iris-overlay/)
+- [Domaintools Lookups Monitors Overlay](https://apis.io/overlays/domaintools/domaintools-lookups-monitors-overlay/)
+- [Domaintools Sie Overlay](https://apis.io/overlays/domaintools/domaintools-sie-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Domaintools Authentication](https://apis.io/security/domaintools/domaintools-authentication/)
+- [Domaintools Domain Security](https://apis.io/security/domaintools/domaintools-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.domaintools.com/)
+- [Documentation](https://docs.domaintools.com/)
+- [Getting started](https://docs.domaintools.com/api/iris/)
+- [API reference](https://docs.domaintools.com/api/iris/reference/)
+- [Sign up](https://www.domaintools.com/demo)
+- [Support](https://www.domaintools.com/support)
+- [Blog](https://www.domaintools.com/blog)
+- [Terms of service](https://www.domaintools.com/company/terms-of-service/)
+- [Privacy policy](https://www.domaintools.com/company/privacy-policy/)
+- [GitHub](https://github.com/DomainTools)
+- [Status](https://domaintools.statuspage.io)
+
+## API Evangelist rating
+
+**Kin Score 48.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 48.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 34.2 |
+
+**Agent readiness 55.5** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/domaintools/](https://apis.io/providers/domaintools/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DomainTools: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/domaintools/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
